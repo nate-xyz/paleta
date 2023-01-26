@@ -27,7 +27,42 @@ from .pages.palettes import Palettes
 class Window(Adw.ApplicationWindow):
     __gtype_name__ = 'Window'
 
-    label = Gtk.Template.Child()
+    header_bar = Gtk.Template.Child(name="header_bar")
+    view_switcher_title = Gtk.Template.Child(name="view-switcher-title")
+    stack = Gtk.Template.Child(name="stack")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+        #adw switcher buttons
+        squeezer = self.view_switcher_title.observe_children()[0]
+        view_switcher = squeezer.observe_children()[0]
+        self.switcher_buttons =  view_switcher.observe_children()
+        #self.drop_button, self.palette_button = self.switcher_buttons
+        for button in self.switcher_buttons:
+            button.connect("clicked", self.switcher_button)
+
+
+    def switcher_button(self, button):
+        if self.check_switcher_title_bug(button):
+            self.replace_switcher()
+
+    def check_switcher_title_bug(self, active_button):
+        error_string = 'button.flat.horizontal.toggle:active:dir(ltr)'
+        for button in self.switcher_buttons:
+            style_context = button.get_style_context()
+            check_string = style_context.to_string(Gtk.StyleContextPrintFlags.SHOW_CHANGE).split(' ')[0]
+            if button != active_button and error_string==check_string:
+                return True
+        return False
+    
+    def replace_switcher(self):        
+        self.header_bar.remove(self.view_switcher_title)
+        self.view_switcher_title = Adw.ViewSwitcherTitle()
+        self.view_switcher_title.set_stack(self.stack)
+        self.header_bar.set_title_widget(self.view_switcher_title)
+        
+        self.switcher_buttons =  self.view_switcher_title.observe_children()[0].observe_children()[0].observe_children()
+
+        for button in self.switcher_buttons:
+            button.connect("clicked", self.switcher_button)
