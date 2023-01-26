@@ -1,0 +1,6 @@
+data/io.nxyz.Paleta.desktop.in
+data/io.nxyz.Paleta.appdata.xml.in
+data/io.nxyz.Paleta.gschema.xml
+src/main.py
+src/window.py
+src/window.ui
