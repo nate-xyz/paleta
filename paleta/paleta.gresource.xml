@@ -9,5 +9,6 @@
   <gresource prefix="/io/nxyz/Paleta/icons/scalable/actions/">
     <file alias="color-symbolic.svg">assets/icons/color-symbolic.svg</file>
     <file alias="image-round-symbolic.svg">assets/icons/image-round-symbolic.svg</file>
+    <file alias="image-missing-symbolic.svg">assets/icons/image-missing-symbolic.svg</file>
   </gresource>
 </gresources>

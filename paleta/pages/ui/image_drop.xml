@@ -4,12 +4,17 @@
   <requires lib="adw" version="1.0" />
   <template class="ImageDrop" parent="AdwBin">
     <property name="child">
-      <object class="GtkLabel">
-        <property name="label">Hello, World!</property>
-        <property name="vexpand">true</property>
-        <style>
-          <class name="title-1"/>
-        </style>
+      <object class="DragOverlay" id="drag_overlay">
+        <property name="title" translatable="yes">Drop an image</property>
+        <!-- <property name="child">
+          <object class="GtkLabel">
+            <property name="label">Hello, World!</property>
+            <property name="vexpand">true</property>
+            <style>
+              <class name="title-1"/>
+            </style>
+          </object>
+        </property> -->
       </object>
     </property>
   </template>

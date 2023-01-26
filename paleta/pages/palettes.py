@@ -1,4 +1,4 @@
-from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Gst, Pango
+from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/palettes.ui')
 class Palettes(Adw.Bin):

@@ -28,9 +28,15 @@ configure_file(
 )
 
 paleta_sources = [
-  '__init__.py',
-  'main.py',
-  'window.py',
+    '__init__.py',
+    'main.py',
+    'window.py',
+    'pages/__init__.py',
+    'pages/image_drop.py',
+    'pages/drag_overlay.py',
+    'pages/palettes.py',
 ]
+
+# subdir('pages')
 
 install_data(paleta_sources, install_dir: moduledir)
