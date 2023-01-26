@@ -4,4 +4,8 @@
     <file alias="window.ui" preprocess="xml-stripblanks">ui/window.xml</file>
     <file alias="help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.xml</file>
   </gresource>
+  <gresource prefix="/io/nxyz/Paleta/icons/scalable/actions/">
+    <file alias="color-symbolic.svg">assets/icons/color-symbolic.svg</file>
+    <file alias="image-round-symbolic.svg">assets/icons/image-round-symbolic.svg</file>
+  </gresource>
 </gresources>
