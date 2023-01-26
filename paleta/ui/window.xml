@@ -39,13 +39,7 @@
                     <property name="title">Drop</property>
                     <property name="icon-name">image-round-symbolic</property>
                     <property name="child">
-                      <object class="GtkLabel">
-                        <property name="label">Hello, World!</property>
-                        <property name="vexpand">true</property>
-                        <style>
-                          <class name="title-1"/>
-                        </style>
-                      </object>
+                      <object class="ImageDrop"></object>
                     </property>
                   </object>
                 </child>
@@ -56,17 +50,10 @@
                     <property name="title">Palettes</property>
                     <property name="icon-name">color-symbolic</property>
                     <property name="child">
-                      <object class="GtkLabel">
-                        <property name="label">Hello, World!!</property>
-                        <property name="vexpand">true</property>
-                        <style>
-                          <class name="title-1"/>
-                        </style>
-                      </object>
+                      <object class="Palettes"></object>
                     </property>
                   </object>
                 </child>
-
 
               </object>
             </child>

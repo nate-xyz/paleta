@@ -20,6 +20,9 @@
 from gi.repository import Adw
 from gi.repository import Gtk
 
+from .pages.image_drop import ImageDrop
+from .pages.palettes import Palettes
+
 @Gtk.Template(resource_path='/io/nxyz/Paleta/window.ui')
 class Window(Adw.ApplicationWindow):
     __gtype_name__ = 'Window'

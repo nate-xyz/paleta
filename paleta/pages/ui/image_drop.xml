@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0" />
+  <template class="ImageDrop" parent="AdwBin">
+    <property name="child">
+      <object class="GtkLabel">
+        <property name="label">Hello, World!</property>
+        <property name="vexpand">true</property>
+        <style>
+          <class name="title-1"/>
+        </style>
+      </object>
+    </property>
+  </template>
+</interface>

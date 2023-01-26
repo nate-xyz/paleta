@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/nxyz/Paleta">
+    <file alias="image_drop.ui" preprocess="xml-stripblanks">pages/ui/image_drop.xml</file>
+    <file alias="palettes.ui" preprocess="xml-stripblanks">pages/ui/palettes.xml</file>
     <file alias="window.ui" preprocess="xml-stripblanks">ui/window.xml</file>
     <file alias="help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.xml</file>
   </gresource>
