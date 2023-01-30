@@ -23,12 +23,16 @@ from gi.repository import Gtk
 from .pages.image_drop import ImageDropPage
 from .pages.palettes import PalettePage
 
+import os
+import html
+
 image_mime_types = ['image/jpeg', 'image/png', 'image/tiff', 'image/webp']
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/window.ui')
 class Window(Adw.ApplicationWindow):
     __gtype_name__ = 'Window'
-
+    
+    toast_overlay = Gtk.Template.Child(name="toast_overlay")
     header_bar = Gtk.Template.Child(name="header_bar")
     view_switcher_title = Gtk.Template.Child(name="view-switcher-title")
     stack = Gtk.Template.Child(name="stack")
@@ -38,6 +42,7 @@ class Window(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.add_dialog()
+        self.image_drop_page.set_win(self)
         self.open_image_button.connect("clicked", self.show_open_dialog)
 
         #adw switcher buttons
@@ -93,6 +98,22 @@ class Window(Adw.ApplicationWindow):
     def open_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
             image_uri = dialog.get_file().get_path()
-            self.image_drop_page.load_image(image_uri)
+            if self.image_drop_page.load_image(image_uri):
+                self.stack.set_visible_child(self.image_drop_page)
+                self.open_image_toast(image_uri)
+            else:
+                self.error_image_toast(image_uri)
         
-        self.stack.set_visible_child(self.image_drop_page)
+
+    def error_image_toast(self, uri):
+        base_name = os.path.basename(uri)
+        self.add_toast("Error! Could not open image: {}".format(base_name))
+
+    def open_image_toast(self, uri):
+        base_name = os.path.basename(uri)
+        self.add_toast("Opened image: {}".format(base_name))
+
+    def add_toast(self, title: str, timeout: int = 1):
+        toast = Adw.Toast.new(html.escape(title))
+        toast.set_timeout(timeout)
+        self.toast_overlay.add_toast(toast)

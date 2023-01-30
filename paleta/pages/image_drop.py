@@ -15,7 +15,11 @@ class ImageDropPage(Adw.Bin):
 
     def __init__(self) -> None:
         super().__init__()
+        self.window = None
         self.setup_drop_target()
+
+    def set_win(self, window):
+        self.window = window
 
     def setup_drop_target(self):
         formats = Gdk.ContentFormats.new(mimes)
@@ -76,8 +80,10 @@ class ImageDropPage(Adw.Bin):
             image.load_image(uri)
             self.overlay.set_child(image)
             self.revealer.set_reveal_child(False)
+            self.window.open_image_toast(uri)
             return True
         except:
+            self.window.error_image_toast(uri)
             return False
 
 
