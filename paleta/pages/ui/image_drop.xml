@@ -2,17 +2,40 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0" />
-  <template class="ImageDrop" parent="AdwBin">
+  <template class="ImageDropPage" parent="AdwBin">
     <property name="child">
-      <object class="DragOverlay" id="drag_overlay">
-        <property name="title" translatable="yes">Drop an image</property>
+      <object class="GtkOverlay" id="overlay">
+        <child type="overlay">
+          <object class="GtkRevealer" id="revealer">
+            <property name="reveal-child">true</property>
+            <property name="transition-type">GTK_REVEALER_TRANSITION_TYPE_CROSSFADE</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="AdwStatusPage" id="status">
+                <property name="title" translatable="yes">Drop Image</property>
+                <!-- <property name="description" translatable="yes">Drag an image here.</property> -->
+                <property name="icon-name">image-missing-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
         <!-- <property name="child">
-          <object class="GtkLabel">
-            <property name="label">Hello, World!</property>
-            <property name="vexpand">true</property>
-            <style>
-              <class name="title-1"/>
-            </style>
+
+        </property> -->
+        <!-- <property name="child">
+          <object class="GtkBox">
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Hello, World!</property>
+                <property name="vexpand">true</property>
+                <style>
+                  <class name="title-1"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="Image" id="image"></object>
+            </child>
           </object>
         </property> -->
       </object>

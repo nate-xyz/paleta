@@ -32,18 +32,29 @@ class DragOverlay(Adw.Bin):
 
         self.revealer.set_child(self.status)
 
+        # self.drop_target = Gtk.DropTarget.new(type=Gio.File, actions=Gdk.DragAction.COPY)
+        # self.set_drop_target(self.drop_target)
+
+        #self.setup_drop_target()
+
     def set_drop_target(self, drop_target: Gtk.DropTarget):
         if self._drop_target == None:
             return
         
-        self.remove_controller(self._drop_target)
+        # self.remove_controller(self._drop_target)
                     
         drop_target.connect('notify::current-drop', self.drop_target_notify)
 
         self.add_controller(drop_target)
 
+    # def setup_drop_target(self):
+    #     self.drop_target = Gtk.DropTarget.new(type=Gio.File, actions=Gdk.DragAction.COPY)
+    #     #self.drop_target.connect('notify::current-drop', self.drop_target_notify)
+    #     self.add_controller(self.drop_target)
+
     def drop_target_notify(self, drop_target, current_drop):
-        self.revealer.set_reveal_child(current_drop)
+        print('drop_target_notify', current_drop != None)
+        self.revealer.set_reveal_child(current_drop != None)
         
 
     @GObject.Property(type=str, default=None)

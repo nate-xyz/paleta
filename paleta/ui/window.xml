@@ -39,7 +39,7 @@
                     <property name="title">Drop</property>
                     <property name="icon-name">image-round-symbolic</property>
                     <property name="child">
-                      <object class="ImageDrop"></object>
+                      <object class="ImageDropPage"></object>
                     </property>
                   </object>
                 </child>
@@ -50,7 +50,7 @@
                     <property name="title">Palettes</property>
                     <property name="icon-name">color-symbolic</property>
                     <property name="child">
-                      <object class="Palettes"></object>
+                      <object class="PalettePage"></object>
                     </property>
                   </object>
                 </child>

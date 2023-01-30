@@ -27,8 +27,11 @@
             "name" : "paleta",
             "builddir" : true,
             "buildsystem" : "meson",
-            "sources" : [
-            ]
+            "sources" : []
+        },
+        "pypi-dependencies.json",
+        {
+          "name": "other-modules"
         }
     ]
 }

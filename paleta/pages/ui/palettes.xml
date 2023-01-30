@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0" />
-  <template class="Palettes" parent="AdwBin">
+  <template class="PalettePage" parent="AdwBin">
     <property name="child">
       <object class="GtkLabel">
         <property name="label">Hello, World!!</property>
