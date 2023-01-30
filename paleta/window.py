@@ -23,6 +23,8 @@ from gi.repository import Gtk
 from .pages.image_drop import ImageDropPage
 from .pages.palettes import PalettePage
 
+image_mime_types = ['image/jpeg', 'image/png', 'image/tiff', 'image/webp']
+
 @Gtk.Template(resource_path='/io/nxyz/Paleta/window.ui')
 class Window(Adw.ApplicationWindow):
     __gtype_name__ = 'Window'
@@ -30,9 +32,13 @@ class Window(Adw.ApplicationWindow):
     header_bar = Gtk.Template.Child(name="header_bar")
     view_switcher_title = Gtk.Template.Child(name="view-switcher-title")
     stack = Gtk.Template.Child(name="stack")
+    open_image_button = Gtk.Template.Child(name="open_image_button")
+    image_drop_page = Gtk.Template.Child(name="image_drop_page")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.add_dialog()
+        self.open_image_button.connect("clicked", self.show_open_dialog)
 
         #adw switcher buttons
         squeezer = self.view_switcher_title.observe_children()[0]
@@ -66,3 +72,27 @@ class Window(Adw.ApplicationWindow):
 
         for button in self.switcher_buttons:
             button.connect("clicked", self.switcher_button)
+
+    def add_dialog(self):
+        self.folder_dialog = Gtk.FileChooserNative.new(title="Select an Image File", 
+                                                        parent=self, 
+                                                        action=Gtk.FileChooserAction.OPEN, 
+                                                        accept_label="Open Image")
+
+        f = Gtk.FileFilter()
+        f.set_name(_("Image files"))
+        for m in image_mime_types:
+            f.add_mime_type(m)
+
+        self.folder_dialog.connect("response", self.open_response)
+        self.folder_dialog.add_filter(f)
+
+    def show_open_dialog(self, _button):
+        self.folder_dialog.show()
+
+    def open_response(self, dialog, response):
+        if response == Gtk.ResponseType.ACCEPT:
+            image_uri = dialog.get_file().get_path()
+            self.image_drop_page.load_image(image_uri)
+        
+        self.stack.set_visible_child(self.image_drop_page)

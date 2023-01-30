@@ -20,6 +20,13 @@
                   </object>
                 </property>
 
+                <child type="start">
+                  <object class="GtkButton" id="open_image_button">
+                    <property name="icon-name">image-round-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Open Image</property>
+                  </object>
+                </child>
+
                 <child type="end">
                   <object class="GtkMenuButton">
                     <property name="icon-name">open-menu-symbolic</property>
@@ -39,7 +46,7 @@
                     <property name="title">Drop</property>
                     <property name="icon-name">image-round-symbolic</property>
                     <property name="child">
-                      <object class="ImageDropPage"></object>
+                      <object class="ImageDropPage" id="image_drop_page"></object>
                     </property>
                   </object>
                 </child>

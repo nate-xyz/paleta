@@ -19,3 +19,4 @@ class PaletaImage(Adw.Bin):
         self.picture = Gtk.Picture.new_for_pixbuf(pixbuf)
         self.set_child(self.picture)
 
+    
