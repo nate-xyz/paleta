@@ -35,6 +35,8 @@ paleta_sources = [
     'pages/image_drop.py',
     'pages/drag_overlay.py',
     'pages/palettes.py',
+    'pages/image_thief_panel.py',
+    'pages/color_row.py',
 ]
 
 # subdir('pages')

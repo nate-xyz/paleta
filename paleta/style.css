@@ -1,0 +1,15 @@
+.darken {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.darken-mas {
+    background-color: rgba(0, 0, 0, 0.24);
+}
+
+.darken-mas-mas {
+    background-color: rgba(0, 0, 0, 0.48);
+}
+
+/* row label.subtitle {
+    font-size: smaller;
+  } */

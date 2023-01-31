@@ -2,6 +2,7 @@ from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
 
 from .drag_overlay import DragOverlay
 from .image import PaletaImage
+from .image_thief_panel import ImageThiefPanel
 
 mimes = ['text/uri-list']
 
@@ -12,6 +13,7 @@ class ImageDropPage(Adw.Bin):
     overlay = Gtk.Template.Child(name="overlay")
     revealer = Gtk.Template.Child(name="revealer")
     status = Gtk.Template.Child(name="status")
+    thief_panel = Gtk.Template.Child(name="thief_panel")
 
     def __init__(self) -> None:
         super().__init__()
@@ -19,6 +21,7 @@ class ImageDropPage(Adw.Bin):
         self.setup_drop_target()
 
     def set_win(self, window):
+        self.thief_panel.set_win(window)
         self.window = window
 
     def setup_drop_target(self):
@@ -78,11 +81,16 @@ class ImageDropPage(Adw.Bin):
         try:
             image = PaletaImage()
             image.load_image(uri)
-            self.overlay.set_child(image)
+
+            #self.overlay.set_child(image)
+            self.thief_panel.set_image(image)
+
             self.revealer.set_reveal_child(False)
+            self.revealer.set_visible(False)
             self.window.open_image_toast(uri)
             return True
-        except:
+        except Exception as e:
+            print(e)
             self.window.error_image_toast(uri)
             return False
 

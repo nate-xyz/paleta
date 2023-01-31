@@ -10,6 +10,7 @@ class PaletaImage(Adw.Bin):
         self.set_valign(Gtk.Align.CENTER)
 
     def load_image(self, image_path):
+        self.image_path = image_path
         source_image = Image.open(image_path)
         width, height = source_image.size
         bytes_ = source_image.tobytes("raw", "RGBA")

@@ -19,9 +19,9 @@
             </child>
           </object>
         </child>
-        <!-- <property name="child">
-
-        </property> -->
+        <property name="child">
+          <object class="ImageThiefPanel" id="thief_panel"></object>
+        </property>
         <!-- <property name="child">
           <object class="GtkBox">
             <child>

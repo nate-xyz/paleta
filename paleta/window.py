@@ -17,8 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw
-from gi.repository import Gtk
+from gi.repository import Adw, Gtk, Gdk
 
 from .pages.image_drop import ImageDropPage
 from .pages.palettes import PalettePage
@@ -53,6 +52,7 @@ class Window(Adw.ApplicationWindow):
         for button in self.switcher_buttons:
             button.connect("clicked", self.switcher_button)
 
+        self.clipboard = Gdk.Display.get_default().get_clipboard()
 
     def switcher_button(self, button):
         if self.check_switcher_title_bug(button):
@@ -117,3 +117,7 @@ class Window(Adw.ApplicationWindow):
         toast = Adw.Toast.new(html.escape(title))
         toast.set_timeout(timeout)
         self.toast_overlay.add_toast(toast)
+
+    def copy_color(self, hex_name):
+        self.add_toast("Copied color {} to clipboard!".format(hex_name))
+        self.clipboard.set(hex_name)
