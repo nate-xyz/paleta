@@ -27,18 +27,13 @@ configure_file(
   install_dir: get_option('bindir')
 )
 
+
 paleta_sources = [
     '__init__.py',
     'main.py',
     'window.py',
-    'pages/__init__.py',
-    'pages/image_drop.py',
-    'pages/drag_overlay.py',
-    'pages/palettes.py',
-    'pages/image_thief_panel.py',
-    'pages/color_row.py',
 ]
 
-# subdir('pages')
+subdir('pages')
 
 install_data(paleta_sources, install_dir: moduledir)

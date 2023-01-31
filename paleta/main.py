@@ -24,8 +24,7 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
-from .window import Window
-
+from paleta.window import Window
 
 class App(Adw.Application):
     """The main application singleton class."""

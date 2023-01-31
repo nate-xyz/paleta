@@ -19,8 +19,9 @@
 
 from gi.repository import Adw, Gtk, Gdk
 
-from .pages.image_drop import ImageDropPage
-from .pages.palettes import PalettePage
+# from paleta.pages.image_drop import ImageDropPage
+# from paleta.pages.palettes import PalettePage
+from .pages import ImageDropPage, PalettePage
 
 import os
 import html

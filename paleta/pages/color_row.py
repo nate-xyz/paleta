@@ -1,5 +1,5 @@
 from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
-from PIL import Image, ImageFilter, ImageChops, ImageDraw
+#from PIL import Image, ImageFilter, ImageChops, ImageDraw
 import re
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/color_row.ui')
