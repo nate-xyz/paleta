@@ -12,12 +12,13 @@ class ColorRow(Gtk.ListBoxRow):
     copy_icon = Gtk.Template.Child(name="copy_icon")
 
 
-    def __init__(self) -> None:
+    def __init__(self, color) -> None:
         super().__init__()
         ctrl = Gtk.EventControllerMotion()
         ctrl.connect("enter", self.on_enter)
         ctrl.connect("leave", self.on_leave)
         self.add_controller(ctrl)
+        self.load_color(color)
 
 
     def load_color(self, color):

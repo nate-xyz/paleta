@@ -11,7 +11,6 @@ class ImageDropPage(Adw.Bin):
     __gtype_name__ = 'ImageDropPage'
 
     overlay = Gtk.Template.Child(name="overlay")
-    revealer = Gtk.Template.Child(name="revealer")
     status = Gtk.Template.Child(name="status")
     thief_panel = Gtk.Template.Child(name="thief_panel")
 
@@ -38,8 +37,7 @@ class ImageDropPage(Adw.Bin):
 
     def on_drag_accept(self, drop_target, drop_value):
         print('on_drag_accept', drop_value)
-        
-        #return True
+    
         formats = drop_value.get_formats()
         if contain_mime_types(formats):
             drop_value.read_value_async(Gio.File, GLib.PRIORITY_DEFAULT, None, self.verify_file_valid)
@@ -79,17 +77,10 @@ class ImageDropPage(Adw.Bin):
         else:
             drop.finish(0)
 
-    
     def load_image(self, uri):
         try:
-            image = PaletaImage()
-            image.load_image(uri)
-
-            #self.overlay.set_child(image)
-            self.thief_panel.set_image(image)
-
-            self.revealer.set_reveal_child(False)
-            self.revealer.set_visible(False)
+            self.thief_panel.set_image(PaletaImage(uri))
+            self.status.hide()
             self.window.open_image_toast(uri)
             return True
         except Exception as e:

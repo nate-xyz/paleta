@@ -9,6 +9,8 @@ pages_sources = [
     'image.py',
     'palettes.py',
     'dialog_windows.py',
+    'palette_card.py',
+    'color_card.py',
 ]
 
 install_data(pages_sources, install_dir: modulesubdir)

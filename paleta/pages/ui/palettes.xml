@@ -3,13 +3,27 @@
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0" />
   <template class="PalettePage" parent="AdwBin">
+    <property name="hexpand">true</property>
+    <property name="vexpand">true</property>
+    <property name="halign">fill</property>
+    <property name="valign">fill</property>
     <property name="child">
-      <object class="GtkLabel">
-        <property name="label">Hello, World!!</property>
-        <property name="vexpand">true</property>
-        <style>
-          <class name="title-1"/>
-        </style>
+      <object class="AdwClamp">
+        <property name="maximum-size">1100</property>
+        <property name="child">
+
+          <object class="GtkScrolledWindow" id="scrolled_window">
+            <child>
+              <object class="GtkListBox" id="list_box">
+                <property name="halign">fill</property>
+                <property name="selection-mode">none</property>
+                <property name="show-separators">true</property>
+
+              </object>
+            </child>
+
+          </object>
+        </property>
       </object>
     </property>
   </template>

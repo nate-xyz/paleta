@@ -46,7 +46,7 @@ class Database(GObject.GObject):
             if self.window != None:
                 pass #TODO: refresh palette page
                 #GLib.idle_add(self.window.)
-                
+
             print('Database loaded db!', threading.get_ident())
             return True
         else:
@@ -153,6 +153,8 @@ class Database(GObject.GObject):
                 self.add_pc_junction(palette_id, cid)
 
         self.con.commit()
+
+        self.model.populate()
 
 
     def add_color(self, r, g, b, hex):

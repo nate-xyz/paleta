@@ -4,8 +4,8 @@
   <requires lib="Adw" version="1.0"/>
   <template class="Window" parent="AdwApplicationWindow">
     <property name="handle-menubar-accel">true</property>
-    <property name="default-width">1800</property>
-    <property name="default-height">1200</property>
+    <property name="default-width">1200</property>
+    <property name="default-height">1100</property>
     <property name="content">
       <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">
@@ -57,7 +57,7 @@
                     <property name="title">Palettes</property>
                     <property name="icon-name">color-symbolic</property>
                     <property name="child">
-                      <object class="PalettePage"></object>
+                      <object class="PalettePage" id="palette_page"></object>
                     </property>
                   </object>
                 </child>

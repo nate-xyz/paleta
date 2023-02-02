@@ -38,6 +38,7 @@ class Window(Adw.ApplicationWindow):
     stack = Gtk.Template.Child(name="stack")
     open_image_button = Gtk.Template.Child(name="open_image_button")
     image_drop_page = Gtk.Template.Child(name="image_drop_page")
+    palette_page = Gtk.Template.Child(name="palette_page")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -46,18 +47,29 @@ class Window(Adw.ApplicationWindow):
         app = kwargs['application']
 
         self.db = app.db 
+        self.db.window = self
+        
         self.model = app.model
         
-        self.db.window = self
-
+        self.saturate()
+        
         if not self.db.try_loading_database():
             self.add_toast("Error loading database.")
     
         self.add_dialog()
+       
+        self.open_image_button.connect("clicked", self.show_open_dialog)
+    
+        self.clipboard = Gdk.Display.get_default().get_clipboard()
+        self.setup_switcher_button()
+
+    def saturate(self):
         self.image_drop_page.set_win(self)
         self.image_drop_page.set_db(self.db)
-        self.open_image_button.connect("clicked", self.show_open_dialog)
-        
+
+        self.palette_page.set_model(self.model)
+
+    def setup_switcher_button(self):
         #adw switcher buttons
         squeezer = self.view_switcher_title.observe_children()[0]
         view_switcher = squeezer.observe_children()[0]
@@ -65,8 +77,6 @@ class Window(Adw.ApplicationWindow):
         #self.drop_button, self.palette_button = self.switcher_buttons
         for button in self.switcher_buttons:
             button.connect("clicked", self.switcher_button)
-
-        self.clipboard = Gdk.Display.get_default().get_clipboard()
 
     def switcher_button(self, button):
         if self.check_switcher_title_bug(button):

@@ -4,10 +4,11 @@ from PIL import Image
 class PaletaImage(Adw.Bin):
     __gtype_name__ = 'PaletaImage'
 
-    def __init__(self) -> None:
+    def __init__(self, image_path) -> None:
         super().__init__()
         self.set_halign(Gtk.Align.CENTER)
         self.set_valign(Gtk.Align.CENTER)
+        self.load_image(image_path)
 
     def load_image(self, image_path):
         self.image_path = image_path

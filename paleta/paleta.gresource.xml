@@ -6,6 +6,8 @@
     <file alias="image_thief_panel.ui" preprocess="xml-stripblanks">pages/ui/image_thief_panel.xml</file>
     <file alias="color_row.ui" preprocess="xml-stripblanks">pages/ui/color_row.xml</file>
     <file alias="save_dialog.ui" preprocess="xml-stripblanks">pages/ui/save_dialog.xml</file>
+    <file alias="palette_card.ui" preprocess="xml-stripblanks">pages/ui/palette_card.xml</file>
+    <file alias="color_card.ui" preprocess="xml-stripblanks">pages/ui/color_card.xml</file>
     <file alias="window.ui" preprocess="xml-stripblanks">ui/window.xml</file>
     <file alias="help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.xml</file>
     <file>style.css</file>

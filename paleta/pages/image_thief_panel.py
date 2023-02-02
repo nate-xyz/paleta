@@ -75,9 +75,7 @@ class ImageThiefPanel(Adw.Bin):
         self.window.copy_color(row.hex_name)
 
     def listbox_factory(self, color):
-        new_row = ColorRow()
-        new_row.load_color(color)
-        return new_row
+        return ColorRow(color)
 
     def save_palette(self, _button):
         sd = SaveDialog(self.db, self.window, [ec for ec in self.list_store])

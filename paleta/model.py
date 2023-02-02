@@ -13,6 +13,7 @@ class Color(GObject.GObject):
         self.hex = hex 
         self.rgb = (r,g,b)
         self.rgba = (r,g,b,a)
+        self.rgb_name = "rgb{}".format(self.rgb)
 
 class Palette(GObject.GObject):
     __gtype_name__ = 'Palette'
@@ -32,6 +33,11 @@ class Palette(GObject.GObject):
 
 class Model(GObject.GObject):
     __gtype_name__ = 'Model'
+
+    __gsignals__ = {
+        'populated': (GObject.SignalFlags.RUN_FIRST, None, ()),
+    }
+
 
     def __init__(self, db) -> None:
         super().__init__()
@@ -70,7 +76,7 @@ class Model(GObject.GObject):
             self.populate_palettes()
             self.populate_color_palette_join()
 
-            #self.emit('populated')
+            self.emit('populated')
 
     def populate_colors(self):
         print('populate color')
