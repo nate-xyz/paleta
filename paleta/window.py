@@ -41,10 +41,23 @@ class Window(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        print("Window")
+
+        app = kwargs['application']
+
+        self.db = app.db 
+        self.model = app.model
+        
+        self.db.window = self
+
+        if not self.db.try_loading_database():
+            self.add_toast("Error loading database.")
+    
         self.add_dialog()
         self.image_drop_page.set_win(self)
+        self.image_drop_page.set_db(self.db)
         self.open_image_button.connect("clicked", self.show_open_dialog)
-
+        
         #adw switcher buttons
         squeezer = self.view_switcher_title.observe_children()[0]
         view_switcher = squeezer.observe_children()[0]

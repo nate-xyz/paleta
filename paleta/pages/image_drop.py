@@ -24,6 +24,9 @@ class ImageDropPage(Adw.Bin):
         self.thief_panel.set_win(window)
         self.window = window
 
+    def set_db(self, db):
+        self.thief_panel.set_db(db)
+
     def setup_drop_target(self):
         formats = Gdk.ContentFormats.new(mimes)
         drop_target = Gtk.DropTargetAsync.new(formats=formats, actions=Gdk.DragAction.COPY)

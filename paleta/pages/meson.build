@@ -8,6 +8,7 @@ pages_sources = [
     'image_thief_panel.py',
     'image.py',
     'palettes.py',
+    'dialog_windows.py',
 ]
 
 install_data(pages_sources, install_dir: modulesubdir)

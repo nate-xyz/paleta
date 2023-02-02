@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     from gi.repository import Gio
 
-    if os.environ.get('MESON_DEVENV') != None:
+    if os.environ.get('MESON_DEVENV') != None or os.environ.get('PALETA_DEVENV') != None:
         dev_path = os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])))
         source_dir = str(Path(dev_path).parent.parent)
 

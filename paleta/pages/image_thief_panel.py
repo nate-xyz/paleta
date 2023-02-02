@@ -4,7 +4,8 @@ from threading import Thread
 from colorthief import ColorThief
 
 from .image import PaletaImage
-from .color_row import ColorRow, PaletaColor
+from .color_row import ColorRow, ExtractedColor
+from .dialog_windows import SaveDialog
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/image_thief_panel.ui')
 class ImageThiefPanel(Adw.Bin):
@@ -17,15 +18,17 @@ class ImageThiefPanel(Adw.Bin):
     palette_box = Gtk.Template.Child(name="palette_box")
     spinner = Gtk.Template.Child(name="spinner")
     colors_list_box = Gtk.Template.Child(name="colors_list_box")
+    save_button = Gtk.Template.Child(name="save_button")
     
     def __init__(self) -> None:
         super().__init__()
         self.image = None
 
-        self.list_store = Gio.ListStore(item_type=PaletaColor)
+        self.list_store = Gio.ListStore(item_type=ExtractedColor)
         self.colors_list_box.bind_model(self.list_store, self.listbox_factory)
 
         self.extract_button.connect('clicked', self.start_extraction)
+        self.save_button.connect('clicked', self.save_palette)
         self.colors_list_box.connect('row_selected', self.row_select)
 
     def set_image(self, image: PaletaImage):
@@ -37,6 +40,9 @@ class ImageThiefPanel(Adw.Bin):
 
     def set_win(self, window):
         self.window = window
+
+    def set_db(self, db):
+        self.db = db
 
     def start_extraction(self, _button):
         self.palette_box.set_visible(False)
@@ -61,7 +67,7 @@ class ImageThiefPanel(Adw.Bin):
         print('extraction_done', colors)
 
         for c in colors:
-            paleta_color = PaletaColor()
+            paleta_color = ExtractedColor()
             paleta_color.add_rgb(c)
             self.list_store.append(paleta_color)
 
@@ -72,6 +78,10 @@ class ImageThiefPanel(Adw.Bin):
         new_row = ColorRow()
         new_row.load_color(color)
         return new_row
+
+    def save_palette(self, _button):
+        sd = SaveDialog(self.db, self.window, [ec for ec in self.list_store])
+        sd.show()
 
 
 def color_extraction(uri, count, quality, callback):

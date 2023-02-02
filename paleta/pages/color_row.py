@@ -53,16 +53,16 @@ class ColorRow(Gtk.ListBoxRow):
 
 
 
-class PaletaColor(GObject.GObject):
-    __gtype_name__ = "PaletaColor"
+class ExtractedColor(GObject.GObject):
+    __gtype_name__ = "ExtractedColor"
 
     def __init__(self) -> None:
         super().__init__()
     
     def add_rgb(self, rgb_tuble):
+        self.rgb = rgb_tuble
         self.rgb_name = "rgb{}".format(rgb_tuble)
         self.hex_name = "#{}".format(rgb_to_hex(*rgb_tuble))
-
 
 def rgb_to_hex(r, g, b):
   return ('{:X}{:X}{:X}').format(r, g, b)

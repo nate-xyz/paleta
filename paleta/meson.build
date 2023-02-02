@@ -31,7 +31,10 @@ configure_file(
 paleta_sources = [
     '__init__.py',
     'main.py',
+    'app.py',
     'window.py',
+    'model.py',
+    'database.py',
 ]
 
 subdir('pages')
