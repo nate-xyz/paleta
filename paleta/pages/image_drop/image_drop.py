@@ -1,4 +1,4 @@
-from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
+from gi.repository import Adw, GLib, Gio, Gtk, Gdk
 
 from .image import PaletaImage
 from .image_thief_panel import ImageThiefPanel

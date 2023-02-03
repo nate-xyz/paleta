@@ -1,0 +1,1 @@
+from .palettes import PalettePage

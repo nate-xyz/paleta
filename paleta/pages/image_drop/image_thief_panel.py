@@ -1,11 +1,11 @@
-from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
+from gi.repository import Adw, GLib, Gio, Gtk
 
 from threading import Thread
 from colorthief import ColorThief
 
 from .image import PaletaImage
 from .color_row import ColorRow, ExtractedColor
-from .dialog_windows import SaveDialog
+from paleta.pages.dialog_windows import SaveDialog
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/image_thief_panel.ui')
 class ImageThiefPanel(Adw.Bin):

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/io/nxyz/Paleta">
-    <file alias="image_drop.ui" preprocess="xml-stripblanks">pages/ui/image_drop.xml</file>
-    <file alias="palettes.ui" preprocess="xml-stripblanks">pages/ui/palettes.xml</file>
-    <file alias="image_thief_panel.ui" preprocess="xml-stripblanks">pages/ui/image_thief_panel.xml</file>
-    <file alias="color_row.ui" preprocess="xml-stripblanks">pages/ui/color_row.xml</file>
+    <!-- image drop -->
+    <file alias="image_drop.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_drop.xml</file>
+    <file alias="image_thief_panel.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_thief_panel.xml</file>
+    <file alias="color_row.ui" preprocess="xml-stripblanks">pages/image_drop/ui/color_row.xml</file>
+    
+    <!-- palettes -->
+    <file alias="palettes.ui" preprocess="xml-stripblanks">pages/palette/ui/palettes.xml</file>
+    <file alias="palette_card.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_card.xml</file>
+    <file alias="color_card.ui" preprocess="xml-stripblanks">pages/palette/ui/color_card.xml</file>
+    
+    <!-- else -->
     <file alias="save_dialog.ui" preprocess="xml-stripblanks">pages/ui/save_dialog.xml</file>
-    <file alias="palette_card.ui" preprocess="xml-stripblanks">pages/ui/palette_card.xml</file>
-    <file alias="color_card.ui" preprocess="xml-stripblanks">pages/ui/color_card.xml</file>
     <file alias="window.ui" preprocess="xml-stripblanks">ui/window.xml</file>
     <file alias="help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.xml</file>
     <file>style.css</file>

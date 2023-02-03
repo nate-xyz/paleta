@@ -1,4 +1,4 @@
-from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
+from gi.repository import Adw, GLib, Gtk, GdkPixbuf
 from PIL import Image
 
 class PaletaImage(Adw.Bin):
