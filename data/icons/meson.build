@@ -1,4 +1,4 @@
-application_id = 'io.nxyz.Paleta'
+
 
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')
 install_data(

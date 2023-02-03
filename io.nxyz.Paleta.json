@@ -28,7 +28,12 @@
             "name" : "paleta",
             "builddir" : true,
             "buildsystem" : "meson",
-            "sources" : []
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/nate-xyz/paleta"
+                }
+            ]
         }
     ]
 }
