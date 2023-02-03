@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0" />
-  <template class="PaletteCard" parent="GtkListBoxRow">
+  <template class="PaletteRow" parent="GtkListBoxRow">
     <property name="activatable">false</property>
     <property name="selectable">false</property>
 

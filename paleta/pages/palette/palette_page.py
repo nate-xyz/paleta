@@ -1,9 +1,9 @@
 from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
 
-from .palette_card import PaletteCard
+from .palette_row import PaletteRow
 from paleta.model import Palette
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/palettes.ui')
+@Gtk.Template(resource_path='/io/nxyz/Paleta/palette_page.ui')
 class PalettePage(Adw.Bin):
     __gtype_name__ = 'PalettePage'
 
@@ -21,7 +21,7 @@ class PalettePage(Adw.Bin):
             self.list_store.append(palette)
 
     def listbox_factory(self, palette):
-        return PaletteCard(palette, self.copy_callback)
+        return PaletteRow(palette, self.copy_callback)
 
     def set_model(self, model):
         self.model = model

@@ -2,9 +2,9 @@ from gi.repository import Gtk, Gdk, GObject
 
 import re
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/color_row.ui')
-class ColorRow(Gtk.ListBoxRow):
-    __gtype_name__ = 'ColorRow'
+@Gtk.Template(resource_path='/io/nxyz/Paleta/extracted_color_row.ui')
+class ExtractedColorRow(Gtk.ListBoxRow):
+    __gtype_name__ = 'ExtractedColorRow'
 
     row_box = Gtk.Template.Child(name="row_box")
     hex_name_label = Gtk.Template.Child(name="hex_name_label")

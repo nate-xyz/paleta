@@ -2,9 +2,9 @@ from gi.repository import Gtk, Gdk, Graphene
 
 from paleta.model import Color
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/color_card.ui')
-class ColorCard(Gtk.FlowBoxChild):
-    __gtype_name__ = 'ColorCard'
+@Gtk.Template(resource_path='/io/nxyz/Paleta/palette_color_card.ui')
+class PaletteColorCard(Gtk.FlowBoxChild):
+    __gtype_name__ = 'PaletteColorCard'
 
     color_bin = Gtk.Template.Child(name="color_bin")
     hex_label = Gtk.Template.Child(name="hex_label")

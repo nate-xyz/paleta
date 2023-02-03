@@ -2,7 +2,7 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0" />
-  <template class="ImageThiefPanel" parent="AdwBin">
+  <template class="ColorThiefPanel" parent="AdwBin">
     <property name="visible">false</property>
     <property name="child">
       <object class="GtkBox">

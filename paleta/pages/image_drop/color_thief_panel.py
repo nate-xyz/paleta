@@ -3,13 +3,13 @@ from gi.repository import Adw, GLib, Gio, Gtk
 from threading import Thread
 from colorthief import ColorThief
 
-from .image import PaletaImage
-from .color_row import ColorRow, ExtractedColor
+from .dropped_image import DroppedImage
+from .extracted_color_row import ExtractedColorRow, ExtractedColor
 from paleta.pages.dialog_windows import SaveDialog
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/image_thief_panel.ui')
-class ImageThiefPanel(Adw.Bin):
-    __gtype_name__ = 'ImageThiefPanel'
+@Gtk.Template(resource_path='/io/nxyz/Paleta/color_thief_panel.ui')
+class ColorThiefPanel(Adw.Bin):
+    __gtype_name__ = 'ColorThiefPanel'
 
     image_bin = Gtk.Template.Child(name="image_bin")
     extract_button = Gtk.Template.Child(name="extract_button")
@@ -31,7 +31,7 @@ class ImageThiefPanel(Adw.Bin):
         self.save_button.connect('clicked', self.save_palette)
         self.colors_list_box.connect('row_selected', lambda _listbox, row: self.window.copy_color(row.hex_name))
 
-    def set_image(self, image: PaletaImage):
+    def set_image(self, image: DroppedImage):
         print('set_image')
         self.set_visible(True)
         self.image_bin.set_child(None)
@@ -72,7 +72,7 @@ class ImageThiefPanel(Adw.Bin):
             self.list_store.append(paleta_color)
 
     def listbox_factory(self, color):
-        return ColorRow(color)
+        return ExtractedColorRow(color)
 
     def save_palette(self, _button):
         SaveDialog(self.db, self.window, [ec for ec in self.list_store]).show()

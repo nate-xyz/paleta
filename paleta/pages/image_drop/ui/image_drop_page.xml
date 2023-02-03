@@ -16,7 +16,7 @@
           </object>
         </child>
         <property name="child">
-          <object class="ImageThiefPanel" id="thief_panel"></object>
+          <object class="ColorThiefPanel" id="thief_panel"></object>
         </property>
       </object>
     </property>

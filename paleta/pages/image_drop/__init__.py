@@ -1,1 +1,1 @@
-from .image_drop import ImageDropPage
+from .image_drop_page import ImageDropPage

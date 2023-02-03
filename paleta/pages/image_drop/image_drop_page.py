@@ -1,11 +1,11 @@
 from gi.repository import Adw, GLib, Gio, Gtk, Gdk
 
-from .image import PaletaImage
-from .image_thief_panel import ImageThiefPanel
+from .dropped_image import DroppedImage
+from .color_thief_panel import ColorThiefPanel
 
 mimes = ['text/uri-list']
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/image_drop.ui')
+@Gtk.Template(resource_path='/io/nxyz/Paleta/image_drop_page.ui')
 class ImageDropPage(Adw.Bin):
     __gtype_name__ = 'ImageDropPage'
 
@@ -78,7 +78,7 @@ class ImageDropPage(Adw.Bin):
 
     def load_image(self, uri):
         try:
-            self.thief_panel.set_image(PaletaImage(uri))
+            self.thief_panel.set_image(DroppedImage(uri))
             self.status.hide()
             self.window.open_image_toast(uri)
             return True

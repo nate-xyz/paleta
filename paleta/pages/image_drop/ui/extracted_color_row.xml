@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version="4.0"/>
-  <template class="ColorRow" parent="GtkListBoxRow">
+  <template class="ExtractedColorRow" parent="GtkListBoxRow">
     <property name="hexpand">true</property>
     <property name="halign">fill</property>
 

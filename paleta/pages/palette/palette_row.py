@@ -1,12 +1,12 @@
 from gi.repository import Gio, Gtk
 
 from paleta.model import Palette, Color
-from .color_card import ColorCard
+from .palette_color_card import PaletteColorCard
 
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/palette_card.ui')
-class PaletteCard(Gtk.ListBoxRow):
-    __gtype_name__ = 'PaletteCard'
+@Gtk.Template(resource_path='/io/nxyz/Paleta/palette_row.ui')
+class PaletteRow(Gtk.ListBoxRow):
+    __gtype_name__ = 'PaletteRow'
 
     title_label = Gtk.Template.Child(name="title_label")
     flow_box = Gtk.Template.Child(name="flow_box")
@@ -27,7 +27,13 @@ class PaletteCard(Gtk.ListBoxRow):
         for color in self.palette.colors:
             self.list_store.append(color)
 
+    def update_edit_view(self, edit_mode):
+        if edit_mode:
+            pass 
+        else:
+            pass
+
     def flowbox_factory(self, color):
-        return ColorCard(color, self.copy_callback)
+        return PaletteColorCard(color, self.copy_callback)
 
 

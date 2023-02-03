@@ -1,1 +1,1 @@
-from .palettes import PalettePage
+from .palette_page import PalettePage

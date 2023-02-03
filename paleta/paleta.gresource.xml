@@ -2,14 +2,14 @@
 <gresources>
   <gresource prefix="/io/nxyz/Paleta">
     <!-- image drop -->
-    <file alias="image_drop.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_drop.xml</file>
-    <file alias="image_thief_panel.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_thief_panel.xml</file>
-    <file alias="color_row.ui" preprocess="xml-stripblanks">pages/image_drop/ui/color_row.xml</file>
+    <file alias="image_drop_page.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_drop_page.xml</file>
+    <file alias="color_thief_panel.ui" preprocess="xml-stripblanks">pages/image_drop/ui/color_thief_panel.xml</file>
+    <file alias="extracted_color_row.ui" preprocess="xml-stripblanks">pages/image_drop/ui/extracted_color_row.xml</file>
     
     <!-- palettes -->
-    <file alias="palettes.ui" preprocess="xml-stripblanks">pages/palette/ui/palettes.xml</file>
-    <file alias="palette_card.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_card.xml</file>
-    <file alias="color_card.ui" preprocess="xml-stripblanks">pages/palette/ui/color_card.xml</file>
+    <file alias="palette_page.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_page.xml</file>
+    <file alias="palette_row.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_row.xml</file>
+    <file alias="palette_color_card.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_color_card.xml</file>
     
     <!-- else -->
     <file alias="save_dialog.ui" preprocess="xml-stripblanks">pages/ui/save_dialog.xml</file>
@@ -23,6 +23,6 @@
     <file alias="image-missing-symbolic.svg">assets/icons/image-missing-symbolic.svg</file>
     <file alias="brush-symbolic.svg">assets/icons/brush-symbolic.svg</file>
     <file alias="copy-symbolic.svg">assets/icons/copy-symbolic.svg</file>
-    
+    <file alias="edit-symbolic.svg">assets/icons/edit-symbolic.svg</file>
   </gresource>
 </gresources>

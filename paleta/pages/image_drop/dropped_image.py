@@ -1,8 +1,8 @@
 from gi.repository import Adw, GLib, Gtk, GdkPixbuf
 from PIL import Image
 
-class PaletaImage(Adw.Bin):
-    __gtype_name__ = 'PaletaImage'
+class DroppedImage(Adw.Bin):
+    __gtype_name__ = 'DroppedImage'
 
     def __init__(self, image_path) -> None:
         super().__init__()
