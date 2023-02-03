@@ -13,10 +13,7 @@ class PalettePage(Adw.Bin):
         super().__init__()
         self.list_store = Gio.ListStore(item_type=Palette)
         self.list_box.bind_model(self.list_store, self.listbox_factory)
-
-    def set_model(self, model):
-        self.model = model
-        self.model.connect('populated', self.update_view)
+        self.copy_callback = None
 
     def update_view(self, model=None):
         self.list_store.remove_all()
@@ -24,4 +21,8 @@ class PalettePage(Adw.Bin):
             self.list_store.append(palette)
 
     def listbox_factory(self, palette):
-        return PaletteCard(palette)
+        return PaletteCard(palette, self.copy_callback)
+
+    def set_model(self, model):
+        self.model = model
+        self.model.connect('populated', self.update_view)

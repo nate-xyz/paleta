@@ -29,7 +29,7 @@ class ImageThiefPanel(Adw.Bin):
 
         self.extract_button.connect('clicked', self.start_extraction)
         self.save_button.connect('clicked', self.save_palette)
-        self.colors_list_box.connect('row_selected', self.row_select)
+        self.colors_list_box.connect('row_selected', lambda _listbox, row: self.window.copy_color(row.hex_name))
 
     def set_image(self, image: PaletaImage):
         print('set_image')
@@ -71,15 +71,11 @@ class ImageThiefPanel(Adw.Bin):
             paleta_color.add_rgb(c)
             self.list_store.append(paleta_color)
 
-    def row_select(self, listbox, row):
-        self.window.copy_color(row.hex_name)
-
     def listbox_factory(self, color):
         return ColorRow(color)
 
     def save_palette(self, _button):
-        sd = SaveDialog(self.db, self.window, [ec for ec in self.list_store])
-        sd.show()
+        SaveDialog(self.db, self.window, [ec for ec in self.list_store]).show()
 
 
 def color_extraction(uri, count, quality, callback):

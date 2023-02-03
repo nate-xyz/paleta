@@ -68,6 +68,7 @@ class Window(Adw.ApplicationWindow):
         self.image_drop_page.set_db(self.db)
 
         self.palette_page.set_model(self.model)
+        self.palette_page.copy_callback = self.copy_color
 
     def setup_switcher_button(self):
         #adw switcher buttons

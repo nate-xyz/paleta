@@ -1,4 +1,4 @@
-from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Gst
+from gi.repository import Adw, Gtk
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/save_dialog.ui')
 class SaveDialog(Adw.MessageDialog):

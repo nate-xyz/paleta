@@ -2,8 +2,11 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0" />
-  <template class="PaletteCard" parent="AdwBin">
-    <property name="child">
+  <template class="PaletteCard" parent="GtkListBoxRow">
+    <property name="activatable">false</property>
+    <property name="selectable">false</property>
+
+    <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <property name="hexpand">true</property>
@@ -21,15 +24,11 @@
             <property name="halign">start</property>
             <property name="label"></property>
             <property name="ellipsize">end</property>
-            <!-- <attributes>
-              <attribute name="weight" value="PANGO_WEIGHT_ULTRALIGHT"/>
-              <attribute name="scale" value="1"/>
-            </attributes> -->
 
             <style>
               <class name="large-title"/>
             </style>
-
+            
           </object>
         </child>
         <child>
@@ -46,7 +45,7 @@
               <object class="GtkFlowBox" id="flow_box">
                 <property name="hexpand">true</property>
                 <property name="vexpand">true</property>
-                <property name="halign">start</property>
+                <property name="halign">center</property>
                 <property name="valign">start</property>
                 <property name="column-spacing">0</property>
                 <property name="row-spacing">0</property>
@@ -56,6 +55,6 @@
           </object>
       </child>
       </object>
-    </property>
+    </child>
   </template>
 </interface>

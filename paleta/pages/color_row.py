@@ -11,16 +11,15 @@ class ColorRow(Gtk.ListBoxRow):
     rgb_name_label = Gtk.Template.Child(name="rgb_name_label")
     copy_icon = Gtk.Template.Child(name="copy_icon")
 
-
     def __init__(self, color) -> None:
         super().__init__()
-        ctrl = Gtk.EventControllerMotion()
-        ctrl.connect("enter", self.on_enter)
-        ctrl.connect("leave", self.on_leave)
-        self.add_controller(ctrl)
         self.load_color(color)
-
-
+        
+        ctrl = Gtk.EventControllerMotion()
+        ctrl.connect("enter", lambda _controller, _x, _y: self.copy_icon.show())
+        ctrl.connect("leave", lambda _controller: self.copy_icon.hide())
+        self.add_controller(ctrl)
+        
     def load_color(self, color):
         rgba = Gdk.RGBA()
         success = rgba.parse(color.rgb_name)
@@ -29,7 +28,6 @@ class ColorRow(Gtk.ListBoxRow):
             color_button.connect('color-set', self.set_from_button)
             color_button.props.show_editor = True
             self.row_box.prepend(color_button)
-        
         
         self.hex_name_label.set_label(color.hex_name)
         self.rgb_name_label.set_label(color.rgb_name)
@@ -43,15 +41,6 @@ class ColorRow(Gtk.ListBoxRow):
         rgb = [int(i) for i in re.search('\(([^)]+)', rgb_name).group(1).split(',')]
         self.hex_name = rgb_to_hex(*rgb)
         self.hex_name_label.set_label("#{}".format(self.hex_name))
-
-
-
-    def on_enter(self, _controller, x, y):
-        self.copy_icon.show()
-
-    def on_leave(self, _controller):
-        self.copy_icon.hide()
-
 
 
 class ExtractedColor(GObject.GObject):

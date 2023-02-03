@@ -8,22 +8,19 @@
     <property name="halign">fill</property>
     <property name="valign">fill</property>
     <property name="child">
-      <object class="AdwClamp">
-        <property name="maximum-size">1100</property>
-        <property name="child">
-
-          <object class="GtkScrolledWindow" id="scrolled_window">
-            <child>
+      <object class="GtkScrolledWindow" id="scrolled_window">
+        <child>
+          <object class="AdwClamp">
+            <property name="maximum-size">1100</property>
+            <property name="child">
               <object class="GtkListBox" id="list_box">
                 <property name="halign">fill</property>
                 <property name="selection-mode">none</property>
                 <property name="show-separators">true</property>
-
               </object>
-            </child>
-
+            </property>
           </object>
-        </property>
+        </child>
       </object>
     </property>
   </template>

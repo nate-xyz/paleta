@@ -1,6 +1,5 @@
 from gi.repository import Adw, GLib, Gio, Gtk, Gdk, GObject, GdkPixbuf, Pango
 
-from .drag_overlay import DragOverlay
 from .image import PaletaImage
 from .image_thief_panel import ImageThiefPanel
 
