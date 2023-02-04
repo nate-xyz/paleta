@@ -12,6 +12,8 @@
         <child type="overlay">
           <object class="AdwStatusPage" id="status">
             <property name="title" translatable="yes">Drop Image</property>
+            <property name="description" translatable="yes">Drag an image here or click the button in the upper left corner of this window.</property>
+
             <property name="icon-name">image-missing-symbolic</property>
           </object>
         </child>

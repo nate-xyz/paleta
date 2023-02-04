@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0" />
+  <template class="AddColorDialog" parent="AdwMessageDialog">
+    <property name="heading" translatable="yes">Add Color to Palette</property>
+    <property name="destroy-with-parent">true</property>
+
+    <property name="close-response">cancel</property>
+    <property name="default-response">add</property>
+
+    <signal name="response::add" handler="dialog_response"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="add" translatable="yes" appearance="suggested" enabled="true">_Add Color</response>
+    </responses>
+
+    <property name="extra-child">
+      <object class="GtkBox" id="color_box">
+        <property name="orientation">vertical</property>
+        <property name="width-request">500</property>
+        <property name="margin-top">18</property>
+        <property name="hexpand">true</property>
+        <property name="halign">center</property>
+        <property name="spacing">10</property>
+
+        <child>
+          <object class="GtkLabel" id="currently_selected_label">
+            <property name="halign">center</property>
+            <property name="label"></property>
+            <property name="ellipsize">end</property>
+            <attributes>
+              <attribute name="weight" value="PANGO_WEIGHT_LIGHT"/>
+              <attribute name="scale" value="1.3"/>
+            </attributes>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkButton" id="picker_button">
+            <property name="hexpand">true</property>
+            <property name="halign">center</property>
+
+            <property name="child">
+              <object class="AdwButtonContent">
+                <property name="icon-name">color-picker-symbolic</property>
+                <property name="label" translatable="yes">_Choose with Picker</property>
+                <property name="use-underline">True</property>
+              </object>
+            </property>
+
+            <style>
+              <class name="pill"/>
+              <class name="suggested-action"/>
+            </style>
+
+          </object>
+        </child>
+
+      </object>
+    </property>
+
+  </template>
+</interface>

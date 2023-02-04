@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0" />
+  <template class="DeleteColorDialog" parent="AdwMessageDialog">
+    <property name="heading" translatable="yes">Remove Color from Palette?</property>
+    <property name="destroy-with-parent">true</property>
+
+    <property name="close-response">cancel</property>
+    <property name="default-response">remove</property>
+
+    <signal name="response::remove" handler="dialog_response"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="remove" translatable="yes" appearance="destructive" enabled="true">_Remove</response>
+    </responses>
+
+    <property name="extra-child">
+      <object class="GtkBox" id="color_box">
+        <property name="width-request">400</property>
+        <property name="margin-top">18</property>
+        <property name="hexpand">true</property>
+        <property name="halign">center</property>
+
+      </object>
+    </property>
+
+  </template>
+</interface>

@@ -5,7 +5,7 @@ from colorthief import ColorThief
 
 from .dropped_image import DroppedImage
 from .extracted_color_row import ExtractedColorRow, ExtractedColor
-from paleta.pages.dialog_windows import SaveDialog
+from paleta.dialog import SavePaletteDialog
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/color_thief_panel.ui')
 class ColorThiefPanel(Adw.Bin):
@@ -28,21 +28,18 @@ class ColorThiefPanel(Adw.Bin):
         self.colors_list_box.bind_model(self.list_store, self.listbox_factory)
 
         self.extract_button.connect('clicked', self.start_extraction)
-        self.save_button.connect('clicked', self.save_palette)
+        self.save_button.connect('clicked', lambda _button: SavePaletteDialog([ec for ec in self.list_store], self.window, self.db).show())
         self.colors_list_box.connect('row_selected', lambda _listbox, row: self.window.copy_color(row.hex_name))
 
     def set_image(self, image: DroppedImage):
-        print('set_image')
         self.set_visible(True)
         self.image_bin.set_child(None)
         self.image_bin.set_child(image)
         self.image = image
 
-    def set_win(self, window):
-        self.window = window
-
-    def set_db(self, db):
-        self.db = db
+    def saturate(self, window, database):
+        self.window = window 
+        self.db = database
 
     def start_extraction(self, _button):
         self.palette_box.set_visible(False)
@@ -66,16 +63,11 @@ class ColorThiefPanel(Adw.Bin):
         self.palette_box.set_visible(True)
         print('extraction_done', colors)
 
-        for c in colors:
-            paleta_color = ExtractedColor()
-            paleta_color.add_rgb(c)
-            self.list_store.append(paleta_color)
+        for rgb in colors:
+            self.list_store.append(ExtractedColor(rgb))
 
     def listbox_factory(self, color):
         return ExtractedColorRow(color)
-
-    def save_palette(self, _button):
-        SaveDialog(self.db, self.window, [ec for ec in self.list_store]).show()
 
 
 def color_extraction(uri, count, quality, callback):

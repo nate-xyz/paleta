@@ -26,6 +26,9 @@ configure_file(
 )
 
 
+subdir('pages')
+subdir('dialog')
+
 paleta_sources = [
     '__init__.py',
     'main.py',
@@ -33,8 +36,7 @@ paleta_sources = [
     'window.py',
     'model.py',
     'database.py',
+    'util.py',
 ]
-
-subdir('pages')
 
 install_data(paleta_sources, install_dir: moduledir)

@@ -10,15 +10,27 @@
     <property name="child">
       <object class="GtkScrolledWindow" id="scrolled_window">
         <child>
-          <object class="AdwClamp">
-            <property name="maximum-size">1100</property>
-            <property name="child">
-              <object class="GtkListBox" id="list_box">
-                <property name="halign">fill</property>
-                <property name="selection-mode">none</property>
-                <property name="show-separators">true</property>
+          <object class="GtkOverlay">
+            <child type="overlay">
+              <object class="AdwStatusPage" id="status">
+                <property name="title" translatable="yes">Add Some Palettes!</property>
+                <property name="description" translatable="yes">Drop an image onto the drop page and extract some colors to get started!</property>
+                <property name="icon-name">io.nxyz.Paleta-symbolic</property>
               </object>
-            </property>
+            </child>
+            <child>
+              <object class="AdwClamp">
+                <property name="maximum-size">1100</property>
+                <property name="child">
+                  <object class="GtkListBox" id="list_box">
+                    <property name="visible">false</property>
+                    <property name="halign">fill</property>
+                    <property name="selection-mode">none</property>
+                    <property name="show-separators">true</property>
+                  </object>
+                </property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

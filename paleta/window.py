@@ -39,6 +39,7 @@ class Window(Adw.ApplicationWindow):
     open_image_button = Gtk.Template.Child(name="open_image_button")
     image_drop_page = Gtk.Template.Child(name="image_drop_page")
     palette_page = Gtk.Template.Child(name="palette_page")
+    edit_palette_button = Gtk.Template.Child(name="edit_palette_button")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -63,12 +64,19 @@ class Window(Adw.ApplicationWindow):
         self.clipboard = Gdk.Display.get_default().get_clipboard()
         self.setup_switcher_button()
 
-    def saturate(self):
-        self.image_drop_page.set_win(self)
-        self.image_drop_page.set_db(self.db)
+        self.stack.connect('notify::visible-child-name', self.on_stack_switch)
+        self.edit_palette_button.connect('clicked', self.palette_page.toggle_edit_mode)
 
-        self.palette_page.set_model(self.model)
-        self.palette_page.copy_callback = self.copy_color
+
+    def on_stack_switch(self, stack, child_name):
+        if stack.get_visible_child_name() == 'palette-stack-page' and len(self.model.get_palettes()) != 0:
+            self.edit_palette_button.show()
+        else:
+            self.edit_palette_button.hide()
+    
+    def saturate(self):
+        self.image_drop_page.saturate(self, self.db)
+        self.palette_page.saturate(self, self.db, self.model)
 
     def setup_switcher_button(self):
         #adw switcher buttons

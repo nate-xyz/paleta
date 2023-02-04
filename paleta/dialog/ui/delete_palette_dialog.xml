@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0" />
+  <template class="DeletePaletteDialog" parent="AdwMessageDialog">
+    <property name="heading" translatable="yes">Delete Palette?</property>
+    <property name="body" translatable="yes">This will permanently remove this palette from Paleta.</property>
+    <property name="destroy-with-parent">true</property>
+
+    <property name="close-response">cancel</property>
+    <property name="default-response">delete</property>
+
+    <signal name="response::delete" handler="dialog_response"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="delete" translatable="yes" appearance="destructive" enabled="true">_Delete</response>
+    </responses>
+  </template>
+</interface>

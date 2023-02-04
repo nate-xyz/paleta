@@ -28,9 +28,21 @@
                 </child>
 
                 <child type="end">
-                  <object class="GtkMenuButton">
-                    <property name="icon-name">open-menu-symbolic</property>
-                    <property name="menu-model">primary_menu</property>
+                  <object class="GtkBox">
+                    <property name="spacing">3</property>
+                    <child>
+                      <object class="GtkButton" id="edit_palette_button">
+                        <property name="visible">false</property>
+                        <property name="icon-name">edit-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Edit Palettes</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkMenuButton">
+                        <property name="icon-name">open-menu-symbolic</property>
+                        <property name="menu-model">primary_menu</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>

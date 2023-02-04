@@ -1,5 +1,7 @@
 from gi.repository import Gtk, Gdk, GObject
 
+from paleta.util import rgb_to_hex
+
 import re
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/extracted_color_row.ui')
@@ -46,13 +48,12 @@ class ExtractedColorRow(Gtk.ListBoxRow):
 class ExtractedColor(GObject.GObject):
     __gtype_name__ = "ExtractedColor"
 
-    def __init__(self) -> None:
+    def __init__(self, rgb_tuble) -> None:
         super().__init__()
+        self.add_rgb(rgb_tuble)
     
     def add_rgb(self, rgb_tuble):
         self.rgb = rgb_tuble
         self.rgb_name = "rgb{}".format(rgb_tuble)
         self.hex_name = "#{}".format(rgb_to_hex(*rgb_tuble))
 
-def rgb_to_hex(r, g, b):
-  return ('{:X}{:X}{:X}').format(r, g, b)

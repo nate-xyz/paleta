@@ -18,12 +18,9 @@ class ImageDropPage(Adw.Bin):
         self.window = None
         self.setup_drop_target()
 
-    def set_win(self, window):
-        self.thief_panel.set_win(window)
-        self.window = window
-
-    def set_db(self, db):
-        self.thief_panel.set_db(db)
+    def saturate(self, window, database):
+        self.window = window 
+        self.thief_panel.saturate(window, database)
 
     def setup_drop_target(self):
         formats = Gdk.ContentFormats.new(mimes)
