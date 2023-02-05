@@ -2,8 +2,8 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <requires lib="adw" version="1.0" />
-  <template class="AddColorDialog" parent="AdwMessageDialog">
-    <property name="heading" translatable="yes">Add Color to Palette</property>
+  <template class="AddNewPaletteDialog" parent="AdwMessageDialog">
+    <property name="heading" translatable="yes">Add New Palette</property>
     <property name="destroy-with-parent">true</property>
 
     <property name="close-response">cancel</property>
@@ -12,7 +12,7 @@
     <signal name="response::add" handler="dialog_response"/>
     <responses>
       <response id="cancel" translatable="yes">_Cancel</response>
-      <response id="add" translatable="yes" appearance="suggested" enabled="true">_Add Color</response>
+      <response id="add" translatable="yes" appearance="suggested" enabled="true">_Add Palette</response>
     </responses>
 
     <property name="extra-child">
@@ -25,7 +25,7 @@
           <class name="darken"/>
         </style>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="box">
             <property name="orientation">vertical</property>
             <property name="margin-top">18</property>
             <property name="margin-bottom">10</property>
@@ -34,12 +34,23 @@
             <property name="hexpand">true</property>
             <property name="halign">center</property>
             <property name="spacing">10</property>
-        
+    
+    
+            <child>
+              <object class="AdwPreferencesGroup">
+                <child>
+                  <object class="AdwEntryRow" id="adw_entry_row">
+                    <property name="title" translatable="yes">New Palette _Name</property>
+                    <property name="use_underline">True</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+    
             <child>
               <object class="GtkLabel" id="color_instruction_label">
                 <property name="halign">center</property>
-                <property name="label">Select from previously added colors or pick a new one.</property>
-                <property name="ellipsize">end</property>
+                <property name="label">Select from previously added colors or pick one to add to new palette.</property>
                 <attributes>
                   <attribute name="weight" value="PANGO_WEIGHT_LIGHT"/>
                   <attribute name="scale" value="1.3"/>
@@ -47,8 +58,10 @@
               </object>
             </child>
     
+    
             <child>
-              <object class="AdwBin" id="color_selection_row"></object>
+              <object class="AdwBin" id="color_selection_row">
+              </object>
             </child>
     
             <child>
@@ -64,10 +77,12 @@
                     <property name="use-underline">True</property>
                   </object>
                 </property>
+    
                 <style>
                   <class name="pill"/>
                   <class name="suggested-action"/>
                 </style>
+    
               </object>
             </child>
     
@@ -99,6 +114,7 @@
             </child>
     
           </object>
+  
         </child>
       </object>
 

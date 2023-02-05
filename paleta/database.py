@@ -180,6 +180,22 @@ class Database(GObject.GObject):
             logging.error(e, exc_info=True)
             return False
 
+    #add palette from palette page
+    def add_palette_new(self, name: str, hex, r, g, b, a=1.0):
+        try:
+            palette_id = self.add_palette(name)
+            color_id = self.add_color(hex, r, g, b, a)
+            self.add_pc_junction(palette_id, color_id)
+
+            self.con.commit()
+            self.model.populate()
+            
+            return True
+        except Exception as e:
+            print(e)
+            logging.error(e, exc_info=True)
+            return False
+
     def duplicate_palette(self, palette_id, duplicate_name):
         try:
             color_ids = self.query_colors_by_palette_id(palette_id)

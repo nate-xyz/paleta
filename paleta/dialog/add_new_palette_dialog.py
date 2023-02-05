@@ -7,10 +7,11 @@ from paleta.pages import ColorSquare
 
 import re
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/add_color_dialog.ui')
-class AddColorDialog(Adw.MessageDialog):
-    __gtype_name__ = 'AddColorDialog'
+@Gtk.Template(resource_path='/io/nxyz/Paleta/add_new_palette_dialog.ui')
+class AddNewPaletteDialog(Adw.MessageDialog):
+    __gtype_name__ = 'AddNewPaletteDialog'
 
+    adw_entry_row = Gtk.Template.Child(name="adw_entry_row")
     color_selection_row = Gtk.Template.Child(name="color_selection_row")
     picker_button = Gtk.Template.Child(name="picker_button")
     currently_selected_label = Gtk.Template.Child(name="currently_selected_label")
@@ -18,17 +19,17 @@ class AddColorDialog(Adw.MessageDialog):
     revealer = Gtk.Template.Child(name="revealer")
     color_instruction_label = Gtk.Template.Child(name="color_instruction_label")
 
-    def __init__(self, palette: Palette, window, database, model) -> None:
+    name = "Palette"
+
+    def __init__(self, window, database, model) -> None:
         super().__init__()
-        self.palette = palette
         self.window = window
         self.db = database
         self.model = model
         self.color = None
         self.set_transient_for(self.window)
-        self.set_heading("Add Color to {}".format(palette.name))
-
-        self.dialog = Gtk.ColorChooserDialog.new('Choose new color to add to {}'.format(palette.name), self)
+        self.set_name("Palette #{}".format(self.db.query_n_palettes()+1))
+        self.dialog = Gtk.ColorChooserDialog.new('Choose color to add to new palette', self)
         self.dialog.set_transient_for(self)
         self.dialog.connect('response', self.chooser_response)
         self.dialog.connect('close', lambda dialog: dialog.close())
@@ -38,7 +39,11 @@ class AddColorDialog(Adw.MessageDialog):
         if len(model.get_colors().items()) > 0:
             self.color_selection_row.set_child(SimplePaletteRow(self.model, self.set_current_color))
         else:
-            self.color_instruction_label.set_label("Pick a new color to add to {}.".format(palette.name))
+            self.color_instruction_label.set_label("Pick a color to add to new palette.")
+
+    def set_name(self, name):
+        self.name = name 
+        self.adw_entry_row.set_text(self.name)
 
     def set_current_color(self, color: Color):
         self.revealer.set_reveal_child(False)
@@ -49,7 +54,7 @@ class AddColorDialog(Adw.MessageDialog):
             self.revealer.set_reveal_child(True)
             
     def init_chooser(self):
-        self.dialog = Gtk.ColorChooserDialog.new('Choose new color to add to {}'.format(self.palette.name), self)
+        self.dialog = Gtk.ColorChooserDialog.new('Choose color to add to new palette', self)
         self.dialog.set_transient_for(self)
         self.dialog.connect('response', self.chooser_response)
         self.dialog.connect('close', lambda dialog: dialog.close())
@@ -74,14 +79,20 @@ class AddColorDialog(Adw.MessageDialog):
     @Gtk.Template.Callback()
     def dialog_response(self, dialog, response):
         if response == 'add':
-            if self.palette == None or self.color == None:
-                self.window.add_toast("Unable to add color.")
+            if self.color == None:
+                self.window.add_toast("Unable to add palette, must select a color.")
                 return 
             
-            if self.db.add_color_to_palette(self.palette.id, self.color.hex, *self.color.rgba):
-                self.window.add_toast("Added color {} to palette «{}».".format(self.color.hex, self.palette.name))
+            name = self.adw_entry_row.get_text()
+            if name == '':
+                name = self.name
+
+            if self.db.add_palette_new(name, self.color.hex, *self.color.rgba):
+                self.window.add_toast("Created new palette «{}»".format(name))
             else:
-                self.window.add_toast("Unable to add color {}.".format(self.color.hex))
+                self.window.add_toast("Unable to add new palette «{}»".format(name))
+
+
 
 
 

@@ -4,3 +4,4 @@ from .dialog_windows import DuplicatePaletteDialog
 from .dialog_windows import DeletePaletteDialog
 from .dialog_windows import DeleteColorDialog
 from .add_color_dialog import AddColorDialog
+from .add_new_palette_dialog import AddNewPaletteDialog

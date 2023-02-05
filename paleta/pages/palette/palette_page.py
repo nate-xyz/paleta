@@ -2,6 +2,8 @@ from gi.repository import Adw, Gio, Gtk
 
 from .palette_row import PaletteRow
 from paleta.model import Model, Palette
+from paleta.dialog import AddNewPaletteDialog
+
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/palette_page.ui')
 class PalettePage(Adw.Bin):
@@ -9,6 +11,7 @@ class PalettePage(Adw.Bin):
 
     list_box = Gtk.Template.Child(name="list_box")
     status = Gtk.Template.Child(name="status")
+    add_palette_button = Gtk.Template.Child(name="add_palette_button")
 
     def __init__(self) -> None:
         super().__init__()
@@ -17,6 +20,7 @@ class PalettePage(Adw.Bin):
         self.edit_mode = False
         self.window = None
         self.database = None
+        self.add_palette_button.connect('clicked', self.show_dialog)
         
     def saturate(self, window, database, model: Model):
         self.window = window 
@@ -59,3 +63,13 @@ class PalettePage(Adw.Bin):
         else:
             self.edit_button.set_css_classes(['flat'])
         self.update_edit_view()
+
+    def show_dialog(self, button):
+
+        def after_dialog():
+            self.set_edit_mode(False)
+            self.edit_button.show()
+
+        dialog = AddNewPaletteDialog(self.window, self.database, self.model)
+        dialog.connect('response', lambda dialog, response: after_dialog())
+        dialog.show()
