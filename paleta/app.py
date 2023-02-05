@@ -11,7 +11,6 @@ class App(Adw.Application):
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.create_action('quit', self.quit, ['<primary>q'])
         self.create_action('about', self.on_about_action)
-        self.create_action('preferences', self.on_preferences_action)
 
         self.db = Database()
         self.model = Model(self.db)
@@ -34,17 +33,24 @@ class App(Adw.Application):
     def on_about_action(self, widget, _):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
-                                application_name='paleta',
+                                application_name='Paleta',
                                 application_icon='io.nxyz.Paleta',
                                 developer_name='nate-xyz',
                                 version='0.1.0',
                                 developers=['nate-xyz'],
-                                copyright='© 2023 nate-xyz')
+                                copyright='© 2023 nate-xyz',
+                                license_type=Gtk.License.GPL_3_0_ONLY,
+                                website='https://github.com/nate-xyz/paleta',
+                                issue_url='https://github.com/nate-xyz/paleta/issues',
+        )
+        about.add_acknowledgement_section(
+            ("Powered by color-thief"),
+            [
+                "color-thief-py https://github.com/fengsp/color-thief-py",
+                "color-thief https://github.com/lokesh/color-thief",
+            ]
+        )
         about.present()
-
-    def on_preferences_action(self, widget, _):
-        """Callback for the app.preferences action."""
-        print('app.preferences action activated')
 
     def create_action(self, name, callback, shortcuts=None):
         """Add an application action.
