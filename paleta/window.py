@@ -43,8 +43,6 @@ class Window(Adw.ApplicationWindow):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        print("Window")
-
         app = kwargs['application']
 
         self.db = app.db 

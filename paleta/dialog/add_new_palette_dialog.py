@@ -60,7 +60,6 @@ class AddNewPaletteDialog(Adw.MessageDialog):
         self.dialog.connect('close', lambda dialog: dialog.close())
 
     def chooser_response(self, dialog, response):
-        print(response)
         if response == Gtk.ResponseType.OK:
             color = dialog.get_rgba()
             rgb_name = color.to_string()

@@ -61,7 +61,6 @@ class ColorThiefPanel(Adw.Bin):
         self.spinner.set_visible(False)
         self.extract_button.set_sensitive(True)
         self.palette_box.set_visible(True)
-        print('extraction_done', colors)
 
         for rgb in colors:
             self.list_store.append(ExtractedColor(rgb))
@@ -71,7 +70,6 @@ class ColorThiefPanel(Adw.Bin):
 
 
 def color_extraction(uri, count, quality, callback):
-    print(count, quality)
     color_thief = ColorThief(uri)
     colors = color_thief.get_palette(color_count=count, quality=quality)[:count]
     GLib.idle_add(callback, colors)

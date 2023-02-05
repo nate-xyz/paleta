@@ -39,31 +39,20 @@ class Database(GObject.GObject):
         print(self.database_path)
 
     def try_loading_database(self) -> bool:
-        print('Database try_loading_database', threading.get_ident())
-                 
         if self.open_connection_to_db():
-            GLib.idle_add(self.model.populate)  # generate internal model
-            if self.window != None:
-                pass #TODO: refresh palette page
-                #GLib.idle_add(self.window.)
-
-            print('Database loaded db!', threading.get_ident())
+            GLib.idle_add(self.model.populate)
             return True
         else:
             return False
           
     #opens connection to database, return whether the database is newly created or not
     def open_connection_to_db(self) -> bool:
-        print('open_connection_to_db')
         try:
             self.con = sqlite3.connect(
                 "file:{}?mode=rw".format(self.database_path), 
                 uri=True, 
                 check_same_thread=False, 
-                detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
-
-            print('open database by existing uri')
-        
+                detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)        
         except:
             try:
                 os.mkdir(APP_DATA_DIR)
@@ -71,18 +60,16 @@ class Database(GObject.GObject):
                     self.database_path, 
                     check_same_thread=False, 
                     detect_types=sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES)
-                print('open NEW database')
             except Exception as e:
                 print(e)
                 return False
         
         self.cur = self.con.cursor()
-
         self.setup_db_tables()  # setup tables
 
         # print location of database
-        for id_, name, filename in self.con.execute('PRAGMA database_list'):
-            print('database location', filename)
+        # for id_, name, filename in self.con.execute('PRAGMA database_list'):
+        #     print('database location', filename)
 
         return True
 
@@ -304,7 +291,7 @@ class Database(GObject.GObject):
         for color_id in [color_id for tuple in self.cur.fetchall() for color_id in tuple]:
             self.cur.execute("SELECT id FROM Palette_Color_Junction WHERE color_id = {};".format(color_id))
             if self.cur.fetchall() == []:
-                print("Deleting color id", color_id)
+                #print("Deleting color id", color_id)
                 self.cur.execute("DELETE FROM Colors WHERE id = {};".format(color_id))
 
     def prune_palletes(self):
@@ -312,7 +299,7 @@ class Database(GObject.GObject):
         for palette_id in [palette_id for tuple in self.cur.fetchall() for palette_id in tuple]:
             self.cur.execute("SELECT id FROM Palette_Color_Junction WHERE palette_id = {};".format(palette_id))
             if self.cur.fetchall() == []:
-                print("Deleting palette id", palette_id)
+                #print("Deleting palette id", palette_id)
                 self.cur.execute("DELETE FROM Palettes WHERE id = {};".format(palette_id))
 
 

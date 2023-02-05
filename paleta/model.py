@@ -67,10 +67,7 @@ class Model(GObject.GObject):
 ######
 
     def populate(self):
-            print('populate model')
-            
-            #reset all maps
-            self.reset_model()
+            self.reset_model()  #reset all maps
 
             self.populate_colors()
             self.populate_palettes()
@@ -79,7 +76,6 @@ class Model(GObject.GObject):
             self.emit('populated')
 
     def populate_colors(self):
-        print('populate color')
         colors = self.db.query_colors()
         if colors == []:
             return
@@ -92,7 +88,6 @@ class Model(GObject.GObject):
 
 
     def populate_palettes(self):
-        print('populate palettes')
         palettes = self.db.query_palettes()
         if palettes == []:
             return
