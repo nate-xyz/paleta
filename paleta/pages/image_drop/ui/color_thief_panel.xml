@@ -214,8 +214,8 @@
   </template>
 
   <object class="GtkAdjustment" id="palette_count_adj">
-    <property name="upper">20</property>
-    <property name="lower">1</property>
+    <property name="upper">255</property>
+    <property name="lower">2</property>
     <property name="value">5</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
@@ -224,7 +224,7 @@
   <object class="GtkAdjustment" id="quality_adj">
     <property name="upper">30</property>
     <property name="lower">1</property>
-    <property name="value">10</property>
+    <property name="value">3</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>

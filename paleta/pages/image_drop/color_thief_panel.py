@@ -71,8 +71,9 @@ class ColorThiefPanel(Adw.Bin):
 
 
 def color_extraction(uri, count, quality, callback):
+    print(count, quality)
     color_thief = ColorThief(uri)
-    colors = color_thief.get_palette(color_count=count, quality=quality)
+    colors = color_thief.get_palette(color_count=count, quality=quality)[:count]
     GLib.idle_add(callback, colors)
 
 
