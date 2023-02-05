@@ -1,6 +1,6 @@
 from gi.repository import Adw, Gtk
 
-from paleta.model import Palette, Color
+from paleta.model import Color
 from paleta.util import rgb_to_hex
 from .simple_row import SimplePaletteRow
 from paleta.pages import ColorSquare

@@ -32,7 +32,7 @@ class PaletteColorCard(Gtk.FlowBoxChild):
         self.add_controller(ctrl)
 
         self.button.connect('clicked', lambda _button: self.window.copy_color(self.color.hex))
-        self.delete_color_button.connect('clicked', lambda _button:  DeleteColorDialog(self.color, self.palette, ColorSquare(110, self.color.rgb_name), self.window, self.db).show())
+        self.delete_color_button.connect('clicked', lambda _button:  DeleteColorDialog(self.color, self.palette, self.window, self.db).show())
 
     def update_edit_view(self):
         self.revealer.set_reveal_child(self.edit_mode)

@@ -21,7 +21,8 @@
     <file alias="simple_palette_row.ui" preprocess="xml-stripblanks">dialog/ui/simple_palette_row.xml</file>
     <file alias="simple_color_card.ui" preprocess="xml-stripblanks">dialog/ui/simple_color_card.xml</file>
     <file alias="add_new_palette_dialog.ui" preprocess="xml-stripblanks">dialog/ui/add_new_palette_dialog.xml</file>
-    
+    <file alias="simpler_delete_color_card.ui" preprocess="xml-stripblanks">dialog/ui/simpler_delete_color_card.xml</file>
+
     <!-- else -->
     <file alias="window.ui" preprocess="xml-stripblanks">ui/window.xml</file>
     <file alias="help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.xml</file>

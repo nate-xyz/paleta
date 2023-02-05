@@ -4,6 +4,7 @@ dialog_sources = [
     '__init__.py',
     'dialog_windows.py',
     'add_color_dialog.py',
+    'delete_color_dialog.py',
     'simple_row.py',
     'add_new_palette_dialog.py'
 ]

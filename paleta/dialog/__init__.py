@@ -2,6 +2,6 @@ from .dialog_windows import SavePaletteDialog
 from .dialog_windows import RenamePaletteDialog
 from .dialog_windows import DuplicatePaletteDialog
 from .dialog_windows import DeletePaletteDialog
-from .dialog_windows import DeleteColorDialog
+from .delete_color_dialog import DeleteColorDialog
 from .add_color_dialog import AddColorDialog
 from .add_new_palette_dialog import AddNewPaletteDialog

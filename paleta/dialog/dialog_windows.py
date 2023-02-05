@@ -1,9 +1,6 @@
 from gi.repository import Adw, Gtk
 
-from paleta.model import Palette, Color
-
-
-import re
+from paleta.model import Palette
 
 @Gtk.Template(resource_path='/io/nxyz/Paleta/save_palette_dialog.ui')
 class SavePaletteDialog(Adw.MessageDialog):
@@ -133,36 +130,4 @@ class DeletePaletteDialog(Adw.MessageDialog):
             else:
                 self.window.add_toast("Unable to delete palette «{}»".format(self.palette.name))
 
-
-@Gtk.Template(resource_path='/io/nxyz/Paleta/delete_color_dialog.ui')
-class DeleteColorDialog(Adw.MessageDialog):
-    __gtype_name__ = 'DeleteColorDialog'
-
-    color_box = Gtk.Template.Child(name="color_box")
-
-    def __init__(self, color: Color, palette: Palette, square, window, database) -> None:
-        super().__init__()
-        
-        self.palette = palette
-        self.color = color
-        self.window = window
-        self.db = database
-
-        self.set_transient_for(self.window)
-        self.set_heading("Remove {} from {}?".format(color.hex, palette.name))
-
-        square.set_halign(Gtk.Align.CENTER)
-        square.set_hexpand(True)
-        self.color_box.append(square)
-
-    @Gtk.Template.Callback()
-    def dialog_response(self, dialog, response):
-        if response == 'remove':
-            if self.palette == None or self.color == None:
-                return 
-
-            if self.db.remove_color_from_palette(self.color.id, self.palette.id):
-                self.window.add_toast("Remove color {} from palette «{}».".format(self.color.hex, self.palette.name))
-            else:
-                self.window.add_toast("Unable to remove color {}.".format(self.color.hex))
 
