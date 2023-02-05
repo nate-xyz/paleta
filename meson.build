@@ -1,7 +1,7 @@
 project('paleta',
           version: '0.1.0',
     meson_version: '>= 0.59.0',
-  default_options: [ 'warning_level=everything', 'werror=false', ],
+  default_options: [ 'warning_level=3', 'werror=false', ],
 )
 
 dependency('gtk4', version: '>= 4.6.0')

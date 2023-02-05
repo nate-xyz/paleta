@@ -1,7 +1,7 @@
 {
     "app-id" : "io.nxyz.Paleta",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "master",
+    "runtime-version" : "43",
     "sdk" : "org.gnome.Sdk",
     "command" : "paleta",
     "finish-args" : [
@@ -30,8 +30,8 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "url" : "https://github.com/nate-xyz/paleta"
+                    "type": "dir",
+                    "path": "."
                 }
             ]
         }
