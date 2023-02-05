@@ -138,7 +138,7 @@ class Window(Adw.ApplicationWindow):
 
     def error_image_toast(self, uri):
         base_name = os.path.basename(uri)
-        self.add_toast("Error! Could not open image: {}".format(base_name))
+        self.add_error_toast("Could not open image: {}".format(base_name), 3)
 
     def open_image_toast(self, uri):
         base_name = os.path.basename(uri)
@@ -146,6 +146,11 @@ class Window(Adw.ApplicationWindow):
 
     def add_toast(self, title: str, timeout: int = 1):
         toast = Adw.Toast.new(html.escape(title))
+        toast.set_timeout(timeout)
+        self.toast_overlay.add_toast(toast)
+
+    def add_error_toast(self, title: str, timeout: int = 1):
+        toast = Adw.Toast.new("<span foreground=\"Red\">Error!</span> {}".format(html.escape(title)))
         toast.set_timeout(timeout)
         self.toast_overlay.add_toast(toast)
 

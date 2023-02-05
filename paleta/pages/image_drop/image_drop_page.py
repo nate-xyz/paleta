@@ -2,6 +2,7 @@ from gi.repository import Adw, GLib, Gio, Gtk, Gdk
 
 from .dropped_image import DroppedImage
 from .color_thief_panel import ColorThiefPanel
+from os import path
 
 mimes = ['text/uri-list']
 
@@ -17,6 +18,7 @@ class ImageDropPage(Adw.Bin):
         super().__init__()
         self.window = None
         self.setup_drop_target()
+        self.file_verified = False
 
     def saturate(self, window, database):
         self.window = window 
@@ -30,47 +32,45 @@ class ImageDropPage(Adw.Bin):
         
         self.overlay.add_controller(drop_target)
 
-
     def on_drag_accept(self, drop_target, drop_value):
-        print('on_drag_accept', drop_value)
-    
+        self.file_verified = False
         formats = drop_value.get_formats()
         if contain_mime_types(formats):
             drop_value.read_value_async(Gio.File, GLib.PRIORITY_DEFAULT, None, self.verify_file_valid)
             return True
         return False
 
-
     def verify_file_valid(self, drop, task):
         result = drop.read_value_finish(task)
         if not result:
-            print("reading value failed")
             return
-        path = result.get_path()
-        print(path)
+        self.file_verified = path.exists(result.get_path())
 
     def on_drag_drop(self, drop_target, drop_value, *args):
-        print('on_drag_drop')
-
         if not drop_value:
-            print("Drop value error")
+            self.window.add_error_toast("Unable to read drop.")
+            drop_value.finish(0)
+            return False
+    
+        if not self.file_verified:
+            self.window.add_error_toast("Unable to verify file on drop, try with the file chooser in the upper left hand corner.", 4)
             drop_value.finish(0)
             return False
 
         drop_value.read_value_async(Gio.File, GLib.PRIORITY_DEFAULT, None, self.load_value_async)
         return True
         
-
     def load_value_async(self, drop, task):
         result = drop.read_value_finish(task)
         if not result:
-            print("reading value failed")
+            self.add_error_toast("Unable to read drop.")
             drop.finish(0)
             return
         
         if self.load_image(result.get_path()):
             drop.finish(Gdk.DragAction.COPY)
         else:
+            self.add_error_toast("Unable to load image.")
             drop.finish(0)
 
     def load_image(self, uri):
@@ -83,7 +83,6 @@ class ImageDropPage(Adw.Bin):
             print(e)
             self.window.error_image_toast(uri)
             return False
-
 
 def contain_mime_types(formats):
     if formats is not None:
