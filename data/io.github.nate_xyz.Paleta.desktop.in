@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Paleta
 GenericName=Color Palettes 
-Comment=Find the dominant colors from any image
+Comment=Extract the dominant colors from any image
 Exec=paleta
 Icon=io.github.nate_xyz.Paleta
 Terminal=false
