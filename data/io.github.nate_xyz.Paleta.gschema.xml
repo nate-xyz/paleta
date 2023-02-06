@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="paleta">
-	<schema id="io.nxyz.Paleta" path="/io/nxyz/Paleta/">
+	<schema id="io.github.nate_xyz.Paleta" path="/io/github/nate_xyz/Paleta/">
 	</schema>
 </schemalist>

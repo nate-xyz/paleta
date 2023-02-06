@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Paleta
+GenericName=Color Palettes 
+Comment=Extract the dominant colors from any image
+Exec=paleta
+Icon=io.github.nate_xyz.Paleta
+Terminal=false
+Type=Application
+Categories=GTK;Graphics
+StartupNotify=true
+Keywords=color;palette;

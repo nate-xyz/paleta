@@ -17,14 +17,143 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw
-from gi.repository import Gtk
+from gi.repository import Adw, Gtk, Gdk
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/window.ui')
+# from paleta.pages.image_drop import ImageDropPage
+# from paleta.pages.palettes import PalettePage
+from .pages import ImageDropPage, PalettePage
+
+import os
+import html
+
+image_mime_types = ['image/jpeg', 'image/png', 'image/tiff', 'image/webp']
+
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/window.ui')
 class Window(Adw.ApplicationWindow):
     __gtype_name__ = 'Window'
-
-    label = Gtk.Template.Child()
+    
+    toast_overlay = Gtk.Template.Child(name="toast_overlay")
+    header_bar = Gtk.Template.Child(name="header_bar")
+    view_switcher_title = Gtk.Template.Child(name="view-switcher-title")
+    stack = Gtk.Template.Child(name="stack")
+    open_image_button = Gtk.Template.Child(name="open_image_button")
+    image_drop_page = Gtk.Template.Child(name="image_drop_page")
+    palette_page = Gtk.Template.Child(name="palette_page")
+    edit_palette_button = Gtk.Template.Child(name="edit_palette_button")
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        app = kwargs['application']
+
+        self.db = app.db 
+        self.db.window = self
+        
+        self.model = app.model
+        
+        self.saturate()
+        
+        if not self.db.try_loading_database():
+            self.add_toast("Error loading database.")
+    
+        self.add_dialog()
+       
+        self.open_image_button.connect("clicked", self.show_open_dialog)
+    
+        self.clipboard = Gdk.Display.get_default().get_clipboard()
+        self.setup_switcher_button()
+
+        self.stack.connect('notify::visible-child-name', self.on_stack_switch)
+        self.edit_palette_button.connect('clicked', self.palette_page.toggle_edit_mode)
+
+
+    def on_stack_switch(self, stack, child_name):
+        if stack.get_visible_child_name() == 'palette-stack-page' and len(self.model.get_palettes()) != 0:
+            self.edit_palette_button.show()
+        else:
+            self.edit_palette_button.hide()
+    
+    def saturate(self):
+        self.image_drop_page.saturate(self, self.db)
+        self.palette_page.saturate(self, self.db, self.model)
+
+    def setup_switcher_button(self):
+        #adw switcher buttons
+        squeezer = self.view_switcher_title.observe_children()[0]
+        view_switcher = squeezer.observe_children()[0]
+        self.switcher_buttons =  view_switcher.observe_children()
+        #self.drop_button, self.palette_button = self.switcher_buttons
+        for button in self.switcher_buttons:
+            button.connect("clicked", self.switcher_button)
+
+    def switcher_button(self, button):
+        if self.check_switcher_title_bug(button):
+            self.replace_switcher()
+
+    def check_switcher_title_bug(self, active_button):
+        error_string = 'button.flat.horizontal.toggle:active:dir(ltr)'
+        for button in self.switcher_buttons:
+            style_context = button.get_style_context()
+            check_string = style_context.to_string(Gtk.StyleContextPrintFlags.SHOW_CHANGE).split(' ')[0]
+            if button != active_button and error_string==check_string:
+                return True
+        return False
+    
+    def replace_switcher(self):        
+        self.header_bar.remove(self.view_switcher_title)
+        self.view_switcher_title = Adw.ViewSwitcherTitle()
+        self.view_switcher_title.set_stack(self.stack)
+        self.header_bar.set_title_widget(self.view_switcher_title)
+        
+        self.switcher_buttons =  self.view_switcher_title.observe_children()[0].observe_children()[0].observe_children()
+
+        for button in self.switcher_buttons:
+            button.connect("clicked", self.switcher_button)
+
+    def add_dialog(self):
+        self.folder_dialog = Gtk.FileChooserNative.new(title="Select an Image File", 
+                                                        parent=self, 
+                                                        action=Gtk.FileChooserAction.OPEN, 
+                                                        accept_label="Open Image")
+
+        f = Gtk.FileFilter()
+        f.set_name(_("Image files"))
+        for m in image_mime_types:
+            f.add_mime_type(m)
+
+        self.folder_dialog.connect("response", self.open_response)
+        self.folder_dialog.add_filter(f)
+
+    def show_open_dialog(self, _button):
+        self.folder_dialog.show()
+
+    def open_response(self, dialog, response):
+        if response == Gtk.ResponseType.ACCEPT:
+            image_uri = dialog.get_file().get_path()
+            if self.image_drop_page.load_image(image_uri):
+                self.stack.set_visible_child(self.image_drop_page)
+                self.open_image_toast(image_uri)
+            else:
+                self.error_image_toast(image_uri)
+        
+
+    def error_image_toast(self, uri):
+        base_name = os.path.basename(uri)
+        self.add_error_toast("Could not open image: {}".format(base_name), 3)
+
+    def open_image_toast(self, uri):
+        base_name = os.path.basename(uri)
+        self.add_toast("Opened image: {}".format(base_name))
+
+    def add_toast(self, title: str, timeout: int = 1):
+        toast = Adw.Toast.new(html.escape(title))
+        toast.set_timeout(timeout)
+        self.toast_overlay.add_toast(toast)
+
+    def add_error_toast(self, title: str, timeout: int = 1):
+        toast = Adw.Toast.new("<span foreground=\"Red\">Error!</span> {}".format(html.escape(title)))
+        toast.set_timeout(timeout)
+        self.toast_overlay.add_toast(toast)
+
+    def copy_color(self, hex_name):
+        self.add_toast("Copied color {} to clipboard!".format(hex_name))
+        self.clipboard.set(hex_name)

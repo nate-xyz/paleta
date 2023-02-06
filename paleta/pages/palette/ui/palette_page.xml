@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0" />
+  <template class="PalettePage" parent="AdwBin">
+    <property name="hexpand">true</property>
+    <property name="vexpand">true</property>
+    <property name="halign">fill</property>
+    <property name="valign">fill</property>
+    <property name="child">
+      <object class="GtkOverlay">
+        <child type="overlay">
+          <object class="GtkButton" id="add_palette_button">
+            <property name="visible">true</property>
+            <property name="hexpand">false</property>
+            <property name="vexpand">false</property>
+            <property name="valign">end</property>
+            <property name="halign">end</property>
+            <property name="margin-end">30</property>
+            <property name="margin-bottom">15</property>
+            <property name="tooltip-text" translatable="yes">Add New Palette</property>
+            <style>
+              <class name="circular"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="icon_name">plus-symbolic</property>
+                <property name="icon_size">2</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="scrolled_window">
+            <child>
+              <object class="GtkOverlay">
+                <child type="overlay">
+                  <object class="AdwStatusPage" id="status">
+                    <property name="title" translatable="yes">Add Some Palettes!</property>
+                    <property name="description" translatable="yes">Drop an image onto the drop page and extract some colors, or add a palette manually by clicking the button in the lower right corner to get started!</property>
+                    <property name="icon-name">io.github.nate_xyz.Paleta-symbolic</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwClamp">
+                    <property name="maximum-size">1100</property>
+                    <property name="child">
+                      <object class="GtkListBox" id="list_box">
+                        <property name="visible">false</property>
+                        <property name="halign">fill</property>
+                        <property name="selection-mode">none</property>
+                        <property name="show-separators">true</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>

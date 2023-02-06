@@ -1,6 +1,6 @@
 desktop_file = i18n.merge_file(
-        input: 'io.nxyz.Paleta.desktop.in',
-       output: 'io.nxyz.Paleta.desktop',
+        input: 'io.github.nate_xyz.Paleta.desktop.in',
+       output: 'io.github.nate_xyz.Paleta.desktop',
          type: 'desktop',
        po_dir: '../po',
       install: true,
@@ -13,8 +13,8 @@ if desktop_utils.found()
 endif
 
 appstream_file = i18n.merge_file(
-        input: 'io.nxyz.Paleta.appdata.xml.in',
-       output: 'io.nxyz.Paleta.appdata.xml',
+        input: 'io.github.nate_xyz.Paleta.appdata.xml.in',
+       output: 'io.github.nate_xyz.Paleta.appdata.xml',
        po_dir: '../po',
       install: true,
   install_dir: join_paths(get_option('datadir'), 'appdata')
@@ -25,7 +25,7 @@ if appstream_util.found()
   test('Validate appstream file', appstream_util, args: ['validate', appstream_file])
 endif
 
-install_data('io.nxyz.Paleta.gschema.xml',
+install_data('io.github.nate_xyz.Paleta.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 

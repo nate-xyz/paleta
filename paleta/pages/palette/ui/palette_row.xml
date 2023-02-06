@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <requires lib="adw" version="1.0" />
+  <template class="PaletteRow" parent="GtkListBoxRow">
+    <property name="activatable">false</property>
+    <property name="selectable">false</property>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="hexpand">true</property>
+        <property name="vexpand">true</property>
+        <property name="halign">fill</property>
+        <property name="valign">fill</property>
+        <property name="hexpand">true</property>
+        <property name="margin-start">5</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">10</property>
+        <property name="spacing">5</property>
+
+        <child>
+          <object class="GtkBox">
+            <property name="spacing">10</property>
+            <child>
+              <object class="GtkLabel" id="title_label">
+                <property name="halign">start</property>
+                <property name="label"></property>
+                <property name="ellipsize">end</property>
+
+                <style>
+                  <class name="large-title"/>
+                </style>
+                
+              </object>
+            </child>
+            <child>
+              <object class="GtkRevealer" id="edit_mode_revealer">
+                <property name="reveal-child">false</property>
+                <property name="transition-type">GTK_REVEALER_TRANSITION_TYPE_SLIDE_RIGHT</property>
+                <property name="child">
+                  <object class="GtkBox" id="edit_buttons_box">
+                    <!-- <property name="visible">false</property> -->
+                    <style>
+                      <class name="linked"/>
+                    </style>
+                    <child>
+                      <object class="GtkButton" id="edit_name_button">
+                        <property name="icon-name">edit-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Edit Palette Name</property>
+                        <style>
+                          <!-- <class name="opaque"/> -->
+                          <class name="circular"/>
+                          <class name="edit-action-button"/>
+                          <class name="opaque"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="duplicate_palette_button">
+                        <property name="icon-name">copy-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Duplicate Palette</property>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="add_color_button">
+                        <property name="icon-name">plus-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Add Color to Palette</property>
+                        <style>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="delete_palette_button">
+                        <property name="icon-name">cross-filled-symbolic</property>
+                        <property name="tooltip-text" translatable="yes">Delete Palette</property>
+                        <style>
+                          <class name="destructive-action"/>
+                          <class name="circular"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+
+        <child>
+          <object class="GtkScrolledWindow" id="scrolled_window">
+            <property name="hexpand">true</property>
+            <property name="vexpand">true</property>
+            <property name="halign">fill</property>
+            <property name="valign">fill</property>
+            <property name="has-frame">false</property>
+            <!-- <property name="propagate-natural-width">true</property> -->
+            <property name="vscrollbar-policy">never</property>
+
+            <child>
+              <object class="GtkFlowBox" id="flow_box">
+                <property name="hexpand">true</property>
+                <property name="vexpand">true</property>
+                <property name="halign">center</property>
+                <property name="valign">start</property>
+                <property name="column-spacing">0</property>
+                <property name="row-spacing">0</property>
+              </object>
+            </child>
+
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/io/nxyz/Paleta">
+  <gresource prefix="/io/github/nate_xyz/Paleta">
+    <!-- image drop -->
+    <file alias="image_drop_page.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_drop_page.xml</file>
+    <file alias="color_thief_panel.ui" preprocess="xml-stripblanks">pages/image_drop/ui/color_thief_panel.xml</file>
+    <file alias="extracted_color_row.ui" preprocess="xml-stripblanks">pages/image_drop/ui/extracted_color_row.xml</file>
+    
+    <!-- palettes -->
+    <file alias="palette_page.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_page.xml</file>
+    <file alias="palette_row.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_row.xml</file>
+    <file alias="palette_color_card.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_color_card.xml</file>
+    
+    <!-- dialog -->
+    <file alias="save_palette_dialog.ui" preprocess="xml-stripblanks">dialog/ui/save_palette_dialog.xml</file>
+    <file alias="rename_palette_dialog.ui" preprocess="xml-stripblanks">dialog/ui/rename_palette_dialog.xml</file>
+    <file alias="duplicate_palette_dialog.ui" preprocess="xml-stripblanks">dialog/ui/duplicate_palette_dialog.xml</file>
+    <file alias="delete_palette_dialog.ui" preprocess="xml-stripblanks">dialog/ui/delete_palette_dialog.xml</file>
+    <file alias="delete_color_dialog.ui" preprocess="xml-stripblanks">dialog/ui/delete_color_dialog.xml</file>
+    <file alias="add_color_dialog.ui" preprocess="xml-stripblanks">dialog/ui/add_color_dialog.xml</file>
+    <file alias="simple_palette_row.ui" preprocess="xml-stripblanks">dialog/ui/simple_palette_row.xml</file>
+    <file alias="simple_color_card.ui" preprocess="xml-stripblanks">dialog/ui/simple_color_card.xml</file>
+    <file alias="add_new_palette_dialog.ui" preprocess="xml-stripblanks">dialog/ui/add_new_palette_dialog.xml</file>
+    <file alias="simpler_delete_color_card.ui" preprocess="xml-stripblanks">dialog/ui/simpler_delete_color_card.xml</file>
+
+    <!-- else -->
     <file alias="window.ui" preprocess="xml-stripblanks">ui/window.xml</file>
     <file alias="help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.xml</file>
+    <file>style.css</file>
+
+  </gresource>
+  <gresource prefix="/io/github/nate_xyz/Paleta/icons/scalable/actions/">
+    <file alias="color-symbolic.svg">assets/icons/color-symbolic.svg</file>
+    <file alias="image-round-symbolic.svg">assets/icons/image-round-symbolic.svg</file>
+    <file alias="image-missing-symbolic.svg">assets/icons/image-missing-symbolic.svg</file>
+    <file alias="brush-symbolic.svg">assets/icons/brush-symbolic.svg</file>
+    <file alias="copy-symbolic.svg">assets/icons/copy-symbolic.svg</file>
+    <file alias="edit-symbolic.svg">assets/icons/edit-symbolic.svg</file>
+    <file alias="cross-filled-symbolic.svg">assets/icons/cross-filled-symbolic.svg</file>
+    <file alias="color-picker-symbolic.svg">assets/icons/color-picker-symbolic.svg</file>    
+    <file alias="plus-symbolic.svg">assets/icons/plus-symbolic.svg</file>    
   </gresource>
 </gresources>
