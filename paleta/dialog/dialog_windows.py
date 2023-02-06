@@ -34,6 +34,7 @@ class SavePaletteDialog(Adw.MessageDialog):
 
             if self.db.add_palette_from_extracted(name, self.colors):
                 self.window.add_toast("Created new palette «{}»".format(name))
+                self.window.go_to_palette_page()
             else:
                 self.window.add_toast("Unable to add new palette «{}»".format(name))
 

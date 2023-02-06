@@ -6,6 +6,8 @@
       <object class="GtkShortcutsSection">
         <property name="section-name">shortcuts</property>
         <property name="max-height">10</property>
+        
+        <!-- GENERAL  -->
         <child>
           <object class="GtkShortcutsGroup">
             <property name="title" translatable="yes" context="shortcut window">General</property>
@@ -19,6 +21,62 @@
               <object class="GtkShortcutsShortcut">
                 <property name="title" translatable="yes" context="shortcut window">Quit</property>
                 <property name="action-name">app.quit</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <!-- IMAGE -->
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes" context="shortcut window">Image</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Open Image</property>
+                <property name="action-name">win.image-open</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Extract Palette</property>
+                <property name="action-name">win.image-palette-extract</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Save Extracted Palette</property>
+                <property name="action-name">win.image-palette-save</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Go To Image Drop Page</property>
+                <property name="action-name">win.image-page</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <!-- PALETTES -->
+        <child>
+          <object class="GtkShortcutsGroup">
+            <property name="title" translatable="yes" context="shortcut window">Palettes</property>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Toggle Edit Mode</property>
+                <property name="action-name">win.palette-edit-mode</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Add Palette</property>
+                <property name="action-name">win.palette-add</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkShortcutsShortcut">
+                <property name="title" translatable="yes" context="shortcut window">Go To Palette Page</property>
+                <property name="action-name">win.palette-page</property>
               </object>
             </child>
           </object>

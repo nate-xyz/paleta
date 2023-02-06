@@ -17,7 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-from gi.repository import Adw, Gtk, Gdk
+from gi.repository import Adw, Gtk, Gdk, Gio
 
 # from paleta.pages.image_drop import ImageDropPage
 # from paleta.pages.palettes import PalettePage
@@ -31,7 +31,7 @@ image_mime_types = ['image/jpeg', 'image/png', 'image/tiff', 'image/webp']
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/window.ui')
 class Window(Adw.ApplicationWindow):
     __gtype_name__ = 'Window'
-    
+
     toast_overlay = Gtk.Template.Child(name="toast_overlay")
     header_bar = Gtk.Template.Child(name="header_bar")
     view_switcher_title = Gtk.Template.Child(name="view-switcher-title")
@@ -44,6 +44,13 @@ class Window(Adw.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         app = kwargs['application']
+        self.add_dialog()
+        help_overlay = Gtk.Builder\
+            .new_from_resource('/io/github/nate_xyz/Paleta/help-overlay.ui')\
+            .get_object('help_overlay')
+        self.set_help_overlay(help_overlay)
+        
+        self.setup_actions(app)
 
         self.db = app.db 
         self.db.window = self
@@ -55,17 +62,24 @@ class Window(Adw.ApplicationWindow):
         if not self.db.try_loading_database():
             self.add_toast("Error loading database.")
     
-        self.add_dialog()
-       
-        self.open_image_button.connect("clicked", self.show_open_dialog)
-    
         self.clipboard = Gdk.Display.get_default().get_clipboard()
         self.setup_switcher_button()
 
         self.stack.connect('notify::visible-child-name', self.on_stack_switch)
-        self.edit_palette_button.connect('clicked', self.palette_page.toggle_edit_mode)
+        self.edit_palette_button.connect('clicked', lambda _button: self.palette_page.toggle_edit_mode())
+
+    def setup_actions(self, app):
+        app.set_accels_for_action(f"win.show-help-overlay", ['<Primary>question'])
+        self.create_action(app, 'image-open', self.open_image_dialog.show, ['<Primary>o'])
+        self.create_action(app, 'image-palette-extract', self.image_drop_page.thief_panel.start_extraction, ['<Primary>e', '<Primary>Return'])
+        self.create_action(app, 'image-palette-save', self.image_drop_page.thief_panel.save_palette, ['<Primary>s'])
+        self.create_action(app, 'image-page', self.go_to_image_drop_page, ['<Primary>i', '<Primary>d'])
+        self.create_action(app, 'palette-edit-mode', self.palette_page.toggle_edit_mode, ['<Primary>t', '<Primary>m'])
+        self.create_action(app, 'palette-add', self.palette_page.show_new_palette_dialog, ['<Primary>n','<Primary>a'])
+        self.create_action(app, 'palette-page', self.go_to_palette_page, ['<Primary>p'])
 
 
+            
     def on_stack_switch(self, stack, child_name):
         if stack.get_visible_child_name() == 'palette-stack-page' and len(self.model.get_palettes()) != 0:
             self.edit_palette_button.show()
@@ -110,7 +124,7 @@ class Window(Adw.ApplicationWindow):
             button.connect("clicked", self.switcher_button)
 
     def add_dialog(self):
-        self.folder_dialog = Gtk.FileChooserNative.new(title="Select an Image File", 
+        self.open_image_dialog = Gtk.FileChooserNative.new(title="Select an Image File", 
                                                         parent=self, 
                                                         action=Gtk.FileChooserAction.OPEN, 
                                                         accept_label="Open Image")
@@ -120,22 +134,19 @@ class Window(Adw.ApplicationWindow):
         for m in image_mime_types:
             f.add_mime_type(m)
 
-        self.folder_dialog.connect("response", self.open_response)
-        self.folder_dialog.add_filter(f)
-
-    def show_open_dialog(self, _button):
-        self.folder_dialog.show()
+        self.open_image_dialog.connect("response", self.open_response)
+        self.open_image_dialog.add_filter(f)
+        self.open_image_button.connect("clicked", lambda _button: self.open_image_dialog.show())
 
     def open_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
             image_uri = dialog.get_file().get_path()
             if self.image_drop_page.load_image(image_uri):
-                self.stack.set_visible_child(self.image_drop_page)
+                self.go_to_image_drop_page()
                 self.open_image_toast(image_uri)
             else:
                 self.error_image_toast(image_uri)
         
-
     def error_image_toast(self, uri):
         base_name = os.path.basename(uri)
         self.add_error_toast("Could not open image: {}".format(base_name), 3)
@@ -157,3 +168,27 @@ class Window(Adw.ApplicationWindow):
     def copy_color(self, hex_name):
         self.add_toast("Copied color {} to clipboard!".format(hex_name))
         self.clipboard.set(hex_name)
+
+    def go_to_image_drop_page(self):
+        if self.stack.get_visible_child_name() != 'drop-stack-page':
+            self.stack.set_visible_child(self.image_drop_page)
+
+    def go_to_palette_page(self):
+        if self.stack.get_visible_child_name() != 'palette-stack-page':
+            self.stack.set_visible_child(self.palette_page)
+
+    def create_action(self, app, name, callback=None, shortcuts=None):
+        """Add a window action.
+
+        Args:
+            name: the name of the action
+            callback: the function to be called when the action is
+              activated
+            shortcuts: an optional list of accelerators
+        """
+        action = Gio.SimpleAction.new(name, None)
+        if callback != None:
+            action.connect("activate", lambda _widget, _parameter: callback())
+        self.add_action(action)
+        if shortcuts:
+            app.set_accels_for_action(f"win.{name}", shortcuts)

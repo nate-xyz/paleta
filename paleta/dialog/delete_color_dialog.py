@@ -42,10 +42,11 @@ class DeleteColorDialog(Adw.MessageDialog):
     def dialog_response(self, dialog, response):
         if response == 'remove':
             if self.palette == None or self.color == None:
+                self.window.add_error_toast("Unable to remove color.")
                 return 
 
             if self.db.remove_color_from_palette(self.color.id, self.palette.id):
-                self.window.add_toast("Remove color {} from palette «{}».".format(self.color.hex, self.palette.name))
+                self.window.add_toast("Removed color {} from palette «{}».".format(self.color.hex, self.palette.name))
             else:
                 self.window.add_toast("Unable to remove color {}.".format(self.color.hex))
 

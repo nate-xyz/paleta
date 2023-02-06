@@ -20,7 +20,7 @@ class PalettePage(Adw.Bin):
         self.edit_mode = False
         self.window = None
         self.database = None
-        self.add_palette_button.connect('clicked', self.show_dialog)
+        self.add_palette_button.connect('clicked', lambda _button: self.show_new_palette_dialog())
         
     def saturate(self, window, database, model: Model):
         self.window = window 
@@ -53,8 +53,12 @@ class PalettePage(Adw.Bin):
     def listbox_factory(self, palette):
         return PaletteRow(palette, self.window, self.database, self.model)
 
-    def toggle_edit_mode(self, _button):
-        self.set_edit_mode(not self.edit_mode)
+    def toggle_edit_mode(self):
+        if len(self.list_store) > 0:
+            self.set_edit_mode(not self.edit_mode)
+            self.window.go_to_palette_page()
+        else:
+            self.window.add_error_toast("Cannot toggle edit mode, no palettes added.")
 
     def set_edit_mode(self, mode):
         self.edit_mode = mode
@@ -64,11 +68,11 @@ class PalettePage(Adw.Bin):
             self.edit_button.set_css_classes(['flat'])
         self.update_edit_view()
 
-    def show_dialog(self, button):
-
+    def show_new_palette_dialog(self):
         def after_dialog():
             self.set_edit_mode(False)
             self.edit_button.show()
+            self.window.go_to_palette_page()
 
         dialog = AddNewPaletteDialog(self.window, self.database, self.model)
         dialog.connect('response', lambda dialog, response: after_dialog())

@@ -9,8 +9,7 @@ class App(Adw.Application):
     def __init__(self):
         super().__init__(application_id='io.github.nate_xyz.Paleta',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
-        self.create_action('quit', self.quit, ['<primary>q'])
-        self.create_action('about', self.on_about_action)
+        self.setup_actions()
 
         self.db = Database()
         self.model = Model(self.db)
@@ -30,7 +29,11 @@ class App(Adw.Application):
         except Exception as e:
             print(e)
 
-    def on_about_action(self, widget, _):
+    def setup_actions(self):
+        self.create_action('quit', self.quit, ['<primary>q'])
+        self.create_action('about', self.on_about_action)
+
+    def on_about_action(self):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='Paleta',
@@ -62,7 +65,7 @@ class App(Adw.Application):
             shortcuts: an optional list of accelerators
         """
         action = Gio.SimpleAction.new(name, None)
-        action.connect("activate", callback)
+        action.connect("activate", lambda _widget, _parameter: callback())
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
