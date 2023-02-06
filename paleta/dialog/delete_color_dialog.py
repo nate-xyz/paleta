@@ -3,7 +3,7 @@ from gi.repository import Adw, Gtk
 from paleta.model import Palette, Color
 from paleta.pages import ColorSquare
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/simpler_delete_color_card.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/simpler_delete_color_card.ui')
 class SimplerDeleteColorCard(Adw.Bin):
     __gtype_name__ = 'SimplerDeleteColorCard'
 
@@ -19,7 +19,7 @@ class SimplerDeleteColorCard(Adw.Bin):
         self.rgb_label.set_label(color.rgb_name)
 
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/delete_color_dialog.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/delete_color_dialog.ui')
 class DeleteColorDialog(Adw.MessageDialog):
     __gtype_name__ = 'DeleteColorDialog'
 

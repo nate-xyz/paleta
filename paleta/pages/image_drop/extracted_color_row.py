@@ -4,7 +4,7 @@ from paleta.util import rgb_to_hex
 
 import re
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/extracted_color_row.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/extracted_color_row.ui')
 class ExtractedColorRow(Gtk.ListBoxRow):
     __gtype_name__ = 'ExtractedColorRow'
 

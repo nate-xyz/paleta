@@ -10,7 +10,7 @@ dependency('libadwaita-1')
 i18n = import('i18n')
 gnome = import('gnome')
 
-application_id = 'io.nxyz.Paleta'
+application_id = 'io.github.nate_xyz.Paleta'
 
 subdir('data')
 subdir('paleta')

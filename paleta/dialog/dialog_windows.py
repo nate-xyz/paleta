@@ -2,7 +2,7 @@ from gi.repository import Adw, Gtk
 
 from paleta.model import Palette
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/save_palette_dialog.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/save_palette_dialog.ui')
 class SavePaletteDialog(Adw.MessageDialog):
     __gtype_name__ = 'SavePaletteDialog'
 
@@ -38,7 +38,7 @@ class SavePaletteDialog(Adw.MessageDialog):
                 self.window.add_toast("Unable to add new palette «{}»".format(name))
 
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/rename_palette_dialog.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/rename_palette_dialog.ui')
 class RenamePaletteDialog(Adw.MessageDialog):
     __gtype_name__ = 'RenamePaletteDialog'
 
@@ -74,7 +74,7 @@ class RenamePaletteDialog(Adw.MessageDialog):
                 self.window.add_toast("Unable to rename palette «{}».".format(self.name))
 
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/duplicate_palette_dialog.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/duplicate_palette_dialog.ui')
 class DuplicatePaletteDialog(Adw.MessageDialog):
     __gtype_name__ = 'DuplicatePaletteDialog'
 
@@ -109,7 +109,7 @@ class DuplicatePaletteDialog(Adw.MessageDialog):
                 self.window.add_toast("Unable to duplicate palette «{}».".format(self.palette.name))
 
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/delete_palette_dialog.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/delete_palette_dialog.ui')
 class DeletePaletteDialog(Adw.MessageDialog):
     __gtype_name__ = 'DeletePaletteDialog'
 

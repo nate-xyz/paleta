@@ -7,7 +7,7 @@ from .dropped_image import DroppedImage
 from .extracted_color_row import ExtractedColorRow, ExtractedColor
 from paleta.dialog import SavePaletteDialog
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/color_thief_panel.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/color_thief_panel.ui')
 class ColorThiefPanel(Adw.Bin):
     __gtype_name__ = 'ColorThiefPanel'
 

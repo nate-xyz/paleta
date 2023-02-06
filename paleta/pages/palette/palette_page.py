@@ -5,7 +5,7 @@ from paleta.model import Model, Palette
 from paleta.dialog import AddNewPaletteDialog
 
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/palette_page.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/palette_page.ui')
 class PalettePage(Adw.Bin):
     __gtype_name__ = 'PalettePage'
 

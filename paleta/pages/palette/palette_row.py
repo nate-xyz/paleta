@@ -4,7 +4,7 @@ from .palette_color_card import PaletteColorCard
 from paleta.model import Palette, Color
 from paleta.dialog import RenamePaletteDialog, DuplicatePaletteDialog, DeletePaletteDialog, AddColorDialog
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/palette_row.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/palette_row.ui')
 class PaletteRow(Gtk.ListBoxRow):
     __gtype_name__ = 'PaletteRow'
 

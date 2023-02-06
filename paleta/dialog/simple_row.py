@@ -3,7 +3,7 @@ from gi.repository import Adw, Gio, Gtk
 from paleta.model import Color
 from paleta.pages import ColorSquare
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/simple_palette_row.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/simple_palette_row.ui')
 class SimplePaletteRow(Gtk.ListBoxRow):
     __gtype_name__ = 'SimplePaletteRow'
 
@@ -27,7 +27,7 @@ class SimplePaletteRow(Gtk.ListBoxRow):
     def flowbox_factory(self, color):
         return SimpleColorCard(color, self.set_color)
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/simple_color_card.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/simple_color_card.ui')
 class SimpleColorCard(Gtk.FlowBoxChild):
     __gtype_name__ = 'SimpleColorCard'
 

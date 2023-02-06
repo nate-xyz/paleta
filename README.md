@@ -1,7 +1,7 @@
 
-<!-- ![Application icon](./data/icons/hicolor/scalable/apps/io.nxyz.Paleta.svg) -->
+<!-- ![Application icon](./data/icons/hicolor/scalable/apps/io.github.nate_xyz.Paleta.svg) -->
 
-<img src="/data/icons/hicolor/scalable/apps/io.nxyz.Paleta.svg" align="left" height="157px" vspace="20px">
+<img src="/data/icons/hicolor/scalable/apps/io.github.nate_xyz.Paleta.svg" align="left" height="157px" vspace="20px">
 
 Paleta
 ======

@@ -28,7 +28,7 @@ import html
 
 image_mime_types = ['image/jpeg', 'image/png', 'image/tiff', 'image/webp']
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/window.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/window.ui')
 class Window(Adw.ApplicationWindow):
     __gtype_name__ = 'Window'
     

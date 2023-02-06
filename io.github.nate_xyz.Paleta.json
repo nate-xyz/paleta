@@ -1,5 +1,5 @@
 {
-    "app-id" : "io.nxyz.Paleta",
+    "app-id" : "io.github.nate_xyz.Paleta",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "43",
     "sdk" : "org.gnome.Sdk",

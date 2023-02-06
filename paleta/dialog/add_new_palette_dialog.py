@@ -7,7 +7,7 @@ from paleta.pages import ColorSquare
 
 import re
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/add_new_palette_dialog.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/add_new_palette_dialog.ui')
 class AddNewPaletteDialog(Adw.MessageDialog):
     __gtype_name__ = 'AddNewPaletteDialog'
 

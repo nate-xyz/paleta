@@ -42,7 +42,7 @@
                   <object class="AdwStatusPage" id="status">
                     <property name="title" translatable="yes">Add Some Palettes!</property>
                     <property name="description" translatable="yes">Drop an image onto the drop page and extract some colors, or add a palette manually by clicking the button in the lower right corner to get started!</property>
-                    <property name="icon-name">io.nxyz.Paleta-symbolic</property>
+                    <property name="icon-name">io.github.nate_xyz.Paleta-symbolic</property>
                   </object>
                 </child>
                 <child>

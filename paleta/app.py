@@ -7,7 +7,7 @@ class App(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='io.nxyz.Paleta',
+        super().__init__(application_id='io.github.nate_xyz.Paleta',
                          flags=Gio.ApplicationFlags.FLAGS_NONE)
         self.create_action('quit', self.quit, ['<primary>q'])
         self.create_action('about', self.on_about_action)
@@ -34,7 +34,7 @@ class App(Adw.Application):
         """Callback for the app.about action."""
         about = Adw.AboutWindow(transient_for=self.props.active_window,
                                 application_name='Paleta',
-                                application_icon='io.nxyz.Paleta',
+                                application_icon='io.github.nate_xyz.Paleta',
                                 developer_name='nate-xyz',
                                 version='0.1.0',
                                 developers=['nate-xyz'],

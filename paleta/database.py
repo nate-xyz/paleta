@@ -17,7 +17,7 @@ from paleta.model import Model
 
 from xdg.BaseDirectory import xdg_data_home
 
-APP_PREFIX = "io.nxyz.Paleta"
+APP_PREFIX = "io.github.nate_xyz.Paleta"
 APP_DATA_DIR =  os.path.join(xdg_data_home, APP_PREFIX)
 sqlite3.enable_callback_tracebacks(True)
 

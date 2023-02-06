@@ -4,7 +4,7 @@ from paleta.model import Color
 from paleta.dialog import DeleteColorDialog
 from paleta.pages import ColorSquare
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/palette_color_card.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/palette_color_card.ui')
 class PaletteColorCard(Gtk.FlowBoxChild):
     __gtype_name__ = 'PaletteColorCard'
 

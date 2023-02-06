@@ -6,7 +6,7 @@ from os import path
 
 mimes = ['text/uri-list']
 
-@Gtk.Template(resource_path='/io/nxyz/Paleta/image_drop_page.ui')
+@Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/image_drop_page.ui')
 class ImageDropPage(Adw.Bin):
     __gtype_name__ = 'ImageDropPage'
 

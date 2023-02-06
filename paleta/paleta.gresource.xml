@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/io/nxyz/Paleta">
+  <gresource prefix="/io/github/nate_xyz/Paleta">
     <!-- image drop -->
     <file alias="image_drop_page.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_drop_page.xml</file>
     <file alias="color_thief_panel.ui" preprocess="xml-stripblanks">pages/image_drop/ui/color_thief_panel.xml</file>
@@ -27,8 +27,9 @@
     <file alias="window.ui" preprocess="xml-stripblanks">ui/window.xml</file>
     <file alias="help-overlay.ui" preprocess="xml-stripblanks">ui/help-overlay.xml</file>
     <file>style.css</file>
+
   </gresource>
-  <gresource prefix="/io/nxyz/Paleta/icons/scalable/actions/">
+  <gresource prefix="/io/github/nate_xyz/Paleta/icons/scalable/actions/">
     <file alias="color-symbolic.svg">assets/icons/color-symbolic.svg</file>
     <file alias="image-round-symbolic.svg">assets/icons/image-round-symbolic.svg</file>
     <file alias="image-missing-symbolic.svg">assets/icons/image-missing-symbolic.svg</file>
