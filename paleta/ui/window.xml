@@ -22,7 +22,22 @@
 
                 <child type="start">
                   <object class="GtkButton" id="open_image_button">
-                    <property name="icon-name">image-round-symbolic</property>
+                    <property name="child">
+                      <object class="GtkBox">
+                        <property name="halign">center</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">image-round-symbolic</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="label" translatable="yes">Open</property>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
                     <property name="tooltip-text" translatable="yes">Open Image</property>
                   </object>
                 </child>
@@ -33,7 +48,22 @@
                     <child>
                       <object class="GtkButton" id="edit_palette_button">
                         <property name="visible">false</property>
-                        <property name="icon-name">edit-symbolic</property>
+                        <property name="child">
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">edit-symbolic</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="label" translatable="yes">Edit</property>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
                         <property name="tooltip-text" translatable="yes">Edit Palettes</property>
                       </object>
                     </child>
