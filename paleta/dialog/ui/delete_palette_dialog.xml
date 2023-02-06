@@ -4,7 +4,6 @@
   <requires lib="adw" version="1.0" />
   <template class="DeletePaletteDialog" parent="AdwMessageDialog">
     <property name="heading" translatable="yes">Delete Palette?</property>
-    <!-- <property name="body" translatable="yes">This will permanently remove this palette from Paleta.</property> -->
     <property name="destroy-with-parent">true</property>
 
 

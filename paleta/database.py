@@ -24,9 +24,6 @@ sqlite3.enable_callback_tracebacks(True)
 class Database(GObject.GObject):
     __gtype_name__ = 'Database'
 
-    # __gsignals__ = {
-    # }
-
     database_name = "paleta_database.db"
 
     def __init__(self) -> None:
@@ -35,8 +32,6 @@ class Database(GObject.GObject):
         self.window = None
         self.model = None
         self.database_path = os.path.join(APP_DATA_DIR, self.database_name)
-        
-        print(self.database_path)
 
     def try_loading_database(self) -> bool:
         if self.open_connection_to_db():
@@ -216,7 +211,7 @@ class Database(GObject.GObject):
             return False
 
 ######
-# MODIFY VALUES 
+# MODIFY VALUES w
 ######
 
     def rename_palette(self, palette_id, new_name) -> bool:
