@@ -78,8 +78,6 @@ class Window(Adw.ApplicationWindow):
         self.create_action(app, 'palette-add', self.palette_page.show_new_palette_dialog, ['<Primary>n','<Primary>a'])
         self.create_action(app, 'palette-page', self.go_to_palette_page, ['<Primary>p'])
 
-
-            
     def on_stack_switch(self, stack, child_name):
         if stack.get_visible_child_name() == 'palette-stack-page' and len(self.model.get_palettes()) != 0:
             self.edit_palette_button.show()

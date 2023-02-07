@@ -57,7 +57,7 @@
                     <child>
                       <object class="AdwActionRow">
                         <property name="title" translatable="yes">Palette Count</property>
-                        <property name="subtitle" translatable="yes">Number of colors to retrieve.</property>
+                        <property name="subtitle" translatable="yes">Max amount of colors to retrieve.</property>
                         <property name="activatable-widget">count_amount_spin</property>
         
                         <child>
