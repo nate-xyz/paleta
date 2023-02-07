@@ -1,42 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop">
-	<id>io.github.nate_xyz.Paleta.desktop</id>
-	<metadata_license>CC0-1.0</metadata_license>
-	<project_license>GPL-3.0-or-later</project_license>
-	<name>Paleta</name>
-	<summary>Extract the dominant colors from any image.</summary>
-	<description>
-		<p>Find the dominant color palette from any image and manage palettes with Paleta. An intuitive tool for designers, artists, or anyone looking to streamline their color work.</p>
-	</description>
-	<screenshots>
-		<screenshot>
-			<image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-1.png</image>
-		</screenshot>
-		<screenshot>
-			<image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-2.png</image>
-		</screenshot>
-		<screenshot>
-			<image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-3.png</image>
-		</screenshot>
-		<screenshot>
-			<image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-4.png</image>
-		</screenshot>
-	</screenshots>
-	<launchable type="desktop-id">io.github.nate_xyz.Paleta.desktop</launchable>
-	<url type="homepage">https://github.com/nate-xyz/paleta</url>
-	<url type="bugtracker">https://github.com/nate-xyz/paleta/issues</url>
-	<developer_name>nate-xyz</developer_name>
-	<releases>
-		<release version="0.1.0" type="development" date="2023-02-05"/>
-	</releases>
-	<translation type="gettext">paleta</translation>
-	<kudos>
-		<kudo>ModernToolkit</kudo>
-		<kudo>HiDpiIcon</kudo>
-	</kudos>
-	<custom>
-		<value key="Purism::form_factor">workstation</value>
-	</custom>
-	<content_rating type="oars-1.1"/>
-	<provides>io.github.nate_xyz.Paleta.desktop</provides>
+  <id>io.github.nate_xyz.Paleta.desktop</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  <name>Paleta</name>
+  <summary>Extract the dominant colors from any image.</summary>
+  <description>
+    <p>Find the dominant color palette from any image and manage palettes with Paleta. An intuitive tool for designers, artists, or anyone looking to streamline their color work.</p>
+    <p>Features:</p>
+    <ul>
+      <li>Drag and drop images to load</li>
+      <li>Color extraction with color-thief</li>
+      <li>Save extracted palettes for later use</li>
+      <li>Modify saved palette name and colors</li>
+      <li>Add new palettes from scratch</li>
+    </ul>
+  </description>
+  <screenshots>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-0.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-1.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-2.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-3.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-4.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-5.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-6.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-7.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-8.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-9.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-10.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-11.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-12.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-13.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-14.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-15.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/nate-xyz/paleta/main/data/screenshots/paleta-16.png</image>
+    </screenshot>
+  </screenshots>
+  <launchable type="desktop-id">io.github.nate_xyz.Paleta.desktop</launchable>
+  <url type="homepage">https://github.com/nate-xyz/paleta</url>
+  <url type="bugtracker">https://github.com/nate-xyz/paleta/issues</url>
+  <url type="donation">https://ko-fi.com/natexyz</url>
+  <developer_name>nate-xyz</developer_name>
+  <releases>
+    <release version="0.1.1" type="development" date="2022-02-06"/>
+    <release version="0.1.0" type="development" date="2023-02-05"/>
+  </releases>
+  <translation type="gettext">paleta</translation>
+  <kudos>
+    <kudo>ModernToolkit</kudo>
+    <kudo>HiDpiIcon</kudo>
+  </kudos>
+  <custom>
+    <value key="Purism::form_factor">workstation</value>
+  </custom>
+  <content_rating type="oars-1.1"/>
+  <provides>io.github.nate_xyz.Paleta.desktop</provides>
 </component>
