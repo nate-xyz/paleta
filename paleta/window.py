@@ -135,6 +135,7 @@ class Window(Adw.ApplicationWindow):
         self.open_image_dialog.connect("response", self.open_response)
         self.open_image_dialog.add_filter(f)
         self.open_image_button.connect("clicked", lambda _button: self.open_image_dialog.show())
+        self.image_drop_page.open_image_button.connect("clicked", lambda _button: self.open_image_dialog.show())
 
     def open_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:

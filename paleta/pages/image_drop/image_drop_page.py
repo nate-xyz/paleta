@@ -13,6 +13,7 @@ class ImageDropPage(Adw.Bin):
     overlay = Gtk.Template.Child(name="overlay")
     status = Gtk.Template.Child(name="status")
     thief_panel = Gtk.Template.Child(name="thief_panel")
+    open_image_button = Gtk.Template.Child(name="open_image_button")
 
     def __init__(self) -> None:
         super().__init__()

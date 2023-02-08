@@ -12,9 +12,31 @@
         <child type="overlay">
           <object class="AdwStatusPage" id="status">
             <property name="title" translatable="yes">Drop Image</property>
-            <property name="description" translatable="yes">Drag an image here or click the button in the upper left corner of this window.</property>
+            <property name="description" translatable="yes">Drag an image here, click the button below, or click the button in the upper left corner of this window.</property>
 
             <property name="icon-name">image-missing-symbolic</property>
+
+            <child>
+              <object class="GtkButton" id="open_image_button">
+                <property name="hexpand">false</property>
+                <property name="vexpand">false</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                
+                <property name="child">
+                  <object class="AdwButtonContent">
+                    <property name="icon-name">plus-symbolic</property>
+                    <property name="label" translatable="yes">Open Image</property>
+                    <property name="use-underline">True</property>
+                  </object>
+                </property>
+                <style>
+                  <class name="pill"/>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+            </child>
+
           </object>
         </child>
         <property name="child">
