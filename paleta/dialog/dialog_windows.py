@@ -33,10 +33,10 @@ class SavePaletteDialog(Adw.MessageDialog):
                 return 
 
             if self.db.add_palette_from_extracted(name, self.colors):
-                self.window.add_toast("Created new palette «{}»".format(name))
+                self.window.add_success_toast("Saved", f"New palette: «{name}»")
                 self.window.go_to_palette_page()
             else:
-                self.window.add_toast("Unable to add new palette «{}»".format(name))
+                self.window.add_error_toast(f"Unable to add new palette «{name}»")
 
 
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/rename_palette_dialog.ui')
@@ -70,9 +70,9 @@ class RenamePaletteDialog(Adw.MessageDialog):
                 return
 
             if self.db.rename_palette(self.palette.id, name):
-                self.window.add_toast("Renamed palette from «{}» to «{}».".format(self.name, name))
+                self.window.add_success_toast("Renamed", f"Changed name from «{self.name}» to «{name}».")
             else:
-                self.window.add_toast("Unable to rename palette «{}».".format(self.name))
+                self.window.add_error_toast(f"Unable to rename palette «{self.name}».")
 
 
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/duplicate_palette_dialog.ui')
@@ -105,9 +105,9 @@ class DuplicatePaletteDialog(Adw.MessageDialog):
                 return
 
             if self.db.duplicate_palette(self.palette.id, name):
-                self.window.add_toast("Duplicated palette «{}» to «{}».".format(self.palette.name, name))
+                self.window.add_success_toast("Duplicated", f"Copied «{self.palette.name}» to «{name}».")
             else:
-                self.window.add_toast("Unable to duplicate palette «{}».".format(self.palette.name))
+                self.window.add_error_toast(f"Unable to duplicate palette «{self.palette.name}».")
 
 
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/delete_palette_dialog.ui')
@@ -127,8 +127,8 @@ class DeletePaletteDialog(Adw.MessageDialog):
     def dialog_response(self, dialog, response):
         if response == 'delete':
             if self.database.delete_palette(self.palette.id):
-                self.window.add_toast("Deleted palette «{}»".format(self.palette.name))
+                self.window.add_success_toast("Deleted", f"Removed palette: «{self.palette.name}».")
             else:
-                self.window.add_toast("Unable to delete palette «{}»".format(self.palette.name))
+                self.window.add_error_toast(f"Unable to delete palette «{self.palette.name}».")
 
 

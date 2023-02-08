@@ -74,13 +74,13 @@ class AddColorDialog(Adw.MessageDialog):
     def dialog_response(self, dialog, response):
         if response == 'add':
             if self.palette == None or self.color == None:
-                self.window.add_toast("Unable to add color.")
+                self.window.add_error_toast("Unable to add color.")
                 return 
             
             if self.db.add_color_to_palette(self.palette.id, self.color.hex, *self.color.rgba):
-                self.window.add_toast("Added color {} to palette «{}».".format(self.color.hex, self.palette.name))
+                self.window.add_color_toast(self.color.hex, self.palette.name)
             else:
-                self.window.add_toast("Unable to add color {}.".format(self.color.hex))
+                self.window.add_error_toast("Unable to add color {}.".format(self.color.hex))
 
 
 

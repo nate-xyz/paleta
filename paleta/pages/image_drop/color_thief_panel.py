@@ -7,6 +7,8 @@ from .dropped_image import DroppedImage
 from .extracted_color_row import ExtractedColorRow, ExtractedColor
 from paleta.dialog import SavePaletteDialog
 
+from paleta.util import SUCCESS_GREEN
+
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/color_thief_panel.ui')
 class ColorThiefPanel(Adw.Bin):
     __gtype_name__ = 'ColorThiefPanel'
@@ -76,7 +78,8 @@ class ColorThiefPanel(Adw.Bin):
         for rgb in colors:
             self.list_store.append(ExtractedColor(rgb))
         
-        self.window.add_toast("Extracted {} colors from {}!".format(colors_n, self.image.image_path))
+        #self.window.add_toast("Extracted {} colors from {}!".format(colors_n, self.image.image_name))
+        self.window.add_toast_markup(f"Extracted <span foreground={SUCCESS_GREEN}>{colors_n}</span> colors from <span foreground={SUCCESS_GREEN}>{self.image.image_name}</span>!")
 
     def save_palette(self):
         if self.image == None:

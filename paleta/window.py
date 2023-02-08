@@ -22,6 +22,7 @@ from gi.repository import Adw, Gtk, Gdk, Gio
 # from paleta.pages.image_drop import ImageDropPage
 # from paleta.pages.palettes import PalettePage
 from .pages import ImageDropPage, PalettePage
+from .util import SUCCESS_GREEN, ERROR_RED
 
 import os
 import html
@@ -60,7 +61,7 @@ class Window(Adw.ApplicationWindow):
         self.saturate()
         
         if not self.db.try_loading_database():
-            self.add_toast("Error loading database.")
+            self.add_error_toast("Unable to load database.")
     
         self.clipboard = Gdk.Display.get_default().get_clipboard()
         self.setup_switcher_button()
@@ -148,24 +149,41 @@ class Window(Adw.ApplicationWindow):
         
     def error_image_toast(self, uri):
         base_name = os.path.basename(uri)
-        self.add_error_toast("Could not open image: {}".format(base_name), 3)
+        self.add_error_toast(f"Could not open image: {base_name}", 3)
 
     def open_image_toast(self, uri):
-        base_name = os.path.basename(uri)
-        self.add_toast("Opened image: {}".format(base_name))
+        base_name = html.escape(os.path.basename(uri))
+        #self.add_toast("Opened image: {}".format(base_name))
+        self.add_toast_markup(f"<span foreground={SUCCESS_GREEN}>Opened!</span> image: {base_name}")
 
     def add_toast(self, title: str, timeout: int = 1):
         toast = Adw.Toast.new(html.escape(title))
         toast.set_timeout(timeout)
         self.toast_overlay.add_toast(toast)
 
-    def add_error_toast(self, title: str, timeout: int = 1):
-        toast = Adw.Toast.new("<span foreground=\"Red\">Error!</span> {}".format(html.escape(title)))
+    def add_toast_markup(self, title: str, timeout: int = 1):
+        toast = Adw.Toast.new(title)
+        toast.set_timeout(timeout)
+        self.toast_overlay.add_toast(toast)
+	
+    def add_success_toast(self, verb: str, msg: str, timeout: int = 1):
+        toast = Adw.Toast.new(f"<span foreground={SUCCESS_GREEN}>{verb}!</span> {html.escape(msg)}")
         toast.set_timeout(timeout)
         self.toast_overlay.add_toast(toast)
 
+    def add_error_toast(self, error: str, timeout: int = 1):
+        toast = Adw.Toast.new(f"<span foreground={ERROR_RED}>Error!</span> {html.escape(error)}")
+        toast.set_timeout(timeout)
+        self.toast_overlay.add_toast(toast)
+
+    def add_color_toast(self, hex_name, palette_name):
+        self.add_toast_markup(f"Added color <span foreground=\"{hex_name}\">{hex_name}</span> to palette «{html.escape(palette_name)}».")
+
+    def remove_color_toast(self, hex_name, palette_name):
+        self.add_toast_markup(f"Removed color <span foreground=\"{hex_name}\">{hex_name}</span> from palette «{html.escape(palette_name)}».")
+
     def copy_color(self, hex_name):
-        self.add_toast("Copied color {} to clipboard!".format(hex_name))
+        self.add_toast_markup(f"Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to clipboard!")
         self.clipboard.set(hex_name)
 
     def go_to_image_drop_page(self):

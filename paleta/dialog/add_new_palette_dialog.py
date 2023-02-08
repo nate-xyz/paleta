@@ -79,7 +79,7 @@ class AddNewPaletteDialog(Adw.MessageDialog):
     def dialog_response(self, dialog, response):
         if response == 'add':
             if self.color == None:
-                self.window.add_toast("Unable to add palette, must select a color.")
+                self.window.add_error_toast("Unable to add palette, must select a color.")
                 return 
             
             name = self.adw_entry_row.get_text()
@@ -87,9 +87,9 @@ class AddNewPaletteDialog(Adw.MessageDialog):
                 name = self.name
 
             if self.db.add_palette_new(name, self.color.hex, *self.color.rgba):
-                self.window.add_toast("Created new palette «{}»".format(name))
+                self.window.add_success_toast("Created", f"New palette: «{name}»")
             else:
-                self.window.add_toast("Unable to add new palette «{}»".format(name))
+                self.window.add_error_toast(f"Unable to add new palette «{name}»")
 
 
 

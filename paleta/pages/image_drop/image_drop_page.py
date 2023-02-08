@@ -54,7 +54,7 @@ class ImageDropPage(Adw.Bin):
             return False
     
         if not self.file_verified:
-            self.window.add_error_toast("Unable to verify file on drop, try with the file chooser in the upper left hand corner.", 4)
+            self.window.add_error_toast("Unable to verify file on drop, try with the file chooser in the upper left corner.", 4)
             drop_value.finish(0)
             return False
 
@@ -64,25 +64,25 @@ class ImageDropPage(Adw.Bin):
     def load_value_async(self, drop, task):
         result = drop.read_value_finish(task)
         if not result:
-            self.add_error_toast("Unable to read drop.")
+            self.window.add_error_toast("Unable to read drop.")
             drop.finish(0)
             return
         
-        if self.load_image(result.get_path()):
+        uri = result.get_path()
+        if self.load_image(uri):
             drop.finish(Gdk.DragAction.COPY)
+            self.window.open_image_toast(uri)
         else:
-            self.add_error_toast("Unable to load image.")
+            self.window.error_image_toast(uri)
             drop.finish(0)
 
     def load_image(self, uri):
         try:
             self.thief_panel.set_image(DroppedImage(uri))
             self.status.hide()
-            self.window.open_image_toast(uri)
             return True
         except Exception as e:
             print(e)
-            self.window.error_image_toast(uri)
             return False
 
 def contain_mime_types(formats):

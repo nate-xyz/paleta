@@ -46,7 +46,7 @@ class DeleteColorDialog(Adw.MessageDialog):
                 return 
 
             if self.db.remove_color_from_palette(self.color.id, self.palette.id):
-                self.window.add_toast("Removed color {} from palette «{}».".format(self.color.hex, self.palette.name))
+                self.window.remove_color_toast(self.color.hex, self.palette.name)
             else:
-                self.window.add_toast("Unable to remove color {}.".format(self.color.hex))
+                self.window.add_error_toast(f"Unable to remove color {self.color.hex}.")
 
