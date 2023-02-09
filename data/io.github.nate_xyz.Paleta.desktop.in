@@ -8,4 +8,4 @@ Terminal=false
 Type=Application
 Categories=GTK;Graphics
 StartupNotify=true
-Keywords=color;palette;
+Keywords=color;palette;paleta;

@@ -18,6 +18,7 @@ Features
 - Modify saved palette name and colors
 - Add new palettes from scratch
 
+❗ **Note**: Paleta is under active development! If you would like to suggest any features or if you find any bugs, your feedback is very welcome!
 
 Flatpak
 --------------
