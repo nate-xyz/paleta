@@ -1,5 +1,5 @@
 project('paleta',
-          version: '0.2.0',
+          version: '0.2.1',
     meson_version: '>= 0.59.0',
   default_options: [ 'warning_level=3', 'werror=false', ],
 )

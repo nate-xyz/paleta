@@ -27,10 +27,11 @@
   <url type="donation">https://ko-fi.com/natexyz</url>
   
   <releases>
+    <release version="0.2.1" date="2022-02-09"/>
     <release version="0.2.0" date="2022-02-08">
       <description>
         <ul>
-          <li>Toast improvements</li>
+          <li>Toast improvements</li>s
           <li>Drop Page open button</li>
         </ul>
       </description>
