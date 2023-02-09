@@ -38,12 +38,12 @@
                 <property name="vexpand">true</property>
                 <property name="halign">fill</property>
                 <property name="valign">fill</property>
-                <property name="spacing">10</property>
+                <property name="spacing">20</property>
 
                 <property name="margin-start">20</property>
                 <property name="margin-end">20</property>
-                <property name="margin-top">10</property>
-                <property name="margin-bottom">10</property>
+                <property name="margin-top">20</property>
+                <property name="margin-bottom">20</property>
                 
                 <child>
                   <object class="GtkListBox" id="options_list_box">
@@ -95,6 +95,9 @@
 
                 <child>
                   <object class="GtkButton" id="extract_button">
+                    <property name="halign">center</property>
+                    <property name="label" translatable="yes">_Extract Palette</property>
+                    <property name="use-underline">True</property>
                     <property name="child">
                       <object class="AdwButtonContent">
                         <property name="icon-name">brush-symbolic</property>
@@ -102,9 +105,9 @@
                         <property name="use-underline">True</property>
                       </object>
                     </property>
-
                     <style>
                       <class name="suggested-action"/>
+                      <class name="pill"/>
                     </style>
 
                   </object>
@@ -142,13 +145,22 @@
                                     </style>
                                   </object>
                                 </child>
+
+
+            
                               </object>
                           </child>
 
+                            <child>
+                              <object class="GtkSeparator">
+                                <property name="orientation">horizontal</property>
+                              </object>
+                            </child>
 
                           <child>
                             <object class="GtkButton" id="save_button">
-                              <property name="margin-top">10</property>
+                              <property name="halign">center</property>
+                              <property name="margin-top">20</property>
                               <property name="child">
                                 <object class="AdwButtonContent">
                                   <property name="icon-name">document-save-symbolic</property>
@@ -156,6 +168,9 @@
                                   <property name="use-underline">True</property>
                                 </object>
                               </property>
+                              <style>
+                                <class name="pill"/>
+                              </style>
                             </object>
                           </child>
 
