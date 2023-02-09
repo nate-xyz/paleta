@@ -42,8 +42,8 @@
 
                 <property name="margin-start">20</property>
                 <property name="margin-end">20</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">20</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
                 
                 <child>
                   <object class="GtkListBox" id="options_list_box">
@@ -62,6 +62,7 @@
         
                         <child>
                           <object class="GtkSpinButton" id="count_amount_spin">
+                            <property name="valign">center</property>
                             <property name="adjustment">palette_count_adj</property>
                             <property name="numeric">true</property>
                           </object>
@@ -79,6 +80,7 @@
         
                         <child>
                           <object class="GtkSpinButton" id="quality_spin">
+                            <property name="valign">center</property>
                             <property name="adjustment">quality_adj</property>
                             <property name="numeric">true</property>
                           </object>
@@ -91,7 +93,6 @@
                   </object>
                 </child>
 
-
                 <child>
                   <object class="GtkButton" id="extract_button">
                     <property name="child">
@@ -103,7 +104,6 @@
                     </property>
 
                     <style>
-                      <class name="pill"/>
                       <class name="suggested-action"/>
                     </style>
 
@@ -148,6 +148,7 @@
 
                           <child>
                             <object class="GtkButton" id="save_button">
+                              <property name="margin-top">10</property>
                               <property name="child">
                                 <object class="AdwButtonContent">
                                   <property name="icon-name">document-save-symbolic</property>
@@ -155,12 +156,6 @@
                                   <property name="use-underline">True</property>
                                 </object>
                               </property>
-          
-                              <style>
-                                <class name="pill"/>
-                                <class name="suggested-action"/>
-                              </style>
-          
                             </object>
                           </child>
 
@@ -175,7 +170,6 @@
                           <property name="valign">center</property>
                           <child>
                             <object class="GtkSpinner" id="spinner">
-
                               <property name="visible">false</property>
                               <property name="spinning">true</property>
                               <property name="can_focus">false</property>
@@ -185,30 +179,11 @@
 
                       </child>
                     </object>
-                  </child>
-
-                <!-- <child>
-                  <object class="GtkLabel">
-                    <property name="label">Hello, THIEF!</property>
-                    <property name="vexpand">true</property>
-                    <style>
-                      <class name="title-1"/>
-                    </style>
-                  </object>
-                </child> -->
-
-                
+                  </child>                
               </object>
             </child>
           </object>
         </child>
-
-
-
-
-
-
-
       </object>
     </property>
   </template>
