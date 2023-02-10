@@ -76,22 +76,26 @@ class ColorThiefPanel(Adw.Bin):
             for p in self.processes:
                 p.terminate()
 
-            process = Process(
-                target=color_extraction,
-                args=(
-                    self.child_conn,
-                    self.image.image_path,
-                    int(self.count_amount),
-                    int(self.quality),
-                ))
-            process.daemon = True 
-            process.start()
-            self.process_id = process.ident
-            self.processes.append(process)
+            self.processes = []
 
+            try:
+                process = Process(
+                    target=color_extraction,
+                    args=(
+                        self.child_conn,
+                        self.image.image_path,
+                        int(self.count_amount),
+                        int(self.quality),
+                    ))
+                process.daemon = True 
+                process.start()
+                self.process_id = process.ident
+                self.processes.append(process)
+            except:
+                self.window.add_error_toast("Unable to start palette extraction.")  
+                
         else:
-            self.window.add_error_toast(
-                "Unable to start palette extraction, no image loaded.")
+            self.window.add_error_toast("Unable to start palette extraction, no image loaded.")
 
     def extraction_done(self, source, condition) -> bool:
         assert self.parent_conn.poll()
