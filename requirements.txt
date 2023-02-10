@@ -1,3 +1,13 @@
-colorthief==0.2.1
+# After changing this file, install the `req2flatpak` tool using pip:
+# pip3 install req2flatpak
+# Then run:
+# req2flatpak --requirements-file requirements.txt --target-platforms 38-x86_64 39-x86_64 310-x86_64 311-x86_64 > pypi-dependencies.json
+# And move output file to flatpak directory:
+# mv pypi-dependencies.json flatpak/
+#
+# NOTE: All of the requirements must have a specified version number
+
+fast-colorthief==0.0.4
+numpy==1.24.2
 Pillow==9.4.0
 pyxdg==0.28

@@ -1,40 +1,110 @@
 {
-    "name": "pypi-dependencies",
+    "name": "python3-package-installation",
     "buildsystem": "simple",
-    "build-commands": [],
-    "modules": [
+    "build-commands": [
+        "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} --no-build-isolation fast-colorthief numpy Pillow pyxdg"
+    ],
+    "sources": [
         {
-            "name": "python3-colorthief",
-            "buildsystem": "simple",
-            "build-commands": [
-                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"colorthief==0.2.1\" --no-build-isolation"
-            ],
-            "sources": [
-                {
-                    "type": "file",
-                    "url": "https://files.pythonhosted.org/packages/bc/07/830784e061fb94d67649f3e438ff63cfb902dec6d48ac75aeaaac7c7c30e/Pillow-9.4.0.tar.gz",
-                    "sha256": "a1c2d7780448eb93fbcc3789bf3916aa5720d942e37945f4056680317f1cd23e"
-                },
-                {
-                    "type": "file",
-                    "url": "https://files.pythonhosted.org/packages/56/18/be03b7058e65f9df479b14e7af4e73945ce311e07aaad45cf2536e14791a/colorthief-0.2.1-py2.py3-none-any.whl",
-                    "sha256": "b04fc8ce5cf9c888768745e29cb19b7b688d5711af6fba26e8057debabec56b9"
-                }
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/77/ba/2f29a6b7224b3e81ddb4d755c66d311d7f3e7c97e40a7f6ccb628b118633/Pillow-9.4.0-cp38-cp38-manylinux_2_28_x86_64.whl",
+            "sha256": "a96e6e23f2b79433390273eaf8cc94fec9c6370842e577ab10dabdcc7ea0a66b",
+            "only-arches": [
+                "x86_64"
             ]
         },
         {
-            "name": "python3-pyxdg",
-            "buildsystem": "simple",
-            "build-commands": [
-                "pip3 install --verbose --exists-action=i --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} \"pyxdg==0.28\" --no-build-isolation"
-            ],
-            "sources": [
-                {
-                    "type": "file",
-                    "url": "https://files.pythonhosted.org/packages/e5/8d/cf41b66a8110670e3ad03dab9b759704eeed07fa96e90fdc0357b2ba70e2/pyxdg-0.28-py2.py3-none-any.whl",
-                    "sha256": "bdaf595999a0178ecea4052b7f4195569c1ff4d344567bccdc12dfdf02d545ab"
-                }
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/40/d1/b646804eb150a94c76abc54576ea885f71030bab6c541ccb9594db5da64a/Pillow-9.4.0-cp310-cp310-manylinux_2_28_x86_64.whl",
+            "sha256": "ed3e4b4e1e6de75fdc16d3259098de7c6571b1a6cc863b1a49e7d3d53e036070",
+            "only-arches": [
+                "x86_64"
             ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/54/4f/346b8ea1b772cb6e802ed32a78b18627be6a9d9a29755fa82ea436bb582e/Pillow-9.4.0-cp311-cp311-manylinux_2_28_x86_64.whl",
+            "sha256": "60e7da3a3ad1812c128750fc1bc14a7ceeb8d29f77e0a2356a8fb2aa8925287d",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/de/e2/d1dda94185dba4fc019744076e52e2c6b450620938b2ded7b31ba90bd559/Pillow-9.4.0-cp39-cp39-manylinux_2_28_x86_64.whl",
+            "sha256": "e8c5cf126889a4de385c02a2c3d3aba4b00f70234bfddae82a5eaa3ee6d5e3e6",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/34/d9/343a458108e15ba262e591b5b3d60cd24ccbc35718336eeb326e59e00e7a/fast_colorthief-0.0.4-cp38-cp38-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+            "sha256": "022515715167a730b722790148a27a1c6efd445a87e71aff55f3a67bb277d033",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/ea/2e/ce32835ef2d51c1e3e7eecf908768c7be4f7fe7a0c3fe8a2341d6b4213d2/fast_colorthief-0.0.4-cp39-cp39-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+            "sha256": "b292eded1df93a86eabb2e581f9c8cca08bc51a81e437eae9753a8fb547a7de5",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/8b/bd/bfe288009cac1949ae5e5689e0d0405f24fc0d63189828635f28cb40950b/fast_colorthief-0.0.4-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+            "sha256": "d0fc89cac1e1a4761845ef9d4fad160b0b1ad8b9e7f920d0944ce1b7d1f0fead",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/03/09/40bd6dff2b633deaaf3e7d4f308ac84e0f27029ec718d5f2740c750924f4/fast_colorthief-0.0.4-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl",
+            "sha256": "0e7c9c37de475a3e2e1ed944d7a292bdc55c08d46adfac5c21b6e60bb982d68c",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/f4/f4/45e6e3f7a23b9023554903a122c95585e9787f9403d386bafb7a95d24c9b/numpy-1.24.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "sha256": "f64bb98ac59b3ea3bf74b02f13836eb2e24e48e0ab0145bbda646295769bd780",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/b6/d7/b208a4a534732e4a978003768ac7b8c14fcd4ca5b1653ce4fb4c2826f3a4/numpy-1.24.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "sha256": "9a23f8440561a633204a67fb44617ce2a299beecf3295f0d13c495518908e910",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/c5/21/275cfa7731ee2e121b1bf85ddb21b8712fe2f409f02a8b61521af6e4993d/numpy-1.24.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "sha256": "a51725a815a6188c662fb66fb32077709a9ca38053f0274640293a14fdd22978",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/9c/ee/77768cade9607687fadbcc1dcbb82dba0554154b3aa641f9c17233ffabe8/numpy-1.24.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+            "sha256": "2eabd64ddb96a1239791da78fa5f4e1693ae2dadc82a76bc76a14cbb2b966e96",
+            "only-arches": [
+                "x86_64"
+            ]
+        },
+        {
+            "type": "file",
+            "url": "https://files.pythonhosted.org/packages/e5/8d/cf41b66a8110670e3ad03dab9b759704eeed07fa96e90fdc0357b2ba70e2/pyxdg-0.28-py2.py3-none-any.whl",
+            "sha256": "bdaf595999a0178ecea4052b7f4195569c1ff4d344567bccdc12dfdf02d545ab"
         }
     ]
 }

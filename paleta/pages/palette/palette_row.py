@@ -39,6 +39,7 @@ class PaletteRow(Gtk.ListBoxRow):
         self.update_view()
 
     def show_dialog(self, button):
+        # TODO: To keep compatibility with Python < 3.10, change `match...case` statement to `if` statements
         match button:
             case self.edit_name_button:
                 dialog = RenamePaletteDialog(self.palette, self.window, self.db)

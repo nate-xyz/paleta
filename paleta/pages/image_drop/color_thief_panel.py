@@ -2,7 +2,7 @@ from gi.repository import Adw, GLib, Gio, Gtk
 
 import os
 from multiprocessing import Pipe, Process
-from colorthief import ColorThief
+import fast_colorthief as color_thief
 
 from .dropped_image import DroppedImage
 from .extracted_color_row import ExtractedColorRow, ExtractedColor
@@ -45,6 +45,7 @@ class ColorThiefPanel(Adw.Bin):
         GLib.io_add_watch(self.parent_conn.fileno(), GLib.IO_IN, self.extraction_done)
 
     def get_quality(self) -> int:
+        # TODO: To keep compatibility with Python < 3.10, change `match...case` statement to `if` statements
         match self.quality_dropdown.get_selected():
             case 0:
                 return 1
@@ -144,7 +145,6 @@ class ColorThiefPanel(Adw.Bin):
         self.start_extraction()
 
 
-def color_extraction(pipe_connection, uri, count, quality):
-    color_thief = ColorThief(uri)
-    colors = color_thief.get_palette(color_count=count, quality=quality)[:count]
+def color_extraction(pipe_connection, image_uri, count, quality):
+    colors = color_thief.get_palette(image_uri, color_count=count, quality=quality)[:count]
     pipe_connection.send((colors, os.getpid()))
