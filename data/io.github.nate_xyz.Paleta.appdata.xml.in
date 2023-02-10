@@ -18,15 +18,25 @@
     </ul>
     <p>❗ Note: Paleta is under active development! If you would like to suggest any features or if you find any bugs, your feedback is very welcome!</p>
   </description>
-  
+
   <provides>io.github.nate_xyz.Paleta.desktop</provides>
   <launchable type="desktop-id">io.github.nate_xyz.Paleta.desktop</launchable>
-  
+
   <url type="homepage">https://github.com/nate-xyz/paleta</url>
   <url type="bugtracker">https://github.com/nate-xyz/paleta/issues</url>
   <url type="donation">https://ko-fi.com/natexyz</url>
-  
+
   <releases>
+    <release version="0.2.2" date="2022-02-10">
+      <description>
+        <ul>
+          <li>Automatic palette extraction on image load</li>s
+          <li>Cleaner extraction panel UI</li>
+          <li>Clearer options for palette quality / accuracy</li>
+          <li>Better AppData summary</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.1" date="2022-02-09"/>
     <release version="0.2.0" date="2022-02-08">
       <description>
