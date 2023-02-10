@@ -47,10 +47,10 @@ class App(Adw.Application):
                                 issue_url='https://github.com/nate-xyz/paleta/issues',
         )
         about.add_acknowledgement_section(
-            ("Powered by color-thief"),
+            ("Powered by color-thief library"),
             [
-                "color-thief-py https://github.com/fengsp/color-thief-py",
-                "color-thief https://github.com/lokesh/color-thief",
+                "fast-colorthief https://github.com/bedapisl/fast-colorthief",
+                "color-thief https://github.com/lokesh/color-thief"
             ]
         )
         about.present()
