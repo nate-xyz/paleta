@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
   <name>Paleta</name>
-  <summary>Extract the dominant colors from any image.</summary>
+  <summary>Generate color palettes with ease</summary>
   <developer_name>nate-xyz</developer_name>
   <description>
     <p>Find the dominant color palette from any image and manage palettes with Paleta. An intuitive tool for designers, artists, or anyone looking to streamline their color work.</p>
