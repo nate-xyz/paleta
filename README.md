@@ -7,7 +7,7 @@ Find the dominant color palette from any image and manage palettes with Paleta.
 An intuitive tool for designers, artists, or anyone looking to streamline their color work.
 <br><br>
 
-![Screenshot 0](./data/screenshots/paleta-0.png)
+![Screenshot 0](./data/screenshots/paleta--0.png)
 
 Features
 --------------
@@ -34,18 +34,18 @@ by using this command:
 
 Screenshots
 --------------
-![Screenshot 1](./data/screenshots/paleta-1.png)
-![Screenshot 2](./data/screenshots/paleta-2.png)
-![Screenshot 3](./data/screenshots/paleta-3.png)
-![Screenshot 4](./data/screenshots/paleta-4.png)
-![Screenshot 5](./data/screenshots/paleta-5.png)
-![Screenshot 6](./data/screenshots/paleta-6.png)
-![Screenshot 7](./data/screenshots/paleta-7.png)
-![Screenshot 8](./data/screenshots/paleta-8.png)
-![Screenshot 9](./data/screenshots/paleta-9.png)
-![Screenshot 10](./data/screenshots/paleta-10.png)
-![Screenshot 11](./data/screenshots/paleta-11.png)
-![Screenshot 12](./data/screenshots/paleta-12.png)
-![Screenshot 13](./data/screenshots/paleta-13.png)
-![Screenshot 14](./data/screenshots/paleta-14.png)
-![Screenshot 15](./data/screenshots/paleta-15.png)
+![Screenshot 1](./data/screenshots/paleta--1.png)
+![Screenshot 2](./data/screenshots/paleta--2.png)
+![Screenshot 3](./data/screenshots/paleta--3.png)
+![Screenshot 4](./data/screenshots/paleta--4.png)
+![Screenshot 5](./data/screenshots/paleta--5.png)
+![Screenshot 6](./data/screenshots/paleta--6.png)
+![Screenshot 7](./data/screenshots/paleta--7.png)
+![Screenshot 8](./data/screenshots/paleta--8.png)
+![Screenshot 9](./data/screenshots/paleta--9.png)
+![Screenshot 10](./data/screenshots/paleta--10.png)
+![Screenshot 11](./data/screenshots/paleta--11.png)
+![Screenshot 12](./data/screenshots/paleta--12.png)
+![Screenshot 13](./data/screenshots/paleta--13.png)
+![Screenshot 14](./data/screenshots/paleta--14.png)
+![Screenshot 15](./data/screenshots/paleta--15.png)
