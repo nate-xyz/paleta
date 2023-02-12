@@ -1,11 +1,12 @@
 [Desktop Entry]
 Name=Paleta
-GenericName=Color Palettes 
+GenericName=Color Palettes
 Comment=Extract the dominant colors from any image
 Exec=paleta
 Icon=io.github.nate_xyz.Paleta
 Terminal=false
 Type=Application
-Categories=GTK;Graphics
+Categories=GNOME;GTK;Graphics
 StartupNotify=true
-Keywords=color;palette;paleta;
+# Translators: Search terms to find this application. Do not translate or localize the semicolons! The list must also end with a semicolon.
+Keywords=color;palette;

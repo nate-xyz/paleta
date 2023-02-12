@@ -58,7 +58,7 @@ class PalettePage(Adw.Bin):
             self.set_edit_mode(not self.edit_mode)
             self.window.go_to_palette_page()
         else:
-            self.window.add_error_toast("Cannot toggle edit mode, no palettes added.")
+            self.window.add_error_toast(_("Cannot toggle edit mode, no palettes added."))
 
     def set_edit_mode(self, mode):
         self.edit_mode = mode

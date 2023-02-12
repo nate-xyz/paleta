@@ -34,11 +34,11 @@
             <property name="hexpand">true</property>
             <property name="halign">center</property>
             <property name="spacing">10</property>
-        
+
             <child>
               <object class="GtkLabel" id="color_instruction_label">
                 <property name="halign">center</property>
-                <property name="label">Select from previously added colors or pick a new one.</property>
+                <property name="label" translatable="yes">Select from previously added colors or pick a new one.</property>
                 <property name="ellipsize">end</property>
                 <attributes>
                   <attribute name="weight" value="PANGO_WEIGHT_LIGHT"/>
@@ -46,17 +46,17 @@
                 </attributes>
               </object>
             </child>
-    
+
             <child>
               <object class="AdwBin" id="color_selection_row"></object>
             </child>
-    
+
             <child>
               <object class="GtkButton" id="picker_button">
                 <property name="margin-bottom">5</property>
                 <property name="hexpand">true</property>
                 <property name="halign">center</property>
-    
+
                 <property name="child">
                   <object class="AdwButtonContent">
                     <property name="icon-name">color-picker-symbolic</property>
@@ -70,7 +70,7 @@
                 </style>
               </object>
             </child>
-    
+
             <child>
               <object class="GtkRevealer" id="revealer">
                 <property name="reveal-child">false</property>
@@ -97,7 +97,7 @@
                 </property>
               </object>
             </child>
-    
+
           </object>
         </child>
       </object>
