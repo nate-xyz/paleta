@@ -46,8 +46,15 @@ class App(Adw.Application):
                                 website='https://github.com/nate-xyz/paleta',
                                 issue_url='https://github.com/nate-xyz/paleta/issues',
         )
+
+        # Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
+        # One name per line, please do not remove previous names.
+        about.set_translator_credits(_("translator-credits"))
+        
+        # Translators: used in the phrase "Powered by color-thief library"
+        ack =  _("Powered by ") + "color-thief " + _("library")
         about.add_acknowledgement_section(
-            ("Powered by color-thief library"),
+            ack,
             [
                 "fast-colorthief https://github.com/bedapisl/fast-colorthief",
                 "color-thief https://github.com/lokesh/color-thief"

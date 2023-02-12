@@ -49,12 +49,12 @@ class ImageDropPage(Adw.Bin):
 
     def on_drag_drop(self, drop_target, drop_value, *args):
         if not drop_value:
-            self.window.add_error_toast("Unable to read drop.")
+            self.window.add_error_toast(_("Unable to read drop."))
             drop_value.finish(0)
             return False
     
         if not self.file_verified:
-            self.window.add_error_toast("Unable to verify file on drop, try with the file chooser in the upper left corner.", 4)
+            self.window.add_error_toast(_("Unable to verify file on drop, try with the file chooser in the upper left corner."), 4)
             drop_value.finish(0)
             return False
 
@@ -64,7 +64,7 @@ class ImageDropPage(Adw.Bin):
     def load_value_async(self, drop, task):
         result = drop.read_value_finish(task)
         if not result:
-            self.window.add_error_toast("Unable to read drop.")
+            self.window.add_error_toast(_("Unable to read drop."))
             drop.finish(0)
             return
         

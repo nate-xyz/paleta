@@ -50,7 +50,7 @@
             <child>
               <object class="GtkLabel" id="color_instruction_label">
                 <property name="halign">center</property>
-                <property name="label">Select from previously added colors or pick one to add to new palette.</property>
+                <property name="label" translatable="yes">Select from previously added colors or pick one to add to new palette.</property>
                 <attributes>
                   <attribute name="weight" value="PANGO_WEIGHT_LIGHT"/>
                   <attribute name="scale" value="1.3"/>

@@ -33,10 +33,12 @@ class SavePaletteDialog(Adw.MessageDialog):
                 return 
 
             if self.db.add_palette_from_extracted(name, self.colors):
-                self.window.add_success_toast("Saved", f"New palette: «{name}»")
+                # Translators: Do not replace {name}
+                self.window.add_success_toast(_("Saved!"), _(f"New palette: «{name}»"))
                 self.window.go_to_palette_page()
             else:
-                self.window.add_error_toast(f"Unable to add new palette «{name}»")
+                # Translators: Do not replace {name}
+                self.window.add_error_toast(_(f"Unable to add new palette «{name}»"))
 
 
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/rename_palette_dialog.ui')
@@ -55,7 +57,9 @@ class RenamePaletteDialog(Adw.MessageDialog):
 
         self.set_transient_for(self.window)
         self.set_name(palette.name)
-        self.set_heading("Rename {}?".format(palette.name))
+        
+        # Translators: Do not replace {palette.name}
+        self.set_heading(_(f"Rename {palette.name}?"))
         
 
     def set_name(self, name):
@@ -70,9 +74,11 @@ class RenamePaletteDialog(Adw.MessageDialog):
                 return
 
             if self.db.rename_palette(self.palette.id, name):
-                self.window.add_success_toast("Renamed", f"Changed name from «{self.name}» to «{name}».")
+                # Translators: Do not replace {self.name} or {name}
+                self.window.add_success_toast(_("Renamed!"), _(f"Changed name from «{self.name}» to «{name}»."))
             else:
-                self.window.add_error_toast(f"Unable to rename palette «{self.name}».")
+                # Translators: Do not replace {self.name}
+                self.window.add_error_toast(_(f"Unable to rename palette «{self.name}»."))
 
 
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/duplicate_palette_dialog.ui')
@@ -91,11 +97,14 @@ class DuplicatePaletteDialog(Adw.MessageDialog):
 
         self.set_transient_for(self.window)
         self.set_name(palette.name)
-        self.set_heading("Duplicate {}?".format(palette.name))
+
+        # Translators: Do not replace {palette.name}
+        self.set_heading(_(f"Duplicate {palette.name}?"))
 
     def set_name(self, name):
         self.name = name 
-        self.adw_entry_row.set_text(self.name+' duplicate')
+
+        self.adw_entry_row.set_text(_(f"{self.name} duplicate"))
 
     @Gtk.Template.Callback()
     def dialog_response(self, dialog, response):
@@ -105,9 +114,11 @@ class DuplicatePaletteDialog(Adw.MessageDialog):
                 return
 
             if self.db.duplicate_palette(self.palette.id, name):
-                self.window.add_success_toast("Duplicated", f"Copied «{self.palette.name}» to «{name}».")
+                # Translators: Do not replace {self.palette.name} or {name}
+                self.window.add_success_toast(_("Duplicated!"), _(f"Copied «{self.palette.name}» to «{name}»."))
             else:
-                self.window.add_error_toast(f"Unable to duplicate palette «{self.palette.name}».")
+                # Translators: Do not replace {self.palette.name}
+                self.window.add_error_toast(_(f"Unable to duplicate palette «{self.palette.name}»."))
 
 
 @Gtk.Template(resource_path='/io/github/nate_xyz/Paleta/delete_palette_dialog.ui')
@@ -121,14 +132,18 @@ class DeletePaletteDialog(Adw.MessageDialog):
         self.database = database
 
         self.set_transient_for(self.window)
-        self.set_heading("Delete {}?".format(palette.name))
+
+        # Translators: Do not replace {palette.name}
+        self.set_heading(_(f"Delete {palette.name}?"))
 
     @Gtk.Template.Callback()
     def dialog_response(self, dialog, response):
         if response == 'delete':
             if self.database.delete_palette(self.palette.id):
-                self.window.add_success_toast("Deleted", f"Removed palette: «{self.palette.name}».")
+                # Translators: Do not replace {self.palette.name}
+                self.window.add_success_toast(_("Removed"), _(f"palette: «{self.palette.name}»."))
             else:
-                self.window.add_error_toast(f"Unable to delete palette «{self.palette.name}».")
+                # Translators: Do not replace {self.palette.name}
+                self.window.add_error_toast(_(f"Unable to delete palette «{self.palette.name}»."))
 
 

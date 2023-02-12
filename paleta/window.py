@@ -61,7 +61,7 @@ class Window(Adw.ApplicationWindow):
         self.saturate()
         
         if not self.db.try_loading_database():
-            self.add_error_toast("Unable to load database.")
+            self.add_error_toast(_("Unable to load database."))
     
         self.clipboard = Gdk.Display.get_default().get_clipboard()
         self.setup_switcher_button()
@@ -70,7 +70,7 @@ class Window(Adw.ApplicationWindow):
         self.edit_palette_button.connect('clicked', lambda _button: self.palette_page.toggle_edit_mode())
 
     def setup_actions(self, app):
-        app.set_accels_for_action(f"win.show-help-overlay", ['<Primary>question'])
+        app.set_accels_for_action("win.show-help-overlay", ['<Primary>question'])
         self.create_action(app, 'image-open', self.open_image_dialog.show, ['<Primary>o'])
         self.create_action(app, 'image-palette-extract', self.image_drop_page.thief_panel.start_extraction, ['<Primary>e', '<Primary>Return'])
         self.create_action(app, 'image-palette-save', self.image_drop_page.thief_panel.save_palette, ['<Primary>s'])
@@ -123,10 +123,10 @@ class Window(Adw.ApplicationWindow):
             button.connect("clicked", self.switcher_button)
 
     def add_dialog(self):
-        self.open_image_dialog = Gtk.FileChooserNative.new(title="Select an Image File", 
+        self.open_image_dialog = Gtk.FileChooserNative.new(title=_("Select an Image File"), 
                                                         parent=self, 
                                                         action=Gtk.FileChooserAction.OPEN, 
-                                                        accept_label="Open Image")
+                                                        accept_label=_("Open Image"))
 
         f = Gtk.FileFilter()
         f.set_name(_("Image files"))
@@ -146,15 +146,6 @@ class Window(Adw.ApplicationWindow):
                 self.open_image_toast(image_uri)
             else:
                 self.error_image_toast(image_uri)
-        
-    def error_image_toast(self, uri):
-        base_name = os.path.basename(uri)
-        self.add_error_toast(f"Could not open image: {base_name}", 3)
-
-    def open_image_toast(self, uri):
-        base_name = html.escape(os.path.basename(uri))
-        #self.add_toast("Opened image: {}".format(base_name))
-        self.add_toast_markup(f"<span foreground={SUCCESS_GREEN}>Opened!</span> image: {base_name}")
 
     def add_toast(self, title: str, timeout: int = 1):
         toast = Adw.Toast.new(html.escape(title))
@@ -165,25 +156,39 @@ class Window(Adw.ApplicationWindow):
         toast = Adw.Toast.new(title)
         toast.set_timeout(timeout)
         self.toast_overlay.add_toast(toast)
-	
+
+    def error_image_toast(self, uri):
+        base_name = os.path.basename(uri)
+        # Translators: Do not replace {}
+        self.add_error_toast("Could not open image: {}".format(base_name), 3)
+
+    def open_image_toast(self, uri):
+        base_name = html.escape(os.path.basename(uri))
+        # Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
+        self.add_toast_markup(f"<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}")
+
     def add_success_toast(self, verb: str, msg: str, timeout: int = 1):
-        toast = Adw.Toast.new(f"<span foreground={SUCCESS_GREEN}>{verb}!</span> {html.escape(msg)}")
+        toast = Adw.Toast.new(f"<span foreground={SUCCESS_GREEN}>{verb}</span> {html.escape(msg)}")
         toast.set_timeout(timeout)
         self.toast_overlay.add_toast(toast)
 
     def add_error_toast(self, error: str, timeout: int = 1):
-        toast = Adw.Toast.new(f"<span foreground={ERROR_RED}>Error!</span> {html.escape(error)}")
+        # Translators: Only replace "Error!"
+        toast = Adw.Toast.new(_(f"<span foreground={ERROR_RED}>Error!</span> {html.escape(error)}"))
         toast.set_timeout(timeout)
         self.toast_overlay.add_toast(toast)
 
     def add_color_toast(self, hex_name, palette_name):
-        self.add_toast_markup(f"Added color <span foreground=\"{hex_name}\">{hex_name}</span> to palette «{html.escape(palette_name)}».")
+        # Translators: Do not replace {hex_name}, only translate "Added color" and "to palette"
+        self.add_toast_markup(_(f"Added color <span foreground=\"{hex_name}\">{hex_name}</span> to palette «{html.escape(palette_name)}»."))
 
     def remove_color_toast(self, hex_name, palette_name):
-        self.add_toast_markup(f"Removed color <span foreground=\"{hex_name}\">{hex_name}</span> from palette «{html.escape(palette_name)}».")
+        # Translators: Do not replace {hex_name}, only translate "Removed color" and "from palette"
+        self.add_toast_markup(_(f"Removed color <span foreground=\"{hex_name}\">{hex_name}</span> from palette «{html.escape(palette_name)}»."))
 
     def copy_color(self, hex_name):
-        self.add_toast_markup(f"Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to clipboard!")
+        # Translators: Do not replace {hex_name}, only translate "Copied color" and "to clipboard!"
+        self.add_toast_markup(_(f"Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to clipboard!"))
         self.clipboard.set(hex_name)
 
     def go_to_image_drop_page(self):

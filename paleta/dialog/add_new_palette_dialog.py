@@ -29,7 +29,7 @@ class AddNewPaletteDialog(Adw.MessageDialog):
         self.color = None
         self.set_transient_for(self.window)
         self.set_name("Palette #{}".format(self.db.query_n_palettes()+1))
-        self.dialog = Gtk.ColorChooserDialog.new('Choose color to add to new palette', self)
+        self.dialog = Gtk.ColorChooserDialog.new(_("Choose color to add to new palette"), self)
         self.dialog.set_transient_for(self)
         self.dialog.connect('response', self.chooser_response)
         self.dialog.connect('close', lambda dialog: dialog.close())
@@ -39,7 +39,7 @@ class AddNewPaletteDialog(Adw.MessageDialog):
         if len(model.get_colors().items()) > 0:
             self.color_selection_row.set_child(SimplePaletteRow(self.model, self.set_current_color))
         else:
-            self.color_instruction_label.set_label("Pick a color to add to new palette.")
+            self.color_instruction_label.set_label(_("Pick a color to add to new palette."))
 
     def set_name(self, name):
         self.name = name 
@@ -47,14 +47,15 @@ class AddNewPaletteDialog(Adw.MessageDialog):
 
     def set_current_color(self, color: Color):
         self.revealer.set_reveal_child(False)
-        self.currently_selected_label.set_label("Currently selected color: {}".format(color.hex))
+        # Translators: Do not replace {color.hex}
+        self.currently_selected_label.set_label(_(f"Currently selected color: {color.hex}"))
         self.currently_selected_color_square.set_child(ColorSquare(110, color.rgb_name))
         self.color = color
         if not self.revealer.get_reveal_child():
             self.revealer.set_reveal_child(True)
             
     def init_chooser(self):
-        self.dialog = Gtk.ColorChooserDialog.new('Choose color to add to new palette', self)
+        self.dialog = Gtk.ColorChooserDialog.new(_("Choose color to add to new palette"), self)
         self.dialog.set_transient_for(self)
         self.dialog.connect('response', self.chooser_response)
         self.dialog.connect('close', lambda dialog: dialog.close())
@@ -79,7 +80,7 @@ class AddNewPaletteDialog(Adw.MessageDialog):
     def dialog_response(self, dialog, response):
         if response == 'add':
             if self.color == None:
-                self.window.add_error_toast("Unable to add palette, must select a color.")
+                self.window.add_error_toast(_("Unable to add palette, must select a color."))
                 return 
             
             name = self.adw_entry_row.get_text()
@@ -87,9 +88,11 @@ class AddNewPaletteDialog(Adw.MessageDialog):
                 name = self.name
 
             if self.db.add_palette_new(name, self.color.hex, *self.color.rgba):
-                self.window.add_success_toast("Created", f"New palette: «{name}»")
+                # Translators: Do not replace {name}
+                self.window.add_success_toast(_("Created!"), _(f"New palette: «{name}»"))
             else:
-                self.window.add_error_toast(f"Unable to add new palette «{name}»")
+                # Translators: Do not replace {name}
+                self.window.add_error_toast(_(f"Unable to add new palette «{name}»"))
 
 
 

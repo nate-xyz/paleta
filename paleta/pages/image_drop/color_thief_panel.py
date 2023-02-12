@@ -77,22 +77,26 @@ class ColorThiefPanel(Adw.Bin):
             for p in self.processes:
                 p.terminate()
 
-            process = Process(
-                target=color_extraction,
-                args=(
-                    self.child_conn,
-                    self.image.image_path,
-                    int(self.count_amount),
-                    int(self.quality),
-                ))
-            process.daemon = True 
-            process.start()
-            self.process_id = process.ident
-            self.processes.append(process)
+            self.processes = []
 
+            try:
+                process = Process(
+                    target=color_extraction,
+                    args=(
+                        self.child_conn,
+                        self.image.image_path,
+                        int(self.count_amount),
+                        int(self.quality),
+                    ))
+                process.daemon = True 
+                process.start()
+                self.process_id = process.ident
+                self.processes.append(process)
+            except:
+                self.window.add_error_toast(_("Unable to start palette extraction."))
+                
         else:
-            self.window.add_error_toast(
-                "Unable to start palette extraction, no image loaded.")
+            self.window.add_error_toast(_("Unable to start palette extraction, no image loaded."))
 
     def extraction_done(self, source, condition) -> bool:
         assert self.parent_conn.poll()
@@ -111,7 +115,7 @@ class ColorThiefPanel(Adw.Bin):
         self.list_store.remove_all()
         colors_n = len(colors)
         if colors_n == 0:
-            self.window.add_error_toast("Unable to extract colors from image.")
+            self.window.add_error_toast(_("Unable to extract colors from image."))
             return
 
         for rgb in colors:
@@ -122,12 +126,12 @@ class ColorThiefPanel(Adw.Bin):
     def save_palette(self):
         if self.image == None:
             self.window.add_error_toast(
-                "Unable to save palette, no image loaded.")
+                _("Unable to save palette, no image loaded."))
             return
 
         if len(self.list_store) == 0:
             self.window.add_error_toast(
-                "Unable to save palette, no colors extracted.")
+                _("Unable to save palette, no colors extracted."))
             return
 
         SavePaletteDialog([ec for ec in self.list_store],
