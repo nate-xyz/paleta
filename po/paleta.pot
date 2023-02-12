@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-11 22:06-0500\n"
+"POT-Creation-Date: 2023-02-12 14:00-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,6 +133,14 @@ msgstr ""
 
 #: paleta/ui/window.ui:37
 msgid "Edit Palettes"
+msgstr ""
+
+#: paleta/ui/window.ui:58
+msgid "Drop"
+msgstr ""
+
+#: paleta/ui/window.ui:69
+msgid "Palettes"
 msgstr ""
 
 #: paleta/ui/window.ui:92

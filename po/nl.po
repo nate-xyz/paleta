@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-11 22:06-0500\n"
+"POT-Creation-Date: 2023-02-12 14:00-0500\n"
 "PO-Revision-Date: 2023-02-12 14:49+0100\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch\n"
@@ -56,9 +56,8 @@ msgid ""
 "Added color <span foreground=\"{hex_name}\">{hex_name}</span> to palette "
 "«{html.escape(palette_name)}»."
 msgstr ""
-"De kleur <span foreground=\"{hex_name}\">{hex_name}</span> is toegevoegd aan"
-" het palet "
-"«{html.escape(palette_name)}»."
+"De kleur <span foreground=\"{hex_name}\">{hex_name}</span> is toegevoegd aan "
+"het palet «{html.escape(palette_name)}»."
 
 #. Translators: Do not replace {hex_name}, only translate "Removed color" and "from palette"
 #: paleta/window.py:187
@@ -66,9 +65,8 @@ msgid ""
 "Removed color <span foreground=\"{hex_name}\">{hex_name}</span> from palette "
 "«{html.escape(palette_name)}»."
 msgstr ""
-"De kleur <span foreground=\"{hex_name}\">{hex_name}</span> is verwijderd van"
-" het palet "
-"«{html.escape(palette_name)}»."
+"De kleur <span foreground=\"{hex_name}\">{hex_name}</span> is verwijderd van "
+"het palet «{html.escape(palette_name)}»."
 
 #. Translators: Do not replace {hex_name}, only translate "Copied color" and "to clipboard!"
 #: paleta/window.py:191
@@ -76,8 +74,8 @@ msgstr ""
 msgid ""
 "Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to clipboard!"
 msgstr ""
-"De kleur <span foreground=\"{hex_name}\">{hex_name}</span> is gekopieerd naar"
-" het klembord!"
+"De kleur <span foreground=\"{hex_name}\">{hex_name}</span> is gekopieerd "
+"naar het klembord!"
 
 #: paleta/ui/help-overlay.ui:13
 msgctxt "shortcut window"
@@ -142,6 +140,15 @@ msgstr "Ga naar paletpagina"
 #: paleta/ui/window.ui:37
 msgid "Edit Palettes"
 msgstr "Paletten bewerken"
+
+#: paleta/ui/window.ui:58
+msgid "Drop"
+msgstr ""
+
+#: paleta/ui/window.ui:69
+#, fuzzy
+msgid "Palettes"
+msgstr "Paletten"
 
 #: paleta/ui/window.ui:92
 msgid "_Keyboard Shortcuts"
@@ -434,8 +441,8 @@ msgid ""
 "Unable to verify file on drop, try with the file chooser in the upper left "
 "corner."
 msgstr ""
-"De afbeelding kan niet worden geverifieerd. Kies een bestand met behulp van"
-" de bestandskiezer (linksboven)."
+"De afbeelding kan niet worden geverifieerd. Kies een bestand met behulp van "
+"de bestandskiezer (linksboven)."
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:63
 msgid "Palette Count"
@@ -474,8 +481,8 @@ msgid ""
 "Drag an image here, click the button below, or click the button in the upper "
 "left corner of this window."
 msgstr ""
-"Sleep een afbeelding hierheen, klik op onderstaande knop of klik op de knop"
-" linksboven."
+"Sleep een afbeelding hierheen, klik op onderstaande knop of klik op de knop "
+"linksboven."
 
 #: paleta/pages/palette/palette_page.py:61
 msgid "Cannot toggle edit mode, no palettes added."
@@ -503,8 +510,8 @@ msgid ""
 "Drop an image onto the drop page and extract some colors, or add a palette "
 "manually by clicking the button in the lower right corner to get started!"
 msgstr ""
-"Voeg een afbeelding toe op de toevoegpagina en extraheer kleuren of voeg een"
-" palet toe via de knop rechtsonder."
+"Voeg een afbeelding toe op de toevoegpagina en extraheer kleuren of voeg een "
+"palet toe via de knop rechtsonder."
 
 #: paleta/pages/palette/ui/palette_color_card.ui:42
 msgid "Remove Color from Palette"
@@ -542,9 +549,9 @@ msgid ""
 "Paleta. An intuitive tool for designers, artists, or anyone looking to "
 "streamline their color work."
 msgstr ""
-"Extraheer dominante kleuren uit afbeeldingen en beheer paletten. Paleta is"
-" een handig en eenvoudig hulpmiddel voor ontwerpers, artiesten en een ieder"
-" die zijn werk wil stroomlijn."
+"Extraheer dominante kleuren uit afbeeldingen en beheer paletten. Paleta is "
+"een handig en eenvoudig hulpmiddel voor ontwerpers, artiesten en een ieder "
+"die zijn werk wil stroomlijn."
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:11
 msgid "Features:"
@@ -575,8 +582,8 @@ msgid ""
 "❗ Note: Paleta is under active development! If you would like to suggest "
 "any features or if you find any bugs, your feedback is very welcome!"
 msgstr ""
-"❗ Let op: er wordt nog flink aan Paleta gesleuteld! Als u ideeën heeft of"
-" bugs wilt melden, dan horen wij dat graag!"
+"❗ Let op: er wordt nog flink aan Paleta gesleuteld! Als u ideeën heeft of "
+"bugs wilt melden, dan horen wij dat graag!"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
 msgid "Automatic palette extraction on image load"

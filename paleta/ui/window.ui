@@ -55,7 +55,7 @@
                 <child>
                   <object class="AdwViewStackPage">
                     <property name="name">drop-stack-page</property>
-                    <property name="title">Drop</property>
+                    <property name="title" translatable="yes">Drop</property>
                     <property name="icon-name">image-round-symbolic</property>
                     <property name="child">
                       <object class="ImageDropPage" id="image_drop_page"></object>
@@ -66,7 +66,7 @@
                 <child>
                   <object class="AdwViewStackPage">
                     <property name="name">palette-stack-page</property>
-                    <property name="title">Palettes</property>
+                    <property name="title" translatable="yes">Palettes</property>
                     <property name="icon-name">color-symbolic</property>
                     <property name="child">
                       <object class="PalettePage" id="palette_page"></object>

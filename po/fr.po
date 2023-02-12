@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-11 22:06-0500\n"
+"POT-Creation-Date: 2023-02-12 14:00-0500\n"
 "PO-Revision-Date: 2023-02-12 11:43+0100\n"
 "Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: \n"
@@ -141,6 +141,15 @@ msgstr "Aller à la page des palettes"
 #: paleta/ui/window.ui:37
 msgid "Edit Palettes"
 msgstr "Modifier les palettes"
+
+#: paleta/ui/window.ui:58
+msgid "Drop"
+msgstr ""
+
+#: paleta/ui/window.ui:69
+#, fuzzy
+msgid "Palettes"
+msgstr "Palettes"
 
 #: paleta/ui/window.ui:92
 msgid "_Keyboard Shortcuts"
