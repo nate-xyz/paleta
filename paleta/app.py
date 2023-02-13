@@ -39,7 +39,7 @@ class App(Adw.Application):
                                 application_name='Paleta',
                                 application_icon='io.github.nate_xyz.Paleta',
                                 developer_name='nate-xyz',
-                                version='0.2.2',
+                                version='0.2.3',
                                 developers=['nate-xyz'],
                                 copyright='© 2023 nate-xyz',
                                 license_type=Gtk.License.GPL_3_0_ONLY,

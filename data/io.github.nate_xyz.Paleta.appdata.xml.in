@@ -27,7 +27,15 @@
   <url type="donation">https://ko-fi.com/natexyz</url>
 
   <releases>
-    <release version="0.2.2" date="2022-02-10">
+    <release version="0.2.3" date="2023-02-13">
+      <description>
+        <ul>
+          <li>Added Translation Support</li>
+          <li>Added French and Dutch translations!</li>
+        </ul>
+      </description>
+    </release>
+    <release version="0.2.2" date="2023-02-10">
       <description>
         <ul>
           <li>Automatic palette extraction on image load</li>s
@@ -37,8 +45,8 @@
         </ul>
       </description>
     </release>
-    <release version="0.2.1" date="2022-02-09"/>
-    <release version="0.2.0" date="2022-02-08">
+    <release version="0.2.1" date="2023-02-09"/>
+    <release version="0.2.0" date="2023-02-08">
       <description>
         <ul>
           <li>Toast improvements</li>s
@@ -46,7 +54,7 @@
         </ul>
       </description>
     </release>
-    <release version="0.1.1" type="development" date="2022-02-06"/>
+    <release version="0.1.1" type="development" date="2023-02-06"/>
     <release version="0.1.0" type="development" date="2023-02-05"/>
   </releases>
 
