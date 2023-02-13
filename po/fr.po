@@ -144,7 +144,7 @@ msgstr "Modifier les palettes"
 
 #: paleta/ui/window.ui:58
 msgid "Drop"
-msgstr ""
+msgstr "Dépôt"
 
 #: paleta/ui/window.ui:69
 #, fuzzy
