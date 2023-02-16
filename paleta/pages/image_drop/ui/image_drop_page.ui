@@ -25,7 +25,7 @@
                 
                 <property name="child">
                   <object class="AdwButtonContent">
-                    <property name="icon-name">plus-symbolic</property>
+                    <property name="icon-name">arrow-into-box-symbolic</property>
                     <property name="label" translatable="yes">Open Image</property>
                     <property name="use-underline">True</property>
                   </object>
