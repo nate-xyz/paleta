@@ -58,7 +58,7 @@ msgid ""
 "«{html.escape(palette_name)}»."
 msgstr ""
 "पैलेट में <span foreground=\"{hex_name}\">{hex_name}</span> रंग जोड़ा गया"
-"palette «{html.escape(palette_name)}»."
+"पैलेट «{html.escape(palette_name)}»."
 
 #. Translators: Do not replace {hex_name}, only translate "Removed color" and "from palette"
 #: paleta/window.py:187
