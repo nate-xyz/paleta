@@ -27,7 +27,7 @@ msgstr "Radioactive radio"
 #. Translators: used in the phrase "Powered by color-thief"
 #: paleta/app.py:55
 msgid "Powered by "
-msgstr "द्वारा संचालित"
+msgstr "द्वारा संचालित "
 
 #: paleta/window.py:64
 msgid "Unable to load database."
