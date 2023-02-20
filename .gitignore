@@ -53,7 +53,6 @@ cover/
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
 *.log
@@ -159,4 +158,7 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/ 
 
+_build
 _builddir
+.vscode
+flatpak-pip-generator

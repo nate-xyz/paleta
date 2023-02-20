@@ -38,6 +38,7 @@
     <file alias="edit-symbolic.svg">assets/icons/edit-symbolic.svg</file>
     <file alias="cross-filled-symbolic.svg">assets/icons/cross-filled-symbolic.svg</file>
     <file alias="color-picker-symbolic.svg">assets/icons/color-picker-symbolic.svg</file>    
-    <file alias="plus-symbolic.svg">assets/icons/plus-symbolic.svg</file>    
+    <file alias="plus-symbolic.svg">assets/icons/plus-symbolic.svg</file>
+    <file alias="arrow-into-box-symbolic.svg">assets/icons/arrow-into-box-symbolic.svg</file>  
   </gresource>
 </gresources>
