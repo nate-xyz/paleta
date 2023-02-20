@@ -28,7 +28,7 @@ class AddNewPaletteDialog(Adw.MessageDialog):
         self.model = model
         self.color = None
         self.set_transient_for(self.window)
-        self.set_name("Palette #{}".format(self.db.query_n_palettes()+1))
+        self.set_name(_("Palette #{}").format(self.db.query_n_palettes()+1))
         self.dialog = Gtk.ColorChooserDialog.new(_("Choose color to add to new palette"), self)
         self.dialog.set_transient_for(self)
         self.dialog.connect('response', self.chooser_response)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-12 14:00-0500\n"
+"POT-Creation-Date: 2023-02-20 02:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,6 +43,17 @@ msgstr ""
 
 #: paleta/window.py:132
 msgid "Image files"
+msgstr ""
+
+#. Translators: Do not replace {}
+#: paleta/window.py:163
+msgid "Could not open image: {}"
+msgstr ""
+
+#. Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
+#: paleta/window.py:168
+#, python-brace-format
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}"
 msgstr ""
 
 #. Translators: Only replace "Error!"
@@ -180,6 +191,11 @@ msgstr ""
 msgid "Unable to add color {self.color.hex}."
 msgstr ""
 
+#: paleta/dialog/add_new_palette_dialog.py:31
+#: paleta/dialog/dialog_windows.py:19
+msgid "Palette #{}"
+msgstr ""
+
 #: paleta/dialog/add_new_palette_dialog.py:32
 #: paleta/dialog/add_new_palette_dialog.py:58
 msgid "Choose color to add to new palette"
@@ -217,6 +233,10 @@ msgstr ""
 msgid "Unable to add new palette «{name}»"
 msgstr ""
 
+#: paleta/dialog/delete_color_dialog.py:37
+msgid "Remove color {} from {}?"
+msgstr ""
+
 #: paleta/dialog/delete_color_dialog.py:45
 msgid "Unable to remove color."
 msgstr ""
@@ -252,6 +272,10 @@ msgstr ""
 #: paleta/dialog/dialog_windows.py:81
 #, python-brace-format
 msgid "Unable to rename palette «{self.name}»."
+msgstr ""
+
+#: paleta/dialog/dialog_windows.py:90
+msgid "Palette"
 msgstr ""
 
 #. Translators: Do not replace {palette.name}
@@ -564,25 +588,33 @@ msgid ""
 msgstr ""
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
-msgid "Automatic palette extraction on image load"
+msgid "Added Translation Support"
 msgstr ""
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+msgid "Added French and Dutch translations!"
+msgstr ""
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
+msgid "Automatic palette extraction on image load"
+msgstr ""
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:42
 msgid "Cleaner extraction panel UI"
 msgstr ""
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:35
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:43
 msgid "Clearer options for palette quality / accuracy"
 msgstr ""
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:36
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
 msgid "Better AppData summary"
 msgstr ""
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:52
 msgid "Toast improvements"
 msgstr ""
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:45
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:53
 msgid "Drop Page open button"
 msgstr ""

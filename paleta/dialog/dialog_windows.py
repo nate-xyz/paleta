@@ -16,7 +16,7 @@ class SavePaletteDialog(Adw.MessageDialog):
         self.window = window
         self.db = database
         self.set_transient_for(self.window)
-        self.set_name("Palette #{}".format(self.db.query_n_palettes()+1))
+        self.set_name(_("Palette #{}").format(self.db.query_n_palettes()+1))
 
     def set_name(self, name):
         self.name = name 
@@ -87,7 +87,7 @@ class DuplicatePaletteDialog(Adw.MessageDialog):
 
     adw_entry_row = Gtk.Template.Child(name="adw_entry_row")
 
-    name = "Palette"
+    name = _("Palette")
 
     def __init__(self, palette: Palette, window, database) -> None:
         super().__init__()

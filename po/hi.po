@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-15 00:13-0500\n"
+"POT-Creation-Date: 2023-02-20 02:38-0500\n"
 "PO-Revision-Date: 2023-02-15 00:13+0100\n"
 "Last-Translator: Radioactive Radio <barraiser59@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -46,6 +46,17 @@ msgstr "इमेज खोलें"
 msgid "Image files"
 msgstr "इमेज फ़ाइलें"
 
+#. Translators: Do not replace {}
+#: paleta/window.py:163
+msgid "Could not open image: {}"
+msgstr ""
+
+#. Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
+#: paleta/window.py:168
+#, python-brace-format
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}"
+msgstr ""
+
 #. Translators: Only replace "Error!"
 #: paleta/window.py:177
 msgid "<span foreground={ERROR_RED}>Error!</span> {html.escape(error)}"
@@ -57,8 +68,8 @@ msgid ""
 "Added color <span foreground=\"{hex_name}\">{hex_name}</span> to palette "
 "«{html.escape(palette_name)}»."
 msgstr ""
-"पैलेट में <span foreground=\"{hex_name}\">{hex_name}</span> रंग जोड़ा गया"
-"पैलेट «{html.escape(palette_name)}»."
+"पैलेट में <span foreground=\"{hex_name}\">{hex_name}</span> रंग जोड़ा गयापैलेट "
+"«{html.escape(palette_name)}»."
 
 #. Translators: Do not replace {hex_name}, only translate "Removed color" and "from palette"
 #: paleta/window.py:187
@@ -66,8 +77,8 @@ msgid ""
 "Removed color <span foreground=\"{hex_name}\">{hex_name}</span> from palette "
 "«{html.escape(palette_name)}»."
 msgstr ""
-"पैलेट से <span foreground=\"{hex_name}\">{hex_name}</span> रंग हटाया गया"
-"पैलेट «{html.escape(palette_name)}»."
+"पैलेट से <span foreground=\"{hex_name}\">{hex_name}</span> रंग हटाया गयापैलेट "
+"«{html.escape(palette_name)}»."
 
 #. Translators: Do not replace {hex_name}, only translate "Copied color" and "to clipboard!"
 #: paleta/window.py:191
@@ -187,6 +198,12 @@ msgstr "रंग ऐड करने में असमर्थ।"
 msgid "Unable to add color {self.color.hex}."
 msgstr "रंग जोड़ने में असमर्थ {self.color.hex}।"
 
+#: paleta/dialog/add_new_palette_dialog.py:31
+#: paleta/dialog/dialog_windows.py:19
+#, fuzzy
+msgid "Palette #{}"
+msgstr ""
+
 #: paleta/dialog/add_new_palette_dialog.py:32
 #: paleta/dialog/add_new_palette_dialog.py:58
 msgid "Choose color to add to new palette"
@@ -224,6 +241,11 @@ msgstr "नया पैलेट : « {name} »"
 msgid "Unable to add new palette «{name}»"
 msgstr "पैलेट ऐड करने में असमर्थ « {name} »"
 
+#: paleta/dialog/delete_color_dialog.py:37
+#, fuzzy
+msgid "Remove color {} from {}?"
+msgstr ""
+
 #: paleta/dialog/delete_color_dialog.py:45
 msgid "Unable to remove color."
 msgstr "रंग हटाने में असमर्थ।"
@@ -260,6 +282,11 @@ msgstr "नाम बदलकर « {self.name} » से « {name} » कि�
 #, python-brace-format
 msgid "Unable to rename palette «{self.name}»."
 msgstr "पैलेट का नाम बदलने में असमर्थ « {self.name} »।"
+
+#: paleta/dialog/dialog_windows.py:90
+#, fuzzy
+msgid "Palette"
+msgstr ""
 
 #. Translators: Do not replace {palette.name}
 #: paleta/dialog/dialog_windows.py:102
@@ -331,9 +358,7 @@ msgstr "_रंग जोड़ें"
 
 #: paleta/dialog/ui/add_color_dialog.ui:41
 msgid "Select from previously added colors or pick a new one."
-msgstr ""
-"पहले जोड़े गए रंगों में से चुनें या नया रंग चुनें।"
-"नया रंग"
+msgstr "पहले जोड़े गए रंगों में से चुनें या नया रंग चुनें।नया रंग"
 
 #: paleta/dialog/ui/add_color_dialog.ui:63
 #: paleta/dialog/ui/add_new_palette_dialog.ui:76
@@ -356,9 +381,7 @@ msgstr "नए पैलेट का _नाम"
 
 #: paleta/dialog/ui/add_new_palette_dialog.ui:53
 msgid "Select from previously added colors or pick one to add to new palette."
-msgstr ""
-"पहले जोड़े गए रंगों में से चुनें या नया रंग चुनें।"
-"नए पैलेट में जोड़ें।"
+msgstr "पहले जोड़े गए रंगों में से चुनें या नया रंग चुनें।नए पैलेट में जोड़ें।"
 
 #: paleta/dialog/ui/delete_color_dialog.ui:6
 msgid "Remove Color from Palette?"
@@ -442,8 +465,7 @@ msgid ""
 "Unable to verify file on drop, try with the file chooser in the upper left "
 "corner."
 msgstr ""
-"ड्रॉप होने पर फ़ाइल सत्यापित करने में असमर्थ, ऊपरी बाएँ "
-"कोने में फ़ाइल चूजर के साथ प्रयास करें।"
+"ड्रॉप होने पर फ़ाइल सत्यापित करने में असमर्थ, ऊपरी बाएँ कोने में फ़ाइल चूजर के साथ प्रयास करें।"
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:63
 msgid "Palette Count"
@@ -482,8 +504,8 @@ msgid ""
 "Drag an image here, click the button below, or click the button in the upper "
 "left corner of this window."
 msgstr ""
-"छवि को यहां खींचें, नीचे दिए गए बटन पर क्लिक करें, या विंडो के ऊपरी बाएं "
-"कोने में स्थित बटन पर क्लिक करें।"
+"छवि को यहां खींचें, नीचे दिए गए बटन पर क्लिक करें, या विंडो के ऊपरी बाएं कोने में स्थित बटन "
+"पर क्लिक करें।"
 
 #: paleta/pages/palette/palette_page.py:61
 msgid "Cannot toggle edit mode, no palettes added."
@@ -510,8 +532,8 @@ msgid ""
 "Drop an image onto the drop page and extract some colors, or add a palette "
 "manually by clicking the button in the lower right corner to get started!"
 msgstr ""
-"ड्रॉप पेज पर एक इमेज ड्रॉप करें और कुछ रंग निकालें, "
-"या आरंभ करने के लिए निचले दाएं कोने में बटन पर क्लिक करके मैन्युअल रूप से एक पैलेट जोड़ें!"
+"ड्रॉप पेज पर एक इमेज ड्रॉप करें और कुछ रंग निकालें, या आरंभ करने के लिए निचले दाएं कोने में "
+"बटन पर क्लिक करके मैन्युअल रूप से एक पैलेट जोड़ें!"
 
 #: paleta/pages/palette/ui/palette_color_card.ui:42
 msgid "Remove Color from Palette"
@@ -549,9 +571,8 @@ msgid ""
 "Paleta. An intuitive tool for designers, artists, or anyone looking to "
 "streamline their color work."
 msgstr ""
-"किसी भी इमैज से प्रमुख रंग पैलेट ढूंढें और पैलेट मैनेज करें।"
-"Paleta, डिजाइनरों, कलाकारों के लिए एक सहज ज्ञान युक्त उपकरण।"
-"अपने रंग के काम को सुव्यवस्थित करें।"
+"किसी भी इमैज से प्रमुख रंग पैलेट ढूंढें और पैलेट मैनेज करें।Paleta, डिजाइनरों, कलाकारों के लिए "
+"एक सहज ज्ञान युक्त उपकरण।अपने रंग के काम को सुव्यवस्थित करें।"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:11
 msgid "Features:"
@@ -582,30 +603,37 @@ msgid ""
 "❗ Note: Paleta is under active development! If you would like to suggest "
 "any features or if you find any bugs, your feedback is very welcome!"
 msgstr ""
-"❗ Note : पलेटा सक्रिय विकास के अधीन है! "
-"यदि आप कोई सुविधा सुझाना चाहते हैं या यदि आपको कोई बग मिलता है, तो आपकी प्रतिक्रिया का बहुत स्वागत है!"
+"❗ Note : पलेटा सक्रिय विकास के अधीन है! यदि आप कोई सुविधा सुझाना चाहते हैं या यदि "
+"आपको कोई बग मिलता है, तो आपकी प्रतिक्रिया का बहुत स्वागत है!"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
+msgid "Added Translation Support"
+msgstr ""
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+msgid "Added French and Dutch translations!"
+msgstr ""
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
 msgid "Automatic palette extraction on image load"
 msgstr "इमेज लोड पर स्वचालित पैलेट निष्कर्षण"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:42
 msgid "Cleaner extraction panel UI"
 msgstr "क्लीनर निष्कर्षण पैनल UI"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:35
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:43
 msgid "Clearer options for palette quality / accuracy"
 msgstr "पैलेट गुणवत्ता / सटीकता के लिए स्पष्ट विकल्प"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:36
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
 msgid "Better AppData summary"
 msgstr "बेहतर ऐपडाटा सारांश"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:52
 msgid "Toast improvements"
 msgstr "टोस्ट सुधार"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:45
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:53
 msgid "Drop Page open button"
 msgstr "ड्रॉप पेज ओपन बटन"
-

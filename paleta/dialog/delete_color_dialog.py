@@ -34,7 +34,7 @@ class DeleteColorDialog(Adw.MessageDialog):
         self.db = database
 
         self.set_transient_for(self.window)
-        self.set_heading("Remove color {} from {}?".format(color.hex, palette.name))
+        self.set_heading(_("Remove color {} from {}?").format(color.hex, palette.name))
 
         self.color_bin.set_child(SimplerDeleteColorCard(color))
 

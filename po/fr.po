@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-12 14:00-0500\n"
+"POT-Creation-Date: 2023-02-20 02:38-0500\n"
 "PO-Revision-Date: 2023-02-12 11:43+0100\n"
 "Last-Translator: Irénée Thirion <irenee.thirion@e.email>\n"
 "Language-Team: \n"
@@ -45,6 +45,17 @@ msgstr "Ouvrir une image"
 #: paleta/window.py:132
 msgid "Image files"
 msgstr "Fichiers d’images"
+
+#. Translators: Do not replace {}
+#: paleta/window.py:163
+msgid "Could not open image: {}"
+msgstr ""
+
+#. Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
+#: paleta/window.py:168
+#, python-brace-format
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}"
+msgstr ""
 
 #. Translators: Only replace "Error!"
 #: paleta/window.py:177
@@ -188,6 +199,12 @@ msgstr "Impossible d’ajouter la couleur."
 msgid "Unable to add color {self.color.hex}."
 msgstr "Impossible d’ajouter la couleur {self.color.hex}."
 
+#: paleta/dialog/add_new_palette_dialog.py:31
+#: paleta/dialog/dialog_windows.py:19
+#, fuzzy
+msgid "Palette #{}"
+msgstr ""
+
 #: paleta/dialog/add_new_palette_dialog.py:32
 #: paleta/dialog/add_new_palette_dialog.py:58
 msgid "Choose color to add to new palette"
@@ -225,6 +242,11 @@ msgstr "Nouvelle palette : « {name} »"
 msgid "Unable to add new palette «{name}»"
 msgstr "Impossible d’ajouter la nouvelle palette « {name} »"
 
+#: paleta/dialog/delete_color_dialog.py:37
+#, fuzzy
+msgid "Remove color {} from {}?"
+msgstr ""
+
 #: paleta/dialog/delete_color_dialog.py:45
 msgid "Unable to remove color."
 msgstr "Impossible de supprimer la couleur."
@@ -261,6 +283,11 @@ msgstr "Nom changé de « {self.name} » en « {name} »."
 #, python-brace-format
 msgid "Unable to rename palette «{self.name}»."
 msgstr "Impossible de renommer la palette « {self.name} »."
+
+#: paleta/dialog/dialog_windows.py:90
+#, fuzzy
+msgid "Palette"
+msgstr ""
 
 #. Translators: Do not replace {palette.name}
 #: paleta/dialog/dialog_windows.py:102
@@ -590,25 +617,33 @@ msgstr ""
 "bienvenus !"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
+msgid "Added Translation Support"
+msgstr ""
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+msgid "Added French and Dutch translations!"
+msgstr ""
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
 msgid "Automatic palette extraction on image load"
 msgstr "Extraction automatique de la palette lors du chargement d’une image"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:42
 msgid "Cleaner extraction panel UI"
 msgstr "Interface d’extraction plus propre"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:35
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:43
 msgid "Clearer options for palette quality / accuracy"
 msgstr "Options plus claires pour la qualité / précision de la palette"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:36
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
 msgid "Better AppData summary"
 msgstr "Meilleur résumé des données de l’application"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:52
 msgid "Toast improvements"
 msgstr "Amélioration des notifications pop-ups"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:45
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:53
 msgid "Drop Page open button"
 msgstr "Bouton d’ouverture de la page de dépôt"

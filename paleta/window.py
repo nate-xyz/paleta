@@ -160,12 +160,12 @@ class Window(Adw.ApplicationWindow):
     def error_image_toast(self, uri):
         base_name = os.path.basename(uri)
         # Translators: Do not replace {}
-        self.add_error_toast("Could not open image: {}".format(base_name), 3)
+        self.add_error_toast(_("Could not open image: {}").format(base_name), 3)
 
     def open_image_toast(self, uri):
         base_name = html.escape(os.path.basename(uri))
         # Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
-        self.add_toast_markup(f"<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}")
+        self.add_toast_markup(_(f"<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}"))
 
     def add_success_toast(self, verb: str, msg: str, timeout: int = 1):
         toast = Adw.Toast.new(f"<span foreground={SUCCESS_GREEN}>{verb}</span> {html.escape(msg)}")
