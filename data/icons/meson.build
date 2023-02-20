@@ -1,3 +1,5 @@
+application_id = 'io.github.nate_xyz.Paleta'
+
 scalable_dir = join_paths('hicolor', 'scalable', 'apps')
 install_data(
   join_paths(scalable_dir, ('@0@.svg').format(application_id)),

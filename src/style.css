@@ -1,0 +1,27 @@
+.darken {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.darken-mas {
+    background-color: rgba(0, 0, 0, 0.24);
+}
+
+.darken-mas-mas {
+    background-color: rgba(0, 0, 0, 0.48);
+}
+
+button.edit-action-button {
+    background-color: #26a169;
+    color: white;
+}
+
+.transparent-flowboxchild {
+    background: transparent;
+    outline-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* dropdown > button.flat {
+    box-shadow: none;
+} */

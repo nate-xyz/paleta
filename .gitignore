@@ -158,7 +158,29 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/ 
 
+.vscode
+
+# MESON
 _build
 _builddir
-.vscode
+
+# RUST
+debug/
+target/
+build/
+_build/
+builddir/
+build-aux/app
+build-aux/.flatpak-builder/
+src/config.rs
+*.ui.in~
+*.ui~
+.flatpak/
+vendor
+Cargo.lock
+**/*.rs.bk
+*.pdb
+src/config.rs
+*.py
+
 flatpak-pip-generator
