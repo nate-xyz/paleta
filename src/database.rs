@@ -511,6 +511,7 @@ impl Database {
     pub fn rename_palette(&self, palette_id: i64, new_name: String) -> bool {
         match self.rename_palette_(palette_id, new_name) {
             Ok(_) => {
+                self.emit_by_name::<()>("populate-model", &[]);
                 return true
             },
             Err(e) => {
@@ -521,16 +522,17 @@ impl Database {
     }
     
     fn rename_palette_(&self, palette_id: i64, new_name: String) -> Result<(), Box<dyn Error>> {
-        let conn = self.imp().conn.borrow();
-        let conn = conn.as_ref().ok_or("Connection not established: remove_color_from_palette")?;
+        let mut conn = self.imp().conn.borrow_mut();
+        let conn = conn.as_mut().ok_or("Connection not established: rename_palette")?;
+        let tx = conn.transaction()?;
 
-        conn.execute(format!("UPDATE Palettes SET name = \"{}\" WHERE id = {};", new_name, palette_id).as_str(), ())?;
+        tx.execute(format!("UPDATE Palettes SET name = \"{}\" WHERE id = {};", new_name, palette_id).as_str(), ())?;
 
-        match self.prune_colors() {
+        match self.prune_colors(&tx) {
             Ok(_) => {
-                match self.prune_palletes() {
+                match self.prune_palletes(&tx) {
                     Ok(_) => {
-                        self.emit_by_name::<()>("populate-model", &[]);
+                        tx.commit()?;
                         Ok(())
                     },
                     Err(e) => Err(e),
@@ -558,6 +560,7 @@ impl Database {
     pub fn remove_color_from_palette(&self, color_id: i64, palette_id: i64) -> bool {
         match self.remove_color_from_palette_(color_id, palette_id) {
             Ok(_) => {
+                self.emit_by_name::<()>("populate-model", &[]);
                 return true
             },
             Err(e) => {
@@ -568,16 +571,17 @@ impl Database {
     }
 
     fn remove_color_from_palette_(&self, color_id: i64, palette_id: i64) -> Result<(), Box<dyn Error>> {
-        let conn = self.imp().conn.borrow();
-        let conn = conn.as_ref().ok_or("Connection not established: remove_color_from_palette")?;
+        let mut conn = self.imp().conn.borrow_mut();
+        let conn = conn.as_mut().ok_or("Connection not established: remove_color_from_palette")?;
+        let tx = conn.transaction()?;
 
-        conn.execute(format!("DELETE FROM Palette_Color_Junction WHERE color_id = {} AND palette_id = {};", color_id, palette_id).as_str(), ())?;
+        tx.execute(format!("DELETE FROM Palette_Color_Junction WHERE color_id = {} AND palette_id = {};", color_id, palette_id).as_str(), ())?;
 
-        match self.prune_colors() {
+        match self.prune_colors(&tx) {
             Ok(_) => {
-                match self.prune_palletes() {
+                match self.prune_palletes(&tx) {
                     Ok(_) => {
-                        self.emit_by_name::<()>("populate-model", &[]);
+                        tx.commit()?;
                         Ok(())
                     },
                     Err(e) => Err(e),
@@ -613,6 +617,7 @@ impl Database {
     pub fn delete_palette(&self, palette_id: i64) -> bool {
         match self.delete_palette_(palette_id) {
             Ok(_) => {
+                self.emit_by_name::<()>("populate-model", &[]);
                 return true
             },
             Err(e) => {
@@ -623,15 +628,17 @@ impl Database {
     }
 
     fn delete_palette_(&self, palette_id: i64)-> Result<(), Box<dyn Error>> {
-        let conn = self.imp().conn.borrow();
-        let conn = conn.as_ref().ok_or("Connection not established: delete_palette")?;
+        let mut conn = self.imp().conn.borrow_mut();
+        let conn = conn.as_mut().ok_or("Connection not established: delete_palette")?;
+        let tx = conn.transaction()?;
 
-        conn.execute(format!("DELETE FROM Palette_Color_Junction WHERE palette_id = {};", palette_id).as_str(), ())?;
-        conn.execute(format!("DELETE FROM Palettes WHERE id = {};", palette_id).as_str(), ())?;
 
-        match self.prune_colors() {
+        tx.execute(format!("DELETE FROM Palette_Color_Junction WHERE palette_id = {};", palette_id).as_str(), ())?;
+        tx.execute(format!("DELETE FROM Palettes WHERE id = {};", palette_id).as_str(), ())?;
+
+        match self.prune_colors(&tx) {
             Ok(_) => {
-                self.emit_by_name::<()>("populate-model", &[]);
+                tx.commit()?;
                 Ok(())
             },
             Err(e) => Err(e),
@@ -647,12 +654,8 @@ impl Database {
     //                 #print("Deleting color id", color_id)
     //                 self.cur.execute("DELETE FROM Colors WHERE id = {};".format(color_id))
     
-    fn prune_colors(&self) -> Result<(), Box<dyn Error>> {
-        let conn = self.imp().conn.borrow();
-        let conn = conn.as_ref().ok_or("Connection not established: prune_colors")?;
-
-
-        let mut stmt = conn.prepare("SELECT id FROM Colors;")?;
+    fn prune_colors(&self, tx: &Transaction) -> Result<(), Box<dyn Error>> {
+        let mut stmt = tx.prepare("SELECT id FROM Colors;")?;
         let rows = stmt.query_map([], |row| {
             let id: i64 = row.get(0)?;
             Ok(id)
@@ -660,7 +663,7 @@ impl Database {
         for row in rows {
             let color_id = row?;
 
-            let mut stmt = conn.prepare(format!("SELECT id FROM Palette_Color_Junction WHERE color_id = {};", color_id).as_str())?;
+            let mut stmt = tx.prepare(format!("SELECT id FROM Palette_Color_Junction WHERE color_id = {};", color_id).as_str())?;
             let rows = stmt.query_map([], |row| {
                 let id: i64 = row.get(0)?;
                 Ok(id)
@@ -672,7 +675,7 @@ impl Database {
             }
 
             if junctions.is_empty() {
-                conn.execute(format!("DELETE FROM Colors WHERE id = {};", color_id).as_str(), ())?;
+                tx.execute(format!("DELETE FROM Colors WHERE id = {};", color_id).as_str(), ())?;
             }
 
         }
@@ -689,12 +692,8 @@ impl Database {
     //                 self.cur.execute("DELETE FROM Palettes WHERE id = {};".format(palette_id))
     
 
-    fn prune_palletes(&self) -> Result<(), Box<dyn Error>> {
-        let conn = self.imp().conn.borrow();
-        let conn = conn.as_ref().ok_or("Connection not established: prune_colors")?;
-
-
-        let mut stmt = conn.prepare("SELECT id FROM Palettes;")?;
+    fn prune_palletes(&self, tx: &Transaction) -> Result<(), Box<dyn Error>> {
+        let mut stmt = tx.prepare("SELECT id FROM Palettes;")?;
         let rows = stmt.query_map([], |row| {
             let id: i64 = row.get(0)?;
             Ok(id)
@@ -702,7 +701,7 @@ impl Database {
         for row in rows {
             let palette_id = row?;
 
-            let mut stmt = conn.prepare(format!("SELECT id FROM Palette_Color_Junction WHERE palette_id = {};", palette_id).as_str())?;
+            let mut stmt = tx.prepare(format!("SELECT id FROM Palette_Color_Junction WHERE palette_id = {};", palette_id).as_str())?;
             let rows = stmt.query_map([], |row| {
                 let id: i64 = row.get(0)?;
                 Ok(id)
@@ -714,7 +713,7 @@ impl Database {
             }
 
             if junctions.is_empty() {
-                conn.execute(format!("DELETE FROM Palettes WHERE id = {};", palette_id).as_str(), ())?;
+                tx.execute(format!("DELETE FROM Palettes WHERE id = {};", palette_id).as_str(), ())?;
             }
 
         }
