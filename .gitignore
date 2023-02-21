@@ -177,7 +177,6 @@ src/config.rs
 *.ui~
 .flatpak/
 vendor
-Cargo.lock
 **/*.rs.bk
 *.pdb
 src/config.rs
