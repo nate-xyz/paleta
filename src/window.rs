@@ -120,14 +120,21 @@ impl Window {
         window.initialize();
         window.bind_signals();
         window.add_dialog();
+        // window.add_help_overlay();
         window
     }
+
 
     fn initialize(&self) {
         if !database().try_loading_database() {
             debug!("Unable to load database.");
         }
     }
+
+    // fn add_help_overlay(&self) {
+    //     let help_overlay = gtk::Builder::from_resource("/io/github/nate_xyz/Paleta/help-overlay.ui").object::<gtk::ShortcutsWindow>("help_overlay").unwrap();
+    //     self.set_help_overlay(Some(&help_overlay));
+    // }
 
     fn bind_signals(&self) {
         debug!("bind signals");
