@@ -108,7 +108,6 @@ impl PalettePage {
     fn update_view(&self) {
         let imp = self.imp();
         imp.list_store.remove_all();
-        // let mut palettes: Vec<(&i64, &Rc<Palette>)> = ;
         let palettes = model().palettes();
         if palettes.is_empty() {
             imp.status.show();

@@ -161,7 +161,6 @@ impl ColorThiefPanel {
             this.start_extraction()
         }));
         
-        // self.quality_dropdown.connect('notify::selected', self.on_quality_value_change)
         imp.quality_dropdown.connect_selected_notify(clone!(@strong self as this => @default-panic, move |_drop_down| {
             this.imp().quality.set(this.quality());
             this.start_extraction()
@@ -195,7 +194,6 @@ impl ColorThiefPanel {
     pub fn set_image(&self, image: DroppedImage) {
         let imp = self.imp();
         self.set_visible(true);
-        //imp.image_bin.set_child(None);
         imp.image_bin.set_child(Some(&image));
         imp.image.replace(Some(image));
         self.list_store().remove_all();
@@ -222,9 +220,7 @@ impl ColorThiefPanel {
             let alpha = color_format(imp.image.borrow().as_ref().unwrap().imp().pixbuf.borrow().as_ref().unwrap().has_alpha());
             let quality = imp.quality.get() as u8;
             let count = imp.count_amount.get() as u8;
-            //let uri = imp.image_uri.borrow().clone();
             thread::spawn(move || {
-                //thread::sleep(time::Duration::from_secs(1));
                 let palette = load_palette_from_bytes(pixbuf_bytes.as_ref(), alpha, count, quality);
                 let _ = sender.send(ExtractionAction::ExtractedColors(palette));
             });
@@ -314,53 +310,5 @@ pub fn load_palette_from_bytes(pixbuf_bytes: &[u8], alpha: ColorFormat, count: u
     }
     None
 }
-
-// pub fn load_palette_from_bytes(pixbuf_bytes: &[u8], alpha: ColorFormat, count: u8, quality: u8) -> Option<Vec<gdk::RGBA>> {
-//     if let Ok(palette) = get_palette(
-//         pixbuf_bytes,
-//         alpha,
-//         quality,
-//         count,
-//     ) {
-//         let colors: Vec<gdk::RGBA> = palette
-//             .iter()
-//             .map(|c| {
-//                 gdk::RGBA::new(
-//                     c.r as f32 / 255.0,
-//                     c.g as f32 / 255.0,
-//                     c.b as f32 / 255.0,
-//                     1.0,
-//                 )
-//             })
-//             .collect();
-//         return Some(colors);
-//     }
-//     None
-// }
-
-// pub fn load_palette(pixbuf: gdk_pixbuf::Pixbuf) -> Option<Vec<gdk::RGBA>> {
-//     if let Ok(palette) = get_palette(
-//         pixbuf.pixel_bytes().unwrap().as_ref(),
-//         color_format(pixbuf.has_alpha()),
-//         10,
-//         3,
-//     ) {
-//         let colors: Vec<gdk::RGBA> = palette
-//             .iter()
-//             .map(|c| {
-//                 gdk::RGBA::new(
-//                     c.r as f32 / 255.0,
-//                     c.g as f32 / 255.0,
-//                     c.b as f32 / 255.0,
-//                     1.0,
-//                 )
-//             })
-//             .collect();
-
-//         return Some(colors);
-//     }
-
-//     None
-// }
 
     

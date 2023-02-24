@@ -106,7 +106,6 @@ impl AddNewPaletteDialog {
         let imp = self.imp();
         
         self.set_transient_for(Some(&active_window().unwrap()));
-        //self.set_name(format!("Palette #{}", database().query_n_palettes()+1));
         self.set_name(i18n_f("Palette #{}", &[&format!("{}", database().query_n_palettes()+1)]));
         self.init_color_chooser();
         self.connect_response(
@@ -155,7 +154,6 @@ impl AddNewPaletteDialog {
     fn set_current_color(&self, color: Color) {
         let imp = self.imp();
         imp.revealer.set_reveal_child(false);
-        //imp.currently_selected_label.set_label(format!("Currently selected color: {}", color.hex_name()).as_str());
         imp.currently_selected_label.set_label(&i18n_f("Currently selected color: {}", &[&color.hex_name()]));
         imp.currently_selected_color_square.set_child(Some(&ColorSquare::new(110, color.rgb_name())));
         imp.color.replace(Some(color));

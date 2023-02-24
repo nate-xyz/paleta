@@ -89,7 +89,6 @@ impl ImageDropPage {
 
         let drop_target = gtk::DropTargetAsync::new(Some(formats), gdk::DragAction::COPY);
 
-        // drop_target.connect('accept', self.on_drag_accept)
         drop_target.connect_accept(clone!(@strong self as this => move |_drop_target, drop_value| {
             this.imp().file_verified.set(false);
             let formats = drop_value.formats();
@@ -104,7 +103,6 @@ impl ImageDropPage {
             return false
         }));
 
-        // drop_target.connect('drop', self.on_drag_drop)
         drop_target.connect_drop(
             clone!(@strong self as this => move |_drop_target, drop_value, _x, _y| {
                         drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>, 

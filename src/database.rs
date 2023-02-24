@@ -59,16 +59,6 @@ impl Database {
         database
     }
 
-    // pub fn load_model(&self, model: Rc<Model>) {
-    //     *self.model.borrow_mut() = Rc::clone(&model);
-    // }
-
-    // fn remove_db(&self) {
-    //     if Path::new("database.db").exists() {
-    //         std::fs::remove_file("database.db").expect("Failed to remove file");
-    //     }
-    // }
-
     fn database_location(&self) -> PathBuf {
         if let Some(base_dirs) = BaseDirs::new() {
             let folder = base_dirs.data_dir().join("io.github.nate_xyz.Paleta");
@@ -97,7 +87,6 @@ impl Database {
         }
     }
 
-    // rusqlite::OpenFlags::SQLITE_OPEN_CREATE
     fn open_connection_to_db(&self) -> bool {
         let path = self.database_location();
         let conn = match Connection::open_with_flags(
@@ -178,12 +167,6 @@ impl Database {
     // # ADDING VALUES TO TABLES
     // ######
 
-    // def add_palette(self, name: str):
-    //     self.cur.execute("""
-    //     INSERT INTO Palettes (name) 
-    //     VALUES ( ? );""", (name, ) )
-    //     return self.cur.lastrowid 
-
     fn add_palette(&self, tx: &Transaction, name: String) -> Result<i64, Box<dyn Error>> {
         let mut stmt = tx.prepare("INSERT INTO Palettes (name) VALUES ( ? );")?;
         stmt.execute(params![
@@ -191,19 +174,6 @@ impl Database {
         ])?;
         Ok(tx.last_insert_rowid())
     }
-
-    // def add_color(self, hex, r, g, b, a=1.0):
-    //     self.cur.execute("""SELECT id FROM Colors WHERE 
-    //     red={} AND green={} AND blue={} AND alpha={} AND hex=\"{}\";""".format(r, g, b, a, hex))
-    //     ids = self.cur.fetchall()
-    //     if ids != []:
-    //         return ids[0][0]
-        
-    //     self.cur.execute("""
-    //     INSERT INTO Colors (red, green, blue, alpha, hex) 
-    //     VALUES ( ?, ?, ?, ?, ? );""", 
-    //     (r, g, b, a, hex, ) )
-    //     return self.cur.lastrowid 
 
     fn add_color(&self, tx: &Transaction, hex: String, r: i64, g: i64, b: i64, a: f64) -> Result<i64, Box<dyn Error>> {        
         let mut stmt = tx.prepare(format!("SELECT id FROM Colors WHERE red={} AND green={} AND blue={} AND alpha={} AND hex=\"{}\";", r, g, b, a, hex).as_str())?;
@@ -224,18 +194,6 @@ impl Database {
         Ok(tx.last_insert_rowid())
     }
 
-    // def add_pc_junction(self, palette_id, color_id):
-    //     self.cur.execute("""SELECT id FROM Palette_Color_Junction WHERE 
-    //     palette_id={} AND color_id={};""".format(palette_id, color_id))
-    //     ids = self.cur.fetchall()
-    //     if ids != []:
-    //         return ids[0][0]
-
-    //     self.cur.execute("""
-    //     INSERT INTO Palette_Color_Junction (palette_id, color_id) VALUES ( ?, ? );""", 
-    //     (palette_id, color_id) )
-    //     return self.cur.lastrowid 
-
     fn add_pc_junction(&self, tx: &Transaction, palette_id: i64, color_id: i64) -> Result<i64, Box<dyn Error>> {        
         let mut stmt = tx.prepare(format!("SELECT id FROM Palette_Color_Junction WHERE palette_id={} AND color_id={};", palette_id, color_id).as_str())?;
         let rows = stmt.query_map([], |row| {
@@ -254,22 +212,6 @@ impl Database {
         ])?;
         Ok(tx.last_insert_rowid())
     }
-
-    // #add palette from drop page
-    // def add_palette_from_extracted(self, name: str, colors):
-    //     try:
-    //         palette_id = self.add_palette(name)
-    //         color_ids = [self.add_color(c.hex_name, *c.rgb) for c in colors]
-    //         [self.add_pc_junction(palette_id, cid) for cid in color_ids]
-
-    //         self.con.commit()
-    //         self.model.populate()
-            
-    //         return True
-    //     except Exception as e:
-    //         print(e)
-    //         logging.error(e, exc_info=True)
-    //         return False
 
     pub fn add_palette_from_extracted(&self, palette_name: String, colors: &Vec<ExtractedColor>) -> bool {
         match self.add_palette_from_extracted_(palette_name, colors) {
@@ -319,22 +261,6 @@ impl Database {
     }
 
 
-    // #add palette from palette page
-    // def add_palette_new(self, name: str, hex, r, g, b, a=1.0):
-    //     try:
-    //         palette_id = self.add_palette(name)
-    //         color_id = self.add_color(hex, r, g, b, a)
-    //         self.add_pc_junction(palette_id, color_id)
-
-    //         self.con.commit()
-    //         self.model.populate()
-            
-    //         return True
-    //     except Exception as e:
-    //         print(e)
-    //         logging.error(e, exc_info=True)
-    //         return False
-
     pub fn add_palette_new(&self, palette_name: String, hex: String, rgba: (i64, i64, i64, f64)) -> bool {
         match self.add_palette_new_(palette_name, hex, rgba) {
             Ok(_) => {
@@ -372,24 +298,6 @@ impl Database {
             Err(e) => Err(e),
         }
     }
-
-    // def duplicate_palette(self, palette_id, duplicate_name):
-    //     try:
-    //         color_ids = self.query_colors_by_palette_id(palette_id)
-    //         if color_ids == []:
-    //             return False
-            
-    //         palette_id = self.add_palette(duplicate_name)
-    //         [self.add_pc_junction(palette_id, cid) for cid in color_ids]
-
-    //         self.con.commit()
-    //         self.model.populate()
-
-    //         return True
-    //     except Exception as e:
-    //         print(e)
-    //         logging.error(e, exc_info=True)
-    //         return False
 
     pub fn duplicate_palette(&self, palette_id: i64, duplicate_name: String) -> bool {
         match self.query_colors_by_palette_id(palette_id) {
@@ -442,22 +350,6 @@ impl Database {
         Ok(())
     }
 
-    // def add_color_to_palette(self, palette_id, hex, r, g, b, a=1.0):
-    //     try:
-    //         color_id = self.add_color(hex, r, g, b, a=1.0)
-    //         self.add_pc_junction(palette_id, color_id)
-
-    //         self.con.commit()
-    //         self.model.populate()
-            
-    //         return True
-    //     except Exception as e:
-    //         print(e)
-    //         logging.error(e, exc_info=True)
-    //         return False
-
-//pub fn add_color(&self, hex: String, r: i64, g: i64, b: i64, a: f64) -> Result<i64, Box<dyn Error>> {
-
     pub fn add_color_to_palette(&self, palette_id: i64, hex: String, rgba: (i64, i64, i64, f64)) -> bool {
         match self.add_color_to_palette_(palette_id, hex, rgba) {
             Ok(_) => {
@@ -494,20 +386,6 @@ impl Database {
     // # MODIFY VALUES
     // ######
     
-    //     def rename_palette(self, palette_id, new_name) -> bool:
-    //         try:
-    //             self.cur.execute("""
-    //             UPDATE Palettes 
-    //             SET name = \"{}\"
-    //             WHERE id = {};""".format(new_name, palette_id))
-    //             self.con.commit()
-    //             self.model.populate()
-    //             return True
-    //         except Exception as e:
-    //             print(e)
-    //             logging.error(e, exc_info=True)
-    //             return False
-
     pub fn rename_palette(&self, palette_id: i64, new_name: String) -> bool {
         match self.rename_palette_(palette_id, new_name) {
             Ok(_) => {
@@ -542,21 +420,7 @@ impl Database {
         }
     }
     
-    //     def remove_color_from_palette(self, color_id, palette_id) -> bool:
-    //         try:
-    //             self.cur.execute("DELETE FROM Palette_Color_Junction WHERE color_id = {} AND palette_id = {};".format(color_id, palette_id))
-    
-    //             self.prune_colors()
-    //             self.prune_palletes()
-    
-    //             self.con.commit()
-    //             self.model.populate()
-    //             return True
-    //         except Exception as e:
-    //             print(e)
-    //             logging.error(e, exc_info=True)
-    //             return False
-    
+
     pub fn remove_color_from_palette(&self, color_id: i64, palette_id: i64) -> bool {
         match self.remove_color_from_palette_(color_id, palette_id) {
             Ok(_) => {
@@ -597,23 +461,6 @@ impl Database {
     // # REMOVE VALUES 
     // ######
     
-    //     def delete_palette(self, palette_id, commit=True):
-    //         try:
-    //             self.cur.execute("DELETE FROM Palette_Color_Junction WHERE palette_id = {};".format(palette_id))
-    //             self.cur.execute("DELETE FROM Palettes WHERE id = {};".format(palette_id))
-    //             self.prune_colors()
-                
-    //             if commit:
-    //                 self.con.commit()
-                
-    //             self.model.populate()
-    //             return True
-    //         except Exception as e:
-    //             print(e)
-    //             logging.error(e, exc_info=True)
-    //             return False
-    
-
     pub fn delete_palette(&self, palette_id: i64) -> bool {
         match self.delete_palette_(palette_id) {
             Ok(_) => {
@@ -646,14 +493,7 @@ impl Database {
     }
 
 
-    //     def prune_colors(self):
-    //         self.cur.execute("SELECT id FROM Colors;")
-    //         for color_id in [color_id for tuple in self.cur.fetchall() for color_id in tuple]:
-    //             self.cur.execute("SELECT id FROM Palette_Color_Junction WHERE color_id = {};".format(color_id))
-    //             if self.cur.fetchall() == []:
-    //                 #print("Deleting color id", color_id)
-    //                 self.cur.execute("DELETE FROM Colors WHERE id = {};".format(color_id))
-    
+
     fn prune_colors(&self, tx: &Transaction) -> Result<(), Box<dyn Error>> {
         let mut stmt = tx.prepare("SELECT id FROM Colors;")?;
         let rows = stmt.query_map([], |row| {
@@ -683,14 +523,6 @@ impl Database {
         Ok(())
     }
 
-    //     def prune_palletes(self):
-    //         self.cur.execute("SELECT id FROM Palettes;")
-    //         for palette_id in [palette_id for tuple in self.cur.fetchall() for palette_id in tuple]:
-    //             self.cur.execute("SELECT id FROM Palette_Color_Junction WHERE palette_id = {};".format(palette_id))
-    //             if self.cur.fetchall() == []:
-    //                 #print("Deleting palette id", palette_id)
-    //                 self.cur.execute("DELETE FROM Palettes WHERE id = {};".format(palette_id))
-    
 
     fn prune_palletes(&self, tx: &Transaction) -> Result<(), Box<dyn Error>> {
         let mut stmt = tx.prepare("SELECT id FROM Palettes;")?;
@@ -725,9 +557,6 @@ impl Database {
     // # QUERY VALUES
     // ######
 
-    // def query_colors(self):
-    //     self.cur.execute("SELECT * FROM Colors;")
-    //     return self.cur.fetchall()
 
     pub fn query_colors(&self) -> Result<Vec<(i64, i64, i64, i64, f64, String)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
@@ -753,10 +582,6 @@ impl Database {
     }
 
 
-    // def query_palettes(self):
-    //     self.cur.execute("SELECT * FROM Palettes;")
-    //     return self.cur.fetchall()
-
     pub fn query_palettes(&self) -> Result<Vec<(i64, String)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
         let conn = conn.as_ref().ok_or("Connection not established")?;
@@ -776,9 +601,6 @@ impl Database {
         Ok(result)
     }
 
-    // def query_palette_color_junction(self):
-    //     self.cur.execute("SELECT * FROM Palette_Color_Junction;")
-    //     return self.cur.fetchall()
 
     pub fn query_palette_color_junction(&self) -> Result<Vec<(i64, i64, i64)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
@@ -799,19 +621,7 @@ impl Database {
 
         Ok(result)
     }
-    // def query_n_palettes(self):
-    //     self.cur.execute("SELECT count( * ) FROM palettes;")
-    //     return self.cur.fetchall()[0][0]
 
-    // pub fn query_n_palettes(&self) -> Result<i64, Box<dyn Error>> {
-    //     let conn = self.imp().conn.borrow();
-    //     let conn = conn.as_ref().ok_or("Connection not established")?;
-
-    //     let mut stmt = conn.prepare("SELECT count( * ) FROM Palettes;")?;
-    //     let count = stmt.query_row([], |row| row.get(0))?;
-    //     Ok(count)
-    // }
-    
     pub fn query_n_palettes(&self) -> i64 {
         match self.query_n_palettes_() {
             Ok(n) => return n,
@@ -827,10 +637,6 @@ impl Database {
         let count = stmt.query_row([], |row| row.get(0))?;
         Ok(count)
     }
-
-    // def query_colors_by_palette_id(self, palette_id):
-    //     colors = self.cur.execute("SELECT color_id FROM Palette_Color_Junction WHERE palette_id={};".format(palette_id))
-    //     return [color_id for tuple in colors for color_id in tuple]
 
     pub fn query_colors_by_palette_id(&self, palette_id: i64) -> Result<Vec<i64>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
