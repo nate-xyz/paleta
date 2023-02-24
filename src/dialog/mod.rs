@@ -1,0 +1,10 @@
+pub mod add_color_dialog;
+pub mod add_new_palette_dialog;
+pub mod delete_color_dialog;
+pub mod delete_palette_dialog;
+pub mod duplicate_palette_dialog;
+pub mod save_palette_dialog;
+pub mod rename_palette_dialog;
+mod simple_row;
+mod simple_color_card;
+mod simpler_delete_color_card;

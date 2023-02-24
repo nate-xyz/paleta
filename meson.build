@@ -1,19 +1,23 @@
-project('paleta',
-          version: '0.2.3',
-    meson_version: '>= 0.59.0',
+project('paleta', 'rust', 
+          version: '0.3.0',
+    meson_version: '>= 0.62.0',
   default_options: [ 'warning_level=3', 'werror=false', ],
 )
-
-dependency('gtk4', version: '>= 4.6.0')
-dependency('libadwaita-1')
 
 i18n = import('i18n')
 gnome = import('gnome')
 
-application_id = 'io.github.nate_xyz.Paleta'
+dependency('gtk4', version: '>= 4.6.0')
+dependency('libadwaita-1', version: '>= 1.2.0')
+
+cargo = find_program('cargo', required: true)
+cargo_sources = files(
+  'Cargo.toml',
+  'Cargo.lock',
+)
 
 subdir('data')
-subdir('paleta')
+subdir('src')
 subdir('po')
 
 gnome.post_install(

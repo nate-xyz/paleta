@@ -1,3 +1,0 @@
-colorthief==0.2.1
-Pillow==9.4.0
-pyxdg==0.28

@@ -3,6 +3,9 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "43",
     "sdk" : "org.gnome.Sdk",
+    "sdk-extensions" : [
+        "org.freedesktop.Sdk.Extension.rust-stable"
+    ],
     "command" : "paleta",
     "finish-args" : [
         "--share=ipc",
@@ -10,6 +13,16 @@
         "--device=dri",
         "--socket=wayland"
     ],
+    "build-options" : {
+        "append-path" : "/usr/lib/sdk/rust-stable/bin",
+        "build-args" : [
+            "--share=network"
+        ],
+        "env" : {
+            "RUST_BACKTRACE" : "1",
+            "RUST_LOG" : "paleta=debug"
+        }
+    },
     "cleanup" : [
         "/include",
         "/lib/pkgconfig",
@@ -22,7 +35,6 @@
         "*.a"
     ],
     "modules" : [
-        "pypi-dependencies.json",
         {
             "name" : "paleta",
             "buildsystem" : "meson",
