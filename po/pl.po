@@ -1,67 +1,67 @@
+# Paleta Polish PO translation file
 # Copyright (C) 2023
 # This file is distributed under the same license as the paleta package.
-# Timofey Sosnovsky <me@sit.sh>, 2023.
+# tfuxu <tfuxu@tutanota.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-20 02:38-0500\n"
-"PO-Revision-Date: 2023-02-20 17:14+0300\n"
+"PO-Revision-Date: 2023-02-20 16:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: ru\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
 #. One name per line, please do not remove previous names.
 #: paleta/app.py:52
 msgid "translator-credits"
-msgstr "Тимофей Сосновский <me@sit.sh>"
+msgstr "tfuxu https://github.com/tfuxu"
 
 #. Translators: used in the phrase "Powered by color-thief"
 #: paleta/app.py:55
 msgid "Powered by "
-msgstr "Работает на "
+msgstr "Zasilany przez "
 
 #: paleta/window.py:64
 msgid "Unable to load database."
-msgstr "Не удалось загрузить базу данных."
+msgstr "Nie udało się załadować bazy danych."
 
 #: paleta/window.py:126
 msgid "Select an Image File"
-msgstr "Выбор файла изображения"
+msgstr "Wybierz plik obrazu"
 
 #: paleta/window.py:129 paleta/ui/window.ui:26
 #: paleta/pages/image_drop/ui/image_drop_page.ui:29
 msgid "Open Image"
-msgstr "Открыть изображение"
+msgstr "Otwórz obraz"
 
 #: paleta/window.py:132
 msgid "Image files"
-msgstr "Файлы изображений"
+msgstr "Pliki obrazów"
 
 #. Translators: Do not replace {}
 #: paleta/window.py:163
 msgid "Could not open image: {}"
-msgstr "Не удалось открыть изображение: {}"
+msgstr "Nie można otworzyć obrazu: {}"
 
 #. Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
 #: paleta/window.py:168
 #, python-brace-format
 msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}"
-msgstr ""
-"<span foreground={SUCCESS_GREEN}>Изображение открыто:</span>  {base_name}"
+msgstr "<span foreground={SUCCESS_GREEN}>Otwarty obraz:</span> {base_name}"
 
 #. Translators: Only replace "Error!"
 #: paleta/window.py:177
 msgid "<span foreground={ERROR_RED}>Error!</span> {html.escape(error)}"
-msgstr "<span foreground={ERROR_RED}>Ошибка!</span> {html.escape(error)}"
+msgstr "<span foreground={ERROR_RED}>Błąd!</span> {html.escape(error)}"
 
 #. Translators: Do not replace {hex_name}, only translate "Added color" and "to palette"
 #: paleta/window.py:183
@@ -69,7 +69,7 @@ msgid ""
 "Added color <span foreground=\"{hex_name}\">{hex_name}</span> to palette "
 "«{html.escape(palette_name)}»."
 msgstr ""
-"Цвет <span foreground=\"{hex_name}\">{hex_name}</span> добавлен в палитру "
+"Dodano kolor <span foreground=\"{hex_name}\">{hex_name}</span> do palety "
 "«{html.escape(palette_name)}»."
 
 #. Translators: Do not replace {hex_name}, only translate "Removed color" and "from palette"
@@ -78,7 +78,7 @@ msgid ""
 "Removed color <span foreground=\"{hex_name}\">{hex_name}</span> from palette "
 "«{html.escape(palette_name)}»."
 msgstr ""
-"Цвет <span foreground=\"{hex_name}\">{hex_name}</span> удалён из палитры "
+"Usunięto kolor <span foreground=\"{hex_name}\">{hex_name}</span> z palety "
 "«{html.escape(palette_name)}»."
 
 #. Translators: Do not replace {hex_name}, only translate "Copied color" and "to clipboard!"
@@ -87,258 +87,258 @@ msgstr ""
 msgid ""
 "Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to clipboard!"
 msgstr ""
-"Цвет <span foreground=\"{hex_name}\">{hex_name}</span> скопирован в буфер "
-"обмена!"
+"Skopiowano kolor <span foreground=\"{hex_name}\">{hex_name}</span> do "
+"schowka!"
 
 #: paleta/ui/help-overlay.ui:13
 msgctxt "shortcut window"
 msgid "General"
-msgstr "Общие"
+msgstr "Ogólne"
 
 #: paleta/ui/help-overlay.ui:16
 msgctxt "shortcut window"
 msgid "Show Shortcuts"
-msgstr "Показать горячие клавиши"
+msgstr "Pokaż skróty klawiszowe"
 
 #: paleta/ui/help-overlay.ui:22
 msgctxt "shortcut window"
 msgid "Quit"
-msgstr "Выйти"
+msgstr "Opuść program"
 
 #: paleta/ui/help-overlay.ui:32
 msgctxt "shortcut window"
 msgid "Image"
-msgstr "Изображение"
+msgstr "Obraz"
 
 #: paleta/ui/help-overlay.ui:35
 msgctxt "shortcut window"
 msgid "Open Image"
-msgstr "Открыть изображение"
+msgstr "Otwórz obraz"
 
 #: paleta/ui/help-overlay.ui:41
 msgctxt "shortcut window"
 msgid "Extract Palette"
-msgstr "Извлечь палитру"
+msgstr "Wyodrębnij paletę"
 
 #: paleta/ui/help-overlay.ui:47
 msgctxt "shortcut window"
 msgid "Save Extracted Palette"
-msgstr "Сохранить извлечённую палитру"
+msgstr "Zapisz wyodrębnione kolory"
 
 #: paleta/ui/help-overlay.ui:53
 msgctxt "shortcut window"
 msgid "Go To Image Drop Page"
-msgstr "Перейти к странице перемещения изображения"
+msgstr "Idź do zrzutu obrazów"
 
 #: paleta/ui/help-overlay.ui:63
 msgctxt "shortcut window"
 msgid "Palettes"
-msgstr "Палитры"
+msgstr "Palety"
 
 #: paleta/ui/help-overlay.ui:66
 msgctxt "shortcut window"
 msgid "Toggle Edit Mode"
-msgstr "Переключить режим редактирования"
+msgstr "Przełącz tryb edycji"
 
 #: paleta/ui/help-overlay.ui:72
 msgctxt "shortcut window"
 msgid "Add Palette"
-msgstr "Добавить палитру"
+msgstr "Dodaj paletę"
 
 #: paleta/ui/help-overlay.ui:78
 msgctxt "shortcut window"
 msgid "Go To Palette Page"
-msgstr "Перейти к странице палитры"
+msgstr "Idź do palet"
 
 #: paleta/ui/window.ui:37
 msgid "Edit Palettes"
-msgstr "Редактировать палитры"
+msgstr "Edytuj palety"
 
 #: paleta/ui/window.ui:58
 msgid "Drop"
-msgstr "Перемещение"
+msgstr "Upuść"
 
 #: paleta/ui/window.ui:69
 msgid "Palettes"
-msgstr "Палитры"
+msgstr "Palety"
 
 #: paleta/ui/window.ui:92
 msgid "_Keyboard Shortcuts"
-msgstr "_Горячие клавиши"
+msgstr "_Skróty klawiszowe"
 
 #: paleta/ui/window.ui:96
 msgid "_About Paleta"
-msgstr "_О Paleta"
+msgstr "_O Paleta"
 
 #: paleta/dialog/add_color_dialog.py:29
 msgid "Add Color to {}"
-msgstr "Добавить цвет в {}"
+msgstr "Dodaj kolor do {}"
 
 #. Translators: Do not replace {}
 #: paleta/dialog/add_color_dialog.py:31 paleta/dialog/add_color_dialog.py:55
 msgid "Choose new color to add to {}"
-msgstr "Выбрать новый цвет для добавления в {}"
+msgstr "Wybierz nowy kolor do dodania do {}"
 
 #. Translators: Do not replace {}
 #: paleta/dialog/add_color_dialog.py:42
 msgid "Pick a new color to add to {}."
-msgstr "Выбрать новый цвет для добавления в {}"
+msgstr "Wybierz nowy kolor do dodania do {}."
 
 #. Translators: Do not replace {}
 #: paleta/dialog/add_color_dialog.py:47
 msgid "Currently selected color: {}"
-msgstr "Текущий цвет: {}"
+msgstr "Aktualnie wybrany kolor: {}"
 
 #: paleta/dialog/add_color_dialog.py:80
 msgid "Unable to add color."
-msgstr "Не удалось добавить цвет."
+msgstr "Nie udało się dodać koloru."
 
 #. Translators: Do not replace {self.color.hex}
 #: paleta/dialog/add_color_dialog.py:87
 #, python-brace-format
 msgid "Unable to add color {self.color.hex}."
-msgstr "Не удалось добавить цвет {self.color.hex}."
+msgstr "Nie udało się dodać koloru {self.color.hex}."
 
 #: paleta/dialog/add_new_palette_dialog.py:31
 #: paleta/dialog/dialog_windows.py:19
 msgid "Palette #{}"
-msgstr "Палитра №{}"
+msgstr "Paleta #{}"
 
 #: paleta/dialog/add_new_palette_dialog.py:32
 #: paleta/dialog/add_new_palette_dialog.py:58
 msgid "Choose color to add to new palette"
-msgstr "Выберете цвет для добавления в новую палитру"
+msgstr "Wybierz kolor do dodania do nowej palety"
 
 #: paleta/dialog/add_new_palette_dialog.py:42
 msgid "Pick a color to add to new palette."
-msgstr "Выберете цвет для добавления в новую палитру."
+msgstr "Wybierz kolor do dodania do nowej palety."
 
 #. Translators: Do not replace {color.hex}
 #: paleta/dialog/add_new_palette_dialog.py:51
 #, python-brace-format
 msgid "Currently selected color: {color.hex}"
-msgstr "Текущий цвет: {color.hex}"
+msgstr "Aktualnie wybrany kolor: {color.hex}"
 
 #: paleta/dialog/add_new_palette_dialog.py:83
 msgid "Unable to add palette, must select a color."
-msgstr "Не удалось создать палитру: требуется выбрать цвет."
+msgstr "Nie udało się dodać palety, musisz wybrać kolor."
 
 #. Translators: Do not replace {name}
 #: paleta/dialog/add_new_palette_dialog.py:92
 msgid "Created!"
-msgstr "Палитра создана!"
+msgstr "Utworzono!"
 
 #: paleta/dialog/add_new_palette_dialog.py:92
 #: paleta/dialog/dialog_windows.py:37
 #, python-brace-format
 msgid "New palette: «{name}»"
-msgstr "Новая палитра: «{name}»"
+msgstr "Nowa paleta: «{name}»"
 
 #. Translators: Do not replace {name}
 #: paleta/dialog/add_new_palette_dialog.py:95
 #: paleta/dialog/dialog_windows.py:41
 #, python-brace-format
 msgid "Unable to add new palette «{name}»"
-msgstr "Не удалось создать новую палитру «{name}»"
+msgstr "Nie udało się utworzyć nowej palety «{name}»"
 
 #: paleta/dialog/delete_color_dialog.py:37
 msgid "Remove color {} from {}?"
-msgstr "Удалить цвет {} из {}?"
+msgstr "Usunąć kolor {} z {}?"
 
 #: paleta/dialog/delete_color_dialog.py:45
 msgid "Unable to remove color."
-msgstr "Не удалось удалить цвет."
+msgstr "Nie udało się usunąć koloru."
 
 #. Translators: Do not replace {self.color.hex}
 #: paleta/dialog/delete_color_dialog.py:52
 #, python-brace-format
 msgid "Unable to remove color {self.color.hex}."
-msgstr "Не удалось удалить цвет {self.color.hex}"
+msgstr "Nie udało się usunąć koloru {self.color.hex}."
 
 #. Translators: Do not replace {name}
 #: paleta/dialog/dialog_windows.py:37
 msgid "Saved!"
-msgstr "Сохранено!"
+msgstr "Zapisano!"
 
 #. Translators: Do not replace {palette.name}
 #: paleta/dialog/dialog_windows.py:62
 #, python-brace-format
 msgid "Rename {palette.name}?"
-msgstr "Переименовать {palette.name}?"
+msgstr "Zmienić nazwę {palette.name}?"
 
 #. Translators: Do not replace {self.name} or {name}
 #: paleta/dialog/dialog_windows.py:78
 msgid "Renamed!"
-msgstr "Переименовано!"
+msgstr "Zmieniono!"
 
 #: paleta/dialog/dialog_windows.py:78
 #, python-brace-format
 msgid "Changed name from «{self.name}» to «{name}»."
-msgstr "Имя изменено с «{self.name}» на «{name}»."
+msgstr "Zmieniono nazwę z «{self.name}» do «{name}»."
 
 #. Translators: Do not replace {self.name}
 #: paleta/dialog/dialog_windows.py:81
 #, python-brace-format
 msgid "Unable to rename palette «{self.name}»."
-msgstr "Не удалось переименовать палитру «{self.name}»."
+msgstr "Nie udało się zmienić nazwy palety «{self.name}»."
 
 #: paleta/dialog/dialog_windows.py:90
 msgid "Palette"
-msgstr "Палитра"
+msgstr "Paleta"
 
 #. Translators: Do not replace {palette.name}
 #: paleta/dialog/dialog_windows.py:102
 #, python-brace-format
 msgid "Duplicate {palette.name}?"
-msgstr "Дублировать {palette.name}?"
+msgstr "Zduplikować {palette.name}?"
 
 #: paleta/dialog/dialog_windows.py:107
 #, python-brace-format
 msgid "{self.name} duplicate"
-msgstr "Копия {self.name}"
+msgstr "{self.name} duplikat"
 
 #. Translators: Do not replace {self.palette.name} or {name}
 #: paleta/dialog/dialog_windows.py:118
 msgid "Duplicated!"
-msgstr "Продублировано!"
+msgstr "Zduplikowano!"
 
 #: paleta/dialog/dialog_windows.py:118
 #, python-brace-format
 msgid "Copied «{self.palette.name}» to «{name}»."
-msgstr "Палитра «{self.palette.name}» скопирована в «{name}»."
+msgstr "Skopiowano «{self.palette.name}» do «{name}»."
 
 #. Translators: Do not replace {self.palette.name}
 #: paleta/dialog/dialog_windows.py:121
 #, python-brace-format
 msgid "Unable to duplicate palette «{self.palette.name}»."
-msgstr "Не удалось дублировать палитру «{self.palette.name}»."
+msgstr "Nie udało się zduplikować palety «{self.palette.name}»."
 
 #. Translators: Do not replace {palette.name}
 #: paleta/dialog/dialog_windows.py:137
 #, python-brace-format
 msgid "Delete {palette.name}?"
-msgstr "Удалить {palette.name}?"
+msgstr "Usunąć {palette.name}?"
 
 #. Translators: Do not replace {self.palette.name}
 #: paleta/dialog/dialog_windows.py:144
 msgid "Removed"
-msgstr "Удалено"
+msgstr "Usunięto"
 
 #: paleta/dialog/dialog_windows.py:144
 #, python-brace-format
 msgid "palette: «{self.palette.name}»."
-msgstr "палитра: «{self.palette.name}»."
+msgstr "paletę: «{self.palette.name}»."
 
 #. Translators: Do not replace {self.palette.name}
 #: paleta/dialog/dialog_windows.py:147
 #, python-brace-format
 msgid "Unable to delete palette «{self.palette.name}»."
-msgstr "Не удалось удалить палитру «{self.palette.name}»."
+msgstr "Nie udało się usunąć palety «{self.palette.name}»."
 
 #: paleta/dialog/ui/add_color_dialog.ui:6
 #: paleta/pages/palette/ui/palette_row.ui:71
 msgid "Add Color to Palette"
-msgstr "Добавить цвет в палитру"
+msgstr "Dodaj kolor do palety"
 
 #: paleta/dialog/ui/add_color_dialog.ui:14
 #: paleta/dialog/ui/add_new_palette_dialog.ui:14
@@ -348,197 +348,196 @@ msgstr "Добавить цвет в палитру"
 #: paleta/dialog/ui/rename_palette_dialog.ui:14
 #: paleta/dialog/ui/save_palette_dialog.ui:15
 msgid "_Cancel"
-msgstr "_Отмена"
+msgstr "_Anuluj"
 
 #: paleta/dialog/ui/add_color_dialog.ui:15
 msgid "_Add Color"
-msgstr "_Добавить цвет"
+msgstr "_Dodaj kolor"
 
 #: paleta/dialog/ui/add_color_dialog.ui:41
 msgid "Select from previously added colors or pick a new one."
-msgstr "Используйте ранее добавленный цвет или выберете новый."
+msgstr "Wybierz z wcześniej dodanych kolorów lub wybierz nowy."
 
 #: paleta/dialog/ui/add_color_dialog.ui:63
 #: paleta/dialog/ui/add_new_palette_dialog.ui:76
 msgid "_Choose with Picker"
-msgstr "_Выбрать пипеткой"
+msgstr "_Wybierz z selektora"
 
 #: paleta/dialog/ui/add_new_palette_dialog.ui:6
 #: paleta/pages/palette/ui/palette_page.ui:21
 msgid "Add New Palette"
-msgstr "Создать новую палитру"
+msgstr "Dodaj nową paletę"
 
 #: paleta/dialog/ui/add_new_palette_dialog.ui:15
 msgid "_Add Palette"
-msgstr "_Создать палитру"
+msgstr "_Dodaj paletę"
 
 #: paleta/dialog/ui/add_new_palette_dialog.ui:43
 #: paleta/dialog/ui/rename_palette_dialog.ui:24
 msgid "New Palette _Name"
-msgstr "_Название новой палитры"
+msgstr "Nazwa nowej palety"
 
 #: paleta/dialog/ui/add_new_palette_dialog.ui:53
 msgid "Select from previously added colors or pick one to add to new palette."
 msgstr ""
-"Используйте ранее добавленный цвет или выберете новый для добавления в новую "
-"палитру."
+"Wybierz z wcześniej dodanych kolorów lub wybierz do dodania do nowej palety."
 
 #: paleta/dialog/ui/delete_color_dialog.ui:6
 msgid "Remove Color from Palette?"
-msgstr "Удалить цвет из палитры?"
+msgstr "Usunąć kolor z palety?"
 
 #: paleta/dialog/ui/delete_color_dialog.ui:15
 msgid "_Remove"
-msgstr "_Удалить"
+msgstr "_Usuń"
 
 #: paleta/dialog/ui/delete_palette_dialog.ui:6
 msgid "Delete Palette?"
-msgstr "Удалить палитру?"
+msgstr "Usunąć paletę?"
 
 #: paleta/dialog/ui/delete_palette_dialog.ui:17
 msgid "_Delete"
-msgstr "_Удалить"
+msgstr "_Usuń"
 
 #: paleta/dialog/ui/delete_palette_dialog.ui:23
 msgid "This action will permanently remove this palette from Paleta."
-msgstr "Это навсегда удалит эту палитру из Paleta."
+msgstr "Ta akcja permanentnie usunie tą paletę z Paleta."
 
 #: paleta/dialog/ui/duplicate_palette_dialog.ui:6
 msgid "Duplicate Palette?"
-msgstr "Дублировать палитру?"
+msgstr "Zduplikować paletę?"
 
 #: paleta/dialog/ui/duplicate_palette_dialog.ui:15
 msgid "_Duplicate"
-msgstr "_Дублировать"
+msgstr "_Duplikuj"
 
 #: paleta/dialog/ui/duplicate_palette_dialog.ui:24
 msgid "Duplicated Palette _Name"
-msgstr "_Название дублированной палитры"
+msgstr "Nazwa zduplikowanej palety"
 
 #: paleta/dialog/ui/rename_palette_dialog.ui:6
 msgid "Rename Palette?"
-msgstr "Переименовать палитру?"
+msgstr "Zmienić nazwę palety?"
 
 #: paleta/dialog/ui/rename_palette_dialog.ui:15
 msgid "_Rename"
-msgstr "_Переименовать"
+msgstr "_Zmień nazwę"
 
 #: paleta/dialog/ui/save_palette_dialog.ui:6
 msgid "Save Palette?"
-msgstr "Сохранить палитру?"
+msgstr "Zapisać paletę?"
 
 #: paleta/dialog/ui/save_palette_dialog.ui:16
 msgid "_Save"
-msgstr "_Сохранить"
+msgstr "_Zapisz"
 
 #: paleta/dialog/ui/save_palette_dialog.ui:25
 msgid "Palette _Name"
-msgstr "_Имя палитры"
+msgstr "Nazwa palety"
 
 #: paleta/pages/image_drop/color_thief_panel.py:95
 msgid "Unable to start palette extraction."
-msgstr "Не удалось начать извлечение палитры."
+msgstr "Nie udało się rozpocząć ekstrakcji kolorów."
 
 #: paleta/pages/image_drop/color_thief_panel.py:98
 msgid "Unable to start palette extraction, no image loaded."
-msgstr "Не удалось начать извлечение палитры: изображение не загружено."
+msgstr "Nie udało się rozpocząć ekstrakcji kolorów, nie załadowano obrazu."
 
 #: paleta/pages/image_drop/color_thief_panel.py:117
 msgid "Unable to extract colors from image."
-msgstr "Не удалось извлечь цвета из изображения."
+msgstr "Nie udało się wyodrębnić kolorów z obrazu."
 
 #: paleta/pages/image_drop/color_thief_panel.py:128
 msgid "Unable to save palette, no image loaded."
-msgstr "Не удалось сохранить палитру: изображение не загружено."
+msgstr "Nie udało się zapisać palety, nie załadowano obrazu."
 
 #: paleta/pages/image_drop/color_thief_panel.py:133
 msgid "Unable to save palette, no colors extracted."
-msgstr "Не удалось сохранить палитру: цвета не извлечены."
+msgstr "Nie udało się zapisać palety, nie wyodrębniono kolorów."
 
 #: paleta/pages/image_drop/image_drop_page.py:52
 #: paleta/pages/image_drop/image_drop_page.py:67
 msgid "Unable to read drop."
-msgstr "Не удалось прочитать изображение."
+msgstr "Nie udało się odczytać upuszczenia."
 
 #: paleta/pages/image_drop/image_drop_page.py:57
 msgid ""
 "Unable to verify file on drop, try with the file chooser in the upper left "
 "corner."
 msgstr ""
-"Не удалось проверить файл при перемещении, попробуйте выбрать файл через "
-"кнопку в левом верхнем углу."
+"Nie udało się zweryfikować pliku przy upuszczeniu, spróbuj z selektorem "
+"plików z lewego górnego rogu."
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:63
 msgid "Palette Count"
-msgstr "Число палитр"
+msgstr "Liczba palet"
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:64
 msgid "Max amount of colors to retrieve."
-msgstr "Максимальное число цветов для извлечения."
+msgstr "Maksymalna ilość kolorów do pozyskania."
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:80
 msgid "Palette Accuracy"
-msgstr "Точность палитры"
+msgstr "Dokładność palety"
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:92
 msgid "Precise"
-msgstr "Точная"
+msgstr "Dokładna"
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:93
 msgid "Normal"
-msgstr "Номальная"
+msgstr "Normalna"
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:94
 msgid "Low"
-msgstr "Низкая"
+msgstr "Niska"
 
 #: paleta/pages/image_drop/ui/color_thief_panel.ui:155
 msgid "_Save Palette"
-msgstr "_Сохранить палитру"
+msgstr "_Zapisz paletę"
 
 #: paleta/pages/image_drop/ui/image_drop_page.ui:14
 msgid "Drop Image"
-msgstr "Переместите изображение"
+msgstr "Upuść obraz tutaj"
 
 #: paleta/pages/image_drop/ui/image_drop_page.ui:15
 msgid ""
 "Drag an image here, click the button below, or click the button in the upper "
 "left corner of this window."
 msgstr ""
-"Переместите изображение сюда, нажмите кнопку ниже или используйте кнопку в "
-"левом верхнем углу окна."
+"Przeciągnij tutaj obraz, kliknij przycisk poniżej lub kliknij przycisk w "
+"lewym górnym rogu tego okna."
 
 #: paleta/pages/palette/palette_page.py:61
 msgid "Cannot toggle edit mode, no palettes added."
-msgstr "Не удалось включить режим редактирования: палитры не добавлены."
+msgstr "Nie można przełączyć trybu edycji, brak dodanych palet."
 
 #: paleta/pages/palette/ui/palette_row.ui:50
 msgid "Edit Palette Name"
-msgstr "Редактировать имя палитры"
+msgstr "Edytuj nazwę palety"
 
 #: paleta/pages/palette/ui/palette_row.ui:62
 msgid "Duplicate Palette"
-msgstr "Дублировать палитру"
+msgstr "Duplikuj paletę"
 
 #: paleta/pages/palette/ui/palette_row.ui:80
 msgid "Delete Palette"
-msgstr "Удалить палитру"
+msgstr "Usuń paletę"
 
 #: paleta/pages/palette/ui/palette_page.ui:43
 msgid "Add Some Palettes!"
-msgstr "Добавьте пару палитр!"
+msgstr "Dodaj parę palet!"
 
 #: paleta/pages/palette/ui/palette_page.ui:44
 msgid ""
 "Drop an image onto the drop page and extract some colors, or add a palette "
 "manually by clicking the button in the lower right corner to get started!"
 msgstr ""
-"Чтобы начать, переместите изображение на странице перемещения или добавьте "
-"палитру вручную, используя кнопку в правом нижнем углу!"
+"Aby zacząć, upuść obraz na stronie zrzutu i wyodrębnij kolory lub dodaj "
+"paletę ręcznie poprzez kliknięcie przycisku w prawym dolnym rogu."
 
 #: paleta/pages/palette/ui/palette_color_card.ui:42
 msgid "Remove Color from Palette"
-msgstr "Удалить цвет из палитры"
+msgstr "Usuń kolor z palety"
 
 #: data/io.github.nate_xyz.Paleta.desktop.in:3
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:6
@@ -547,20 +546,20 @@ msgstr "Paleta"
 
 #: data/io.github.nate_xyz.Paleta.desktop.in:4
 msgid "Color Palettes"
-msgstr "Палитры цветов"
+msgstr "Palety kolorów"
 
 #: data/io.github.nate_xyz.Paleta.desktop.in:5
 msgid "Extract the dominant colors from any image"
-msgstr "Извлеките доминирующие цвета из любого изображения"
+msgstr "Wyodrębnij dominujące kolory z dowolnego obrazu"
 
 #. Translators: Search terms to find this application. Do not translate or localize the semicolons! The list must also end with a semicolon.
 #: data/io.github.nate_xyz.Paleta.desktop.in:13
 msgid "color;palette;"
-msgstr "цвет;палитра;"
+msgstr "kolor;paleta;"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:7
 msgid "Generate color palettes with ease"
-msgstr "Генерируйте палитры цветов лёгкостью"
+msgstr "Twórz z łatwością palety kolorów"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:8
 msgid "nate-xyz"
@@ -572,70 +571,82 @@ msgid ""
 "Paleta. An intuitive tool for designers, artists, or anyone looking to "
 "streamline their color work."
 msgstr ""
-"Находите доминирующие цвета из любого изображения и управляйте палитрами с "
-"помощью Paleta. Это интуитивный инструмент для дизайнеров, художников и "
-"любого, кто хочет упростить работу с цветами."
+"Wyodrębnij paletę dominujących kolorów z dowolnego obrazu i zarządzaj "
+"paletami z Paleta, intuicyjnym narzędziem dla projektantów, artystów lub "
+"każdego, kto chce usprawnić swoją pracę z kolorami."
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:11
 msgid "Features:"
-msgstr "Функции:"
+msgstr "Cechy:"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:13
 msgid "Drag and drop images to load"
-msgstr "Перемещение изображений для загрузки"
+msgstr "Przeciągnij i upuść obrazy, aby je załadować"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:14
 msgid "Color extraction with color-thief"
-msgstr "Извлечение цветов с помощью color-thief"
+msgstr "Wyodrębnij kolory z color-thief"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:15
 msgid "Save extracted palettes for later use"
-msgstr "Сохранение палитр для последующего использования"
+msgstr "Zapisz wyodrębnione palety do użycia w dowolnym momencie"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:16
 msgid "Modify saved palette name and colors"
-msgstr "Изменение название и цвета сохранённых палитр"
+msgstr "Zmieniaj nazwy zapisanych palet i kolorów"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:17
 msgid "Add new palettes from scratch"
-msgstr "Создание новых палитр с нуля"
+msgstr "Twórz od zera nowe palety"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:19
 msgid ""
-"❗ Note: Paleta is under active development! If you would like to suggest any "
-"features or if you find any bugs, your feedback is very welcome!"
+"❗ Note: Paleta is under active development! If you would like to suggest "
+"any features or if you find any bugs, your feedback is very welcome!"
 msgstr ""
-"❗ Примечания: Paleta активно разрабатывается! Если вы хотите предложить "
-"новые функции или рассказать о баге, ваша обратная связь приветствуется!"
+"❗ Uwaga: Paleta jest w stale rozwijana! Jeśli chciałbyś zasugerować nowe "
+"funkcje lub znalazłeś usterkę, twoja opinia będzie mile widziana!"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
 msgid "Added Translation Support"
-msgstr "Добавлена поддержка других языков"
+msgstr "Dodano wsparcie tłumaczeń"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
 msgid "Added French and Dutch translations!"
-msgstr "Добавлены переводы на Французский и Голландский языки!"
+msgstr "Dodano tłumaczenia w językach Francuskim i Duńskim!"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
 msgid "Automatic palette extraction on image load"
-msgstr "Автоматическое извлечение цветов при загрузке изображения"
+msgstr "Automatyczna ekstrakcja palety przy załadowaniu obrazu"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:42
 msgid "Cleaner extraction panel UI"
-msgstr "Более чистый интерфейс панели извлечения цветов"
+msgstr "Czytelniejsze UI panelu ekstrakcji"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:43
 msgid "Clearer options for palette quality / accuracy"
-msgstr "Более опрятные настройки качества и точности палитры"
+msgstr "Czytelniejsze opcje dla dokładności / jakości palety"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
 msgid "Better AppData summary"
-msgstr "Улучшенная сводка данных приложения"
+msgstr "Lepsze podsumowanie w AppData"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:52
 msgid "Toast improvements"
-msgstr "Улучшение всплывающих сообщений"
+msgstr "Ulepszenia wyskakujących informacji (toasts)"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:53
 msgid "Drop Page open button"
-msgstr "Кнопка открытия на странице перемещения"
+msgstr "Nowy przycisk do otwierania obrazów w stronie rzutu"
+
+#, python-brace-format
+#~ msgid "Add Color to {palette_name}"
+#~ msgstr "Dodaj kolor do {palette_name}"
+
+#, python-brace-format
+#~ msgid "Palette #{query_number}"
+#~ msgstr "Paleta #{query_number}"
+
+#, python-brace-format
+#~ msgid "Remove color {color_hex} from {palette_name}?"
+#~ msgstr "Usunąć kolor {color_hex} z {palette_name}?"
