@@ -7,7 +7,7 @@ rust_sources += files(
     'duplicate_palette_dialog.rs',
     'rename_palette_dialog.rs',
     'save_palette_dialog.rs',
-    'simple_row.rs',
+    'simple_palette_row.rs',
     'simple_color_card.rs',
     'simpler_delete_color_card.rs',
 )

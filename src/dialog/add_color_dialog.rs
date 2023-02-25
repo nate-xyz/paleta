@@ -14,7 +14,7 @@ use crate::model::palette::Palette;
 use crate::model::color::Color;
 use crate::pages::color_square::ColorSquare;
 
-use super::simple_row::SimplePaletteRow;
+use super::simple_palette_row::SimplePaletteRow;
 
 mod imp {
     use super::*;
