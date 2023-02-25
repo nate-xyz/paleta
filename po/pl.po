@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-20 02:38-0500\n"
+"POT-Creation-Date: 2023-02-25 12:35+0100\n"
 "PO-Revision-Date: 2023-02-20 16:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,526 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
 "|| n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.2.2\n"
-
-#. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
-#. One name per line, please do not remove previous names.
-#: paleta/app.py:52
-msgid "translator-credits"
-msgstr "tfuxu https://github.com/tfuxu"
-
-#. Translators: used in the phrase "Powered by color-thief"
-#: paleta/app.py:55
-msgid "Powered by "
-msgstr "Zasilany przez "
-
-#: paleta/window.py:64
-msgid "Unable to load database."
-msgstr "Nie udało się załadować bazy danych."
-
-#: paleta/window.py:126
-msgid "Select an Image File"
-msgstr "Wybierz plik obrazu"
-
-#: paleta/window.py:129 paleta/ui/window.ui:26
-#: paleta/pages/image_drop/ui/image_drop_page.ui:29
-msgid "Open Image"
-msgstr "Otwórz obraz"
-
-#: paleta/window.py:132
-msgid "Image files"
-msgstr "Pliki obrazów"
-
-#. Translators: Do not replace {}
-#: paleta/window.py:163
-msgid "Could not open image: {}"
-msgstr "Nie można otworzyć obrazu: {}"
-
-#. Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
-#: paleta/window.py:168
-#, python-brace-format
-msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}"
-msgstr "<span foreground={SUCCESS_GREEN}>Otwarty obraz:</span> {base_name}"
-
-#. Translators: Only replace "Error!"
-#: paleta/window.py:177
-msgid "<span foreground={ERROR_RED}>Error!</span> {html.escape(error)}"
-msgstr "<span foreground={ERROR_RED}>Błąd!</span> {html.escape(error)}"
-
-#. Translators: Do not replace {hex_name}, only translate "Added color" and "to palette"
-#: paleta/window.py:183
-msgid ""
-"Added color <span foreground=\"{hex_name}\">{hex_name}</span> to palette "
-"«{html.escape(palette_name)}»."
-msgstr ""
-"Dodano kolor <span foreground=\"{hex_name}\">{hex_name}</span> do palety "
-"«{html.escape(palette_name)}»."
-
-#. Translators: Do not replace {hex_name}, only translate "Removed color" and "from palette"
-#: paleta/window.py:187
-msgid ""
-"Removed color <span foreground=\"{hex_name}\">{hex_name}</span> from palette "
-"«{html.escape(palette_name)}»."
-msgstr ""
-"Usunięto kolor <span foreground=\"{hex_name}\">{hex_name}</span> z palety "
-"«{html.escape(palette_name)}»."
-
-#. Translators: Do not replace {hex_name}, only translate "Copied color" and "to clipboard!"
-#: paleta/window.py:191
-#, python-brace-format
-msgid ""
-"Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to clipboard!"
-msgstr ""
-"Skopiowano kolor <span foreground=\"{hex_name}\">{hex_name}</span> do "
-"schowka!"
-
-#: paleta/ui/help-overlay.ui:13
-msgctxt "shortcut window"
-msgid "General"
-msgstr "Ogólne"
-
-#: paleta/ui/help-overlay.ui:16
-msgctxt "shortcut window"
-msgid "Show Shortcuts"
-msgstr "Pokaż skróty klawiszowe"
-
-#: paleta/ui/help-overlay.ui:22
-msgctxt "shortcut window"
-msgid "Quit"
-msgstr "Opuść program"
-
-#: paleta/ui/help-overlay.ui:32
-msgctxt "shortcut window"
-msgid "Image"
-msgstr "Obraz"
-
-#: paleta/ui/help-overlay.ui:35
-msgctxt "shortcut window"
-msgid "Open Image"
-msgstr "Otwórz obraz"
-
-#: paleta/ui/help-overlay.ui:41
-msgctxt "shortcut window"
-msgid "Extract Palette"
-msgstr "Wyodrębnij paletę"
-
-#: paleta/ui/help-overlay.ui:47
-msgctxt "shortcut window"
-msgid "Save Extracted Palette"
-msgstr "Zapisz wyodrębnione kolory"
-
-#: paleta/ui/help-overlay.ui:53
-msgctxt "shortcut window"
-msgid "Go To Image Drop Page"
-msgstr "Idź do zrzutu obrazów"
-
-#: paleta/ui/help-overlay.ui:63
-msgctxt "shortcut window"
-msgid "Palettes"
-msgstr "Palety"
-
-#: paleta/ui/help-overlay.ui:66
-msgctxt "shortcut window"
-msgid "Toggle Edit Mode"
-msgstr "Przełącz tryb edycji"
-
-#: paleta/ui/help-overlay.ui:72
-msgctxt "shortcut window"
-msgid "Add Palette"
-msgstr "Dodaj paletę"
-
-#: paleta/ui/help-overlay.ui:78
-msgctxt "shortcut window"
-msgid "Go To Palette Page"
-msgstr "Idź do palet"
-
-#: paleta/ui/window.ui:37
-msgid "Edit Palettes"
-msgstr "Edytuj palety"
-
-#: paleta/ui/window.ui:58
-msgid "Drop"
-msgstr "Upuść"
-
-#: paleta/ui/window.ui:69
-msgid "Palettes"
-msgstr "Palety"
-
-#: paleta/ui/window.ui:92
-msgid "_Keyboard Shortcuts"
-msgstr "_Skróty klawiszowe"
-
-#: paleta/ui/window.ui:96
-msgid "_About Paleta"
-msgstr "_O Paleta"
-
-#: paleta/dialog/add_color_dialog.py:29
-msgid "Add Color to {}"
-msgstr "Dodaj kolor do {}"
-
-#. Translators: Do not replace {}
-#: paleta/dialog/add_color_dialog.py:31 paleta/dialog/add_color_dialog.py:55
-msgid "Choose new color to add to {}"
-msgstr "Wybierz nowy kolor do dodania do {}"
-
-#. Translators: Do not replace {}
-#: paleta/dialog/add_color_dialog.py:42
-msgid "Pick a new color to add to {}."
-msgstr "Wybierz nowy kolor do dodania do {}."
-
-#. Translators: Do not replace {}
-#: paleta/dialog/add_color_dialog.py:47
-msgid "Currently selected color: {}"
-msgstr "Aktualnie wybrany kolor: {}"
-
-#: paleta/dialog/add_color_dialog.py:80
-msgid "Unable to add color."
-msgstr "Nie udało się dodać koloru."
-
-#. Translators: Do not replace {self.color.hex}
-#: paleta/dialog/add_color_dialog.py:87
-#, python-brace-format
-msgid "Unable to add color {self.color.hex}."
-msgstr "Nie udało się dodać koloru {self.color.hex}."
-
-#: paleta/dialog/add_new_palette_dialog.py:31
-#: paleta/dialog/dialog_windows.py:19
-msgid "Palette #{}"
-msgstr "Paleta #{}"
-
-#: paleta/dialog/add_new_palette_dialog.py:32
-#: paleta/dialog/add_new_palette_dialog.py:58
-msgid "Choose color to add to new palette"
-msgstr "Wybierz kolor do dodania do nowej palety"
-
-#: paleta/dialog/add_new_palette_dialog.py:42
-msgid "Pick a color to add to new palette."
-msgstr "Wybierz kolor do dodania do nowej palety."
-
-#. Translators: Do not replace {color.hex}
-#: paleta/dialog/add_new_palette_dialog.py:51
-#, python-brace-format
-msgid "Currently selected color: {color.hex}"
-msgstr "Aktualnie wybrany kolor: {color.hex}"
-
-#: paleta/dialog/add_new_palette_dialog.py:83
-msgid "Unable to add palette, must select a color."
-msgstr "Nie udało się dodać palety, musisz wybrać kolor."
-
-#. Translators: Do not replace {name}
-#: paleta/dialog/add_new_palette_dialog.py:92
-msgid "Created!"
-msgstr "Utworzono!"
-
-#: paleta/dialog/add_new_palette_dialog.py:92
-#: paleta/dialog/dialog_windows.py:37
-#, python-brace-format
-msgid "New palette: «{name}»"
-msgstr "Nowa paleta: «{name}»"
-
-#. Translators: Do not replace {name}
-#: paleta/dialog/add_new_palette_dialog.py:95
-#: paleta/dialog/dialog_windows.py:41
-#, python-brace-format
-msgid "Unable to add new palette «{name}»"
-msgstr "Nie udało się utworzyć nowej palety «{name}»"
-
-#: paleta/dialog/delete_color_dialog.py:37
-msgid "Remove color {} from {}?"
-msgstr "Usunąć kolor {} z {}?"
-
-#: paleta/dialog/delete_color_dialog.py:45
-msgid "Unable to remove color."
-msgstr "Nie udało się usunąć koloru."
-
-#. Translators: Do not replace {self.color.hex}
-#: paleta/dialog/delete_color_dialog.py:52
-#, python-brace-format
-msgid "Unable to remove color {self.color.hex}."
-msgstr "Nie udało się usunąć koloru {self.color.hex}."
-
-#. Translators: Do not replace {name}
-#: paleta/dialog/dialog_windows.py:37
-msgid "Saved!"
-msgstr "Zapisano!"
-
-#. Translators: Do not replace {palette.name}
-#: paleta/dialog/dialog_windows.py:62
-#, python-brace-format
-msgid "Rename {palette.name}?"
-msgstr "Zmienić nazwę {palette.name}?"
-
-#. Translators: Do not replace {self.name} or {name}
-#: paleta/dialog/dialog_windows.py:78
-msgid "Renamed!"
-msgstr "Zmieniono!"
-
-#: paleta/dialog/dialog_windows.py:78
-#, python-brace-format
-msgid "Changed name from «{self.name}» to «{name}»."
-msgstr "Zmieniono nazwę z «{self.name}» do «{name}»."
-
-#. Translators: Do not replace {self.name}
-#: paleta/dialog/dialog_windows.py:81
-#, python-brace-format
-msgid "Unable to rename palette «{self.name}»."
-msgstr "Nie udało się zmienić nazwy palety «{self.name}»."
-
-#: paleta/dialog/dialog_windows.py:90
-msgid "Palette"
-msgstr "Paleta"
-
-#. Translators: Do not replace {palette.name}
-#: paleta/dialog/dialog_windows.py:102
-#, python-brace-format
-msgid "Duplicate {palette.name}?"
-msgstr "Zduplikować {palette.name}?"
-
-#: paleta/dialog/dialog_windows.py:107
-#, python-brace-format
-msgid "{self.name} duplicate"
-msgstr "{self.name} duplikat"
-
-#. Translators: Do not replace {self.palette.name} or {name}
-#: paleta/dialog/dialog_windows.py:118
-msgid "Duplicated!"
-msgstr "Zduplikowano!"
-
-#: paleta/dialog/dialog_windows.py:118
-#, python-brace-format
-msgid "Copied «{self.palette.name}» to «{name}»."
-msgstr "Skopiowano «{self.palette.name}» do «{name}»."
-
-#. Translators: Do not replace {self.palette.name}
-#: paleta/dialog/dialog_windows.py:121
-#, python-brace-format
-msgid "Unable to duplicate palette «{self.palette.name}»."
-msgstr "Nie udało się zduplikować palety «{self.palette.name}»."
-
-#. Translators: Do not replace {palette.name}
-#: paleta/dialog/dialog_windows.py:137
-#, python-brace-format
-msgid "Delete {palette.name}?"
-msgstr "Usunąć {palette.name}?"
-
-#. Translators: Do not replace {self.palette.name}
-#: paleta/dialog/dialog_windows.py:144
-msgid "Removed"
-msgstr "Usunięto"
-
-#: paleta/dialog/dialog_windows.py:144
-#, python-brace-format
-msgid "palette: «{self.palette.name}»."
-msgstr "paletę: «{self.palette.name}»."
-
-#. Translators: Do not replace {self.palette.name}
-#: paleta/dialog/dialog_windows.py:147
-#, python-brace-format
-msgid "Unable to delete palette «{self.palette.name}»."
-msgstr "Nie udało się usunąć palety «{self.palette.name}»."
-
-#: paleta/dialog/ui/add_color_dialog.ui:6
-#: paleta/pages/palette/ui/palette_row.ui:71
-msgid "Add Color to Palette"
-msgstr "Dodaj kolor do palety"
-
-#: paleta/dialog/ui/add_color_dialog.ui:14
-#: paleta/dialog/ui/add_new_palette_dialog.ui:14
-#: paleta/dialog/ui/delete_color_dialog.ui:14
-#: paleta/dialog/ui/delete_palette_dialog.ui:16
-#: paleta/dialog/ui/duplicate_palette_dialog.ui:14
-#: paleta/dialog/ui/rename_palette_dialog.ui:14
-#: paleta/dialog/ui/save_palette_dialog.ui:15
-msgid "_Cancel"
-msgstr "_Anuluj"
-
-#: paleta/dialog/ui/add_color_dialog.ui:15
-msgid "_Add Color"
-msgstr "_Dodaj kolor"
-
-#: paleta/dialog/ui/add_color_dialog.ui:41
-msgid "Select from previously added colors or pick a new one."
-msgstr "Wybierz z wcześniej dodanych kolorów lub wybierz nowy."
-
-#: paleta/dialog/ui/add_color_dialog.ui:63
-#: paleta/dialog/ui/add_new_palette_dialog.ui:76
-msgid "_Choose with Picker"
-msgstr "_Wybierz z selektora"
-
-#: paleta/dialog/ui/add_new_palette_dialog.ui:6
-#: paleta/pages/palette/ui/palette_page.ui:21
-msgid "Add New Palette"
-msgstr "Dodaj nową paletę"
-
-#: paleta/dialog/ui/add_new_palette_dialog.ui:15
-msgid "_Add Palette"
-msgstr "_Dodaj paletę"
-
-#: paleta/dialog/ui/add_new_palette_dialog.ui:43
-#: paleta/dialog/ui/rename_palette_dialog.ui:24
-msgid "New Palette _Name"
-msgstr "Nazwa nowej palety"
-
-#: paleta/dialog/ui/add_new_palette_dialog.ui:53
-msgid "Select from previously added colors or pick one to add to new palette."
-msgstr ""
-"Wybierz z wcześniej dodanych kolorów lub wybierz do dodania do nowej palety."
-
-#: paleta/dialog/ui/delete_color_dialog.ui:6
-msgid "Remove Color from Palette?"
-msgstr "Usunąć kolor z palety?"
-
-#: paleta/dialog/ui/delete_color_dialog.ui:15
-msgid "_Remove"
-msgstr "_Usuń"
-
-#: paleta/dialog/ui/delete_palette_dialog.ui:6
-msgid "Delete Palette?"
-msgstr "Usunąć paletę?"
-
-#: paleta/dialog/ui/delete_palette_dialog.ui:17
-msgid "_Delete"
-msgstr "_Usuń"
-
-#: paleta/dialog/ui/delete_palette_dialog.ui:23
-msgid "This action will permanently remove this palette from Paleta."
-msgstr "Ta akcja permanentnie usunie tą paletę z Paleta."
-
-#: paleta/dialog/ui/duplicate_palette_dialog.ui:6
-msgid "Duplicate Palette?"
-msgstr "Zduplikować paletę?"
-
-#: paleta/dialog/ui/duplicate_palette_dialog.ui:15
-msgid "_Duplicate"
-msgstr "_Duplikuj"
-
-#: paleta/dialog/ui/duplicate_palette_dialog.ui:24
-msgid "Duplicated Palette _Name"
-msgstr "Nazwa zduplikowanej palety"
-
-#: paleta/dialog/ui/rename_palette_dialog.ui:6
-msgid "Rename Palette?"
-msgstr "Zmienić nazwę palety?"
-
-#: paleta/dialog/ui/rename_palette_dialog.ui:15
-msgid "_Rename"
-msgstr "_Zmień nazwę"
-
-#: paleta/dialog/ui/save_palette_dialog.ui:6
-msgid "Save Palette?"
-msgstr "Zapisać paletę?"
-
-#: paleta/dialog/ui/save_palette_dialog.ui:16
-msgid "_Save"
-msgstr "_Zapisz"
-
-#: paleta/dialog/ui/save_palette_dialog.ui:25
-msgid "Palette _Name"
-msgstr "Nazwa palety"
-
-#: paleta/pages/image_drop/color_thief_panel.py:95
-msgid "Unable to start palette extraction."
-msgstr "Nie udało się rozpocząć ekstrakcji kolorów."
-
-#: paleta/pages/image_drop/color_thief_panel.py:98
-msgid "Unable to start palette extraction, no image loaded."
-msgstr "Nie udało się rozpocząć ekstrakcji kolorów, nie załadowano obrazu."
-
-#: paleta/pages/image_drop/color_thief_panel.py:117
-msgid "Unable to extract colors from image."
-msgstr "Nie udało się wyodrębnić kolorów z obrazu."
-
-#: paleta/pages/image_drop/color_thief_panel.py:128
-msgid "Unable to save palette, no image loaded."
-msgstr "Nie udało się zapisać palety, nie załadowano obrazu."
-
-#: paleta/pages/image_drop/color_thief_panel.py:133
-msgid "Unable to save palette, no colors extracted."
-msgstr "Nie udało się zapisać palety, nie wyodrębniono kolorów."
-
-#: paleta/pages/image_drop/image_drop_page.py:52
-#: paleta/pages/image_drop/image_drop_page.py:67
-msgid "Unable to read drop."
-msgstr "Nie udało się odczytać upuszczenia."
-
-#: paleta/pages/image_drop/image_drop_page.py:57
-msgid ""
-"Unable to verify file on drop, try with the file chooser in the upper left "
-"corner."
-msgstr ""
-"Nie udało się zweryfikować pliku przy upuszczeniu, spróbuj z selektorem "
-"plików z lewego górnego rogu."
-
-#: paleta/pages/image_drop/ui/color_thief_panel.ui:63
-msgid "Palette Count"
-msgstr "Liczba palet"
-
-#: paleta/pages/image_drop/ui/color_thief_panel.ui:64
-msgid "Max amount of colors to retrieve."
-msgstr "Maksymalna ilość kolorów do pozyskania."
-
-#: paleta/pages/image_drop/ui/color_thief_panel.ui:80
-msgid "Palette Accuracy"
-msgstr "Dokładność palety"
-
-#: paleta/pages/image_drop/ui/color_thief_panel.ui:92
-msgid "Precise"
-msgstr "Dokładna"
-
-#: paleta/pages/image_drop/ui/color_thief_panel.ui:93
-msgid "Normal"
-msgstr "Normalna"
-
-#: paleta/pages/image_drop/ui/color_thief_panel.ui:94
-msgid "Low"
-msgstr "Niska"
-
-#: paleta/pages/image_drop/ui/color_thief_panel.ui:155
-msgid "_Save Palette"
-msgstr "_Zapisz paletę"
-
-#: paleta/pages/image_drop/ui/image_drop_page.ui:14
-msgid "Drop Image"
-msgstr "Upuść obraz tutaj"
-
-#: paleta/pages/image_drop/ui/image_drop_page.ui:15
-msgid ""
-"Drag an image here, click the button below, or click the button in the upper "
-"left corner of this window."
-msgstr ""
-"Przeciągnij tutaj obraz, kliknij przycisk poniżej lub kliknij przycisk w "
-"lewym górnym rogu tego okna."
-
-#: paleta/pages/palette/palette_page.py:61
-msgid "Cannot toggle edit mode, no palettes added."
-msgstr "Nie można przełączyć trybu edycji, brak dodanych palet."
-
-#: paleta/pages/palette/ui/palette_row.ui:50
-msgid "Edit Palette Name"
-msgstr "Edytuj nazwę palety"
-
-#: paleta/pages/palette/ui/palette_row.ui:62
-msgid "Duplicate Palette"
-msgstr "Duplikuj paletę"
-
-#: paleta/pages/palette/ui/palette_row.ui:80
-msgid "Delete Palette"
-msgstr "Usuń paletę"
-
-#: paleta/pages/palette/ui/palette_page.ui:43
-msgid "Add Some Palettes!"
-msgstr "Dodaj parę palet!"
-
-#: paleta/pages/palette/ui/palette_page.ui:44
-msgid ""
-"Drop an image onto the drop page and extract some colors, or add a palette "
-"manually by clicking the button in the lower right corner to get started!"
-msgstr ""
-"Aby zacząć, upuść obraz na stronie zrzutu i wyodrębnij kolory lub dodaj "
-"paletę ręcznie poprzez kliknięcie przycisku w prawym dolnym rogu."
-
-#: paleta/pages/palette/ui/palette_color_card.ui:42
-msgid "Remove Color from Palette"
-msgstr "Usuń kolor z palety"
 
 #: data/io.github.nate_xyz.Paleta.desktop.in:3
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:6
@@ -608,36 +88,572 @@ msgstr ""
 "funkcje lub znalazłeś usterkę, twoja opinia będzie mile widziana!"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
+msgid "Rewritten in Rust, now uses colorthief-rs!"
+msgstr ""
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:40
 msgid "Added Translation Support"
 msgstr "Dodano wsparcie tłumaczeń"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
 msgid "Added French and Dutch translations!"
 msgstr "Dodano tłumaczenia w językach Francuskim i Duńskim!"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:48
 msgid "Automatic palette extraction on image load"
 msgstr "Automatyczna ekstrakcja palety przy załadowaniu obrazu"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:42
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:49
 msgid "Cleaner extraction panel UI"
 msgstr "Czytelniejsze UI panelu ekstrakcji"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:43
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:50
 msgid "Clearer options for palette quality / accuracy"
 msgstr "Czytelniejsze opcje dla dokładności / jakości palety"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:51
 msgid "Better AppData summary"
 msgstr "Lepsze podsumowanie w AppData"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:52
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:59
 msgid "Toast improvements"
 msgstr "Ulepszenia wyskakujących informacji (toasts)"
 
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:53
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:60
 msgid "Drop Page open button"
 msgstr "Nowy przycisk do otwierania obrazów w stronie rzutu"
+
+#. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
+#. One name per line, please do not remove previous names.
+#: src/application.rs:150
+msgid "translator-credits"
+msgstr "tfuxu https://github.com/tfuxu"
+
+#: src/application.rs:151
+msgid "Powered by "
+msgstr "Zasilany przez "
+
+#: src/window.rs:184
+#, fuzzy
+msgid "_Open Image"
+msgstr "Otwórz obraz"
+
+#: src/window.rs:185 src/dialog/ui/add_color_dialog.ui:13
+#: src/dialog/ui/add_new_palette_dialog.ui:13
+#: src/dialog/ui/delete_color_dialog.ui:13
+#: src/dialog/ui/delete_palette_dialog.ui:13
+#: src/dialog/ui/duplicate_palette_dialog.ui:12
+#: src/dialog/ui/rename_palette_dialog.ui:12
+#: src/dialog/ui/save_palette_dialog.ui:12
+msgid "_Cancel"
+msgstr "_Anuluj"
+
+#: src/window.rs:187
+msgid "Select an Image File"
+msgstr "Wybierz plik obrazu"
+
+#: src/window.rs:205 src/window.rs:209
+#, fuzzy
+msgid "Unable to load file."
+msgstr "Nie udało się załadować bazy danych."
+
+#: src/toasts.rs:58
+#, fuzzy
+msgid "<span foreground={}>Error!</span> {}"
+msgstr "<span foreground={ERROR_RED}>Błąd!</span> {html.escape(error)}"
+
+#: src/toasts.rs:66
+#, fuzzy
+msgid "<span foreground={}>Opened image:</span> {}"
+msgstr "<span foreground={SUCCESS_GREEN}>Otwarty obraz:</span> {base_name}"
+
+#: src/toasts.rs:71
+msgid "Could not open image: {}"
+msgstr "Nie można otworzyć obrazu: {}"
+
+#: src/toasts.rs:75
+#, fuzzy
+msgid "Added color <span foreground=\"{}\">{}</span> to palette «{}»."
+msgstr ""
+"Dodano kolor <span foreground=\"{hex_name}\">{hex_name}</span> do palety "
+"«{html.escape(palette_name)}»."
+
+#: src/toasts.rs:80
+#, fuzzy
+msgid "Removed color <span foreground=\"{}\">{}</span> from palette «{}»."
+msgstr ""
+"Usunięto kolor <span foreground=\"{hex_name}\">{hex_name}</span> z palety "
+"«{html.escape(palette_name)}»."
+
+#: src/ui/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Ogólne"
+
+#: src/ui/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Pokaż skróty klawiszowe"
+
+#: src/ui/help-overlay.ui:22
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Opuść program"
+
+#: src/ui/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Image"
+msgstr "Obraz"
+
+#: src/ui/help-overlay.ui:35
+msgctxt "shortcut window"
+msgid "Open Image"
+msgstr "Otwórz obraz"
+
+#: src/ui/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Extract Palette"
+msgstr "Wyodrębnij paletę"
+
+#: src/ui/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Save Extracted Palette"
+msgstr "Zapisz wyodrębnione kolory"
+
+#: src/ui/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Go To Image Drop Page"
+msgstr "Idź do zrzutu obrazów"
+
+#: src/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Palettes"
+msgstr "Palety"
+
+#: src/ui/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Toggle Edit Mode"
+msgstr "Przełącz tryb edycji"
+
+#: src/ui/help-overlay.ui:72
+msgctxt "shortcut window"
+msgid "Add Palette"
+msgstr "Dodaj paletę"
+
+#: src/ui/help-overlay.ui:78
+msgctxt "shortcut window"
+msgid "Go To Palette Page"
+msgstr "Idź do palet"
+
+#: src/ui/window.ui:26 src/pages/image_drop/ui/image_drop_page.ui:29
+msgid "Open Image"
+msgstr "Otwórz obraz"
+
+#: src/ui/window.ui:37
+msgid "Edit Palettes"
+msgstr "Edytuj palety"
+
+#: src/ui/window.ui:58
+msgid "Drop"
+msgstr "Upuść"
+
+#: src/ui/window.ui:69
+msgid "Palettes"
+msgstr "Palety"
+
+#: src/ui/window.ui:92
+msgid "_Keyboard Shortcuts"
+msgstr "_Skróty klawiszowe"
+
+#: src/ui/window.ui:96
+msgid "_About Paleta"
+msgstr "_O Paleta"
+
+#: src/dialog/add_color_dialog.rs:125
+msgid "Add Color to {}"
+msgstr "Dodaj kolor do {}"
+
+#: src/dialog/add_color_dialog.rs:147
+msgid "Pick a new color to add to {}."
+msgstr "Wybierz nowy kolor do dodania do {}."
+
+#: src/dialog/add_color_dialog.rs:158 src/dialog/add_new_palette_dialog.rs:157
+msgid "Currently selected color: {}"
+msgstr "Aktualnie wybrany kolor: {}"
+
+#: src/dialog/add_color_dialog.rs:179
+msgid "Choose new color to add to {}"
+msgstr "Wybierz nowy kolor do dodania do {}"
+
+#: src/dialog/add_color_dialog.rs:211
+#, fuzzy
+msgid "Unable to add color {}."
+msgstr "Nie udało się dodać koloru."
+
+#: src/dialog/add_color_dialog.rs:214 src/dialog/add_color_dialog.rs:217
+msgid "Unable to add color."
+msgstr "Nie udało się dodać koloru."
+
+#: src/dialog/add_new_palette_dialog.rs:109
+#: src/dialog/save_palette_dialog.rs:78
+msgid "Palette #{}"
+msgstr "Paleta #{}"
+
+#: src/dialog/add_new_palette_dialog.rs:144
+#, fuzzy
+msgid "Pick a new color to add to new palette."
+msgstr "Wybierz kolor do dodania do nowej palety."
+
+#: src/dialog/add_new_palette_dialog.rs:177
+msgid "Choose color to add to new palette"
+msgstr "Wybierz kolor do dodania do nowej palety"
+
+#: src/dialog/add_new_palette_dialog.rs:203
+msgid "Created!"
+msgstr "Utworzono!"
+
+#: src/dialog/add_new_palette_dialog.rs:203
+#: src/dialog/save_palette_dialog.rs:109
+#, fuzzy
+msgid "New palette: «{}»"
+msgstr "Nowa paleta: «{name}»"
+
+#: src/dialog/add_new_palette_dialog.rs:206
+#: src/dialog/save_palette_dialog.rs:114
+#, fuzzy
+msgid "Unable to add new palette «{}»"
+msgstr "Nie udało się utworzyć nowej palety «{name}»"
+
+#: src/dialog/add_new_palette_dialog.rs:209
+msgid "Unable to add palette, must select a color."
+msgstr "Nie udało się dodać palety, musisz wybrać kolor."
+
+#: src/dialog/delete_color_dialog.rs:93
+msgid "Remove color {} from {}?"
+msgstr "Usunąć kolor {} z {}?"
+
+#: src/dialog/delete_color_dialog.rs:111
+#, fuzzy
+msgid "Unable to remove color {}."
+msgstr "Nie udało się usunąć koloru."
+
+#: src/dialog/delete_color_dialog.rs:114 src/dialog/delete_color_dialog.rs:117
+msgid "Unable to remove color."
+msgstr "Nie udało się usunąć koloru."
+
+#: src/dialog/delete_palette_dialog.rs:93
+msgid "Removed"
+msgstr "Usunięto"
+
+#: src/dialog/delete_palette_dialog.rs:93
+#, fuzzy
+msgid "palette: «{}»."
+msgstr "Nowa paleta: «{name}»"
+
+#: src/dialog/delete_palette_dialog.rs:96
+#, fuzzy
+msgid "Unable to delete palette «{}»."
+msgstr "Nie udało się utworzyć nowej palety «{name}»"
+
+#: src/dialog/delete_palette_dialog.rs:99
+#, fuzzy
+msgid "Unable to delete palette."
+msgstr "Nie udało się usunąć palety «{self.palette.name}»."
+
+#: src/dialog/duplicate_palette_dialog.rs:89
+#, fuzzy
+msgid "Duplicate {}?"
+msgstr "_Duplikuj"
+
+#: src/dialog/duplicate_palette_dialog.rs:90
+#, fuzzy
+msgid "{} duplicate"
+msgstr "{self.name} duplikat"
+
+#: src/dialog/duplicate_palette_dialog.rs:109
+msgid "Duplicated!"
+msgstr "Zduplikowano!"
+
+#: src/dialog/duplicate_palette_dialog.rs:109
+#, fuzzy
+msgid "Copied «{}» to «{}»."
+msgstr "Skopiowano «{self.palette.name}» do «{name}»."
+
+#: src/dialog/duplicate_palette_dialog.rs:112
+#, fuzzy
+msgid "Unable to duplicate palette «{}»."
+msgstr "Nie udało się zduplikować palety «{self.palette.name}»."
+
+#: src/dialog/duplicate_palette_dialog.rs:115
+#, fuzzy
+msgid "Unable to duplicate palette."
+msgstr "Nie udało się zduplikować palety «{self.palette.name}»."
+
+#: src/dialog/rename_palette_dialog.rs:89
+#, fuzzy
+msgid "Rename {}?"
+msgstr "_Zmień nazwę"
+
+#: src/dialog/rename_palette_dialog.rs:109
+msgid "Renamed!"
+msgstr "Zmieniono!"
+
+#: src/dialog/rename_palette_dialog.rs:109
+#, fuzzy
+msgid "Changed name from «{}» to «{}»."
+msgstr "Zmieniono nazwę z «{self.name}» do «{name}»."
+
+#: src/dialog/rename_palette_dialog.rs:112
+#, fuzzy
+msgid "Unable to rename palette «{}»."
+msgstr "Nie udało się zmienić nazwy palety «{self.name}»."
+
+#: src/dialog/rename_palette_dialog.rs:115
+#, fuzzy
+msgid "Unable to rename palette."
+msgstr "Nie udało się zmienić nazwy palety «{self.name}»."
+
+#: src/dialog/save_palette_dialog.rs:109
+msgid "Saved!"
+msgstr "Zapisano!"
+
+#: src/dialog/save_palette_dialog.rs:118
+#, fuzzy
+msgid "Unable to add palette, no colors extracted."
+msgstr "Nie udało się zapisać palety, nie wyodrębniono kolorów."
+
+#: src/dialog/ui/add_color_dialog.ui:6 src/pages/palette/ui/palette_row.ui:71
+msgid "Add Color to Palette"
+msgstr "Dodaj kolor do palety"
+
+#: src/dialog/ui/add_color_dialog.ui:14
+msgid "_Add Color"
+msgstr "_Dodaj kolor"
+
+#: src/dialog/ui/add_color_dialog.ui:40
+msgid "Select from previously added colors or pick a new one."
+msgstr "Wybierz z wcześniej dodanych kolorów lub wybierz nowy."
+
+#: src/dialog/ui/add_color_dialog.ui:62
+#: src/dialog/ui/add_new_palette_dialog.ui:75
+msgid "_Choose with Picker"
+msgstr "_Wybierz z selektora"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:6
+#: src/pages/palette/ui/palette_page.ui:21
+msgid "Add New Palette"
+msgstr "Dodaj nową paletę"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:14
+msgid "_Add Palette"
+msgstr "_Dodaj paletę"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:42
+#: src/dialog/ui/rename_palette_dialog.ui:22
+msgid "New Palette _Name"
+msgstr "Nazwa nowej palety"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:52
+msgid "Select from previously added colors or pick one to add to new palette."
+msgstr ""
+"Wybierz z wcześniej dodanych kolorów lub wybierz do dodania do nowej palety."
+
+#: src/dialog/ui/delete_color_dialog.ui:6
+msgid "Remove Color from Palette?"
+msgstr "Usunąć kolor z palety?"
+
+#: src/dialog/ui/delete_color_dialog.ui:14
+msgid "_Remove"
+msgstr "_Usuń"
+
+#: src/dialog/ui/delete_palette_dialog.ui:6
+msgid "Delete Palette?"
+msgstr "Usunąć paletę?"
+
+#: src/dialog/ui/delete_palette_dialog.ui:14
+msgid "_Delete"
+msgstr "_Usuń"
+
+#: src/dialog/ui/delete_palette_dialog.ui:20
+msgid "This action will permanently remove this palette from Paleta."
+msgstr "Ta akcja permanentnie usunie tą paletę z Paleta."
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:6
+msgid "Duplicate Palette?"
+msgstr "Zduplikować paletę?"
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:13
+msgid "_Duplicate"
+msgstr "_Duplikuj"
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:22
+msgid "Duplicated Palette _Name"
+msgstr "Nazwa zduplikowanej palety"
+
+#: src/dialog/ui/rename_palette_dialog.ui:6
+msgid "Rename Palette?"
+msgstr "Zmienić nazwę palety?"
+
+#: src/dialog/ui/rename_palette_dialog.ui:13
+msgid "_Rename"
+msgstr "_Zmień nazwę"
+
+#: src/dialog/ui/save_palette_dialog.ui:6
+msgid "Save Palette?"
+msgstr "Zapisać paletę?"
+
+#: src/dialog/ui/save_palette_dialog.ui:13
+msgid "_Save"
+msgstr "_Zapisz"
+
+#: src/dialog/ui/save_palette_dialog.ui:22
+msgid "Palette _Name"
+msgstr "Nazwa palety"
+
+#: src/pages/image_drop/color_thief_panel.rs:228
+msgid "Unable to start palette extraction, no image loaded."
+msgstr "Nie udało się rozpocząć ekstrakcji kolorów, nie załadowano obrazu."
+
+#: src/pages/image_drop/color_thief_panel.rs:247
+msgid "Unable to extract colors from image."
+msgstr "Nie udało się wyodrębnić kolorów z obrazu."
+
+#: src/pages/image_drop/color_thief_panel.rs:268
+msgid "Unable to save palette, no colors extracted."
+msgstr "Nie udało się zapisać palety, nie wyodrębniono kolorów."
+
+#: src/pages/image_drop/color_thief_panel.rs:271
+msgid "Unable to save palette, no image loaded."
+msgstr "Nie udało się zapisać palety, nie załadowano obrazu."
+
+#: src/pages/image_drop/image_drop_page.rs:112
+msgid ""
+"Unable to verify file on drop, try with the file chooser in the upper left "
+"corner."
+msgstr ""
+"Nie udało się zweryfikować pliku przy upuszczeniu, spróbuj z selektorem "
+"plików z lewego górnego rogu."
+
+#: src/pages/image_drop/image_drop_page.rs:150
+msgid "Unable to read drop."
+msgstr "Nie udało się odczytać upuszczenia."
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:70
+msgid "Palette Count"
+msgstr "Liczba palet"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:71
+msgid "Max amount of colors to retrieve."
+msgstr "Maksymalna ilość kolorów do pozyskania."
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:87
+msgid "Palette Accuracy"
+msgstr "Dokładność palety"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:106
+msgid "Precise"
+msgstr "Dokładna"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:107
+msgid "Normal"
+msgstr "Normalna"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:108
+msgid "Low"
+msgstr "Niska"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:169
+msgid "_Save Palette"
+msgstr "_Zapisz paletę"
+
+#: src/pages/image_drop/ui/image_drop_page.ui:14
+msgid "Drop Image"
+msgstr "Upuść obraz tutaj"
+
+#: src/pages/image_drop/ui/image_drop_page.ui:15
+msgid ""
+"Drag an image here, click the button below, or click the button in the upper "
+"left corner of this window."
+msgstr ""
+"Przeciągnij tutaj obraz, kliknij przycisk poniżej lub kliknij przycisk w "
+"lewym górnym rogu tego okna."
+
+#: src/pages/palette/palette_page.rs:132
+msgid "Cannot toggle edit mode, no palettes added."
+msgstr "Nie można przełączyć trybu edycji, brak dodanych palet."
+
+#: src/pages/palette/ui/palette_row.ui:50
+msgid "Edit Palette Name"
+msgstr "Edytuj nazwę palety"
+
+#: src/pages/palette/ui/palette_row.ui:62
+msgid "Duplicate Palette"
+msgstr "Duplikuj paletę"
+
+#: src/pages/palette/ui/palette_row.ui:80
+msgid "Delete Palette"
+msgstr "Usuń paletę"
+
+#: src/pages/palette/ui/palette_page.ui:43
+msgid "Add Some Palettes!"
+msgstr "Dodaj parę palet!"
+
+#: src/pages/palette/ui/palette_page.ui:44
+msgid ""
+"Drop an image onto the drop page and extract some colors, or add a palette "
+"manually by clicking the button in the lower right corner to get started!"
+msgstr ""
+"Aby zacząć, upuść obraz na stronie zrzutu i wyodrębnij kolory lub dodaj "
+"paletę ręcznie poprzez kliknięcie przycisku w prawym dolnym rogu."
+
+#: src/pages/palette/ui/palette_color_card.ui:42
+msgid "Remove Color from Palette"
+msgstr "Usuń kolor z palety"
+
+#~ msgid "Image files"
+#~ msgstr "Pliki obrazów"
+
+#, python-brace-format
+#~ msgid ""
+#~ "Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to "
+#~ "clipboard!"
+#~ msgstr ""
+#~ "Skopiowano kolor <span foreground=\"{hex_name}\">{hex_name}</span> do "
+#~ "schowka!"
+
+#, python-brace-format
+#~ msgid "Unable to add color {self.color.hex}."
+#~ msgstr "Nie udało się dodać koloru {self.color.hex}."
+
+#, python-brace-format
+#~ msgid "Currently selected color: {color.hex}"
+#~ msgstr "Aktualnie wybrany kolor: {color.hex}"
+
+#, python-brace-format
+#~ msgid "Unable to remove color {self.color.hex}."
+#~ msgstr "Nie udało się usunąć koloru {self.color.hex}."
+
+#, python-brace-format
+#~ msgid "Rename {palette.name}?"
+#~ msgstr "Zmienić nazwę {palette.name}?"
+
+#~ msgid "Palette"
+#~ msgstr "Paleta"
+
+#, python-brace-format
+#~ msgid "Duplicate {palette.name}?"
+#~ msgstr "Zduplikować {palette.name}?"
+
+#, python-brace-format
+#~ msgid "Delete {palette.name}?"
+#~ msgstr "Usunąć {palette.name}?"
+
+#, python-brace-format
+#~ msgid "palette: «{self.palette.name}»."
+#~ msgstr "paletę: «{self.palette.name}»."
+
+#~ msgid "Unable to start palette extraction."
+#~ msgstr "Nie udało się rozpocząć ekstrakcji kolorów."
 
 #, python-brace-format
 #~ msgid "Add Color to {palette_name}"

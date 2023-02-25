@@ -1,5 +1,3 @@
-# i18n.gettext('paleta', preset: 'glib')
-
 i18n.gettext(
   'paleta',
   args: [
