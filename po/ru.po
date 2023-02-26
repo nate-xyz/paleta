@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-25 12:35+0100\n"
+"POT-Creation-Date: 2023-02-26 18:14-0500\n"
 "PO-Revision-Date: 2023-02-20 17:14+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -128,9 +128,10 @@ msgstr "Кнопка открытия на странице перемещени
 msgid "translator-credits"
 msgstr "Тимофей Сосновский <me@sit.sh>"
 
-#: src/application.rs:151
-msgid "Powered by "
-msgstr "Работает на "
+#. Translators: only replace "Powered by "
+#: src/application.rs:153
+msgid "Powered by color-thief"
+msgstr "Работает на color-thief"
 
 #: src/window.rs:184
 #, fuzzy
@@ -156,34 +157,36 @@ msgstr "Выбор файла изображения"
 msgid "Unable to load file."
 msgstr "Не удалось загрузить базу данных."
 
-#: src/toasts.rs:58
-#, fuzzy
-msgid "<span foreground={}>Error!</span> {}"
-msgstr "<span foreground={ERROR_RED}>Ошибка!</span> {html.escape(error)}"
+#. Translators: Do not replace {color_hex}, only translate "Copied color" and "to clipboard!"
+#: src/util.rs:109
+msgid "Copied color {color_hex} to clipboard!"
+msgstr "Цвет {color_hex} скопирован в буфер обмена!"
 
-#: src/toasts.rs:66
-#, fuzzy
-msgid "<span foreground={}>Opened image:</span> {}"
+#. Translators: Only replace "Error!". Reorder if necessary
+#: src/toasts.rs:59
+msgid "<span foreground={ERROR_RED}>Error!</span> {error_msg}"
+msgstr "<span foreground={ERROR_RED}>Ошибка!</span> {error_msg}"
+
+#. Translators: Only replace "Opened image:". Reorder if necessary
+#: src/toasts.rs:68
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
 msgstr ""
-"<span foreground={SUCCESS_GREEN}>Изображение открыто:</span>  {base_name}"
+"<span foreground={SUCCESS_GREEN}>Изображение открыто:</span>  {image_name}"
 
-#: src/toasts.rs:71
-msgid "Could not open image: {}"
+#. Translators: Do not replace {image_name}
+#: src/toasts.rs:74
+msgid "Could not open image: {image_name}"
 msgstr "Не удалось открыть изображение: {}"
 
-#: src/toasts.rs:75
-#, fuzzy
-msgid "Added color <span foreground=\"{}\">{}</span> to palette «{}»."
-msgstr ""
-"Цвет <span foreground=\"{hex_name}\">{hex_name}</span> добавлен в палитру "
-"«{html.escape(palette_name)}»."
-
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Added color" and "to palette" Reorder if necessary
 #: src/toasts.rs:80
-#, fuzzy
-msgid "Removed color <span foreground=\"{}\">{}</span> from palette «{}»."
-msgstr ""
-"Цвет <span foreground=\"{hex_name}\">{hex_name}</span> удалён из палитры "
-"«{html.escape(palette_name)}»."
+msgid "Added color {color_hex} to palette «{palette_name}»."
+msgstr "Цвет {color_hex} добавлен в палитру «{palette_name}»."
+
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Removed color" and "from palette" Reorder if necessary
+#: src/toasts.rs:87
+msgid "Removed color {color_hex} from palette «{palette_name}»."
+msgstr "Цвет {color_hex} удалён из палитры «{palette_name}»."
 
 #: src/ui/help-overlay.ui:13
 msgctxt "shortcut window"
@@ -270,25 +273,24 @@ msgid "_About Paleta"
 msgstr "_О Paleta"
 
 #: src/dialog/add_color_dialog.rs:125
-msgid "Add Color to {}"
-msgstr "Добавить цвет в {}"
+msgid "Add Color to {palette_name}"
+msgstr "Добавить цвет в {palette_name}"
 
 #: src/dialog/add_color_dialog.rs:147
-msgid "Pick a new color to add to {}."
-msgstr "Выбрать новый цвет для добавления в {}"
+msgid "Pick a new color to add to {palette_name}."
+msgstr "Выбрать новый цвет для добавления в {palette_name}"
 
 #: src/dialog/add_color_dialog.rs:158 src/dialog/add_new_palette_dialog.rs:157
-msgid "Currently selected color: {}"
-msgstr "Текущий цвет: {}"
+msgid "Currently selected color: {color_hex}"
+msgstr "Текущий цвет: {color_hex}"
 
 #: src/dialog/add_color_dialog.rs:179
-msgid "Choose new color to add to {}"
-msgstr "Выбрать новый цвет для добавления в {}"
+msgid "Choose new color to add to {palette_name}"
+msgstr "Выбрать новый цвет для добавления в {palette_name}"
 
 #: src/dialog/add_color_dialog.rs:211
-#, fuzzy
-msgid "Unable to add color {}."
-msgstr "Не удалось добавить цвет."
+msgid "Unable to add color {color_hex}."
+msgstr "Не удалось добавить цвет {color_hex}."
 
 #: src/dialog/add_color_dialog.rs:214 src/dialog/add_color_dialog.rs:217
 msgid "Unable to add color."
@@ -314,28 +316,25 @@ msgstr "Палитра создана!"
 
 #: src/dialog/add_new_palette_dialog.rs:203
 #: src/dialog/save_palette_dialog.rs:109
-#, fuzzy
-msgid "New palette: «{}»"
-msgstr "Новая палитра: «{name}»"
+msgid "New palette: «{palette_name}»"
+msgstr "Новая палитра: «{palette_name}»"
 
 #: src/dialog/add_new_palette_dialog.rs:206
 #: src/dialog/save_palette_dialog.rs:114
-#, fuzzy
-msgid "Unable to add new palette «{}»"
-msgstr "Не удалось создать новую палитру «{name}»"
+msgid "Unable to add new palette «{palette_name}»"
+msgstr "Не удалось создать новую палитру «{palette_name}»"
 
 #: src/dialog/add_new_palette_dialog.rs:209
 msgid "Unable to add palette, must select a color."
 msgstr "Не удалось создать палитру: требуется выбрать цвет."
 
 #: src/dialog/delete_color_dialog.rs:93
-msgid "Remove color {} from {}?"
-msgstr "Удалить цвет {} из {}?"
+msgid "Remove color {color_hex} from {palette_name}?"
+msgstr "Удалить цвет {color_hex} из {palette_name}?"
 
 #: src/dialog/delete_color_dialog.rs:111
-#, fuzzy
-msgid "Unable to remove color {}."
-msgstr "Не удалось удалить цвет."
+msgid "Unable to remove color {color_hex}."
+msgstr "Не удалось удалить цвет {color_hex}"
 
 #: src/dialog/delete_color_dialog.rs:114 src/dialog/delete_color_dialog.rs:117
 msgid "Unable to remove color."
@@ -346,72 +345,63 @@ msgid "Removed"
 msgstr "Удалено"
 
 #: src/dialog/delete_palette_dialog.rs:93
-#, fuzzy
-msgid "palette: «{}»."
-msgstr "Новая палитра: «{name}»"
+msgid "palette: «{palette_name}»."
+msgstr "палитра: «{palette_name}»."
 
 #: src/dialog/delete_palette_dialog.rs:96
-#, fuzzy
-msgid "Unable to delete palette «{}»."
-msgstr "Не удалось создать новую палитру «{name}»"
+msgid "Unable to delete palette «{palette_name}»."
+msgstr "Не удалось удалить палитру «{palette_name}»."
 
 #: src/dialog/delete_palette_dialog.rs:99
 #, fuzzy
 msgid "Unable to delete palette."
-msgstr "Не удалось удалить палитру «{self.palette.name}»."
+msgstr "Не удалось удалить палитру «{palette_name}»."
 
 #: src/dialog/duplicate_palette_dialog.rs:89
-#, fuzzy
-msgid "Duplicate {}?"
-msgstr "_Дублировать"
+msgid "Duplicate {palette_name}?"
+msgstr "Дублировать {palette_name}?"
 
 #: src/dialog/duplicate_palette_dialog.rs:90
-#, fuzzy
-msgid "{} duplicate"
-msgstr "Копия {self.name}"
+msgid "{palette_name} duplicate"
+msgstr "Копия {palette_name}"
 
 #: src/dialog/duplicate_palette_dialog.rs:109
 msgid "Duplicated!"
 msgstr "Продублировано!"
 
 #: src/dialog/duplicate_palette_dialog.rs:109
-#, fuzzy
-msgid "Copied «{}» to «{}»."
-msgstr "Палитра «{self.palette.name}» скопирована в «{name}»."
+msgid "Copied «{original_palette}» to «{duplicate_palette}»."
+msgstr "Палитра «{original_palette}» скопирована в «{duplicate_palette}»."
 
 #: src/dialog/duplicate_palette_dialog.rs:112
-#, fuzzy
-msgid "Unable to duplicate palette «{}»."
-msgstr "Не удалось дублировать палитру «{self.palette.name}»."
+msgid "Unable to duplicate palette «{palette_name}»."
+msgstr "Не удалось дублировать палитру «{palette_name}»."
 
 #: src/dialog/duplicate_palette_dialog.rs:115
 #, fuzzy
 msgid "Unable to duplicate palette."
-msgstr "Не удалось дублировать палитру «{self.palette.name}»."
+msgstr "Не удалось дублировать палитру «{palette_name}»."
 
 #: src/dialog/rename_palette_dialog.rs:89
-#, fuzzy
-msgid "Rename {}?"
-msgstr "_Переименовать"
+msgid "Rename {palette_name}?"
+msgstr "Переименовать {palette_name}?"
 
 #: src/dialog/rename_palette_dialog.rs:109
 msgid "Renamed!"
 msgstr "Переименовано!"
 
 #: src/dialog/rename_palette_dialog.rs:109
-#, fuzzy
-msgid "Changed name from «{}» to «{}»."
-msgstr "Имя изменено с «{self.name}» на «{name}»."
+msgid "Changed name from «{old_palette_name}» to «{new_palette_name}»."
+msgstr "Имя изменено с «{old_palette_name}» на «{palette_name}»."
 
 #: src/dialog/rename_palette_dialog.rs:112
-#, fuzzy
-msgid "Unable to rename palette «{}»."
-msgstr "Не удалось переименовать палитру «{self.name}»."
+msgid "Unable to rename palette «{palette_name}»."
+msgstr "Не удалось переименовать палитру «{palette_name}»."
 
 #: src/dialog/rename_palette_dialog.rs:115
 #, fuzzy
 msgid "Unable to rename palette."
-msgstr "Не удалось переименовать палитру «{self.name}»."
+msgstr "Не удалось переименовать палитру «{palette_name}»."
 
 #: src/dialog/save_palette_dialog.rs:109
 msgid "Saved!"
@@ -614,44 +604,12 @@ msgstr "Удалить цвет из палитры"
 #~ msgid "Image files"
 #~ msgstr "Файлы изображений"
 
-#, python-brace-format
-#~ msgid ""
-#~ "Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to "
-#~ "clipboard!"
-#~ msgstr ""
-#~ "Цвет <span foreground=\"{hex_name}\">{hex_name}</span> скопирован в буфер "
-#~ "обмена!"
-
-#, python-brace-format
-#~ msgid "Unable to add color {self.color.hex}."
-#~ msgstr "Не удалось добавить цвет {self.color.hex}."
-
-#, python-brace-format
-#~ msgid "Currently selected color: {color.hex}"
-#~ msgstr "Текущий цвет: {color.hex}"
-
-#, python-brace-format
-#~ msgid "Unable to remove color {self.color.hex}."
-#~ msgstr "Не удалось удалить цвет {self.color.hex}"
-
-#, python-brace-format
-#~ msgid "Rename {palette.name}?"
-#~ msgstr "Переименовать {palette.name}?"
-
 #~ msgid "Palette"
 #~ msgstr "Палитра"
 
 #, python-brace-format
-#~ msgid "Duplicate {palette.name}?"
-#~ msgstr "Дублировать {palette.name}?"
-
-#, python-brace-format
-#~ msgid "Delete {palette.name}?"
-#~ msgstr "Удалить {palette.name}?"
-
-#, python-brace-format
-#~ msgid "palette: «{self.palette.name}»."
-#~ msgstr "палитра: «{self.palette.name}»."
+#~ msgid "Delete {palette_name}?"
+#~ msgstr "Удалить {palette_name}?"
 
 #~ msgid "Unable to start palette extraction."
 #~ msgstr "Не удалось начать извлечение палитры."

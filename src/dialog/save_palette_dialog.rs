@@ -7,7 +7,7 @@ use std::cell::RefCell;
 
 use crate::util::{ database, active_window, go_to_palette_page};
 use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_f};
+use crate::i18n::{i18n, i18n_f, i18n_k};
 
 use crate::pages::image_drop::extracted_color::ExtractedColor;
 
@@ -106,12 +106,12 @@ impl SavePaletteDialog {
             }
 
             if database().add_palette_from_extracted(name.clone(), imp.colors.borrow().as_ref()) {
-                add_success_toast(&i18n("Saved!"), &i18n_f("New palette: «{}»", &[&name]));
+                add_success_toast(&i18n("Saved!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &name)]));
                 go_to_palette_page();
                 return;
 
             } else {
-                add_error_toast(i18n_f("Unable to add new palette «{}»", &[&name]));
+                add_error_toast(i18n_k("Unable to add new palette «{palette_name}»", &[("palette_name", &name)]));
             }
 
         } else  {

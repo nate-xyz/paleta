@@ -7,7 +7,7 @@ use std::cell::RefCell;
 
 use crate::util::{database, active_window};
 use crate::toasts::{add_error_toast, remove_color_toast};
-use crate::i18n::{i18n, i18n_f};
+use crate::i18n::{i18n, i18n_k};
 
 use crate::model::palette::Palette;
 use crate::model::color::Color;
@@ -90,7 +90,7 @@ impl DeleteColorDialog {
     }
 
     fn load(&self, color: &Color, palette: &Palette) {
-        self.set_heading(Some(&i18n_f("Remove color {} from {}?", &[&color.hex_name(), &palette.name()])));
+        self.set_heading(Some(&i18n_k("Remove color {color_hex} from {palette_name}?", &[("color_hex", &color.hex_name()), ("palette_name", &palette.name())])));
         let imp = self.imp();
         imp.color_bin.set_child(Some(&SimplerDeleteColorCard::new(color)));        
         imp.color.replace(Some(color.clone()));
@@ -108,7 +108,7 @@ impl DeleteColorDialog {
                             remove_color_toast(color.hex_name(), palette.name());
                             return;
                         } else {
-                            add_error_toast(i18n_f("Unable to remove color {}.", &[&color.hex_name()]));
+                            add_error_toast(i18n_k("Unable to remove color {color_hex}.", &[("color_hex", &color.hex_name())]));
                         }
                     },
                     None => add_error_toast(i18n("Unable to remove color.")),

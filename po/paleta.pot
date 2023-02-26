@@ -1,14 +1,14 @@
-# Paleta POT source translation file.
-# Copyright (C) 2023 nate-xyz
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the paleta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-25 12:35+0100\n"
+"POT-Creation-Date: 2023-02-26 18:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,8 +122,9 @@ msgstr ""
 msgid "translator-credits"
 msgstr ""
 
-#: src/application.rs:151
-msgid "Powered by "
+#. Translators: only replace "Powered by "
+#: src/application.rs:153
+msgid "Powered by color-thief"
 msgstr ""
 
 #: src/window.rs:184
@@ -148,24 +149,34 @@ msgstr ""
 msgid "Unable to load file."
 msgstr ""
 
-#: src/toasts.rs:58
-msgid "<span foreground={}>Error!</span> {}"
+#. Translators: Do not replace {color_hex}, only translate "Copied color" and "to clipboard!"
+#: src/util.rs:109
+msgid "Copied color {color_hex} to clipboard!"
 msgstr ""
 
-#: src/toasts.rs:66
-msgid "<span foreground={}>Opened image:</span> {}"
+#. Translators: Only replace "Error!". Reorder if necessary
+#: src/toasts.rs:59
+msgid "<span foreground={ERROR_RED}>Error!</span> {error_msg}"
 msgstr ""
 
-#: src/toasts.rs:71
-msgid "Could not open image: {}"
+#. Translators: Only replace "Opened image:". Reorder if necessary
+#: src/toasts.rs:68
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
 msgstr ""
 
-#: src/toasts.rs:75
-msgid "Added color <span foreground=\"{}\">{}</span> to palette «{}»."
+#. Translators: Do not replace {image_name}
+#: src/toasts.rs:74
+msgid "Could not open image: {image_name}"
 msgstr ""
 
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Added color" and "to palette" Reorder if necessary
 #: src/toasts.rs:80
-msgid "Removed color <span foreground=\"{}\">{}</span> from palette «{}»."
+msgid "Added color {color_hex} to palette «{palette_name}»."
+msgstr ""
+
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Removed color" and "from palette" Reorder if necessary
+#: src/toasts.rs:87
+msgid "Removed color {color_hex} from palette «{palette_name}»."
 msgstr ""
 
 #: src/ui/help-overlay.ui:13
@@ -253,23 +264,23 @@ msgid "_About Paleta"
 msgstr ""
 
 #: src/dialog/add_color_dialog.rs:125
-msgid "Add Color to {}"
+msgid "Add Color to {palette_name}"
 msgstr ""
 
 #: src/dialog/add_color_dialog.rs:147
-msgid "Pick a new color to add to {}."
+msgid "Pick a new color to add to {palette_name}."
 msgstr ""
 
 #: src/dialog/add_color_dialog.rs:158 src/dialog/add_new_palette_dialog.rs:157
-msgid "Currently selected color: {}"
+msgid "Currently selected color: {color_hex}"
 msgstr ""
 
 #: src/dialog/add_color_dialog.rs:179
-msgid "Choose new color to add to {}"
+msgid "Choose new color to add to {palette_name}"
 msgstr ""
 
 #: src/dialog/add_color_dialog.rs:211
-msgid "Unable to add color {}."
+msgid "Unable to add color {color_hex}."
 msgstr ""
 
 #: src/dialog/add_color_dialog.rs:214 src/dialog/add_color_dialog.rs:217
@@ -295,12 +306,12 @@ msgstr ""
 
 #: src/dialog/add_new_palette_dialog.rs:203
 #: src/dialog/save_palette_dialog.rs:109
-msgid "New palette: «{}»"
+msgid "New palette: «{palette_name}»"
 msgstr ""
 
 #: src/dialog/add_new_palette_dialog.rs:206
 #: src/dialog/save_palette_dialog.rs:114
-msgid "Unable to add new palette «{}»"
+msgid "Unable to add new palette «{palette_name}»"
 msgstr ""
 
 #: src/dialog/add_new_palette_dialog.rs:209
@@ -308,11 +319,11 @@ msgid "Unable to add palette, must select a color."
 msgstr ""
 
 #: src/dialog/delete_color_dialog.rs:93
-msgid "Remove color {} from {}?"
+msgid "Remove color {color_hex} from {palette_name}?"
 msgstr ""
 
 #: src/dialog/delete_color_dialog.rs:111
-msgid "Unable to remove color {}."
+msgid "Unable to remove color {color_hex}."
 msgstr ""
 
 #: src/dialog/delete_color_dialog.rs:114 src/dialog/delete_color_dialog.rs:117
@@ -324,11 +335,11 @@ msgid "Removed"
 msgstr ""
 
 #: src/dialog/delete_palette_dialog.rs:93
-msgid "palette: «{}»."
+msgid "palette: «{palette_name}»."
 msgstr ""
 
 #: src/dialog/delete_palette_dialog.rs:96
-msgid "Unable to delete palette «{}»."
+msgid "Unable to delete palette «{palette_name}»."
 msgstr ""
 
 #: src/dialog/delete_palette_dialog.rs:99
@@ -336,11 +347,11 @@ msgid "Unable to delete palette."
 msgstr ""
 
 #: src/dialog/duplicate_palette_dialog.rs:89
-msgid "Duplicate {}?"
+msgid "Duplicate {palette_name}?"
 msgstr ""
 
 #: src/dialog/duplicate_palette_dialog.rs:90
-msgid "{} duplicate"
+msgid "{palette_name} duplicate"
 msgstr ""
 
 #: src/dialog/duplicate_palette_dialog.rs:109
@@ -348,11 +359,11 @@ msgid "Duplicated!"
 msgstr ""
 
 #: src/dialog/duplicate_palette_dialog.rs:109
-msgid "Copied «{}» to «{}»."
+msgid "Copied «{original_palette}» to «{duplicate_palette}»."
 msgstr ""
 
 #: src/dialog/duplicate_palette_dialog.rs:112
-msgid "Unable to duplicate palette «{}»."
+msgid "Unable to duplicate palette «{palette_name}»."
 msgstr ""
 
 #: src/dialog/duplicate_palette_dialog.rs:115
@@ -360,7 +371,7 @@ msgid "Unable to duplicate palette."
 msgstr ""
 
 #: src/dialog/rename_palette_dialog.rs:89
-msgid "Rename {}?"
+msgid "Rename {palette_name}?"
 msgstr ""
 
 #: src/dialog/rename_palette_dialog.rs:109
@@ -368,11 +379,11 @@ msgid "Renamed!"
 msgstr ""
 
 #: src/dialog/rename_palette_dialog.rs:109
-msgid "Changed name from «{}» to «{}»."
+msgid "Changed name from «{old_palette_name}» to «{new_palette_name}»."
 msgstr ""
 
 #: src/dialog/rename_palette_dialog.rs:112
-msgid "Unable to rename palette «{}»."
+msgid "Unable to rename palette «{palette_name}»."
 msgstr ""
 
 #: src/dialog/rename_palette_dialog.rs:115

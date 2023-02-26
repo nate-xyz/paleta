@@ -9,6 +9,8 @@ use crate::model::model::Model;
 use super::application::App;
 use super::window::Window;
 
+use super::i18n::i18n_k;
+
 pub fn rgb_to_hex(r: u8, g: u8, b: u8) -> String {
     format!("#{:02X}{:02X}{:02X}", r, g, b)
 }
@@ -101,9 +103,11 @@ pub fn copy_color(hex_name: String) {
         .unwrap();
 
     win.copy_color(hex_name.clone());
+    let color_hex = format!("<span foreground=\"{}\">{}</span>", hex_name, hex_name);
 
-    let msg = format!("Copied color <span foreground=\"{}\">{}</span> to clipboard!", hex_name, hex_name);
-    let toast = adw::Toast::new(msg.as_str());
+    // Translators: Do not replace {color_hex}, only translate "Copied color" and "to clipboard!"
+    let msg = &i18n_k("Copied color {color_hex} to clipboard!", &[("color_hex", &color_hex)]);
+    let toast = adw::Toast::new(msg);
     toast.set_timeout(1);
     win.add_toast(toast);
 }

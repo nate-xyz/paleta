@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-25 12:35+0100\n"
+"POT-Creation-Date: 2023-02-26 18:14-0500\n"
 "PO-Revision-Date: 2023-02-15 00:13+0100\n"
 "Last-Translator: Radioactive Radio <barraiser59@gmail.com>\n"
 "Language-Team: Hindi\n"
@@ -127,9 +127,11 @@ msgstr "ड्रॉप पेज ओपन बटन"
 msgid "translator-credits"
 msgstr "Radioactive radio"
 
-#: src/application.rs:151
-msgid "Powered by "
-msgstr "द्वारा संचालित "
+#. Translators: only replace "Powered by "
+#: src/application.rs:153
+#, fuzzy
+msgid "Powered by color-thief"
+msgstr "द्वारा संचालित color-thief"
 
 #: src/window.rs:184
 #, fuzzy
@@ -155,32 +157,35 @@ msgstr "एक इमेज फ़ाइल चुने"
 msgid "Unable to load file."
 msgstr "डेटाबेस लोड करने में असमर्थ"
 
-#: src/toasts.rs:58
-#, fuzzy
-msgid "<span foreground={}>Error!</span> {}"
-msgstr "<span foreground={ERROR_RED}>एरर!</span> {html.escape(error)}"
+#. Translators: Do not replace {color_hex}, only translate "Copied color" and "to clipboard!"
+#: src/util.rs:109
+msgid "Copied color {color_hex} to clipboard!"
+msgstr "क्लिपबोर्ड में {color_hex} रंग कॉपी किया!"
 
-#: src/toasts.rs:66
-msgid "<span foreground={}>Opened image:</span> {}"
+#. Translators: Only replace "Error!". Reorder if necessary
+#: src/toasts.rs:59
+msgid "<span foreground={ERROR_RED}>Error!</span> {error_msg}"
+msgstr "<span foreground={ERROR_RED}>एरर!</span> {error_msg}"
+
+#. Translators: Only replace "Opened image:". Reorder if necessary
+#: src/toasts.rs:68
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
 msgstr ""
 
-#: src/toasts.rs:71
-msgid "Could not open image: {}"
+#. Translators: Do not replace {image_name}
+#: src/toasts.rs:74
+msgid "Could not open image: {image_name}"
 msgstr ""
 
-#: src/toasts.rs:75
-#, fuzzy
-msgid "Added color <span foreground=\"{}\">{}</span> to palette «{}»."
-msgstr ""
-"पैलेट में <span foreground=\"{hex_name}\">{hex_name}</span> रंग जोड़ा गयापैलेट "
-"«{html.escape(palette_name)}»."
-
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Added color" and "to palette" Reorder if necessary
 #: src/toasts.rs:80
-#, fuzzy
-msgid "Removed color <span foreground=\"{}\">{}</span> from palette «{}»."
-msgstr ""
-"पैलेट से <span foreground=\"{hex_name}\">{hex_name}</span> रंग हटाया गयापैलेट "
-"«{html.escape(palette_name)}»."
+msgid "Added color {color_hex} to palette «{palette_name}»."
+msgstr "पैलेट में {color_hex} रंग जोड़ा गयापैलेट «{palette_name}»."
+
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Removed color" and "from palette" Reorder if necessary
+#: src/toasts.rs:87
+msgid "Removed color {color_hex} from palette «{palette_name}»."
+msgstr "पैलेट से {color_hex} रंग हटाया गयापैलेट «{palette_name}»."
 
 #: src/ui/help-overlay.ui:13
 msgctxt "shortcut window"
@@ -268,25 +273,24 @@ msgid "_About Paleta"
 msgstr "_Paleta के बारे में"
 
 #: src/dialog/add_color_dialog.rs:125
-msgid "Add Color to {}"
-msgstr "{} में रंग जोड़ें"
+msgid "Add Color to {palette_name}"
+msgstr "{palette_name} में रंग जोड़ें"
 
 #: src/dialog/add_color_dialog.rs:147
-msgid "Pick a new color to add to {}."
-msgstr "{} में जोड़ने के लिए नया रंग चुनें।"
+msgid "Pick a new color to add to {palette_name}."
+msgstr "{palette_name} में जोड़ने के लिए नया रंग चुनें।"
 
 #: src/dialog/add_color_dialog.rs:158 src/dialog/add_new_palette_dialog.rs:157
-msgid "Currently selected color: {}"
-msgstr "वर्तमान में चयनित रंग : {}"
+msgid "Currently selected color: {color_hex}"
+msgstr "वर्तमान में चयनित रंग : {color_hex}"
 
 #: src/dialog/add_color_dialog.rs:179
-msgid "Choose new color to add to {}"
-msgstr "{} में जोड़ने के लिए नया रंग चुनें"
+msgid "Choose new color to add to {palette_name}"
+msgstr "{palette_name} में जोड़ने के लिए नया रंग चुनें"
 
 #: src/dialog/add_color_dialog.rs:211
-#, fuzzy
-msgid "Unable to add color {}."
-msgstr "रंग ऐड करने में असमर्थ।"
+msgid "Unable to add color {color_hex}."
+msgstr "रंग जोड़ने में असमर्थ {color_hex}।"
 
 #: src/dialog/add_color_dialog.rs:214 src/dialog/add_color_dialog.rs:217
 msgid "Unable to add color."
@@ -312,28 +316,25 @@ msgstr "क्रीएटेड!"
 
 #: src/dialog/add_new_palette_dialog.rs:203
 #: src/dialog/save_palette_dialog.rs:109
-#, fuzzy
-msgid "New palette: «{}»"
-msgstr "नया पैलेट : « {name} »"
+msgid "New palette: «{palette_name}»"
+msgstr "नया पैलेट : « {palette_name} »"
 
 #: src/dialog/add_new_palette_dialog.rs:206
 #: src/dialog/save_palette_dialog.rs:114
-#, fuzzy
-msgid "Unable to add new palette «{}»"
-msgstr "पैलेट ऐड करने में असमर्थ « {name} »"
+msgid "Unable to add new palette «{palette_name}»"
+msgstr "पैलेट ऐड करने में असमर्थ « {palette_name} »"
 
 #: src/dialog/add_new_palette_dialog.rs:209
 msgid "Unable to add palette, must select a color."
 msgstr "पैलेट ऐड करने में असमर्थ, कृपया एक रंग चुनें।"
 
 #: src/dialog/delete_color_dialog.rs:93
-msgid "Remove color {} from {}?"
+msgid "Remove color {color_hex} from {palette_name}?"
 msgstr ""
 
 #: src/dialog/delete_color_dialog.rs:111
-#, fuzzy
-msgid "Unable to remove color {}."
-msgstr "रंग हटाने में असमर्थ।"
+msgid "Unable to remove color {color_hex}."
+msgstr "रंग हटाने में असमर्थ {color_hex}।"
 
 #: src/dialog/delete_color_dialog.rs:114 src/dialog/delete_color_dialog.rs:117
 msgid "Unable to remove color."
@@ -344,72 +345,63 @@ msgid "Removed"
 msgstr "रिमूव्ड"
 
 #: src/dialog/delete_palette_dialog.rs:93
-#, fuzzy
-msgid "palette: «{}»."
-msgstr "नया पैलेट : « {name} »"
+msgid "palette: «{palette_name}»."
+msgstr "पैलेट : «{palette_name}»।"
 
 #: src/dialog/delete_palette_dialog.rs:96
-#, fuzzy
-msgid "Unable to delete palette «{}»."
-msgstr "पैलेट ऐड करने में असमर्थ « {name} »"
+msgid "Unable to delete palette «{palette_name}»."
+msgstr "पैलेट डिलीट करने में असमर्थ «{palette_name}»।"
 
 #: src/dialog/delete_palette_dialog.rs:99
 #, fuzzy
 msgid "Unable to delete palette."
-msgstr "पैलेट डिलीट करने में असमर्थ «{self.palette.name}»।"
+msgstr "पैलेट डिलीट करने में असमर्थ «{palette_name}»।"
 
 #: src/dialog/duplicate_palette_dialog.rs:89
-#, fuzzy
-msgid "Duplicate {}?"
-msgstr "_डुप्लीकेट"
+msgid "Duplicate {palette_name}?"
+msgstr "डुप्लिकेट {palette_name}?"
 
 #: src/dialog/duplicate_palette_dialog.rs:90
-#, fuzzy
-msgid "{} duplicate"
-msgstr "{self.name} डुप्लिकेट"
+msgid "{palette_name} duplicate"
+msgstr "{palette_name} डुप्लिकेट"
 
 #: src/dialog/duplicate_palette_dialog.rs:109
 msgid "Duplicated!"
 msgstr "डुप्लिकेटेड!"
 
 #: src/dialog/duplicate_palette_dialog.rs:109
-#, fuzzy
-msgid "Copied «{}» to «{}»."
-msgstr "« {self.palette.name} » को « {name} » में कॉपी किया गया।"
+msgid "Copied «{original_palette}» to «{duplicate_palette}»."
+msgstr "« {original_palette} » को « {duplicate_palette} » में कॉपी किया गया।"
 
 #: src/dialog/duplicate_palette_dialog.rs:112
-#, fuzzy
-msgid "Unable to duplicate palette «{}»."
-msgstr "पैलेट को डुप्लीकेट करने में असमर्थ«{self.palette.name}»।"
+msgid "Unable to duplicate palette «{palette_name}»."
+msgstr "पैलेट को डुप्लीकेट करने में असमर्थ «{palette_name}»।"
 
 #: src/dialog/duplicate_palette_dialog.rs:115
 #, fuzzy
 msgid "Unable to duplicate palette."
-msgstr "पैलेट को डुप्लीकेट करने में असमर्थ«{self.palette.name}»।"
+msgstr "पैलेट को डुप्लीकेट करने में असमर्थ «{palette_name}»।"
 
 #: src/dialog/rename_palette_dialog.rs:89
-#, fuzzy
-msgid "Rename {}?"
-msgstr "_नाम बदलें"
+msgid "Rename {palette_name}?"
+msgstr "नाम बदलें {palette_name} ?"
 
 #: src/dialog/rename_palette_dialog.rs:109
 msgid "Renamed!"
 msgstr "रिनेम्ड!"
 
 #: src/dialog/rename_palette_dialog.rs:109
-#, fuzzy
-msgid "Changed name from «{}» to «{}»."
-msgstr "नाम बदलकर « {self.name} » से « {name} » किया गया।"
+msgid "Changed name from «{old_palette_name}» to «{new_palette_name}»."
+msgstr "नाम बदलकर « {old_palette_name} » से « {palette_name} » किया गया।"
 
 #: src/dialog/rename_palette_dialog.rs:112
-#, fuzzy
-msgid "Unable to rename palette «{}»."
-msgstr "पैलेट का नाम बदलने में असमर्थ « {self.name} »।"
+msgid "Unable to rename palette «{palette_name}»."
+msgstr "पैलेट का नाम बदलने में असमर्थ « {palette_name} »।"
 
 #: src/dialog/rename_palette_dialog.rs:115
 #, fuzzy
 msgid "Unable to rename palette."
-msgstr "पैलेट का नाम बदलने में असमर्थ « {self.name} »।"
+msgstr "पैलेट का नाम बदलने में असमर्थ « {palette_name} »।"
 
 #: src/dialog/save_palette_dialog.rs:109
 msgid "Saved!"
@@ -610,39 +602,8 @@ msgstr "पैलेट से रंग हटाएं"
 #~ msgstr "इमेज फ़ाइलें"
 
 #, python-brace-format
-#~ msgid ""
-#~ "Copied color <span foreground=\"{hex_name}\">{hex_name}</span> to "
-#~ "clipboard!"
-#~ msgstr ""
-#~ "क्लिपबोर्ड में <span foreground=\"{hex_name}\">{hex_name}</span> रंग कॉपी किया!"
-
-#, python-brace-format
-#~ msgid "Unable to add color {self.color.hex}."
-#~ msgstr "रंग जोड़ने में असमर्थ {self.color.hex}।"
-
-#, python-brace-format
-#~ msgid "Currently selected color: {color.hex}"
-#~ msgstr "वर्तमान में चयनित रंग : {color.hex}"
-
-#, python-brace-format
-#~ msgid "Unable to remove color {self.color.hex}."
-#~ msgstr "रंग हटाने में असमर्थ {self.color.hex}।"
-
-#, python-brace-format
-#~ msgid "Rename {palette.name}?"
-#~ msgstr "नाम बदलें {palette.name} ?"
-
-#, python-brace-format
-#~ msgid "Duplicate {palette.name}?"
-#~ msgstr "डुप्लिकेट {palette.name}?"
-
-#, python-brace-format
-#~ msgid "Delete {palette.name}?"
-#~ msgstr "डिलीट {palette.name}?"
-
-#, python-brace-format
-#~ msgid "palette: «{self.palette.name}»."
-#~ msgstr "पैलेट : «{self.palette.name}»।"
+#~ msgid "Delete {palette_name}?"
+#~ msgstr "डिलीट {palette_name}?"
 
 #~ msgid "Unable to start palette extraction."
 #~ msgstr "पैलेट निष्कर्षण प्रारंभ करने में असमर्थ।"

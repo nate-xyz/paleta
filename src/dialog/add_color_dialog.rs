@@ -8,7 +8,7 @@ use log::debug;
 
 use crate::util::{model, database, active_window, rgb_to_hex};
 use crate::toasts::{add_error_toast, add_color_toast};
-use crate::i18n::{i18n, i18n_f};
+use crate::i18n::{i18n, i18n_k};
 
 use crate::model::palette::Palette;
 use crate::model::color::Color;
@@ -122,11 +122,11 @@ impl AddColorDialog {
 
     fn load(&self, palette: &Palette) {
         debug!("load palette");
-        self.set_heading(Some(&i18n_f("Add Color to {}", &[&palette.name()])));
+        self.set_heading(Some(&i18n_k("Add Color to {palette_name}", &[("palette_name", &palette.name())])));
         let imp = self.imp();
         if model().colors().len() > 0 {
-            let simple_row = SimplePaletteRow::new();
-            simple_row.connect_local(
+            let simple_palette_row = SimplePaletteRow::new();
+            simple_palette_row.connect_local(
                 "color-selected",
                 false,
                 clone!(@weak self as this => @default-return None, move |value| {
@@ -142,9 +142,9 @@ impl AddColorDialog {
                     None
                 }),
             );
-            imp.color_selection_row.set_child(Some(&simple_row));
+            imp.color_selection_row.set_child(Some(&simple_palette_row));
         } else {
-            imp.color_instruction_label.set_label(&i18n_f("Pick a new color to add to {}.", &[&palette.name()]));
+            imp.color_instruction_label.set_label(&i18n_k("Pick a new color to add to {palette_name}.", &[("palette_name", &palette.name())]));
 
             
         }
@@ -155,7 +155,7 @@ impl AddColorDialog {
     fn set_current_color(&self, color: Color) {
         let imp = self.imp();
         imp.revealer.set_reveal_child(false);
-        imp.currently_selected_label.set_label(&i18n_f("Currently selected color: {}", &[&color.hex_name()]));
+        imp.currently_selected_label.set_label(&i18n_k("Currently selected color: {color_hex}", &[("color_hex", &color.hex_name())]));
 
         imp.currently_selected_color_square.set_child(Some(&ColorSquare::new(110, color.rgb_name())));
         imp.color.replace(Some(color));
@@ -176,7 +176,7 @@ impl AddColorDialog {
 
     fn init_color_chooser(&self) {
         let dialog = gtk::ColorChooserDialog::builder()
-        .title(&i18n_f("Choose new color to add to {}", &[&self.palette_name()]))
+        .title(&i18n_k("Choose new color to add to {palette_name}", &[("palette_name", &self.palette_name())]))
         .transient_for(self)
         .build();
 
@@ -208,7 +208,7 @@ impl AddColorDialog {
                             add_color_toast(color.hex_name(), palette.name());
                             return;
                         } else {
-                            add_error_toast(i18n_f("Unable to add color {}.", &[&color.hex_name()]));
+                            add_error_toast(i18n_k("Unable to add color {color_hex}.", &[("color_hex", &color.hex_name())]));
                         }
                     },
                     None => add_error_toast(i18n("Unable to add color.")),

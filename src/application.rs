@@ -148,7 +148,10 @@ impl App {
         // Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
         // One name per line, please do not remove previous names.
         about.set_translator_credits(&i18n("translator-credits"));
-        let ack: String = format!("{}color-thief", i18n("Powered by "));
+
+        // Translators: only replace "Powered by "
+        let ack: String = i18n("Powered by color-thief");
+
         about.add_acknowledgement_section(Some(&ack), 
             &["color-thief-rs https://github.com/RazrFalcon/color-thief-rs", "color-thief-py https://github.com/fengsp/color-thief-py", "color-thief https://github.com/lokesh/color-thief"]);
 

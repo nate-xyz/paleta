@@ -7,7 +7,7 @@ use std::cell::RefCell;
 
 use crate::util::{model, database, active_window, rgb_to_hex};
 use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_f};
+use crate::i18n::{i18n, i18n_f, i18n_k};
 
 use crate::model::color::Color;
 use crate::pages::color_square::ColorSquare;
@@ -122,8 +122,8 @@ impl AddNewPaletteDialog {
             }),
         );
         if model().colors().len() > 0 {
-            let simple_row = SimplePaletteRow::new();
-            simple_row.connect_local(
+            let simple_palette_row = SimplePaletteRow::new();
+            simple_palette_row.connect_local(
                 "color-selected",
                 false,
                 clone!(@weak self as this => @default-return None, move |value| {
@@ -139,7 +139,7 @@ impl AddNewPaletteDialog {
                     None
                 }),
             );
-            imp.color_selection_row.set_child(Some(&simple_row));
+            imp.color_selection_row.set_child(Some(&simple_palette_row));
         } else {
             imp.color_instruction_label.set_label(&i18n("Pick a new color to add to new palette."));
             
@@ -154,7 +154,7 @@ impl AddNewPaletteDialog {
     fn set_current_color(&self, color: Color) {
         let imp = self.imp();
         imp.revealer.set_reveal_child(false);
-        imp.currently_selected_label.set_label(&i18n_f("Currently selected color: {}", &[&color.hex_name()]));
+        imp.currently_selected_label.set_label(&i18n_k("Currently selected color: {color_hex}", &[("color_hex", &color.hex_name())]));
         imp.currently_selected_color_square.set_child(Some(&ColorSquare::new(110, color.rgb_name())));
         imp.color.replace(Some(color));
         if !imp.revealer.reveals_child() {
@@ -200,10 +200,10 @@ impl AddNewPaletteDialog {
                     name = imp.name.borrow().clone();
                 }
                 if database().add_palette_new(name.clone(), color.hex_name(), color.rgba()) {
-                    add_success_toast(&i18n("Created!"), &i18n_f("New palette: «{}»", &[&name]));
+                    add_success_toast(&i18n("Created!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &name)]));
                     return;
                 } else {
-                    add_error_toast(i18n_f("Unable to add new palette «{}»", &[&name]));
+                    add_error_toast(i18n_k("Unable to add new palette «{palette_name}»", &[("palette_name", &name)]));
                 }
             },
             None => add_error_toast(i18n("Unable to add palette, must select a color.")),
