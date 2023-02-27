@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-20 02:38-0500\n"
-"PO-Revision-Date: 2023-02-25 10:05+0100\n"
+"POT-Creation-Date: 2023-02-26 18:14-0500\n"
+"PO-Revision-Date: 2023-02-15 22:22+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
 "Language: oc\n"
@@ -127,10 +127,15 @@ msgstr "Boton de dubertura de la pagina de depaus"
 msgid "translator-credits"
 msgstr "Quentin PAGÈS"
 
-#. Translators: used in the phrase "Powered by color-thief"
-#: paleta/app.py:55
-msgid "Powered by "
-msgstr "Propulsat per "
+#. Translators: only replace "Powered by "
+#: src/application.rs:153
+msgid "Powered by color-thief"
+msgstr "Propulsat per color-thief"
+
+#: src/window.rs:184
+#, fuzzy
+msgid "_Open Image"
+msgstr "Dobrir un imatge"
 
 #: src/window.rs:185 src/dialog/ui/add_color_dialog.ui:13
 #: src/dialog/ui/add_new_palette_dialog.ui:13
@@ -161,16 +166,15 @@ msgstr "Color copiada {color_hex} al quichapapièrs !"
 msgid "<span foreground={ERROR_RED}>Error!</span> {error_msg}"
 msgstr "<span foreground={ERROR_RED}>Error !</span> {error_msg}"
 
-#. Translators: Do not replace {}
-#: paleta/window.py:163
-msgid "Could not open image: {}"
-msgstr "Dubertura de l’imatge impossibla : {}"
+#. Translators: Only replace "Opened image:". Reorder if necessary
+#: src/toasts.rs:68
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
+msgstr ""
 
-#. Translators: Do not replace {base_name}, {SUCCESS_GREEN}, or the span tags, only translate "Opened image:"
-#: paleta/window.py:168
-#, python-brace-format
-msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span>  {base_name}"
-msgstr "<span foreground={SUCCESS_GREEN}>Imatge dobèrt :</span>  {base_name}"
+#. Translators: Do not replace {image_name}
+#: src/toasts.rs:74
+msgid "Could not open image: {image_name}"
+msgstr ""
 
 #. Translators: Do not replace {color_hex} or {palette_name}, only translate "Added color" and "to palette" Reorder if necessary
 #: src/toasts.rs:80
@@ -290,19 +294,17 @@ msgstr "Apondon impossibla de la color {color_hex}."
 msgid "Unable to add color."
 msgstr "Impossible d'apondre la color."
 
-#. Translators: Do not replace {self.color.hex}
-#: paleta/dialog/add_color_dialog.py:87
-#, python-brace-format
-msgid "Unable to add color {self.color.hex}."
-msgstr "Apondon impossibla de la color {self.color.hex}."
-
-#: paleta/dialog/add_new_palette_dialog.py:31
-#: paleta/dialog/dialog_windows.py:19
+#: src/dialog/add_new_palette_dialog.rs:109
+#: src/dialog/save_palette_dialog.rs:78
 msgid "Palette #{}"
-msgstr "Paleta #{}"
+msgstr ""
 
-#: paleta/dialog/add_new_palette_dialog.py:32
-#: paleta/dialog/add_new_palette_dialog.py:58
+#: src/dialog/add_new_palette_dialog.rs:144
+#, fuzzy
+msgid "Pick a new color to add to new palette."
+msgstr "Seleccionar una color d’apondre a una paleta novèla."
+
+#: src/dialog/add_new_palette_dialog.rs:177
 msgid "Choose color to add to new palette"
 msgstr "Causir una color novèla d’apondre a la paleta novèla"
 
@@ -324,27 +326,9 @@ msgstr "Apondon impossible de la paleta novèla « {palette_name} »"
 msgid "Unable to add palette, must select a color."
 msgstr "Apondon impossible de la paleta, seleccion de color obligatòria."
 
-#. Translators: Do not replace {name}
-#: paleta/dialog/add_new_palette_dialog.py:92
-msgid "Created!"
-msgstr "Creada !"
-
-#: paleta/dialog/add_new_palette_dialog.py:92
-#: paleta/dialog/dialog_windows.py:37
-#, python-brace-format
-msgid "New palette: «{name}»"
-msgstr "Paleta novèla : « {name} »"
-
-#. Translators: Do not replace {name}
-#: paleta/dialog/add_new_palette_dialog.py:95
-#: paleta/dialog/dialog_windows.py:41
-#, python-brace-format
-msgid "Unable to add new palette «{name}»"
-msgstr "Apondon impossible de la paleta novèla « {name} »"
-
-#: paleta/dialog/delete_color_dialog.py:37
-msgid "Remove color {} from {}?"
-msgstr "Levar la color {} de {} ?"
+#: src/dialog/delete_color_dialog.rs:93
+msgid "Remove color {color_hex} from {palette_name}?"
+msgstr ""
 
 #: src/dialog/delete_color_dialog.rs:111
 msgid "Unable to remove color {color_hex}."
@@ -352,7 +336,7 @@ msgstr "Impossible de tirar la color {color_hex}."
 
 #: src/dialog/delete_color_dialog.rs:114 src/dialog/delete_color_dialog.rs:117
 msgid "Unable to remove color."
-msgstr "Supression impossibla de la color."
+msgstr ""
 
 #: src/dialog/delete_palette_dialog.rs:93
 msgid "Removed"
@@ -366,25 +350,10 @@ msgstr "paleta : « {palette_name} »."
 msgid "Unable to delete palette «{palette_name}»."
 msgstr "Supression impossibla de la paleta « {palette_name} »."
 
-#. Translators: Do not replace {self.name} or {name}
-#: paleta/dialog/dialog_windows.py:78
-msgid "Renamed!"
-msgstr "Renomenada !"
-
-#: paleta/dialog/dialog_windows.py:78
-#, python-brace-format
-msgid "Changed name from «{self.name}» to «{name}»."
-msgstr "Nom modificat de « {self.name} » en « {name} »."
-
-#. Translators: Do not replace {self.name}
-#: paleta/dialog/dialog_windows.py:81
-#, python-brace-format
-msgid "Unable to rename palette «{self.name}»."
-msgstr "Impossible de renomenar la paleta « {self.name} »."
-
-#: paleta/dialog/dialog_windows.py:90
-msgid "Palette"
-msgstr "Paleta"
+#: src/dialog/delete_palette_dialog.rs:99
+#, fuzzy
+msgid "Unable to delete palette."
+msgstr "Supression impossibla de la paleta « {palette_name} »."
 
 #: src/dialog/duplicate_palette_dialog.rs:89
 msgid "Duplicate {palette_name}?"
@@ -618,7 +587,7 @@ msgstr "Suprimir paleta"
 
 #: src/pages/palette/ui/palette_page.ui:43
 msgid "Add Some Palettes!"
-msgstr "Ajustatz d’unas paletas !"
+msgstr "Apondre d’unas paletas !"
 
 #: src/pages/palette/ui/palette_page.ui:44
 msgid ""
@@ -640,93 +609,5 @@ msgstr "Suprimir la color de la paleta"
 #~ msgid "Delete {palette_name}?"
 #~ msgstr "Suprimir {palette_name} ?"
 
-#: data/io.github.nate_xyz.Paleta.desktop.in:5
-msgid "Extract the dominant colors from any image"
-msgstr "Extraire las colors màgers de quin imatge que siá"
-
-#. Translators: Search terms to find this application. Do not translate or localize the semicolons! The list must also end with a semicolon.
-#: data/io.github.nate_xyz.Paleta.desktop.in:13
-msgid "color;palette;"
-msgstr "color;paleta;"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:7
-msgid "Generate color palettes with ease"
-msgstr "Generatz de paletas de colors aisidament"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:8
-msgid "nate-xyz"
-msgstr "nate-xyz"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:10
-msgid ""
-"Find the dominant color palette from any image and manage palettes with "
-"Paleta. An intuitive tool for designers, artists, or anyone looking to "
-"streamline their color work."
-msgstr ""
-"Trobar la paleta de colors màgers a partir de quin imatge que siá e gerir "
-"las paletas amb Paleta. Una aisina intuitiva pels designers, artistas o qual "
-"que siá que vòl optimizar son trabalha amb las colors."
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:11
-msgid "Features:"
-msgstr "Foncionalitats :"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:13
-msgid "Drag and drop images to load"
-msgstr "Lisatz depausatz los imatges de cargar"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:14
-msgid "Color extraction with color-thief"
-msgstr "Extraccion de la color amb color-thief"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:15
-msgid "Save extracted palettes for later use"
-msgstr "Paletas extrachas per usatge ulterior"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:16
-msgid "Modify saved palette name and colors"
-msgstr "Modificar lo nom e las colors de las paletas"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:17
-msgid "Add new palettes from scratch"
-msgstr "Apondre de paletas novèlas a partir de zèro"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:19
-msgid ""
-"❗ Note: Paleta is under active development! If you would like to suggest any "
-"features or if you find any bugs, your feedback is very welcome!"
-msgstr ""
-"❗ Nòta : Paleta es en desvolopament actiu ! Se volètz suggerir una "
-"foncionalitat o se trobatz un bug, vòstre retorn es benvengut !"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
-msgid "Added Translation Support"
-msgstr "Apondon de la presa en carga de las lengas"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
-msgid "Added French and Dutch translations!"
-msgstr "Traduccion en francés aponduda !"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
-msgid "Automatic palette extraction on image load"
-msgstr "Extraccion automatica de la paleta al cargament de l’imatge"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:42
-msgid "Cleaner extraction panel UI"
-msgstr "Interfàcia d’extraccion mai neta"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:43
-msgid "Clearer options for palette quality / accuracy"
-msgstr "Opcions mai claras per la qualitat e precision de la paleta"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:44
-msgid "Better AppData summary"
-msgstr "Melhor resumit de las donadas de l’aplicacion"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:52
-msgid "Toast improvements"
-msgstr "Melhoraments de las notificacions"
-
-#: data/io.github.nate_xyz.Paleta.appdata.xml.in:53
-msgid "Drop Page open button"
-msgstr "Boton de dubertura de la pagina de depaus"
+#~ msgid "Unable to start palette extraction."
+#~ msgstr "Impossible de aviar l'extraccion de la paleta."
