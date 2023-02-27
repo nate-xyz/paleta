@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-26 18:14-0500\n"
-"PO-Revision-Date: 2023-02-15 22:22+0100\n"
+"POT-Creation-Date: 2023-02-20 02:38-0500\n"
+"PO-Revision-Date: 2023-02-25 10:05+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: \n"
 "Language: oc\n"
@@ -91,11 +91,11 @@ msgstr ""
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:40
 msgid "Added Translation Support"
-msgstr ""
+msgstr "Apondon de la presa en carga de las lengas"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
 msgid "Added French and Dutch translations!"
-msgstr ""
+msgstr "Traduccion en francés aponduda !"
 
 #: data/io.github.nate_xyz.Paleta.appdata.xml.in:48
 msgid "Automatic palette extraction on image load"
@@ -169,12 +169,12 @@ msgstr "<span foreground={ERROR_RED}>Error !</span> {error_msg}"
 #. Translators: Only replace "Opened image:". Reorder if necessary
 #: src/toasts.rs:68
 msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
-msgstr ""
+msgstr "<span foreground={SUCCESS_GREEN}>Imatge dobèrt :</span> {base_name}"
 
 #. Translators: Do not replace {image_name}
 #: src/toasts.rs:74
 msgid "Could not open image: {image_name}"
-msgstr ""
+msgstr "Dubertura de l’imatge impossibla : {image_name}"
 
 #. Translators: Do not replace {color_hex} or {palette_name}, only translate "Added color" and "to palette" Reorder if necessary
 #: src/toasts.rs:80
@@ -239,7 +239,7 @@ msgstr "Bascular lo mòde d'edicion"
 #: src/ui/help-overlay.ui:72
 msgctxt "shortcut window"
 msgid "Add Palette"
-msgstr "Apondre una paleta"
+msgstr "Ajustatz una paleta"
 
 #: src/ui/help-overlay.ui:78
 msgctxt "shortcut window"
@@ -297,7 +297,7 @@ msgstr "Impossible d'apondre la color."
 #: src/dialog/add_new_palette_dialog.rs:109
 #: src/dialog/save_palette_dialog.rs:78
 msgid "Palette #{}"
-msgstr ""
+msgstr "Paleta #{}"
 
 #: src/dialog/add_new_palette_dialog.rs:144
 #, fuzzy
@@ -328,7 +328,7 @@ msgstr "Apondon impossible de la paleta, seleccion de color obligatòria."
 
 #: src/dialog/delete_color_dialog.rs:93
 msgid "Remove color {color_hex} from {palette_name}?"
-msgstr ""
+msgstr "Levar la color {color_hex} de {palette_name} ?"
 
 #: src/dialog/delete_color_dialog.rs:111
 msgid "Unable to remove color {color_hex}."
@@ -336,7 +336,7 @@ msgstr "Impossible de tirar la color {color_hex}."
 
 #: src/dialog/delete_color_dialog.rs:114 src/dialog/delete_color_dialog.rs:117
 msgid "Unable to remove color."
-msgstr ""
+msgstr "Supression impossibla de la color."
 
 #: src/dialog/delete_palette_dialog.rs:93
 msgid "Removed"
