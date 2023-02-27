@@ -27,6 +27,14 @@
   <url type="donation">https://ko-fi.com/natexyz</url>
 
   <releases>
+    <release version="0.3.1" date="2023-02-27">
+      <description>
+        <ul>
+          <li>Added German, Hindi, Occitan, Polish, and Russian translations!</li>
+          <li>Fixed translations for Rust version</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.0" date="2023-02-24">
       <description>
         <ul>
