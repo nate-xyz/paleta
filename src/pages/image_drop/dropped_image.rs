@@ -57,6 +57,7 @@ impl DroppedImage {
         let _image_name = format!("{}", html_escape::encode_text_minimal(basename.to_str().unwrap()));
         let pixbuf = gdk_pixbuf::Pixbuf::from_file(image_path)?;
         let picture = gtk::Picture::for_pixbuf(&pixbuf);
+        picture.set_css_classes(&[&"card"]);
         self.set_child(Some(&picture));
         self.imp().picture.replace(picture);
         self.imp().pixbuf.replace(Some(pixbuf));

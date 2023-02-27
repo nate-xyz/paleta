@@ -26,6 +26,9 @@ mod imp {
         #[template_child(id = "status")]
         pub status: TemplateChild<adw::StatusPage>,
 
+        #[template_child(id = "image_bin")]
+        pub image_bin: TemplateChild<adw::Bin>,
+
         #[template_child(id = "thief_panel")]
         pub thief_panel: TemplateChild<ColorThiefPanel>,
 
@@ -159,7 +162,7 @@ impl ImageDropPage {
         let dropped_image = DroppedImage::new();
         match dropped_image.load_image(uri) {
             Ok(_) => {
-                self.imp().thief_panel.set_image(dropped_image);
+                self.set_image(dropped_image);
                 self.imp().status.hide();
                 open_image_toast(uri);
                 return true;
@@ -170,6 +173,16 @@ impl ImageDropPage {
                 return false
             },
         }
+    }
+
+
+    fn set_image(&self, image: DroppedImage) {
+        let imp = self.imp();
+        self.imp().thief_panel.set_visible(true);
+        imp.image_bin.set_child(Some(&image));
+        self.imp().thief_panel.imp().image.replace(Some(image));
+        self.imp().thief_panel.list_store().remove_all();
+        self.imp().thief_panel.start_extraction();
     }
 
 }

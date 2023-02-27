@@ -5,7 +5,8 @@
     <file alias="image_drop_page.ui" preprocess="xml-stripblanks">pages/image_drop/ui/image_drop_page.ui</file>
     <file alias="color_thief_panel.ui" preprocess="xml-stripblanks">pages/image_drop/ui/color_thief_panel.ui</file>
     <file alias="extracted_color_row.ui" preprocess="xml-stripblanks">pages/image_drop/ui/extracted_color_row.ui</file>
-    
+    <file alias="extracted_color_card.ui" preprocess="xml-stripblanks">pages/image_drop/ui/extracted_color_card.ui</file>
+
     <!-- palettes -->
     <file alias="palette_page.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_page.ui</file>
     <file alias="palette_row.ui" preprocess="xml-stripblanks">pages/palette/ui/palette_row.ui</file>
@@ -40,5 +41,8 @@
     <file alias="color-picker-symbolic.svg">assets/icons/color-picker-symbolic.svg</file>    
     <file alias="plus-symbolic.svg">assets/icons/plus-symbolic.svg</file>
     <file alias="arrow-into-box-symbolic.svg">assets/icons/arrow-into-box-symbolic.svg</file>  
+    <file alias="star-outline-rounded-symbolic.svg">assets/icons/star-outline-rounded-symbolic.svg</file>  
+    <file alias="star-filled-rounded-symbolic.svg">assets/icons/star-filled-rounded-symbolic.svg</file> 
+
   </gresource>
 </gresources>

@@ -54,6 +54,11 @@ impl ExtractedColor {
 
     }
 
+    pub fn is_light(&self) -> bool {
+        let rgb = self.imp().rgb_tuple.get();
+        return (rgb.0 as u32 + rgb.1 as u32 + rgb.2 as u32) > 509;
+    }
+
     pub fn rgb_tuple(&self) -> (u8, u8, u8) {
         self.imp().rgb_tuple.get()
     }

@@ -40,7 +40,38 @@
           </object>
         </child>
         <property name="child">
-          <object class="ColorThiefPanel" id="thief_panel"></object>
+          <object class="GtkBox">
+            <property name="hexpand">true</property>
+            <property name="vexpand">true</property>
+            <property name="halign">fill</property>
+            <property name="valign">fill</property>
+            <child>
+              <object class="GtkBox">
+                <property name="hexpand">true</property>
+                <property name="halign">end</property>
+                <child>
+                  <object class="AdwBin" id="image_bin">
+                    <property name="hexpand">true</property>
+                    <property name="halign">fill</property>
+        
+                    <property name="margin-start">20</property>
+                    <property name="margin-end">20</property>
+                    <property name="margin-top">20</property>
+                    <property name="margin-bottom">20</property>
+        
+        
+                  </object>
+                </child>
+              </object>
+
+
+            </child>
+  
+            <child>
+              <object class="ColorThiefPanel" id="thief_panel"></object>
+            </child>
+
+          </object>
         </property>
       </object>
     </property>

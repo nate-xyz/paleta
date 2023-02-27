@@ -8,14 +8,13 @@ use log::debug;
 use color_thief::{get_palette, ColorFormat};
 
 use crate::toasts::add_error_toast;
-use crate::util::copy_color;
 use crate::i18n::i18n;
 
 use crate::dialog::save_palette_dialog::SavePaletteDialog;
 
 use super::dropped_image::DroppedImage;
 use super::extracted_color::ExtractedColor;
-use super::extracted_color_row::ExtractedColorRow;
+use super::extracted_color_card::ExtractedColorCard;
 
 
 #[derive(Clone, Debug)]
@@ -31,15 +30,11 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/color_thief_panel.ui")]
     pub struct ColorThiefPanelPriv {
-        
-        #[template_child(id = "image_bin")]
-        pub image_bin: TemplateChild<adw::Bin>,
-
         #[template_child(id = "count_amount_spin")]
         pub count_amount_spin: TemplateChild<gtk::SpinButton>,
 
-        #[template_child(id = "quality_dropdown")]
-        pub quality_dropdown: TemplateChild<gtk::DropDown>,
+        #[template_child(id = "accuracy_row")]
+        pub accuracy_row: TemplateChild<adw::ComboRow>,
 
         #[template_child(id = "palette_box")]
         pub palette_box: TemplateChild<gtk::Box>,
@@ -47,8 +42,8 @@ mod imp {
         #[template_child(id = "spinner")]
         pub spinner: TemplateChild<gtk::Spinner>,
 
-        #[template_child(id = "colors_list_box")]
-        pub colors_list_box: TemplateChild<gtk::ListBox>,
+        #[template_child(id = "colors_flow_box")]
+        pub colors_flow_box: TemplateChild<gtk::FlowBox>,
 
         #[template_child(id = "save_button")]
         pub save_button: TemplateChild<gtk::Button>,
@@ -57,8 +52,9 @@ mod imp {
         
         pub count_amount: Cell<f64>,
         pub quality: Cell<u8>,
+        
+
         pub image: RefCell<Option<DroppedImage>>,
-        pub image_uri: RefCell<String>,
 
         pub sender: RefCell<Option<Sender<ExtractionAction>>>,
         pub receiver: RefCell<Option<Receiver<ExtractionAction>>>,
@@ -84,18 +80,17 @@ mod imp {
             let (sender, r) = glib::MainContext::channel(glib::PRIORITY_DEFAULT);
 
             Self {
-                image_bin: TemplateChild::default(),
                 count_amount_spin: TemplateChild::default(),
-                quality_dropdown: TemplateChild::default(),
+                accuracy_row: TemplateChild::default(),
                 palette_box: TemplateChild::default(),
                 spinner: TemplateChild::default(),
-                colors_list_box: TemplateChild::default(),
+                colors_flow_box: TemplateChild::default(),
                 save_button: TemplateChild::default(),
                 list_store: ListStore::new(ExtractedColor::static_type()),
                 count_amount: Cell::new(0.0),
                 quality: Cell::new(0),
                 image: RefCell::new(None),
-                image_uri: RefCell::new(String::new()),
+
                 sender: RefCell::new(Some(sender)),
                 receiver: RefCell::new(Some(r)),
             }
@@ -129,29 +124,30 @@ impl ColorThiefPanel {
     fn initialize(&self) {
         let imp = self.imp();
 
-        imp.colors_list_box.bind_model(Some(&imp.list_store), 
+        imp.colors_flow_box.bind_model(Some(&imp.list_store), 
         clone!(@strong self as this => @default-panic, move |obj| {
             let color = obj.clone().downcast::<ExtractedColor>().expect("ExtractedColor is of wrong type");       
-            return ExtractedColorRow::new(&color).upcast::<gtk::Widget>();
+            //return ExtractedColorRow::new(&color).upcast::<gtk::Widget>();
+            return ExtractedColorCard::new(&color).upcast::<gtk::Widget>();
             })
         );
 
-        imp.colors_list_box.connect_row_selected(clone!(@strong self as this => @default-panic, move |_listbox, obj| {
-            match obj {
-                Some(row) => {
-                    let ec_row = row.clone().downcast::<ExtractedColorRow>().expect("ExtractedColorRow is of wrong type");    
-                    let hex_name = ec_row.hex_name();
-                    copy_color(hex_name);
-                },
-                None => (),
-            }
-        }));
+        // imp.colors_flow_box.connect_row_selected(clone!(@strong self as this => @default-panic, move |_listbox, obj| {
+        //     match obj {
+        //         Some(row) => {
+        //             let ec_row = row.clone().downcast::<ExtractedColorRow>().expect("ExtractedColorRow is of wrong type");    
+        //             let hex_name = ec_row.hex_name();
+        //             copy_color(hex_name);
+        //         },
+        //         None => (),
+        //     }
+        // }));
 
         imp.save_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
             this.save_palette();
         }));
 
-        imp.quality_dropdown.set_selected(1);
+        imp.accuracy_row.set_selected(1);
 
         imp.count_amount.set(imp.count_amount_spin.value());
         imp.quality.set(self.quality());
@@ -161,7 +157,7 @@ impl ColorThiefPanel {
             this.start_extraction()
         }));
         
-        imp.quality_dropdown.connect_selected_notify(clone!(@strong self as this => @default-panic, move |_drop_down| {
+        imp.accuracy_row.connect_selected_notify(clone!(@strong self as this => @default-panic, move |_drop_down| {
             this.imp().quality.set(this.quality());
             this.start_extraction()
         }));
@@ -180,24 +176,13 @@ impl ColorThiefPanel {
         );
     }
 
-
-
     fn quality(&self) -> u8 {
-        match self.imp().quality_dropdown.selected() {
+        match self.imp().accuracy_row.selected() {
             0 => return 1,
             1 => return 3,
             2 => return 10,
             _ => return 10,
         }
-    }
-
-    pub fn set_image(&self, image: DroppedImage) {
-        let imp = self.imp();
-        self.set_visible(true);
-        imp.image_bin.set_child(Some(&image));
-        imp.image.replace(Some(image));
-        self.list_store().remove_all();
-        self.start_extraction();
     }
 
     fn process_action(&self, action: ExtractionAction) -> glib::Continue {
@@ -209,12 +194,13 @@ impl ColorThiefPanel {
         glib::Continue(true)
     }
 
-    fn start_extraction(&self) {
+    pub fn start_extraction(&self) {
         let imp = self.imp();
         if let Some(_image) = imp.image.borrow().as_ref() {
             imp.palette_box.set_visible(false);
             imp.spinner.set_visible(true);
             imp.spinner.start();
+            imp.save_button.set_icon_name("star-outline-rounded-symbolic");
             let sender = imp.sender.borrow().as_ref().unwrap().clone();
             let pixbuf_bytes = imp.image.borrow().as_ref().unwrap().imp().pixbuf.borrow().as_ref().unwrap().clone().pixel_bytes().unwrap();
             let alpha = color_format(imp.image.borrow().as_ref().unwrap().imp().pixbuf.borrow().as_ref().unwrap().has_alpha());
@@ -263,6 +249,16 @@ impl ColorThiefPanel {
                 }
 
                 let dialog = SavePaletteDialog::new(colors);
+
+                dialog.connect_local(
+                    "success",
+                    false,
+                    clone!(@weak self as this => @default-return None, move |_args| {
+                        this.imp().save_button.set_icon_name("star-filled-rounded-symbolic");
+                        None
+                    }),
+                );
+
                 dialog.show();
             } else {
                 add_error_toast(i18n("Unable to save palette, no colors extracted."));
@@ -272,7 +268,7 @@ impl ColorThiefPanel {
         }
     }
     
-    fn list_store(&self) -> &ListStore {
+    pub fn list_store(&self) -> &ListStore {
         &self.imp().list_store
     }
 

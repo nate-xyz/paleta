@@ -4,4 +4,5 @@ rust_sources += files(
     'dropped_image.rs',
     'extracted_color_row.rs',
     'image_drop_page.rs',
+    'extracted_color_card.rs',
 )

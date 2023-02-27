@@ -13,6 +13,8 @@ use crate::pages::image_drop::extracted_color::ExtractedColor;
 
 mod imp {
     use super::*;
+    use glib::subclass::Signal;
+    use once_cell::sync::Lazy;
 
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/save_palette_dialog.ui")]
@@ -51,6 +53,14 @@ mod imp {
         fn constructed(&self) {
             self.parent_constructed();
             self.obj().initialize();
+        }
+
+
+        fn signals() -> &'static [Signal] {
+            static SIGNALS: Lazy<Vec<Signal>> =
+                Lazy::new(|| vec![Signal::builder("success").build()]);
+
+            SIGNALS.as_ref()
         }
     }
 
@@ -107,6 +117,7 @@ impl SavePaletteDialog {
 
             if database().add_palette_from_extracted(name.clone(), imp.colors.borrow().as_ref()) {
                 add_success_toast(&i18n("Saved!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &name)]));
+                self.emit_by_name::<()>("success", &[]);
                 go_to_palette_page();
                 return;
 
