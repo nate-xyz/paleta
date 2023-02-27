@@ -5,6 +5,6 @@ pub mod delete_palette_dialog;
 pub mod duplicate_palette_dialog;
 pub mod save_palette_dialog;
 pub mod rename_palette_dialog;
-mod simple_row;
+mod simple_palette_row;
 mod simple_color_card;
 mod simpler_delete_color_card;

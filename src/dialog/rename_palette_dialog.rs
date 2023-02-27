@@ -7,7 +7,7 @@ use std::cell::RefCell;
 
 use crate::util::{ database, active_window};
 use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_f};
+use crate::i18n::{i18n, i18n_k};
 
 use crate::model::palette::Palette;
 
@@ -86,7 +86,7 @@ impl RenamePaletteDialog {
     }
 
     fn load(&self, palette: &Palette) {
-        self.set_heading(Some(&i18n_f("Rename {}?", &[&palette.name()])));
+        self.set_heading(Some(&i18n_k("Rename {palette_name}?", &[("palette_name", &palette.name())])));
         self.set_name(palette.name());
         self.imp().palette.replace(Some(palette.clone()));
     }
@@ -106,10 +106,10 @@ impl RenamePaletteDialog {
                 }
     
                 if database().rename_palette(palette.id(), name.clone()) {
-                    add_success_toast(&i18n("Renamed!"), &i18n_f("Changed name from «{}» to «{}».", &[&palette.name(), &name]));
+                    add_success_toast(&i18n("Renamed!"), &i18n_k("Changed name from «{old_palette_name}» to «{new_palette_name}».", &[("old_palette_name", &palette.name()), ("new_palette_name", &name)]));
                     return;
                 } else {
-                    add_error_toast(i18n_f("Unable to rename palette «{}».", &[&name]));
+                    add_error_toast(i18n_k("Unable to rename palette «{palette_name}».", &[("palette_name", &name)]));
                 }
             },
             None => add_error_toast(i18n("Unable to rename palette.")),

@@ -7,7 +7,7 @@ use std::cell::RefCell;
 
 use crate::util::{database, active_window};
 use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_f};
+use crate::i18n::{i18n, i18n_k};
 
 use crate::model::palette::Palette;
 
@@ -86,8 +86,8 @@ impl DuplicatePaletteDialog {
     }
 
     fn load(&self, palette: &Palette) {
-        self.set_heading(Some(&i18n_f("Duplicate {}?", &[&palette.name()])));
-        self.set_name(i18n_f("{} duplicate", &[&palette.name()]));
+        self.set_heading(Some(&i18n_k("Duplicate {palette_name}?", &[("palette_name", &palette.name())])));
+        self.set_name(i18n_k("{palette_name} duplicate", &[("palette_name", &palette.name())]));
         self.imp().palette.replace(Some(palette.clone()));
     }
 
@@ -106,10 +106,10 @@ impl DuplicatePaletteDialog {
                 }
     
                 if database().duplicate_palette(palette.id(), name.clone()) {
-                    add_success_toast(&i18n("Duplicated!"), &i18n_f("Copied «{}» to «{}».", &[&palette.name(), &name]));
+                    add_success_toast(&i18n("Duplicated!"), &i18n_k("Copied «{original_palette}» to «{duplicate_palette}».", &[("original_palette", &palette.name()), ("duplicate_palette", &name)]));
                     return;
                 } else {
-                    add_error_toast(i18n_f("Unable to duplicate palette «{}».", &[&name]));
+                    add_error_toast(i18n_k("Unable to duplicate palette «{palette_name}».", &[("palette_name", &name)]));
                 }
             },
             None => add_error_toast(i18n("Unable to duplicate palette.")),
