@@ -21,6 +21,7 @@
 use gtk::prelude::*;
 use adw::subclass::prelude::*;
 use gtk::{gio, glib, glib::clone};
+use gtk_macros::action;
 
 use std::rc::Rc;
 
@@ -118,19 +119,27 @@ impl App {
     pub fn model(&self) -> Rc<Model> {
         self.imp().model.clone()
     }
-    
+
     pub fn database(&self) -> Rc<Database> {
         self.imp().database.clone()
     }
 
     fn setup_gactions(&self) {
-        let quit_action = gio::ActionEntry::builder("quit")
-            .activate(move |app: &Self, _, _| app.quit())
-            .build();
-        let about_action = gio::ActionEntry::builder("about")
-            .activate(move |app: &Self, _, _| app.show_about())
-            .build();
-        self.add_action_entries([quit_action, about_action]);
+        action!(
+            self,
+            "quit",
+            clone!(@weak self as app => move |_, _| {
+                app.quit()
+            })
+        );
+
+        action!(
+            self,
+            "about",
+            clone!(@weak self as app => move |_, _| {
+                app.show_about()
+            })
+        );
     }
 
     fn show_about(&self) {
