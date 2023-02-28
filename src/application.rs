@@ -109,10 +109,11 @@ glib::wrapper! {
 }
 
 impl App {
-    pub fn new(application_id: &str, flags: &gio::ApplicationFlags) -> Self {
-        glib::Object::builder()
-            .property("application-id", application_id)
-            .property("flags", flags)
+    pub fn new() -> Self {
+        glib::Object::builder::<App>()
+            .property("application-id", &"io.github.nate_xyz.Paleta")
+            .property("flags", gio::ApplicationFlags::FLAGS_NONE)
+            .property("resource-base-path", &"/io/github/nate_xyz/Paleta")
             .build()
     }
 
