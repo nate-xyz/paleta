@@ -142,21 +142,20 @@ impl App {
             .developer_name("nate-xyz")
             .version(VERSION)
             .developers(vec!["nate-xyz"])
-            .copyright("© 2023 nate-xyz")
+            .copyright("Copyright © 2023 nate-xyz")
             .license_type(gtk::License::Gpl30Only)
+            // Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
+            // One name per line, please do not remove previous names.
+            .translator_credits(&i18n("translator-credits"))
             .website("https://github.com/nate-xyz/paleta")
             .issue_url("https://github.com/nate-xyz/paleta/issues")
             .build();
-        
-        // Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
-        // One name per line, please do not remove previous names.
-        about.set_translator_credits(&i18n("translator-credits"));
 
         // Translators: only replace "Powered by "
         let ack: String = i18n("Powered by color-thief");
 
-        about.add_acknowledgement_section(Some(&ack), 
-            &["color-thief-rs https://github.com/RazrFalcon/color-thief-rs", "color-thief-py https://github.com/fengsp/color-thief-py", "color-thief https://github.com/lokesh/color-thief"]);
+        about.add_acknowledgement_section(Some(&ack),
+            &["color-thief-rs https://github.com/RazrFalcon/color-thief-rs", "color-thief https://github.com/lokesh/color-thief"]);
 
         about.present();
     }
