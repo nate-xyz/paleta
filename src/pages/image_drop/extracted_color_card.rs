@@ -89,13 +89,7 @@ impl ExtractedColorCard {
     fn load(&self, color: &ExtractedColor) {
         let imp = self.imp();
         imp.color_bin.set_child(Some(&RoundedColorSquare::new(110, color.hex_name())));
-        
-        if color.is_light() {
-            imp.color_label.set_label(&format!("<span foreground=\"#404040\" style=\"oblique\" size=\"x-large\">{}</span>", color.hex_name()));
-        } else {
-            imp.color_label.set_label(&format!("<span foreground=\"#BFBFBF\" style=\"oblique\" size=\"x-large\">{}</span>", color.hex_name()));
-        }
-
+        imp.color_label.set_label(&format!("<span foreground=\"{}\" style=\"oblique\" size=\"x-large\">{}</span>", color.brightness_shift(), color.hex_name()));
         imp.color.replace(Some(color.clone()));
     }
 }

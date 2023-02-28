@@ -4,6 +4,8 @@ use std::{cell::Cell, cell::RefCell};
 
 use crate::util::rgb_to_hex;
 
+use palette::{FromColor, IntoColor, Lch, Srgb, Shade};
+
 mod imp {
     use super::*;
 
@@ -54,9 +56,23 @@ impl ExtractedColor {
 
     }
 
+    pub fn brightness_shift(&self) -> String {
+        let rgb = self.imp().rgb_tuple.get();
+        let lch_color: Lch = Srgb::new(rgb.0 as f32 / 255.0, rgb.1 as f32 / 255.0, rgb.2 as f32 / 255.0).into_color();
+        if self.is_light() {
+            let new_color = Srgb::from_color(lch_color.darken(0.5));
+            return rgb_to_hex((new_color.red * 255.0) as u8, (new_color.green * 255.0) as u8, (new_color.blue * 255.0) as u8 );
+        } else {
+            let new_color = Srgb::from_color(lch_color.lighten(0.5));
+            return rgb_to_hex((new_color.red * 255.0) as u8, (new_color.green * 255.0) as u8, (new_color.blue * 255.0) as u8 );
+        }        
+    }
+
     pub fn is_light(&self) -> bool {
         let rgb = self.imp().rgb_tuple.get();
         return (rgb.0 as u32 + rgb.1 as u32 + rgb.2 as u32) > 509;
+
+        
     }
 
     pub fn rgb_tuple(&self) -> (u8, u8, u8) {
