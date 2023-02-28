@@ -68,9 +68,12 @@ mod imp {
     impl ObjectImpl for App {
         fn constructed(&self) {
             self.parent_constructed();
+
             let obj = self.obj();
             obj.setup_gactions();
-            obj.set_accels_for_action("app.quit", &["<primary>q"]);
+
+            obj.set_accels_for_action("app.quit", &["<primary>q", "<primary>w"]);
+            // TODO: Add more accelerators
         }
     }
 
