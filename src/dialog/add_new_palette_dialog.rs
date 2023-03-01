@@ -7,7 +7,7 @@ use std::cell::RefCell;
 
 use crate::util::{model, database, active_window, rgb_to_hex};
 use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_f, i18n_k};
+use crate::i18n::{i18n, i18n_k};
 
 use crate::model::color::Color;
 use crate::pages::color_square::ColorSquare;
@@ -104,9 +104,11 @@ impl AddNewPaletteDialog {
 
     fn initialize(&self) {
         let imp = self.imp();
-        
+        let palette_index = database().query_n_palettes()+1;
+
         self.set_transient_for(Some(&active_window().unwrap()));
-        self.set_name(i18n_f("Palette #{}", &[&format!("{}", database().query_n_palettes()+1)]));
+        self.set_name(i18n_k("Palette #{palette_index}", &[("palette_index", &palette_index.to_string())]));
+
         self.init_color_chooser();
         self.connect_response(
             None,
