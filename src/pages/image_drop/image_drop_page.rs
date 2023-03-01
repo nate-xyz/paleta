@@ -19,7 +19,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/image_drop_page.ui")]
     pub struct ImageDropPagePriv {
-        
         #[template_child(id = "overlay")]
         pub overlay: TemplateChild<gtk::Overlay>,
 
@@ -71,14 +70,13 @@ glib::wrapper! {
 impl ImageDropPage {
     pub fn new() -> ImageDropPage {
         let color_panel: ImageDropPage = glib::Object::builder::<ImageDropPage>().build();
-        color_panel
+        return color_panel;
     }
 
     fn initialize(&self) {
         let imp = self.imp();
 
         imp.file_verified.set(false);
-        
         self.setup_drop_target();
     }
 
@@ -86,38 +84,41 @@ impl ImageDropPage {
         let imp = self.imp();
 
         let formats = gdk::ContentFormats::new(&["text/uri-list"]);
-
         let drop_target = gtk::DropTargetAsync::new(Some(formats), gdk::DragAction::COPY);
 
-        drop_target.connect_accept(clone!(@strong self as this => move |_drop_target, drop_value| {
-            this.imp().file_verified.set(false);
-            let formats = drop_value.formats();
-            if contain_mime_type(formats) {
-                drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>, 
-                clone!(@strong this => move |value| {
-                    this.verify_file_valid(value)
-                })
-            );
-                return true
-            }
-            return false
-        }));
+        drop_target.connect_accept(
+            clone!(@strong self as this => move |_drop_target, drop_value| {
+                this.imp().file_verified.set(false);
+
+                let formats = drop_value.formats();
+
+                if contain_mime_type(formats) {
+                    drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>,
+                        clone!(@strong this => move |value| {
+                            this.verify_file_valid(value)
+                        })
+                    );
+
+                    return true;
+                }
+
+                return false;
+            })
+        );
 
         drop_target.connect_drop(
             clone!(@strong self as this => move |_drop_target, drop_value, _x, _y| {
-                        drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>, 
-                clone!(@strong this => move |value| {
+                drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>,
+                    clone!(@strong this => move |value| {
+                        if !this.imp().file_verified.get() {
+                            add_error_toast(i18n("Unable to verify file on drop, try with the file chooser in the upper left corner."))
+                        }
+                        this.load_value_async(value)
+                    })
+                );
 
-                    if !this.imp().file_verified.get() {
-                        add_error_toast(i18n("Unable to verify file on drop, try with the file chooser in the upper left corner."))
-                    }
-                    this.load_value_async(value)
-                })
-            );
-
-
-                return true
-            }),
+                return true;
+            })
         );
 
         imp.overlay.add_controller(drop_target);
@@ -128,6 +129,7 @@ impl ImageDropPage {
             Ok(value) => {
                 let file: gio::File = value.get::<gio::File>().unwrap();
                 let uri = file.path().unwrap();
+
                 self.imp().file_verified.set(Path::new(&uri).exists());
             },
             Err(e) => {
@@ -135,7 +137,6 @@ impl ImageDropPage {
                 return;
             }
         }
-
     }
 
     fn load_value_async(&self, value: Result<glib::Value, glib::Error>) {
@@ -143,38 +144,41 @@ impl ImageDropPage {
             Ok(value) => {
                 let file: gio::File = value.get::<gio::File>().unwrap();
                 let uri = file.path().unwrap();
+
                 self.load_image(uri.to_str().unwrap());
                 debug!("{:?}", uri);
             },
             Err(e) => {
                 add_error_toast(i18n("Unable to read drop."));
                 error!("{}", e);
+
                 return;
             }
         }
-
     }
 
     pub fn load_image(&self, uri: &str) -> bool {
         let dropped_image = DroppedImage::new();
+
         match dropped_image.load_image(uri) {
             Ok(_) => {
                 self.imp().thief_panel.set_image(dropped_image);
                 self.imp().status.hide();
                 open_image_toast(uri);
+
                 return true;
             },
             Err(e) => {
                 error_image_toast(uri);
                 error!("{}", e);
-                return false
+
+                return false;
             },
         }
     }
-
 }
 
 fn contain_mime_type(formats: ContentFormats) -> bool {
     let mimes = ["text/uri-list"];
-    mimes.iter().any(|m| formats.contain_mime_type(m))
+    return mimes.iter().any(|m| formats.contain_mime_type(m));
 }

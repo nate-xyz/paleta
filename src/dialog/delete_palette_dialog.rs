@@ -64,8 +64,9 @@ glib::wrapper! {
 impl DeletePaletteDialog {
     pub fn new(palette: &Palette) -> DeletePaletteDialog {
         let delete_dialog: DeletePaletteDialog = glib::Object::builder::<DeletePaletteDialog>().build();
+
         delete_dialog.load(palette);
-        delete_dialog
+        return delete_dialog;
     }
 
     fn initialize(&self) {
@@ -76,7 +77,7 @@ impl DeletePaletteDialog {
                 if response == "delete" {
                     this.delete_palette();
                 }
-            }),
+            })
         );
     }
 
@@ -87,8 +88,9 @@ impl DeletePaletteDialog {
 
     fn delete_palette(&self) {
         let imp = self.imp();
+
         match imp.palette.borrow().as_ref() {
-            Some(palette) => {    
+            Some(palette) => {
                 if database().delete_palette(palette.id()) {
                     add_success_toast(&i18n("Removed"), &i18n_k("palette: «{palette_name}».", &[("palette_name", &palette.name())]));
                     return;
@@ -99,5 +101,4 @@ impl DeletePaletteDialog {
             None => add_error_toast(i18n("Unable to delete palette.")),
         }
     }
-
 }

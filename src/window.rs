@@ -39,13 +39,12 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/window.ui")]
     pub struct Window {
-
         #[template_child(id = "toast_overlay")]
         pub toast_overlay: TemplateChild<adw::ToastOverlay>,
-        
+
         #[template_child(id = "header_bar")]
         pub header_bar: TemplateChild<adw::HeaderBar>,
-        
+
         #[template_child(id = "view-switcher-title")]
         pub view_switcher_title: TemplateChild<adw::ViewSwitcherTitle>,
 
@@ -96,7 +95,6 @@ mod imp {
                 open_image_dialog: RefCell::new(None),
             }
         }
-
     }
 
     impl ObjectImpl for Window {}
@@ -117,13 +115,14 @@ impl Window {
         let window: Window = glib::Object::builder()
             .property("application", application)
             .build();
+
         window.initialize();
         window.bind_signals();
         window.add_dialog();
         // window.add_help_overlay();
-        window
-    }
 
+        return window;
+    }
 
     fn initialize(&self) {
         if !database().try_loading_database() {
@@ -144,7 +143,7 @@ impl Window {
         imp.edit_palette_button.connect_clicked(
             clone!(@strong self as this => @default-panic, move |_button| {
                 this.imp().palette_page.toggle_edit_mode();
-            }),
+            })
         );
 
         // self.stack.connect('notify::visible-child-name', self.on_stack_switch)
@@ -156,12 +155,9 @@ impl Window {
                 } else {
                     this.imp().edit_palette_button.hide();
                 }
-            }),
+            })
         );
-
-  
     }
-
 
     fn go_to_image_drop_page(&self) {
         if self.imp().stack.visible_child_name().unwrap().as_str() != "drop-stack-page" {
@@ -211,7 +207,7 @@ impl Window {
                         },
                     }
                 }
-            }),
+            })
         );
 
         self.imp().open_image_dialog.replace(Some(dialog));
@@ -219,23 +215,22 @@ impl Window {
         self.imp().open_image_button.connect_clicked(
             clone!(@strong self as this => @default-panic, move |_button| {
                 this.imp().open_image_dialog.borrow().as_ref().unwrap().show();
-            }),
+            })
         );
 
         self.imp().image_drop_page.imp().open_image_button.connect_clicked(
             clone!(@strong self as this => @default-panic, move |_button| {
                 this.imp().open_image_dialog.borrow().as_ref().unwrap().show();
-            }),
+            })
         );
-
-        
     }
 
     fn load_image(&self, file_option: Option<gio::File>) -> Result<String, Box<dyn Error>> {
         let file = file_option.ok_or("No file.")?;
         let path = file.path().ok_or("No path.")?;
         let uri = path.to_str().ok_or("No uri.")?.to_owned();
-        Ok(uri)
+
+        return Ok(uri);
     }
 
     pub fn edit_button_set_visible(&self, visible: bool) {
@@ -245,6 +240,7 @@ impl Window {
 
     pub fn edit_button_mode(&self, mode: bool) {
         let button: &gtk::Button = self.imp().edit_palette_button.as_ref();
+
         if mode {
             button.set_css_classes(&[&"opaque", &"edit-action-button"]);
         } else {

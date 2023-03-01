@@ -69,8 +69,9 @@ glib::wrapper! {
 impl SavePaletteDialog {
     pub fn new(colors: Vec<ExtractedColor>) -> SavePaletteDialog {
         let save_dialog: SavePaletteDialog = glib::Object::builder::<SavePaletteDialog>().build();
+
         save_dialog.load(colors);
-        save_dialog
+        return save_dialog;
     }
 
     fn initialize(&self) {
@@ -101,9 +102,9 @@ impl SavePaletteDialog {
     fn save_colors(&self) {
         let imp = self.imp();
 
-
         if !imp.colors.borrow().is_empty() {
             let mut name = imp.adw_entry_row.text().to_string();
+
             if name == "" {
                 name = imp.name.borrow().clone();
             }
@@ -111,16 +112,14 @@ impl SavePaletteDialog {
             if database().add_palette_from_extracted(name.clone(), imp.colors.borrow().as_ref()) {
                 add_success_toast(&i18n("Saved!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &name)]));
                 go_to_palette_page();
+
                 return;
 
             } else {
                 add_error_toast(i18n_k("Unable to add new palette «{palette_name}»", &[("palette_name", &name)]));
             }
-
-        } else  {
+        } else {
             add_error_toast(i18n("Unable to add palette, no colors extracted."))
         }
-
     }
-
 }

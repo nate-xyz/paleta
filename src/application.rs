@@ -50,19 +50,22 @@ mod imp {
         fn new() -> Self {
             let database = Rc::new(Database::new());
             let model = Model::new();
+
             database.connect_local(
                 "populate-model",
                 false,
                 clone!(@weak model => @default-return None, move |_args| {
                     model.populate_all();
                     None
-                }),
+                })
             );
+
             model.load_db(database.clone());
-            Self {
+
+            return Self {
                 database,
                 model: Rc::new(model),
-            }
+            };
         }
     }
 

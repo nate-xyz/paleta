@@ -53,7 +53,7 @@ mod imp {
             static SIGNALS: Lazy<Vec<Signal>> =
                 Lazy::new(|| vec![Signal::builder("color-selected").param_types([<Color>::static_type()]).build()]);
 
-            SIGNALS.as_ref()
+            return SIGNALS.as_ref();
         }
     }
 
@@ -70,32 +70,39 @@ glib::wrapper! {
 impl SimplePaletteRow {
     pub fn new() -> SimplePaletteRow {
         let palette_row: SimplePaletteRow = glib::Object::builder::<SimplePaletteRow>().build();
+
         palette_row.initialize();
-        palette_row
+
+        return palette_row;
     }
 
     fn initialize(&self) {
         let imp = self.imp();
-        imp.flow_box.bind_model(Some(&imp.list_store), 
-        clone!(@strong self as this => @default-panic, move |obj| {
-            let color = obj.clone().downcast::<Color>().expect("Palette is of wrong type");     
-            let color_card = SimpleColorCard::new(color).upcast::<gtk::Widget>();
-            color_card.connect_local(
-                "color-selected",
-                false,
-                clone!(@weak this => @default-return None, move |value| {
-                    let color_val = value.get(1); 
-                    match color_val {
-                        Some(color_val) => {
-                            let color = color_val.get::<Color>().ok().unwrap();
-                            this.emit_by_name::<()>("color-selected", &[&color]);
-                        },
-                        None => (),
-                    }
-                    None
-                }),
-            );
-            return color_card;
+
+        imp.flow_box.bind_model(Some(&imp.list_store),
+            clone!(@strong self as this => @default-panic, move |obj| {
+                let color = obj.clone().downcast::<Color>().expect("Palette is of wrong type");
+                let color_card = SimpleColorCard::new(color).upcast::<gtk::Widget>();
+
+                color_card.connect_local(
+                    "color-selected",
+                    false,
+                    clone!(@weak this => @default-return None, move |value| {
+                        let color_val = value.get(1);
+
+                        match color_val {
+                            Some(color_val) => {
+                                let color = color_val.get::<Color>().ok().unwrap();
+                                this.emit_by_name::<()>("color-selected", &[&color]);
+                            },
+                            None => (),
+                        }
+
+                        return None;
+                    })
+                );
+
+                return color_card;
             })
         );
 
@@ -106,12 +113,14 @@ impl SimplePaletteRow {
         let imp = self.imp();
         let colors = model().colors();
         let n_colors = colors.len() as u32;
+
         imp.flow_box.set_min_children_per_line(n_colors);
         imp.flow_box.set_max_children_per_line(n_colors);
+
         imp.list_store.remove_all();
+
         for (_i, color) in colors.iter() {
             imp.list_store.append(color.as_ref());
         }
     }
-
 }

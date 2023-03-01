@@ -13,7 +13,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/extracted_color_row.ui")]
     pub struct ExtractedColorRowPriv {
-        
         #[template_child(id = "row_box")]
         pub row_box: TemplateChild<gtk::Box>,
 
@@ -64,27 +63,37 @@ glib::wrapper! {
 impl ExtractedColorRow {
     pub fn new(color: &ExtractedColor) -> ExtractedColorRow {
         let color_row: ExtractedColorRow = glib::Object::builder::<ExtractedColorRow>().build();
+
         color_row.load_color(color);
-        color_row
+        return color_row;
     }
 
     fn initialize(&self) {
         let ctrl = gtk::EventControllerMotion::new();
-        ctrl.connect_enter(clone!(@strong self as this => move |_controller, _x, _y| {
-            this.imp().copy_icon.show();
-        }));
-        ctrl.connect_leave(clone!(@strong self as this => move |_controller| {
-            this.imp().copy_icon.hide();
-        }));
+
+        ctrl.connect_enter(
+            clone!(@strong self as this => move |_controller, _x, _y| {
+                this.imp().copy_icon.show();
+            })
+        );
+
+        ctrl.connect_leave(
+            clone!(@strong self as this => move |_controller| {
+                this.imp().copy_icon.hide();
+            })
+        );
+
         self.add_controller(ctrl);
     }
 
-
     fn load_color(&self, color: &ExtractedColor) {
         let imp = self.imp();
+
         imp.rgb_name_label.set_label(color.rgb_name().as_str());
         imp.hex_name_label.set_label(color.hex_name().as_str());
+
         imp.hex_name.replace(color.hex_name());
+
         match gdk::RGBA::parse(color.rgb_name()) {
             Ok(rgba) => {
                 let color_button = gtk::ColorButton::with_rgba(&rgba);
@@ -96,7 +105,6 @@ impl ExtractedColorRow {
     }
 
     pub fn hex_name(&self) -> String {
-        self.imp().hex_name.borrow().clone()
+        return self.imp().hex_name.borrow().clone();
     }
-
 }

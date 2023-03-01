@@ -42,11 +42,11 @@ mod imp {
         }
 
         fn new() -> Self {
-            Self {
+            return Self {
                 color_bin: TemplateChild::default(),
                 palette: RefCell::new(None),
                 color: RefCell::new(None),
-            }
+            };
         }
     }
 
@@ -72,11 +72,12 @@ glib::wrapper! {
 impl DeleteColorDialog {
     pub fn new(color: &Color, palette: &Palette) -> DeleteColorDialog {
         let save_dialog: DeleteColorDialog = glib::Object::builder::<DeleteColorDialog>().build();
+
         save_dialog.load(color, palette);
-        save_dialog
+        return save_dialog;
     }
 
-    fn initialize(&self) {        
+    fn initialize(&self) {
         self.set_transient_for(Some(&active_window().unwrap()));
         self.connect_response(
             None,
@@ -84,22 +85,24 @@ impl DeleteColorDialog {
                 if response == "remove" {
                     this.remove_color_from_palette();
                 }
-            }),
+            })
         );
-       
     }
 
     fn load(&self, color: &Color, palette: &Palette) {
         self.set_heading(Some(&i18n_k("Remove color {color_hex} from {palette_name}?", &[("color_hex", &color.hex_name()), ("palette_name", &palette.name())])));
+
         let imp = self.imp();
-        imp.color_bin.set_child(Some(&SimplerDeleteColorCard::new(color)));        
+
+        imp.color_bin.set_child(Some(&SimplerDeleteColorCard::new(color)));
+
         imp.color.replace(Some(color.clone()));
         imp.palette.replace(Some(palette.clone()));
     }
 
-
     fn remove_color_from_palette(&self) {
         let imp = self.imp();
+
         match imp.palette.borrow().as_ref() {
             Some(palette) => {
                 match imp.color.borrow().as_ref() {
@@ -117,5 +120,4 @@ impl DeleteColorDialog {
             None => add_error_toast(i18n("Unable to remove color.")),
         }
     }
-
 }
