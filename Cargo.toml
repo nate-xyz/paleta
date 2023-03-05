@@ -7,7 +7,7 @@ edition = "2021"
 gettext-rs = { version = "0.7", features = ["gettext-system"] }
 gtk-macros = "0.3"
 gtk4-macros = "0.6.0"
-gdk-pixbuf = { version = "0.15", features = ["v2_36"] }
+gdk-pixbuf = { version = "0.16", features = ["v2_42"] }
 log = "0.4"
 pretty_env_logger = "0.4"
 rusqlite = { version = "0.28.0", features = ["bundled"] }
