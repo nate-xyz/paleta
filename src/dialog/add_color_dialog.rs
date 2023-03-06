@@ -61,7 +61,7 @@ mod imp {
         }
 
         fn new() -> Self {
-            Self {
+            return Self {
                 color_selection_row: TemplateChild::default(),
                 picker_button: TemplateChild::default(),
                 currently_selected_label: TemplateChild::default(),
@@ -71,7 +71,7 @@ mod imp {
                 color_chooser: RefCell::new(None),
                 palette: RefCell::new(None),
                 color: RefCell::new(None),
-            }
+            };
         }
     }
 
@@ -97,40 +97,47 @@ glib::wrapper! {
 impl AddColorDialog {
     pub fn new(palette: &Palette) -> AddColorDialog {
         let save_dialog: AddColorDialog = glib::Object::builder::<AddColorDialog>().build();
+
         save_dialog.load(palette);
-        save_dialog
+        return save_dialog;
     }
 
     fn initialize(&self) {
         let imp = self.imp();
-        
+
         self.connect_response(
             None,
             clone!(@strong self as this => move |_dialog, response| {
                 if response == "add" {
                     this.add_color();
                 }
-            }),
+            })
         );
+
         self.set_transient_for(Some(&active_window().unwrap()));
+
         imp.picker_button.connect_clicked(
             clone!(@strong self as this => @default-panic, move |_button| {
                 this.imp().color_chooser.borrow().as_ref().unwrap().show();
-            }),
+            })
         );
     }
 
     fn load(&self, palette: &Palette) {
         debug!("load palette");
         self.set_heading(Some(&i18n_k("Add Color to {palette_name}", &[("palette_name", &palette.name())])));
+
         let imp = self.imp();
+
         if model().colors().len() > 0 {
             let simple_palette_row = SimplePaletteRow::new();
+
             simple_palette_row.connect_local(
                 "color-selected",
                 false,
                 clone!(@weak self as this => @default-return None, move |value| {
-                    let color_val = value.get(1); 
+                    let color_val = value.get(1);
+
                     match color_val {
                         Some(color_val) => {
                             let color = color_val.get::<Color>().ok().unwrap();
@@ -138,30 +145,32 @@ impl AddColorDialog {
                         },
                         None => (),
                     }
-                    
+
                     None
-                }),
+                })
             );
+
             imp.color_selection_row.set_child(Some(&simple_palette_row));
         } else {
             imp.color_instruction_label.set_label(&i18n_k("Pick a new color to add to {palette_name}.", &[("palette_name", &palette.name())]));
-
-            
         }
+
         imp.palette.replace(Some(palette.clone()));
         self.init_color_chooser();
     }
 
     fn set_current_color(&self, color: Color) {
         let imp = self.imp();
+
         imp.revealer.set_reveal_child(false);
         imp.currently_selected_label.set_label(&i18n_k("Currently selected color: {color_hex}", &[("color_hex", &color.hex_name())]));
 
         imp.currently_selected_color_square.set_child(Some(&ColorSquare::new(110, color.rgb_name())));
         imp.color.replace(Some(color));
+
         if !imp.revealer.reveals_child() {
             imp.revealer.set_reveal_child(true);
-        }           
+        }
     }
 
     fn chooser_response(&self, color: gdk::RGBA) {
@@ -170,9 +179,9 @@ impl AddColorDialog {
         let blue = (color.blue() * 255.0) as i64;
         let alpha = color.red() as f64;
         let hex = rgb_to_hex(red as u8, green as u8, blue as u8);
+
         self.set_current_color(Color::new(-1, red, green, blue, alpha, hex))
     }
-
 
     fn init_color_chooser(&self) {
         let dialog = gtk::ColorChooserDialog::builder()
@@ -180,15 +189,15 @@ impl AddColorDialog {
         .transient_for(self)
         .build();
 
-
         dialog.connect_response(
             clone!(@strong dialog, @weak self as this => move |dialog, response| {
                 if response == gtk::ResponseType::Ok {
                     this.chooser_response(dialog.rgba());
                 }
+
                 dialog.close();
                 this.init_color_chooser();
-            }),
+            })
         );
 
         self.imp().color_chooser.replace(Some(dialog));
@@ -200,6 +209,7 @@ impl AddColorDialog {
 
     fn add_color(&self) {
         let imp = self.imp();
+
         match imp.palette.borrow().as_ref() {
             Some(palette) => {
                 match imp.color.borrow().as_ref() {
@@ -217,5 +227,4 @@ impl AddColorDialog {
             None => add_error_toast(i18n("Unable to add color.")),
         }
     }
-
 }

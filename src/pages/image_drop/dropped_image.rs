@@ -39,11 +39,10 @@ glib::wrapper! {
     @extends gtk::Widget, adw::Bin;
 }
 
-
 impl DroppedImage {
     pub fn new() -> DroppedImage {
         let dropped_image: DroppedImage = glib::Object::builder::<DroppedImage>().build();
-        dropped_image
+        return dropped_image;
     }
 
     fn initialize(&self) {
@@ -57,12 +56,11 @@ impl DroppedImage {
         let _image_name = format!("{}", html_escape::encode_text_minimal(basename.to_str().unwrap()));
         let pixbuf = gdk_pixbuf::Pixbuf::from_file(image_path)?;
         let picture = gtk::Picture::for_pixbuf(&pixbuf);
+
         self.set_child(Some(&picture));
         self.imp().picture.replace(picture);
         self.imp().pixbuf.replace(Some(pixbuf));
-        Ok(())
+
+        return Ok(());
     }
-
-
 }
-    

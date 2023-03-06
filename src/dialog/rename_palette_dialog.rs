@@ -69,8 +69,9 @@ glib::wrapper! {
 impl RenamePaletteDialog {
     pub fn new(palette: &Palette) -> RenamePaletteDialog {
         let save_dialog: RenamePaletteDialog = glib::Object::builder::<RenamePaletteDialog>().build();
+
         save_dialog.load(palette);
-        save_dialog
+        return save_dialog;
     }
 
     fn initialize(&self) {
@@ -81,7 +82,7 @@ impl RenamePaletteDialog {
                 if response == "rename" {
                     this.rename_palette();
                 }
-            }),
+            })
         );
     }
 
@@ -98,13 +99,15 @@ impl RenamePaletteDialog {
 
     fn rename_palette(&self) {
         let imp = self.imp();
+
         match imp.palette.borrow().as_ref() {
             Some(palette) => {
                 let mut name = imp.adw_entry_row.text().to_string();
+
                 if name == "" {
                     name = imp.name.borrow().clone();
                 }
-    
+
                 if database().rename_palette(palette.id(), name.clone()) {
                     add_success_toast(&i18n("Renamed!"), &i18n_k("Changed name from «{old_palette_name}» to «{new_palette_name}».", &[("old_palette_name", &palette.name()), ("new_palette_name", &name)]));
                     return;
@@ -115,5 +118,4 @@ impl RenamePaletteDialog {
             None => add_error_toast(i18n("Unable to rename palette.")),
         }
     }
-
 }

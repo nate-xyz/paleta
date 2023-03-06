@@ -35,7 +35,7 @@ use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
 
 use std::{env, process};
 use log::{debug, error};
-use gettextrs::{bind_textdomain_codeset, bindtextdomain, textdomain};
+use gettextrs::{bind_textdomain_codeset, bindtextdomain, textdomain, setlocale, LocaleCategory};
 use gtk::{gio, glib, prelude::*};
 
 fn main() -> glib::ExitCode {
@@ -43,6 +43,8 @@ fn main() -> glib::ExitCode {
 
     // Set up gettext translations
     debug!("Setting up locale data");
+    setlocale(LocaleCategory::LcAll, "");
+
     bindtextdomain(GETTEXT_PACKAGE, LOCALEDIR).expect("Unable to bind the text domain");
     bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8")
         .expect("Unable to set the text domain encoding");
@@ -56,8 +58,10 @@ fn main() -> glib::ExitCode {
         Ok(_) => match env::current_exe() {
             Ok(path) => {
                 let mut resource_path = path;
+
                 resource_path.pop();
                 resource_path.push("paleta.gresource");
+
                 gio::Resource::load(&resource_path)
                     .expect("Unable to find paleta.gresource in devenv")
             }
@@ -65,18 +69,19 @@ fn main() -> glib::ExitCode {
                 error!("Unable to find the current path: {}", err);
                 process::exit(0x0100);
             }
-        },
+        }
     };
+
     gio::resources_register(&resources);
 
     // Create a new GtkApplication. The application manages our main loop,
     // application windows, integration with the window manager/compositor, and
     // desktop features such as file opening and single-instance applications.
-    let app = App::new("io.github.nate_xyz.Paleta", &gio::ApplicationFlags::empty());
+    let app = App::new();
 
     // Run the application. This function will block until the application
     // exits. Upon return, we have our exit code to return to the shell. (This
     // is the code you see when you do `echo $?` after running a command in a
     // terminal.
-    app.run()
+    return app.run();
 }

@@ -24,15 +24,18 @@ use regex::{Captures, Regex};
 fn freplace(input: String, args: &[&str]) -> String {
     let mut parts = input.split("{}");
     let mut output = parts.next().unwrap_or_default().to_string();
+
     for (p, a) in parts.zip(args.iter()) {
         output += &(a.to_string() + p);
     }
-    output
+
+    return output;
 }
 
 #[allow(dead_code)]
 fn kreplace(input: String, kwargs: &[(&str, &str)]) -> String {
     let mut s = input;
+
     for (k, v) in kwargs {
         if let Ok(re) = Regex::new(&format!("\\{{{}\\}}", k)) {
             s = re
@@ -41,7 +44,7 @@ fn kreplace(input: String, kwargs: &[(&str, &str)]) -> String {
         }
     }
 
-    s
+    return s;
 }
 
 // Simple translations functions
@@ -115,13 +118,7 @@ pub fn pni18n_f(ctx: &str, single: &str, multiple: &str, number: u32, args: &[&s
 }
 
 #[allow(dead_code)]
-pub fn pni18n_k(
-    ctx: &str,
-    single: &str,
-    multiple: &str,
-    number: u32,
-    kwargs: &[(&str, &str)],
-) -> String {
+pub fn pni18n_k(ctx: &str, single: &str, multiple: &str, number: u32, kwargs: &[(&str, &str)]) -> String {
     let s = npgettext(ctx, single, multiple, number);
     kreplace(s, kwargs)
 }

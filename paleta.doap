@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:gnome="http://api.gnome.org/doap-extensions#"
+         xmlns="http://usefulinc.com/ns/doap#">
+
+  <name xml:lang="en">Paleta</name>
+  <shortdesc xml:lang="en">Generate color palettes with ease</shortdesc>
+
+  <homepage rdf:resource="https://github.com/nate-xyz/paleta"/>
+  <download-page rdf:resource="https://beta.flathub.org/apps/io.github.nate_xyz.Paleta"/>
+  <bug-database rdf:resource="https://github.com/nate-xyz/paleta/issues"/>
+
+  <programming-language>Rust</programming-language>
+
+  <platform>GTK 4</platform>
+  <platform>Libadwaita</platform>
+
+  <maintainer>
+    <foaf:Person>
+      <foaf:name>nate-xyz</foaf:name>
+    </foaf:Person>
+  </maintainer>
+</Project>

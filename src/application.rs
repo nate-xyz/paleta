@@ -21,6 +21,7 @@
 use gtk::prelude::*;
 use adw::subclass::prelude::*;
 use gtk::{gio, glib, glib::clone};
+use gtk_macros::action;
 
 use std::rc::Rc;
 
@@ -49,28 +50,34 @@ mod imp {
         fn new() -> Self {
             let database = Rc::new(Database::new());
             let model = Model::new();
+
             database.connect_local(
                 "populate-model",
                 false,
                 clone!(@weak model => @default-return None, move |_args| {
                     model.populate_all();
                     None
-                }),
+                })
             );
+
             model.load_db(database.clone());
-            Self {
+
+            return Self {
                 database,
                 model: Rc::new(model),
-            }
+            };
         }
     }
 
     impl ObjectImpl for App {
         fn constructed(&self) {
             self.parent_constructed();
+
             let obj = self.obj();
             obj.setup_gactions();
-            obj.set_accels_for_action("app.quit", &["<primary>q"]);
+
+            obj.set_accels_for_action("app.quit", &["<primary>q", "<primary>w"]);
+            // TODO: Add more accelerators
         }
     }
 
@@ -105,29 +112,38 @@ glib::wrapper! {
 }
 
 impl App {
-    pub fn new(application_id: &str, flags: &gio::ApplicationFlags) -> Self {
-        glib::Object::builder()
-            .property("application-id", application_id)
-            .property("flags", flags)
+    pub fn new() -> Self {
+        glib::Object::builder::<App>()
+            .property("application-id", &"io.github.nate_xyz.Paleta")
+            .property("flags", gio::ApplicationFlags::FLAGS_NONE)
+            .property("resource-base-path", &"/io/github/nate_xyz/Paleta")
             .build()
     }
 
     pub fn model(&self) -> Rc<Model> {
         self.imp().model.clone()
     }
-    
+
     pub fn database(&self) -> Rc<Database> {
         self.imp().database.clone()
     }
 
     fn setup_gactions(&self) {
-        let quit_action = gio::ActionEntry::builder("quit")
-            .activate(move |app: &Self, _, _| app.quit())
-            .build();
-        let about_action = gio::ActionEntry::builder("about")
-            .activate(move |app: &Self, _, _| app.show_about())
-            .build();
-        self.add_action_entries([quit_action, about_action]);
+        action!(
+            self,
+            "quit",
+            clone!(@weak self as app => move |_, _| {
+                app.quit()
+            })
+        );
+
+        action!(
+            self,
+            "about",
+            clone!(@weak self as app => move |_, _| {
+                app.show_about()
+            })
+        );
     }
 
     fn show_about(&self) {
@@ -139,21 +155,20 @@ impl App {
             .developer_name("nate-xyz")
             .version(VERSION)
             .developers(vec!["nate-xyz"])
-            .copyright("© 2023 nate-xyz")
+            .copyright("Copyright © 2023 nate-xyz")
             .license_type(gtk::License::Gpl30Only)
+            // Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
+            // One name per line, please do not remove previous names.
+            .translator_credits(&i18n("translator-credits"))
             .website("https://github.com/nate-xyz/paleta")
             .issue_url("https://github.com/nate-xyz/paleta/issues")
             .build();
-        
-        // Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
-        // One name per line, please do not remove previous names.
-        about.set_translator_credits(&i18n("translator-credits"));
 
         // Translators: only replace "Powered by "
         let ack: String = i18n("Powered by color-thief");
 
-        about.add_acknowledgement_section(Some(&ack), 
-            &["color-thief-rs https://github.com/RazrFalcon/color-thief-rs", "color-thief-py https://github.com/fengsp/color-thief-py", "color-thief https://github.com/lokesh/color-thief"]);
+        about.add_acknowledgement_section(Some(&ack),
+            &["color-thief-rs https://github.com/RazrFalcon/color-thief-rs", "color-thief https://github.com/lokesh/color-thief"]);
 
         about.present();
     }

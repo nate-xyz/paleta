@@ -18,7 +18,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/palette_page.ui")]
     pub struct PalettePagePriv {
-        
         #[template_child(id = "list_box")]
         pub list_box: TemplateChild<gtk::ListBox>,
 
@@ -79,44 +78,52 @@ glib::wrapper! {
 impl PalettePage {
     pub fn new() -> PalettePage {
         let color_panel: PalettePage = glib::Object::builder::<PalettePage>().build();
-        color_panel
+        return color_panel;
     }
 
     fn initialize(&self) {
         let imp = self.imp();
-        imp.list_box.bind_model(Some(&imp.list_store), 
-        clone!(@strong self as this => @default-panic, move |obj| {
-            let palette = obj.clone().downcast::<Palette>().expect("Palette is of wrong type");       
-            return PaletteRow::new(palette).upcast::<gtk::Widget>();
+
+        imp.list_box.bind_model(Some(&imp.list_store),
+            clone!(@strong self as this => @default-panic, move |obj| {
+                let palette = obj.clone().downcast::<Palette>().expect("Palette is of wrong type");
+                return PaletteRow::new(palette).upcast::<gtk::Widget>();
             })
         );
+
         model().connect_local(
             "populated",
             false,
             clone!(@weak self as this => @default-return None, move |_args| {
                 this.update_view();
                 None
-            }),
+            })
         );
+
         imp.add_palette_button.connect_clicked(
             clone!(@strong self as this => @default-panic, move |_button| {
                 this.show_new_palette_dialog();
-            }),
+            })
         );
     }
 
     fn update_view(&self) {
         let imp = self.imp();
+
         imp.list_store.remove_all();
+
         let palettes = model().palettes();
+
         if palettes.is_empty() {
             imp.status.show();
             imp.list_box.hide();
+
             edit_button_set_visible(false);
             imp.edit_mode.set(false);
         } else {
             imp.status.hide();
             imp.list_box.show();
+
             for (_i, palette) in palettes.iter() {
                 imp.list_store.append(palette.as_ref());
             }
@@ -126,16 +133,17 @@ impl PalettePage {
 
     pub fn toggle_edit_mode(&self) {
         let imp = self.imp();
+
         if imp.list_store.n_items() > 0 {
             self.set_edit_mode(!imp.edit_mode.get());
         } else {
             add_error_toast(i18n("Cannot toggle edit mode, no palettes added."))
         }
-
     }
 
     fn set_edit_mode(&self, mode: bool) {
         let imp = self.imp();
+
         imp.edit_mode.set(mode);
         edit_button_mode(mode);
         self.update_edit_view();
@@ -143,26 +151,25 @@ impl PalettePage {
 
     fn update_edit_view(&self) {
         let imp = self.imp();
+
         for row in imp.list_box.observe_children().snapshot() {
-            let palette_row = row.downcast::<PaletteRow>().expect("PaletteRow is of wrong type");      
+            let palette_row = row.downcast::<PaletteRow>().expect("PaletteRow is of wrong type");
             palette_row.set_edit_mode(imp.edit_mode.get());
         }
     }
 
     fn show_new_palette_dialog(&self) {
         let dialog = AddNewPaletteDialog::new();
-        dialog.connect_response(            
+
+        dialog.connect_response(
             None,
             clone!(@strong self as this => move |_dialog, response| {
                 if response == "add" {
                     this.set_edit_mode(false);
                     edit_button_set_visible(true);
                 }
-            }),);
+            })
+        );
         dialog.show()
-
     }
-
-
 }
-    

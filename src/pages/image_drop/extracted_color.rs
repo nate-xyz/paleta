@@ -36,8 +36,9 @@ glib::wrapper! {
 impl ExtractedColor {
     pub fn new(rgba: (u8, u8, u8)) -> ExtractedColor {
         let ec: ExtractedColor = glib::Object::builder::<ExtractedColor>().build();
+
         ec.load(rgba);
-        ec
+        return ec;
     }
 
     fn load(&self, rgba: (u8, u8, u8)) {
@@ -49,27 +50,24 @@ impl ExtractedColor {
 
         imp.rgb_tuple.set(rgba);
         imp.rgba_tuple.set((red, green, blue, 1.0));
+
         imp.hex_name.replace(format!("{}", rgb_to_hex(red, green, blue)));
         imp.rgb_name.replace(format!("rgb({},{},{})", red, green, blue));
-
     }
 
     pub fn rgb_tuple(&self) -> (u8, u8, u8) {
-        self.imp().rgb_tuple.get()
+        return self.imp().rgb_tuple.get();
     }
 
     pub fn rgba_tuple(&self) -> (u8, u8, u8, f32) {
-        self.imp().rgba_tuple.get()
+        return self.imp().rgba_tuple.get();
     }
 
-
     pub fn hex_name(&self) -> String {
-        self.imp().hex_name.borrow().clone()
+        return self.imp().hex_name.borrow().clone();
     }
 
     pub fn rgb_name(&self) -> String {
-        self.imp().rgb_name.borrow().clone()
+        return self.imp().rgb_name.borrow().clone();
     }
-
 }
-    

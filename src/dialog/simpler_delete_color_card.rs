@@ -8,13 +8,13 @@ use crate::pages::color_square::ColorSquare;
 
 mod imp {
     use super::*;
-    
+
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/simpler_delete_color_card.ui")]
     pub struct SimplerDeleteColorCardPriv {
         #[template_child(id = "color_bin")]
         pub color_bin: TemplateChild<adw::Bin>,
-        
+
         #[template_child(id = "hex_label")]
         pub hex_label: TemplateChild<gtk::Label>,
 
@@ -53,20 +53,20 @@ glib::wrapper! {
     @extends gtk::Widget, adw::Bin;
 }
 
-
 impl SimplerDeleteColorCard {
     pub fn new(color: &Color) -> SimplerDeleteColorCard {
         let palette_color_card: SimplerDeleteColorCard = glib::Object::builder::<SimplerDeleteColorCard>().build();
+
         palette_color_card.load(color);
-        palette_color_card
+        return palette_color_card;
     }
 
     fn load(&self, color: &Color) {
         let imp = self.imp();
+
         imp.hex_label.set_label(color.hex_name().as_str());
         imp.rgb_label.set_label(color.rgb_name().as_str());
+
         imp.color_bin.set_child(Some(&ColorSquare::new(110, color.rgb_name())));
     }
-
 }
-    

@@ -69,8 +69,9 @@ glib::wrapper! {
 impl DuplicatePaletteDialog {
     pub fn new(palette: &Palette) -> DuplicatePaletteDialog {
         let duplicate_dialog: DuplicatePaletteDialog = glib::Object::builder::<DuplicatePaletteDialog>().build();
+
         duplicate_dialog.load(palette);
-        duplicate_dialog
+        return duplicate_dialog;
     }
 
     fn initialize(&self) {
@@ -81,7 +82,7 @@ impl DuplicatePaletteDialog {
                 if response == "duplicate" {
                     this.duplicate_palette();
                 }
-            }),
+            })
         );
     }
 
@@ -98,13 +99,15 @@ impl DuplicatePaletteDialog {
 
     fn duplicate_palette(&self) {
         let imp = self.imp();
+
         match imp.palette.borrow().as_ref() {
             Some(palette) => {
                 let mut name = imp.adw_entry_row.text().to_string();
+
                 if name == "" {
                     name = imp.name.borrow().clone();
                 }
-    
+
                 if database().duplicate_palette(palette.id(), name.clone()) {
                     add_success_toast(&i18n("Duplicated!"), &i18n_k("Copied «{original_palette}» to «{duplicate_palette}».", &[("original_palette", &palette.name()), ("duplicate_palette", &name)]));
                     return;
@@ -115,5 +118,4 @@ impl DuplicatePaletteDialog {
             None => add_error_toast(i18n("Unable to duplicate palette.")),
         }
     }
-
 }
