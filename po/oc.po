@@ -169,7 +169,7 @@ msgstr "<span foreground={ERROR_RED}>Error !</span> {error_msg}"
 #. Translators: Only replace "Opened image:". Reorder if necessary
 #: src/toasts.rs:68
 msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
-msgstr "<span foreground={SUCCESS_GREEN}>Imatge dobèrt :</span> {base_name}"
+msgstr "<span foreground={SUCCESS_GREEN}>Imatge dobèrt :</span> {image_name}"
 
 #. Translators: Do not replace {image_name}
 #: src/toasts.rs:74
@@ -587,7 +587,7 @@ msgstr "Suprimir paleta"
 
 #: src/pages/palette/ui/palette_page.ui:43
 msgid "Add Some Palettes!"
-msgstr "Apondre d’unas paletas !"
+msgstr "Ajustatz d’unas paletas !"
 
 #: src/pages/palette/ui/palette_page.ui:44
 msgid ""
