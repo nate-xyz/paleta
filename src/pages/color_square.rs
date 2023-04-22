@@ -28,17 +28,17 @@ mod imp {
 
     impl WidgetImpl for ColorSquare {
         fn measure(&self, _orientation: gtk::Orientation, _for_size: i32) -> (i32, i32, i32, i32) {
-            (self.size.get(), self.size.get(), -1, -1)
+            return (self.size.get(), self.size.get(), -1, -1);
         }
 
         fn snapshot(&self, snapshot: &gtk::Snapshot) {
             let widget = &*self.obj();
             let color = gdk::RGBA::parse(&self.rgb_name.borrow().clone()).unwrap();
             let rect = graphene::Rect::new(0.0, 0.0, widget.width() as f32, widget.height() as f32);
+
             snapshot.append_color(&color, &rect);
         }
     }
-
 }
 
 glib::wrapper! {
@@ -49,8 +49,9 @@ glib::wrapper! {
 impl ColorSquare {
     pub fn new(size: i32, rgb_name: String) -> ColorSquare {
         let cs: ColorSquare = glib::Object::builder::<ColorSquare>().build();
+
         cs.load(size, rgb_name);
-        cs
+        return cs;
     }
 
     fn load(&self, size: i32, rgb_name: String) {

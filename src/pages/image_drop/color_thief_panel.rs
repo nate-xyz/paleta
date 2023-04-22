@@ -31,7 +31,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/color_thief_panel.ui")]
     pub struct ColorThiefPanelPriv {
-        
         #[template_child(id = "image_bin")]
         pub image_bin: TemplateChild<adw::Bin>,
 
@@ -54,7 +53,7 @@ mod imp {
         pub save_button: TemplateChild<gtk::Button>,
 
         pub list_store: ListStore,
-        
+
         pub count_amount: Cell<f64>,
         pub quality: Cell<u8>,
         pub image: RefCell<Option<DroppedImage>>,
@@ -62,8 +61,6 @@ mod imp {
 
         pub sender: RefCell<Option<Sender<ExtractionAction>>>,
         pub receiver: RefCell<Option<Receiver<ExtractionAction>>>,
-
-
     }
 
     #[glib::object_subclass]
@@ -100,7 +97,6 @@ mod imp {
                 receiver: RefCell::new(Some(r)),
             }
         }
-
     }
 
     impl ObjectImpl for ColorThiefPanelPriv {
@@ -123,64 +119,70 @@ glib::wrapper! {
 impl ColorThiefPanel {
     pub fn new() -> ColorThiefPanel {
         let color_panel: ColorThiefPanel = glib::Object::builder::<ColorThiefPanel>().build();
-        color_panel
+        return color_panel;
     }
 
     fn initialize(&self) {
         let imp = self.imp();
 
-        imp.colors_list_box.bind_model(Some(&imp.list_store), 
-        clone!(@strong self as this => @default-panic, move |obj| {
-            let color = obj.clone().downcast::<ExtractedColor>().expect("ExtractedColor is of wrong type");       
-            return ExtractedColorRow::new(&color).upcast::<gtk::Widget>();
+        imp.colors_list_box.bind_model(Some(&imp.list_store),
+            clone!(@strong self as this => @default-panic, move |obj| {
+                let color = obj.clone().downcast::<ExtractedColor>().expect("ExtractedColor is of wrong type");
+                return ExtractedColorRow::new(&color).upcast::<gtk::Widget>();
             })
         );
 
-        imp.colors_list_box.connect_row_selected(clone!(@strong self as this => @default-panic, move |_listbox, obj| {
-            match obj {
-                Some(row) => {
-                    let ec_row = row.clone().downcast::<ExtractedColorRow>().expect("ExtractedColorRow is of wrong type");    
-                    let hex_name = ec_row.hex_name();
-                    copy_color(hex_name);
-                },
-                None => (),
-            }
-        }));
+        imp.colors_list_box.connect_row_selected(
+            clone!(@strong self as this => @default-panic, move |_listbox, obj| {
+                match obj {
+                    Some(row) => {
+                        let ec_row = row.clone().downcast::<ExtractedColorRow>().expect("ExtractedColorRow is of wrong type");
+                        let hex_name = ec_row.hex_name();
 
-        imp.save_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            this.save_palette();
-        }));
+                        copy_color(hex_name);
+                    },
+                    None => (),
+                }
+            })
+        );
+
+        imp.save_button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                this.save_palette();
+            })
+        );
 
         imp.quality_dropdown.set_selected(1);
 
         imp.count_amount.set(imp.count_amount_spin.value());
         imp.quality.set(self.quality());
 
-        imp.count_amount_spin.connect_value_changed(clone!(@strong self as this => @default-panic, move |spin_button| {
-            this.imp().count_amount.set(spin_button.value());
-            this.start_extraction()
-        }));
-        
-        imp.quality_dropdown.connect_selected_notify(clone!(@strong self as this => @default-panic, move |_drop_down| {
-            this.imp().quality.set(this.quality());
-            this.start_extraction()
-        }));
+        imp.count_amount_spin.connect_value_changed(
+            clone!(@strong self as this => @default-panic, move |spin_button| {
+                this.imp().count_amount.set(spin_button.value());
+                this.start_extraction()
+            })
+        );
 
+        imp.quality_dropdown.connect_selected_notify(
+            clone!(@strong self as this => @default-panic, move |_drop_down| {
+                this.imp().quality.set(this.quality());
+                this.start_extraction()
+            })
+        );
 
         self.setup_channel();
-    
     }
 
     fn setup_channel(&self) {
         let imp = self.imp();
         let receiver = imp.receiver.borrow_mut().take().unwrap();
+
         receiver.attach(
             None,
             clone!(@strong self as this => move |action| this.clone().process_action(action)),
         );
     }
-
-
 
     fn quality(&self) -> u8 {
         match self.imp().quality_dropdown.selected() {
@@ -193,9 +195,12 @@ impl ColorThiefPanel {
 
     pub fn set_image(&self, image: DroppedImage) {
         let imp = self.imp();
+
         self.set_visible(true);
+
         imp.image_bin.set_child(Some(&image));
         imp.image.replace(Some(image));
+
         self.list_store().remove_all();
         self.start_extraction();
     }
@@ -206,20 +211,24 @@ impl ColorThiefPanel {
             _ => debug!("Received action {:?}", action),
         }
 
-        glib::Continue(true)
+        return glib::Continue(true);
     }
 
     fn start_extraction(&self) {
         let imp = self.imp();
+
         if let Some(_image) = imp.image.borrow().as_ref() {
             imp.palette_box.set_visible(false);
             imp.spinner.set_visible(true);
             imp.spinner.start();
+
+            // TODO: 😨️
             let sender = imp.sender.borrow().as_ref().unwrap().clone();
             let pixbuf_bytes = imp.image.borrow().as_ref().unwrap().imp().pixbuf.borrow().as_ref().unwrap().clone().pixel_bytes().unwrap();
             let alpha = color_format(imp.image.borrow().as_ref().unwrap().imp().pixbuf.borrow().as_ref().unwrap().has_alpha());
             let quality = imp.quality.get() as u8;
             let count = imp.count_amount.get() as u8;
+
             thread::spawn(move || {
                 let palette = load_palette_from_bytes(pixbuf_bytes.as_ref(), alpha, count, quality);
                 let _ = sender.send(ExtractionAction::ExtractedColors(palette));
@@ -233,6 +242,7 @@ impl ColorThiefPanel {
         match colors {
             Some(colors) => {
                 let imp = self.imp();
+
                 imp.spinner.stop();
                 imp.spinner.set_visible(false);
                 imp.palette_box.set_visible(true);
@@ -241,24 +251,31 @@ impl ColorThiefPanel {
                 for rgba in colors {
                     imp.list_store.append(&ExtractedColor::new(rgba))
                 }
-                    
+
             },
             None => {
                 add_error_toast(i18n("Unable to extract colors from image."));
             },
         }
+
         debug!("extraction_done");
     }
 
     fn save_palette(&self) {
         let imp = self.imp();
+
         if let Some(_image) = imp.image.borrow().as_ref() {
             if imp.list_store.n_items() > 0 {
                 debug!("save palette");
-            
-                let mut colors = Vec::new(); 
+                let mut colors = Vec::new();
+
                 for position in 0..imp.list_store.n_items() {
-                    let color = imp.list_store.item(position).unwrap().clone().downcast::<ExtractedColor>().expect("ExtractedColor is of wrong type");
+                    let color = imp.list_store.item(position)
+                        .unwrap()
+                        .clone()
+                        .downcast::<ExtractedColor>()
+                        .expect("ExtractedColor is of wrong type");
+
                     colors.push(color);
                 }
 
@@ -271,44 +288,29 @@ impl ColorThiefPanel {
             add_error_toast(i18n("Unable to save palette, no image loaded."));
         }
     }
-    
+
     fn list_store(&self) -> &ListStore {
-        &self.imp().list_store
+        return &self.imp().list_store;
     }
-
-
-
 }
 
 fn color_format(has_alpha: bool) -> ColorFormat {
     if has_alpha {
-        ColorFormat::Rgba
+        return ColorFormat::Rgba;
     } else {
-        ColorFormat::Rgb
+        return ColorFormat::Rgb;
     }
 }
 
 pub fn load_palette_from_bytes(pixbuf_bytes: &[u8], alpha: ColorFormat, count: u8, quality: u8) -> Option<Vec<(u8, u8, u8)>> {
-    if let Ok(palette) = get_palette(
-        pixbuf_bytes,
-        alpha,
-        quality,
-        count,
-    ) {
+    if let Ok(palette) = get_palette(pixbuf_bytes, alpha, quality, count) {
         let colors: Vec<(u8, u8, u8)> = palette
             .iter()
-            .map(|c| {
-                (                   
-                    c.r,
-                    c.g,
-                    c.b,
-                )
-
-            })
+            .map(|c| { (c.r, c.g, c.b) })
             .collect();
+
         return Some(colors);
     }
-    None
-}
 
-    
+    return None;
+}

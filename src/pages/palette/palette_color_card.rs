@@ -11,14 +11,13 @@ use crate::util::copy_color;
 
 mod imp {
     use super::*;
-    
+
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/palette_color_card.ui")]
     pub struct PaletteColorCardPriv {
-        
         #[template_child(id = "color_bin")]
         pub color_bin: TemplateChild<adw::Bin>,
-        
+
         #[template_child(id = "hex_label")]
         pub hex_label: TemplateChild<gtk::Label>,
 
@@ -75,61 +74,74 @@ glib::wrapper! {
 impl PaletteColorCard {
     pub fn new(color: Color, palette: &Palette) -> PaletteColorCard {
         let palette_color_card: PaletteColorCard = glib::Object::builder::<PaletteColorCard>().build();
-        palette_color_card.load(color, palette);
-        palette_color_card
-    }
 
+        palette_color_card.load(color, palette);
+        return palette_color_card;
+    }
 
     fn initialize(&self) {
         let imp = self.imp();
-        
+
         let ctrl = gtk::EventControllerMotion::new();
-        ctrl.connect_enter(clone!(@strong self as this => move |_controller, _x, _y| {
-            if !this.imp().edit_mode.get() {
-                this.imp().button.show();
-            } else {    
+
+        ctrl.connect_enter(
+            clone!(@strong self as this => move |_controller, _x, _y| {
+                if !this.imp().edit_mode.get() {
+                    this.imp().button.show();
+                } else {
+                    this.imp().button.hide();
+                }
+            })
+        );
+
+        ctrl.connect_leave(
+            clone!(@strong self as this => move |_controller| {
                 this.imp().button.hide();
-            }
-        }));
-        ctrl.connect_leave(clone!(@strong self as this => move |_controller| {
-            this.imp().button.hide();
-        }));
+            })
+        );
+
         self.add_controller(ctrl);
 
-        imp.button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            let hex_name = this.imp().color.borrow().as_ref().unwrap().hex_name();
-            copy_color(hex_name);
-        }));
+        imp.button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                let hex_name = this.imp().color.borrow().as_ref().unwrap().hex_name();
+                copy_color(hex_name);
+            })
+        );
 
-        imp.delete_color_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            let dialog = DeleteColorDialog::new(this.imp().color.borrow().as_ref().unwrap(), this.imp().palette.borrow().as_ref().unwrap());
-            dialog.show();
-        }));
+        imp.delete_color_button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                let dialog = DeleteColorDialog::new(this.imp().color.borrow().as_ref().unwrap(), this.imp().palette.borrow().as_ref().unwrap());
+                dialog.show();
+            })
+        );
 
         imp.edit_mode.set(false);
     }
 
     fn load(&self, color: Color, palette: &Palette) {
         let imp = self.imp();
+
         imp.hex_label.set_label(color.hex_name().as_str());
         imp.rgb_label.set_label(color.rgb_name().as_str());
+
         imp.color_bin.set_child(Some(&ColorSquare::new(110, color.rgb_name())));
+
         imp.color.replace(Some(color));
         imp.palette.replace(Some(palette.clone()));
     }
 
     pub fn set_edit_mode(&self, mode: bool) {
         let imp = self.imp();
+
         imp.edit_mode.set(mode);
         self.update_edit_view();
-
     }
 
     fn update_edit_view(&self) {
         let imp = self.imp();
+
         imp.revealer.set_reveal_child(imp.edit_mode.get());
         imp.button.set_visible(false);
     }
-
 }
-    
