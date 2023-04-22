@@ -7,7 +7,7 @@ use std::cell::RefCell;
 
 use crate::util::{ database, active_window, go_to_palette_page};
 use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_f, i18n_k};
+use crate::i18n::{i18n, i18n_k};
 
 use crate::pages::image_drop::extracted_color::ExtractedColor;
 
@@ -73,16 +73,19 @@ impl SavePaletteDialog {
         save_dialog
     }
 
-    fn initialize(&self) {        
+    fn initialize(&self) {
+        let palette_index = database().query_n_palettes()+1;
+
         self.set_transient_for(Some(&active_window().unwrap()));
-        self.set_name(i18n_f("Palette #{}", &[&format!("{}", database().query_n_palettes()+1)]));
+        self.set_name(i18n_k("Palette #{palette_index}", &[("palette_index", &palette_index.to_string())]));
+
         self.connect_response(
             None,
             clone!(@strong self as this => move |_dialog, response| {
                 if response == "save" {
                     this.save_colors();
                 }
-            }),
+            })
         );
     }
 

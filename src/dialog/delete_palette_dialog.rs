@@ -81,7 +81,7 @@ impl DeletePaletteDialog {
     }
 
     fn load(&self, palette: &Palette) {
-        self.set_heading(Some(format!("Delete {}?", palette.name()).as_str()));
+        self.set_heading(Some(&i18n_k("Delete {palette_name}?", &[("palette_name", &palette.name())])));
         self.imp().palette.replace(Some(palette.clone()));
     }
 
