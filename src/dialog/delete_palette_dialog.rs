@@ -5,21 +5,25 @@
  */
 
 use adw::{prelude::*, subclass::prelude::*};
-use gtk::{glib, glib::clone, CompositeTemplate};
+use gtk::{glib, glib::{clone, Sender}, CompositeTemplate};
+use gtk_macros::send;
 
 use std::cell::RefCell;
+use log::error;
 
 use crate::model::palette::Palette;
-use crate::toasts::{add_error_toast, add_success_toast};
+use crate::database::DatabaseAction;
+use crate::toasts::add_error_toast;
 use crate::i18n::{i18n, i18n_k};
 use crate::util::{database, active_window};
 
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/delete_palette_dialog.ui")]
     pub struct DeletePaletteDialogPriv {
+        pub db_sender: Sender<DatabaseAction>,
         pub palette: RefCell<Option<Palette>>,
         pub name: RefCell<String>,
     }
@@ -30,19 +34,20 @@ mod imp {
         type Type = super::DeletePaletteDialog;
         type ParentType = adw::MessageDialog;
 
+        fn new() -> Self {
+            Self {
+                db_sender: database().sender(),
+                palette: RefCell::new(None),
+                name: RefCell::new(String::new()),
+            }
+        }
+
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
             obj.init_template();
-        }
-
-        fn new() -> Self {
-            Self {
-                palette: RefCell::new(None),
-                name: RefCell::new(String::new()),
-            }
         }
     }
 
@@ -93,11 +98,7 @@ impl DeletePaletteDialog {
         let imp = self.imp();
 
         if let Some(palette) = imp.palette.borrow().as_ref() {
-            if database().delete_palette(palette.id()) {
-                add_success_toast(&i18n("Removed"), &i18n_k("palette: «{palette_name}».", &[("palette_name", &palette.name())]));
-            } else {
-                add_error_toast(i18n_k("Unable to delete palette «{palette_name}».", &[("palette_name", &palette.name())]));
-            }
+            send!(imp.db_sender, DatabaseAction::DeletePalette((palette.id(), palette.name())));
             return;
         }
         add_error_toast(i18n("Unable to delete palette."));

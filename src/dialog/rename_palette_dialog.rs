@@ -5,24 +5,28 @@
  */
 
 use adw::{prelude::*, subclass::prelude::*};
-use gtk::{glib, glib::clone, CompositeTemplate};
+use gtk::{glib, glib::{clone, Sender}, CompositeTemplate};
+use gtk_macros::send;
 
 use std::cell::RefCell;
+use log::error;
 
 use crate::model::palette::Palette;
-use crate::toasts::{add_error_toast, add_success_toast};
+use crate::database::DatabaseAction;
+use crate::toasts::add_error_toast;
 use crate::util::{database, active_window};
 use crate::i18n::{i18n, i18n_k};
 
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/rename_palette_dialog.ui")]
     pub struct RenamePaletteDialogPriv {
         #[template_child(id = "adw_entry_row")]
         pub adw_entry_row: TemplateChild<adw::EntryRow>,
 
+        pub db_sender: Sender<DatabaseAction>,
         pub palette: RefCell<Option<Palette>>,
         pub name: RefCell<String>,
     }
@@ -33,20 +37,21 @@ mod imp {
         type Type = super::RenamePaletteDialog;
         type ParentType = adw::MessageDialog;
 
+        fn new() -> Self {
+            Self {
+                adw_entry_row: TemplateChild::default(),
+                db_sender: database().sender(),
+                palette: RefCell::new(None),
+                name: RefCell::new(String::new()),
+            }
+        }
+
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
             obj.init_template();
-        }
-
-        fn new() -> Self {
-            Self {
-                adw_entry_row: TemplateChild::default(),
-                palette: RefCell::new(None),
-                name: RefCell::new(String::new()),
-            }
         }
     }
 
@@ -109,11 +114,7 @@ impl RenamePaletteDialog {
                 name = imp.name.borrow().clone();
             }
 
-            if database().rename_palette(palette.id(), name.clone()) {
-                add_success_toast(&i18n("Renamed!"), &i18n_k("Changed name from «{old_palette_name}» to «{new_palette_name}».", &[("old_palette_name", &palette.name()), ("new_palette_name", &name)]));
-            } else {
-                add_error_toast(i18n_k("Unable to rename palette «{palette_name}».", &[("palette_name", &name)]));
-            }
+            send!(imp.db_sender, DatabaseAction::RenamePalette((palette.id(), palette.name(), name)));
             return;
         }
         add_error_toast(i18n("Unable to rename palette."));

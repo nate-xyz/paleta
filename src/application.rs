@@ -32,7 +32,7 @@ mod imp {
         type ParentType = adw::Application;
 
         fn new() -> Self {
-            let database = Rc::new(Database::new());
+            let database = Database::new();
             let model = Model::new();
             database.connect_local(
                 "populate-model",

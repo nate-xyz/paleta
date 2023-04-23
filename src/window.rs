@@ -5,7 +5,8 @@
  */
 
 use adw::subclass::prelude::*;
-use gtk::{prelude::*, gio, glib, glib::clone, gdk, CompositeTemplate};
+use gtk::{prelude::*, gio, glib, glib::{clone, Sender}, gdk, CompositeTemplate};
+use gtk_macros::send;
 
 use std::{cell::RefCell, error::Error};
 use log::{debug, error};
@@ -14,6 +15,7 @@ use crate::pages::{
     image_drop::image_drop_page::ImageDropPage,
     palette::palette_page::PalettePage,
 };
+use crate::database::DatabaseAction;
 use crate::toasts::add_error_toast;
 use crate::i18n::i18n;
 
@@ -22,7 +24,7 @@ use super::util::{database, model};
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/window.ui")]
     pub struct Window {
 
@@ -52,6 +54,7 @@ mod imp {
 
         pub clipboard: Option<gdk::Clipboard>,
         pub open_image_dialog: RefCell<Option<gtk::FileChooserNative>>,
+        pub db_sender: Sender<DatabaseAction>,
     }
 
     #[glib::object_subclass]
@@ -80,6 +83,7 @@ mod imp {
                 edit_palette_button: TemplateChild::default(),
                 clipboard: Some(gdk::Display::default().unwrap().clipboard()),
                 open_image_dialog: RefCell::new(None),
+                db_sender: database().sender(),
             }
         }
 
@@ -112,9 +116,8 @@ impl Window {
 
 
     fn initialize(&self) {
-        if !database().try_loading_database() {
-            debug!("Unable to load database.");
-        }
+        let imp = self.imp();
+        send!(imp.db_sender, DatabaseAction::TryLoadingDataBase);
     }
 
     // fn add_help_overlay(&self) {
