@@ -19,7 +19,7 @@ use crate::database::DatabaseAction;
 use crate::toasts::add_error_toast;
 use crate::i18n::i18n;
 
-use super::util::{database, model};
+use super::util::{database, model, settings_manager};
 
 mod imp {
     use super::*;
@@ -54,6 +54,7 @@ mod imp {
 
         pub clipboard: Option<gdk::Clipboard>,
         pub open_image_dialog: RefCell<Option<gtk::FileChooserNative>>,
+        pub settings: gio::Settings,
         pub db_sender: Sender<DatabaseAction>,
     }
 
@@ -83,6 +84,7 @@ mod imp {
                 edit_palette_button: TemplateChild::default(),
                 clipboard: Some(gdk::Display::default().unwrap().clipboard()),
                 open_image_dialog: RefCell::new(None),
+                settings: settings_manager(),
                 db_sender: database().sender(),
             }
         }
@@ -107,16 +109,18 @@ impl Window {
         let window: Window = glib::Object::builder()
             .property("application", application)
             .build();
-        window.initialize();
-        window.bind_signals();
-        window.add_dialog();
-        // window.add_help_overlay();
+        window.setup();
         window
     }
 
 
-    fn initialize(&self) {
+    fn setup(&self) {
         let imp = self.imp();
+
+        self.setup_settings();
+        self.bind_signals();
+        self.add_dialog();
+
         send!(imp.db_sender, DatabaseAction::TryLoadingDataBase);
     }
 
@@ -148,9 +152,15 @@ impl Window {
             }),
         );
 
-  
+        self.connect_local(
+            "unrealize",
+            false,
+            clone!(@strong self as this => @default-return None, move |_value| {
+                this.save_window_props();
+                None
+            }),
+        );
     }
-
 
     fn go_to_image_drop_page(&self) {
         if self.imp().stack.visible_child_name().unwrap().as_str() != "drop-stack-page" {
@@ -243,5 +253,31 @@ impl Window {
 
     pub fn copy_color(&self, hex_name: String) {
         self.imp().clipboard.as_ref().unwrap().set_text(hex_name.as_str());
+    }
+
+    /*
+    GIO SETTINGS
+    */
+
+    fn setup_settings(&self) {
+        let imp = self.imp();
+
+        let width = imp.settings.int("window-width");
+        let height = imp.settings.int("window-height");
+        let maximized = imp.settings.boolean("window-maximized");
+
+        self.set_default_size(width, height);
+        self.set_maximized(maximized);
+    }
+
+    fn save_window_props(&self) {
+        let imp = self.imp();
+
+        let (width, height) = self.default_size();
+        let maximized = self.is_maximized();
+
+        _ = imp.settings.set_int("window-width", width);
+        _ = imp.settings.set_int("window-height", height);
+        _ = imp.settings.set_boolean("window-maximized", maximized);
     }
 }
