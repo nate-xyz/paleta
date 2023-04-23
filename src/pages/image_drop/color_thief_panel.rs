@@ -14,11 +14,10 @@ use log::debug;
 use crate::dialog::save_palette_dialog::SavePaletteDialog;
 use crate::toasts::add_error_toast;
 use crate::i18n::i18n;
-use crate::util::copy_color;
 
 use super::dropped_image::DroppedImage;
 use super::extracted_color::ExtractedColor;
-use super::extracted_color_row::ExtractedColorRow;
+use super::extracted_color_card::ExtractedColorCard;
 
 #[derive(Clone, Debug)]
 pub enum ExtractionAction {
@@ -33,9 +32,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/color_thief_panel.ui")]
     pub struct ColorThiefPanelPriv {
-        #[template_child(id = "image_bin")]
-        pub image_bin: TemplateChild<adw::Bin>,
-
         #[template_child(id = "count_amount_spin")]
         pub count_amount_spin: TemplateChild<gtk::SpinButton>,
 
@@ -61,6 +57,7 @@ mod imp {
         
 
         pub image: RefCell<Option<DroppedImage>>,
+        pub image_uri: RefCell<String>,
 
         pub sender: RefCell<Option<Sender<ExtractionAction>>>,
         pub receiver: RefCell<Option<Receiver<ExtractionAction>>>,
@@ -94,7 +91,7 @@ mod imp {
                 count_amount: Cell::new(0.0),
                 quality: Cell::new(0),
                 image: RefCell::new(None),
-
+                image_uri: RefCell::new(String::new()),
                 sender: RefCell::new(Some(sender)),
                 receiver: RefCell::new(Some(r)),
             }
@@ -128,11 +125,11 @@ impl ColorThiefPanel {
     fn initialize(&self) {
         let imp = self.imp();
 
-        imp.colors_flow_box.bind_model(Some(&imp.list_store), 
+        imp.colors_flow_box.bind_model(
+            Some(&imp.list_store), 
         clone!(@strong self as this => @default-panic, move |obj| {
-            let color = obj.clone().downcast::<ExtractedColor>().expect("ExtractedColor is of wrong type");       
-            //return ExtractedColorRow::new(&color).upcast::<gtk::Widget>();
-            return ExtractedColorCard::new(&color).upcast::<gtk::Widget>();
+                let color = obj.clone().downcast::<ExtractedColor>().expect("ExtractedColor is of wrong type");       
+                ExtractedColorCard::new(&color).upcast::<gtk::Widget>()
             })
         );
 
@@ -155,7 +152,7 @@ impl ColorThiefPanel {
 
         imp.accuracy_row.set_selected(1);
 
-        imp.quality_dropdown.set_selected(1);
+        imp.accuracy_row.set_selected(1);
         imp.count_amount.set(imp.count_amount_spin.value());
         imp.quality.set(self.quality());
 
@@ -166,7 +163,7 @@ impl ColorThiefPanel {
             })
         );
         
-        imp.quality_dropdown.connect_selected_notify(
+        imp.accuracy_row.connect_selected_notify(
             clone!(@strong self as this => @default-panic, move |_drop_down| {
                 this.imp().quality.set(this.quality());
                 this.start_extraction()
@@ -192,15 +189,6 @@ impl ColorThiefPanel {
             2 => return 10,
             _ => return 10,
         }
-    }
-
-    pub fn set_image(&self, image: DroppedImage) {
-        let imp = self.imp();
-        imp.image_bin.set_child(Some(&image));
-        imp.image.replace(Some(image));
-        self.set_visible(true);
-        self.list_store().remove_all();
-        self.start_extraction();
     }
 
     fn process_action(&self, action: ExtractionAction) -> glib::Continue {

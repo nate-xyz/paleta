@@ -161,9 +161,8 @@ impl ImageDropPage {
             error!("{}", e);
             return false
         } else {
-            let imp = self.imp();
-            imp.thief_panel.set_image(dropped_image);
-            imp.status.hide();
+            self.set_image(dropped_image);
+            self.imp().status.hide();
             open_image_toast(uri);
             return true;
         }
@@ -172,11 +171,11 @@ impl ImageDropPage {
 
     fn set_image(&self, image: DroppedImage) {
         let imp = self.imp();
-        self.imp().thief_panel.set_visible(true);
         imp.image_bin.set_child(Some(&image));
-        self.imp().thief_panel.imp().image.replace(Some(image));
-        self.imp().thief_panel.list_store().remove_all();
-        self.imp().thief_panel.start_extraction();
+        imp.thief_panel.set_visible(true);
+        imp.thief_panel.imp().image.replace(Some(image));
+        imp.thief_panel.list_store().remove_all();
+        imp.thief_panel.start_extraction();
     }
 
 }
