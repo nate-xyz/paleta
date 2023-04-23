@@ -1,15 +1,12 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
-
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
 
-use crate::util::{ database, active_window};
-use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_k};
-
 use crate::model::palette::Palette;
+use crate::toasts::{add_error_toast, add_success_toast};
+use crate::util::{database, active_window};
+use crate::i18n::{i18n, i18n_k};
 
 mod imp {
     use super::*;
@@ -92,28 +89,28 @@ impl RenamePaletteDialog {
     }
 
     fn set_name(&self, name: String) {
-        self.imp().adw_entry_row.set_text(name.as_str());
-        self.imp().name.replace(name);
+        let imp = self.imp();
+        imp.adw_entry_row.set_text(name.as_str());
+        imp.name.replace(name);
     }
 
     fn rename_palette(&self) {
         let imp = self.imp();
-        match imp.palette.borrow().as_ref() {
-            Some(palette) => {
-                let mut name = imp.adw_entry_row.text().to_string();
-                if name == "" {
-                    name = imp.name.borrow().clone();
-                }
-    
-                if database().rename_palette(palette.id(), name.clone()) {
-                    add_success_toast(&i18n("Renamed!"), &i18n_k("Changed name from «{old_palette_name}» to «{new_palette_name}».", &[("old_palette_name", &palette.name()), ("new_palette_name", &name)]));
-                    return;
-                } else {
-                    add_error_toast(i18n_k("Unable to rename palette «{palette_name}».", &[("palette_name", &name)]));
-                }
-            },
-            None => add_error_toast(i18n("Unable to rename palette.")),
+
+        if let Some(palette) = imp.palette.borrow().as_ref() {
+            let mut name = imp.adw_entry_row.text().to_string();
+            if name == "" {
+                name = imp.name.borrow().clone();
+            }
+
+            if database().rename_palette(palette.id(), name.clone()) {
+                add_success_toast(&i18n("Renamed!"), &i18n_k("Changed name from «{old_palette_name}» to «{new_palette_name}».", &[("old_palette_name", &palette.name()), ("new_palette_name", &name)]));
+            } else {
+                add_error_toast(i18n_k("Unable to rename palette «{palette_name}».", &[("palette_name", &name)]));
+            }
+            return;
         }
+        add_error_toast(i18n("Unable to rename palette."));
     }
 
 }

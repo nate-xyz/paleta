@@ -26,7 +26,6 @@ use std::rc::Rc;
 
 use crate::config::VERSION;
 use crate::Window;
-
 use crate::database::Database;
 use crate::model::model::Model;
 use crate::i18n::i18n;

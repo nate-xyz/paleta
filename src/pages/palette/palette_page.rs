@@ -1,14 +1,13 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, CompositeTemplate, gio};
 
 use std::cell::Cell;
 
-use crate::util::{model, edit_button_set_visible, edit_button_mode};
-use crate::toasts::add_error_toast;
-use crate::i18n::i18n;
 use crate::model::palette::Palette;
 use crate::dialog::add_new_palette_dialog::AddNewPaletteDialog;
+use crate::toasts::add_error_toast;
+use crate::i18n::i18n;
+use crate::util::{model, edit_button_set_visible, edit_button_mode};
 
 use super::palette_row::PaletteRow;
 
@@ -18,7 +17,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/palette_page.ui")]
     pub struct PalettePagePriv {
-        
         #[template_child(id = "list_box")]
         pub list_box: TemplateChild<gtk::ListBox>,
 
@@ -84,12 +82,14 @@ impl PalettePage {
 
     fn initialize(&self) {
         let imp = self.imp();
+
         imp.list_box.bind_model(Some(&imp.list_store), 
         clone!(@strong self as this => @default-panic, move |obj| {
             let palette = obj.clone().downcast::<Palette>().expect("Palette is of wrong type");       
             return PaletteRow::new(palette).upcast::<gtk::Widget>();
             })
         );
+
         model().connect_local(
             "populated",
             false,
@@ -98,6 +98,7 @@ impl PalettePage {
                 None
             }),
         );
+
         imp.add_palette_button.connect_clicked(
             clone!(@strong self as this => @default-panic, move |_button| {
                 this.show_new_palette_dialog();
@@ -131,7 +132,6 @@ impl PalettePage {
         } else {
             add_error_toast(i18n("Cannot toggle edit mode, no palettes added."))
         }
-
     }
 
     fn set_edit_mode(&self, mode: bool) {
@@ -151,18 +151,15 @@ impl PalettePage {
 
     fn show_new_palette_dialog(&self) {
         let dialog = AddNewPaletteDialog::new();
-        dialog.connect_response(            
-            None,
+        dialog.connect_response(            None,
             clone!(@strong self as this => move |_dialog, response| {
                 if response == "add" {
                     this.set_edit_mode(false);
                     edit_button_set_visible(true);
                 }
-            }),);
+            }),
+        );
         dialog.show()
-
     }
-
-
 }
     

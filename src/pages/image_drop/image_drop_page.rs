@@ -1,10 +1,7 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
-use gtk::gdk::ContentFormats;
-use gtk::{gdk, gio, glib, glib::clone, CompositeTemplate};
+use adw::{prelude::*, subclass::prelude::*};
+use gtk::{gdk::ContentFormats, gdk, gio, glib, glib::clone, CompositeTemplate};
 
-use std::cell::Cell;
-use std::path::Path;
+use std::{cell::Cell, path::Path};
 use log::{debug, error};
 
 use crate::toasts::{add_error_toast, open_image_toast, error_image_toast};
@@ -19,7 +16,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/image_drop_page.ui")]
     pub struct ImageDropPagePriv {
-        
         #[template_child(id = "overlay")]
         pub overlay: TemplateChild<gtk::Overlay>,
 
@@ -75,10 +71,7 @@ impl ImageDropPage {
     }
 
     fn initialize(&self) {
-        let imp = self.imp();
-
-        imp.file_verified.set(false);
-        
+        self.imp().file_verified.set(false);
         self.setup_drop_target();
     }
 
@@ -86,36 +79,34 @@ impl ImageDropPage {
         let imp = self.imp();
 
         let formats = gdk::ContentFormats::new(&["text/uri-list"]);
-
         let drop_target = gtk::DropTargetAsync::new(Some(formats), gdk::DragAction::COPY);
 
-        drop_target.connect_accept(clone!(@strong self as this => move |_drop_target, drop_value| {
-            this.imp().file_verified.set(false);
-            let formats = drop_value.formats();
-            if contain_mime_type(formats) {
-                drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>, 
-                clone!(@strong this => move |value| {
-                    this.verify_file_valid(value)
-                })
-            );
-                return true
-            }
-            return false
-        }));
+        drop_target.connect_accept(
+            clone!(@strong self as this => move |_drop_target, drop_value| {
+                this.imp().file_verified.set(false);
+                let formats = drop_value.formats();
+                if contain_mime_type(formats) {
+                    drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>, 
+                    clone!(@strong this => move |value| {
+                            this.verify_file_valid(value)
+                        })
+                    );
+                    return true
+                }
+                return false
+            })
+        );
 
         drop_target.connect_drop(
             clone!(@strong self as this => move |_drop_target, drop_value, _x, _y| {
-                        drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>, 
-                clone!(@strong this => move |value| {
-
-                    if !this.imp().file_verified.get() {
-                        add_error_toast(i18n("Unable to verify file on drop, try with the file chooser in the upper left corner."))
-                    }
-                    this.load_value_async(value)
-                })
-            );
-
-
+                drop_value.read_value_async(gio::File::static_type(), glib::PRIORITY_DEFAULT, None::<&gio::Cancellable>, 
+                    clone!(@strong this => move |value| {
+                        if !this.imp().file_verified.get() {
+                            add_error_toast(i18n("Unable to verify file on drop, try with the file chooser in the upper left corner."))
+                        }
+                        this.load_value_async(value)
+                    })
+                );
                 return true
             }),
         );
@@ -152,23 +143,20 @@ impl ImageDropPage {
                 return;
             }
         }
-
     }
 
     pub fn load_image(&self, uri: &str) -> bool {
         let dropped_image = DroppedImage::new();
-        match dropped_image.load_image(uri) {
-            Ok(_) => {
-                self.imp().thief_panel.set_image(dropped_image);
-                self.imp().status.hide();
-                open_image_toast(uri);
-                return true;
-            },
-            Err(e) => {
-                error_image_toast(uri);
-                error!("{}", e);
-                return false
-            },
+        if let Err(e) = dropped_image.load_image(uri) {
+            error_image_toast(uri);
+            error!("{}", e);
+            return false
+        } else {
+            let imp = self.imp();
+            imp.thief_panel.set_image(dropped_image);
+            imp.status.hide();
+            open_image_toast(uri);
+            return true;
         }
     }
 

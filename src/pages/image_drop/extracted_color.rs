@@ -51,7 +51,6 @@ impl ExtractedColor {
         imp.rgba_tuple.set((red, green, blue, 1.0));
         imp.hex_name.replace(format!("{}", rgb_to_hex(red, green, blue)));
         imp.rgb_name.replace(format!("rgb({},{},{})", red, green, blue));
-
     }
 
     pub fn rgb_tuple(&self) -> (u8, u8, u8) {
@@ -62,7 +61,6 @@ impl ExtractedColor {
         self.imp().rgba_tuple.get()
     }
 
-
     pub fn hex_name(&self) -> String {
         self.imp().hex_name.borrow().clone()
     }
@@ -70,6 +68,5 @@ impl ExtractedColor {
     pub fn rgb_name(&self) -> String {
         self.imp().rgb_name.borrow().clone()
     }
-
 }
     

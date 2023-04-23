@@ -1,17 +1,13 @@
 use adw::subclass::prelude::*;
-
 use gtk::{glib, prelude::*};
 
-use std::cell::RefCell;
-use std::collections::HashMap;
-use std::rc::Rc;
-
-use super::color::Color;
-use super::palette::Palette;
+use std::{cell::RefCell, rc::Rc, collections::HashMap};
+use log::{debug, error};
 
 use crate::database::Database;
 
-use log::{debug, error};
+use super::color::Color;
+use super::palette::Palette;
 
 mod imp {
     use super::*;
@@ -198,7 +194,6 @@ impl Model {
     pub fn palettes(&self) -> HashMap<i64, Rc<Palette>> {
         self.imp().palettes()
     }
-
 
     pub fn color(&self, id: i64) -> Result<Rc<Color>, String> {
         self.imp().color(id)

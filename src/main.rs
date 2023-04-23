@@ -31,6 +31,7 @@ mod i18n;
 
 use self::application::App;
 use self::window::Window;
+
 use config::{GETTEXT_PACKAGE, LOCALEDIR, PKGDATADIR};
 
 use std::{env, process};

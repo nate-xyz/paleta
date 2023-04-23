@@ -1,14 +1,12 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
 
-use crate::util::{database, active_window};
+use crate::model::palette::Palette;
 use crate::toasts::{add_error_toast, add_success_toast};
 use crate::i18n::{i18n, i18n_k};
-
-use crate::model::palette::Palette;
+use crate::util::{database, active_window};
 
 mod imp {
     use super::*;
@@ -87,17 +85,16 @@ impl DeletePaletteDialog {
 
     fn delete_palette(&self) {
         let imp = self.imp();
-        match imp.palette.borrow().as_ref() {
-            Some(palette) => {    
-                if database().delete_palette(palette.id()) {
-                    add_success_toast(&i18n("Removed"), &i18n_k("palette: «{palette_name}».", &[("palette_name", &palette.name())]));
-                    return;
-                } else {
-                    add_error_toast(i18n_k("Unable to delete palette «{palette_name}».", &[("palette_name", &palette.name())]));
-                }
-            },
-            None => add_error_toast(i18n("Unable to delete palette.")),
+
+        if let Some(palette) = imp.palette.borrow().as_ref() {
+            if database().delete_palette(palette.id()) {
+                add_success_toast(&i18n("Removed"), &i18n_k("palette: «{palette_name}».", &[("palette_name", &palette.name())]));
+            } else {
+                add_error_toast(i18n_k("Unable to delete palette «{palette_name}».", &[("palette_name", &palette.name())]));
+            }
+            return;
         }
+        add_error_toast(i18n("Unable to delete palette."));
     }
 
 }

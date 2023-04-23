@@ -1,5 +1,4 @@
-use gtk::glib;
-use gtk::subclass::prelude::*;
+use gtk::{subclass::prelude::*, glib};
 
 use std::{cell::Cell, cell::RefCell};
 
@@ -76,6 +75,5 @@ impl Color {
     pub fn rgb_name(&self) -> String {
         self.imp().rgb_name.borrow().clone()
     }
-
 }
     

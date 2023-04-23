@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-read -p "Do you want to do a clean compilation? [N/y] " answer
+read -p "Do you want to do a clean compilation? [n/y] " answer
 
 if [[ "$answer" == "y" ]]; then
     rm -r _builddir

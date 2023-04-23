@@ -1,5 +1,4 @@
-use gtk::prelude::*;
-use gtk::gio;
+use gtk::{prelude::*, gio};
 
 use std::rc::Rc;
 
@@ -8,7 +7,6 @@ use crate::model::model::Model;
 
 use super::application::App;
 use super::window::Window;
-
 use super::i18n::i18n_k;
 
 pub fn rgb_to_hex(r: u8, g: u8, b: u8) -> String {

@@ -1,16 +1,13 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
-
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gdk, glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
 
-use crate::util::{model, database, active_window, rgb_to_hex};
-use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_k};
-
 use crate::model::color::Color;
 use crate::pages::color_square::ColorSquare;
+use crate::toasts::{add_error_toast, add_success_toast};
+use crate::i18n::{i18n, i18n_k};
+use crate::util::{model, database, active_window, rgb_to_hex};
 
 use super::simple_palette_row::SimplePaletteRow;
 
@@ -149,8 +146,9 @@ impl AddNewPaletteDialog {
     }
 
     fn set_name(&self, name: String) {
-        self.imp().adw_entry_row.set_text(name.as_str());
-        self.imp().name.replace(name);
+        let imp = self.imp();
+        imp.adw_entry_row.set_text(name.as_str());
+        imp.name.replace(name);
     }
 
     fn set_current_color(&self, color: Color) {
@@ -172,13 +170,12 @@ impl AddNewPaletteDialog {
         let hex = rgb_to_hex(red as u8, green as u8, blue as u8);
         self.set_current_color(Color::new(-1, red, green, blue, alpha, hex))
     }
-
-
+    
     fn init_color_chooser(&self) {
         let dialog = gtk::ColorChooserDialog::builder()
-        .title(&i18n("Choose color to add to new palette"))
-        .transient_for(self)
-        .build();
+            .title(&i18n("Choose color to add to new palette"))
+            .transient_for(self)
+            .build();
 
         dialog.connect_response(
             clone!(@strong dialog, @weak self as this => move |dialog, response| {
@@ -195,21 +192,21 @@ impl AddNewPaletteDialog {
 
     fn add_new_palette(&self) {
         let imp = self.imp();
-        match imp.color.borrow().as_ref() {
-            Some(color) => {
-                let mut name = imp.adw_entry_row.text().to_string();
-                if name == "" {
-                    name = imp.name.borrow().clone();
-                }
-                if database().add_palette_new(name.clone(), color.hex_name(), color.rgba()) {
-                    add_success_toast(&i18n("Created!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &name)]));
-                    return;
-                } else {
-                    add_error_toast(i18n_k("Unable to add new palette «{palette_name}»", &[("palette_name", &name)]));
-                }
-            },
-            None => add_error_toast(i18n("Unable to add palette, must select a color.")),
+
+        if let Some(color) = imp.color.borrow().as_ref() {
+            let mut name = imp.adw_entry_row.text().to_string();
+            if name == "" {
+                name = imp.name.borrow().clone();
+            }
+
+            if database().add_palette_new(name.clone(), color.hex_name(), color.rgba()) {
+                add_success_toast(&i18n("Created!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &name)]));
+            } else {
+                add_error_toast(i18n_k("Unable to add new palette «{palette_name}»", &[("palette_name", &name)]));
+            }
+            return;
         }
+        add_error_toast(i18n("Unable to add palette, must select a color."));
     }
 
 }

@@ -19,15 +19,15 @@
  */
 
 use adw::subclass::prelude::*;
-use gtk::prelude::*;
-use gtk::{gio, glib, glib::clone, gdk, CompositeTemplate};
+use gtk::{prelude::*, gio, glib, glib::clone, gdk, CompositeTemplate};
 
-use std::cell::RefCell;
-use std::error::Error;
+use std::{cell::RefCell, error::Error};
 use log::{debug, error};
 
-use crate::pages::image_drop::image_drop_page::ImageDropPage;
-use crate::pages::palette::palette_page::PalettePage;
+use crate::pages::{
+    image_drop::image_drop_page::ImageDropPage,
+    palette::palette_page::PalettePage,
+};
 use crate::toasts::add_error_toast;
 use crate::i18n::i18n;
 

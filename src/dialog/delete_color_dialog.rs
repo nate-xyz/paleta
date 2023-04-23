@@ -1,16 +1,15 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
-
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
 
-use crate::util::{database, active_window};
+use crate::model::{
+    palette::Palette,
+    color::Color,
+};
 use crate::toasts::{add_error_toast, remove_color_toast};
 use crate::i18n::{i18n, i18n_k};
-
-use crate::model::palette::Palette;
-use crate::model::color::Color;
+use crate::util::{database, active_window};
 
 use super::simpler_delete_color_card::SimplerDeleteColorCard;
 
@@ -97,25 +96,19 @@ impl DeleteColorDialog {
         imp.palette.replace(Some(palette.clone()));
     }
 
-
     fn remove_color_from_palette(&self) {
         let imp = self.imp();
-        match imp.palette.borrow().as_ref() {
-            Some(palette) => {
-                match imp.color.borrow().as_ref() {
-                    Some(color) => {
-                        if database().remove_color_from_palette(color.id(), palette.id()) {
-                            remove_color_toast(color.hex_name(), palette.name());
-                            return;
-                        } else {
-                            add_error_toast(i18n_k("Unable to remove color {color_hex}.", &[("color_hex", &color.hex_name())]));
-                        }
-                    },
-                    None => add_error_toast(i18n("Unable to remove color.")),
+    
+        if let Some(palette) = imp.palette.borrow().as_ref() {
+            if let Some(color) = imp.color.borrow().as_ref() {
+                if database().remove_color_from_palette(color.id(), palette.id()) {
+                    remove_color_toast(color.hex_name(), palette.name());
+                } else {
+                    add_error_toast(i18n_k("Unable to remove color {color_hex}.", &[("color_hex", &color.hex_name())]));
                 }
-            },
-            None => add_error_toast(i18n("Unable to remove color.")),
+                return;
+            }
+            add_error_toast(i18n("Unable to remove color."));
         }
     }
-
 }

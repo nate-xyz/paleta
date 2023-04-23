@@ -1,10 +1,9 @@
-use gtk::prelude::*;
-use gtk::gio;
+use gtk::{prelude::*, gio};
 
 use std::path::Path;
 
-use super::i18n::i18n_k;
 use super::window::Window;
+use super::i18n::i18n_k;
 
 pub static SUCCESS_GREEN: &str = "\"#57e389\"";
 pub static ERROR_RED: &str = "\"#c01c28\"";

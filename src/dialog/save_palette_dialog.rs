@@ -1,15 +1,12 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
-
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
 
-use crate::util::{ database, active_window, go_to_palette_page};
-use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_k};
-
 use crate::pages::image_drop::extracted_color::ExtractedColor;
+use crate::toasts::{add_error_toast, add_success_toast};
+use crate::util::{ database, active_window, go_to_palette_page};
+use crate::i18n::{i18n, i18n_k};
 
 mod imp {
     use super::*;
@@ -94,8 +91,9 @@ impl SavePaletteDialog {
     }
 
     fn set_name(&self, name: String) {
-        self.imp().adw_entry_row.set_text(name.as_str());
-        self.imp().name.replace(name);
+        let imp = self.imp();
+        imp.adw_entry_row.set_text(name.as_str());
+        imp.name.replace(name);
     }
 
     fn save_colors(&self) {
@@ -120,7 +118,5 @@ impl SavePaletteDialog {
         } else  {
             add_error_toast(i18n("Unable to add palette, no colors extracted."))
         }
-
     }
-
 }

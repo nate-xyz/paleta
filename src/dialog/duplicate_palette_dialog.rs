@@ -1,15 +1,12 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
-
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
 
-use crate::util::{database, active_window};
-use crate::toasts::{add_error_toast, add_success_toast};
-use crate::i18n::{i18n, i18n_k};
-
 use crate::model::palette::Palette;
+use crate::toasts::{add_error_toast, add_success_toast};
+use crate::util::{database, active_window};
+use crate::i18n::{i18n, i18n_k};
 
 mod imp {
     use super::*;
@@ -92,8 +89,9 @@ impl DuplicatePaletteDialog {
     }
 
     fn set_name(&self, name: String) {
-        self.imp().adw_entry_row.set_text(name.as_str());
-        self.imp().name.replace(name);
+        let imp = self.imp();
+        imp.adw_entry_row.set_text(name.as_str());
+        imp.name.replace(name);
     }
 
     fn duplicate_palette(&self) {

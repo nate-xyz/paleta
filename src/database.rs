@@ -59,24 +59,6 @@ impl Database {
         database
     }
 
-    fn database_location(&self) -> PathBuf {
-        if let Some(base_dirs) = BaseDirs::new() {
-            let folder = base_dirs.data_dir().join("io.github.nate_xyz.Paleta");
-            fs::create_dir_all(folder.clone()).unwrap();
-            folder.join("paleta_database.db")
-        } else {
-            let xdg_dirs = xdg::BaseDirectories::with_prefix("paleta_database").unwrap();
-            match xdg_dirs.place_data_file("paleta_database.db") {
-                Ok(path) => {
-                    let folder = xdg_dirs.get_data_home();
-                    fs::create_dir_all(folder).unwrap();
-                    path
-                }
-                Err(_) => PathBuf::from("paleta_database.db"),
-            }
-        }
-    }
-
     pub fn try_loading_database(&self) -> bool {
         if self.open_connection_to_db() {
             self.emit_by_name::<()>("populate-model", &[]);
@@ -86,7 +68,7 @@ impl Database {
             return false
         }
     }
-
+    
     fn open_connection_to_db(&self) -> bool {
         let path = self.database_location();
         let conn = match Connection::open_with_flags(
@@ -120,6 +102,24 @@ impl Database {
             Err(err) => {
                 error!("An error occurred: {}", err);
                 return false;
+            }
+        }
+    }
+
+    fn database_location(&self) -> PathBuf {
+        if let Some(base_dirs) = BaseDirs::new() {
+            let folder = base_dirs.data_dir().join("io.github.nate_xyz.Paleta");
+            fs::create_dir_all(folder.clone()).unwrap();
+            folder.join("paleta_database.db")
+        } else {
+            let xdg_dirs = xdg::BaseDirectories::with_prefix("io.github.nate_xyz.Paleta").unwrap();
+            match xdg_dirs.place_data_file("paleta_database.db") {
+                Ok(path) => {
+                    let folder = xdg_dirs.get_data_home();
+                    fs::create_dir_all(folder).unwrap();
+                    path
+                }
+                Err(_) => PathBuf::from("paleta_database.db"),
             }
         }
     }
@@ -259,7 +259,6 @@ impl Database {
             },
         }
     }
-
 
     pub fn add_palette_new(&self, palette_name: String, hex: String, rgba: (i64, i64, i64, f64)) -> bool {
         match self.add_palette_new_(palette_name, hex, rgba) {
@@ -455,8 +454,6 @@ impl Database {
         }
     }
 
-
-
     // ######
     // # REMOVE VALUES 
     // ######
@@ -478,7 +475,6 @@ impl Database {
         let mut conn = self.imp().conn.borrow_mut();
         let conn = conn.as_mut().ok_or("Connection not established: delete_palette")?;
         let tx = conn.transaction()?;
-
 
         tx.execute(format!("DELETE FROM Palette_Color_Junction WHERE palette_id = {};", palette_id).as_str(), ())?;
         tx.execute(format!("DELETE FROM Palettes WHERE id = {};", palette_id).as_str(), ())?;
@@ -557,7 +553,6 @@ impl Database {
     // # QUERY VALUES
     // ######
 
-
     pub fn query_colors(&self) -> Result<Vec<(i64, i64, i64, i64, f64, String)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
         let conn = conn.as_ref().ok_or("Connection not established")?;
@@ -581,7 +576,6 @@ impl Database {
         Ok(result)
     }
 
-
     pub fn query_palettes(&self) -> Result<Vec<(i64, String)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
         let conn = conn.as_ref().ok_or("Connection not established")?;
@@ -600,7 +594,6 @@ impl Database {
 
         Ok(result)
     }
-
 
     pub fn query_palette_color_junction(&self) -> Result<Vec<(i64, i64, i64)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
@@ -647,6 +640,4 @@ impl Database {
         let colors = rows.filter_map(|r| r.ok()).collect();
         Ok(colors)
     }
-
-
 }
