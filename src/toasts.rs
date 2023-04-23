@@ -1,3 +1,9 @@
+/* toasts.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 use gtk::{prelude::*, gio};
 
 use std::path::Path;

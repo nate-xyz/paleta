@@ -1,3 +1,9 @@
+/* add_new_palette_dialog.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gdk, glib, glib::clone, CompositeTemplate};
 
@@ -170,7 +176,7 @@ impl AddNewPaletteDialog {
         let hex = rgb_to_hex(red as u8, green as u8, blue as u8);
         self.set_current_color(Color::new(-1, red, green, blue, alpha, hex))
     }
-    
+
     fn init_color_chooser(&self) {
         let dialog = gtk::ColorChooserDialog::builder()
             .title(&i18n("Choose color to add to new palette"))

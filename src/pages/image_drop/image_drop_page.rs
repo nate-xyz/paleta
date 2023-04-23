@@ -1,3 +1,9 @@
+/* image_drop_page.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gdk::ContentFormats, gdk, gio, glib, glib::clone, CompositeTemplate};
 

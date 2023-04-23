@@ -1,3 +1,9 @@
+/* simple_palette_row.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gio, glib, glib::clone, CompositeTemplate};
 

@@ -1,3 +1,9 @@
+/* color_thief_panel.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, glib::Receiver, glib::Sender, CompositeTemplate, gio::ListStore};
 

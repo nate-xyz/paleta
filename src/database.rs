@@ -1,3 +1,9 @@
+/* database.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 use adw::subclass::prelude::*;
 use gtk::{glib, prelude::*};
 
