@@ -1,18 +1,23 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* add_color_dialog.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gdk, glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
 use log::debug;
 
-use crate::util::{model, database, active_window, rgb_to_hex};
+use crate::model::{
+    palette::Palette,
+    color::Color,
+};
+use crate::pages::color_square::ColorSquare;
 use crate::toasts::{add_error_toast, add_color_toast};
 use crate::i18n::{i18n, i18n_k};
-
-use crate::model::palette::Palette;
-use crate::model::color::Color;
-use crate::pages::color_square::ColorSquare;
+use crate::util::{model, database, active_window, rgb_to_hex};
 
 use super::simple_palette_row::SimplePaletteRow;
 
@@ -173,13 +178,11 @@ impl AddColorDialog {
         self.set_current_color(Color::new(-1, red, green, blue, alpha, hex))
     }
 
-
     fn init_color_chooser(&self) {
         let dialog = gtk::ColorChooserDialog::builder()
-        .title(&i18n_k("Choose new color to add to {palette_name}", &[("palette_name", &self.palette_name())]))
-        .transient_for(self)
-        .build();
-
+            .title(&i18n_k("Choose new color to add to {palette_name}", &[("palette_name", &self.palette_name())]))
+            .transient_for(self)
+            .build();
 
         dialog.connect_response(
             clone!(@strong dialog, @weak self as this => move |dialog, response| {
@@ -200,22 +203,18 @@ impl AddColorDialog {
 
     fn add_color(&self) {
         let imp = self.imp();
-        match imp.palette.borrow().as_ref() {
-            Some(palette) => {
-                match imp.color.borrow().as_ref() {
-                    Some(color) => {
-                        if database().add_color_to_palette(palette.id(), color.hex_name(), color.rgba()) {
-                            add_color_toast(color.hex_name(), palette.name());
-                            return;
-                        } else {
-                            add_error_toast(i18n_k("Unable to add color {color_hex}.", &[("color_hex", &color.hex_name())]));
-                        }
-                    },
-                    None => add_error_toast(i18n("Unable to add color.")),
+        
+        if let Some(palette) = imp.palette.borrow().as_ref() {
+            if let Some(color) = imp.color.borrow().as_ref() {
+                if database().add_color_to_palette(palette.id(), color.hex_name(), color.rgba()) {
+                    add_color_toast(color.hex_name(), palette.name());
+                } else {
+                    add_error_toast(i18n_k("Unable to add color {color_hex}.", &[("color_hex", &color.hex_name())]));
                 }
-            },
-            None => add_error_toast(i18n("Unable to add color.")),
+                return;
+            }
         }
+        add_error_toast(i18n("Unable to add color."));
     }
 
 }

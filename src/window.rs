@@ -1,42 +1,30 @@
 /* window.rs
  *
- * Copyright 2023 nate-xyz
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
 use adw::subclass::prelude::*;
-use gtk::prelude::*;
-use gtk::{gio, glib, glib::clone, gdk, CompositeTemplate};
+use gtk::{prelude::*, gio, glib, glib::{clone, Sender}, gdk, CompositeTemplate};
+use gtk_macros::send;
 
-use std::cell::RefCell;
-use std::error::Error;
+use std::{cell::RefCell, error::Error};
 use log::{debug, error};
 
-use crate::pages::image_drop::image_drop_page::ImageDropPage;
-use crate::pages::palette::palette_page::PalettePage;
+use crate::pages::{
+    image_drop::image_drop_page::ImageDropPage,
+    palette::palette_page::PalettePage,
+};
+use crate::database::DatabaseAction;
 use crate::toasts::add_error_toast;
 use crate::i18n::i18n;
 
-use super::util::{database, model};
+use super::util::{database, model, settings_manager};
 
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/window.ui")]
     pub struct Window {
 
@@ -66,6 +54,8 @@ mod imp {
 
         pub clipboard: Option<gdk::Clipboard>,
         pub open_image_dialog: RefCell<Option<gtk::FileChooserNative>>,
+        pub settings: gio::Settings,
+        pub db_sender: Sender<DatabaseAction>,
     }
 
     #[glib::object_subclass]
@@ -94,6 +84,8 @@ mod imp {
                 edit_palette_button: TemplateChild::default(),
                 clipboard: Some(gdk::Display::default().unwrap().clipboard()),
                 open_image_dialog: RefCell::new(None),
+                settings: settings_manager(),
+                db_sender: database().sender(),
             }
         }
 
@@ -117,18 +109,19 @@ impl Window {
         let window: Window = glib::Object::builder()
             .property("application", application)
             .build();
-        window.initialize();
-        window.bind_signals();
-        window.add_dialog();
-        // window.add_help_overlay();
+        window.setup();
         window
     }
 
 
-    fn initialize(&self) {
-        if !database().try_loading_database() {
-            debug!("Unable to load database.");
-        }
+    fn setup(&self) {
+        let imp = self.imp();
+
+        self.setup_settings();
+        self.bind_signals();
+        self.add_dialog();
+
+        send!(imp.db_sender, DatabaseAction::TryLoadingDataBase);
     }
 
     // fn add_help_overlay(&self) {
@@ -159,9 +152,15 @@ impl Window {
             }),
         );
 
-  
+        self.connect_local(
+            "unrealize",
+            false,
+            clone!(@strong self as this => @default-return None, move |_value| {
+                this.save_window_props();
+                None
+            }),
+        );
     }
-
 
     fn go_to_image_drop_page(&self) {
         if self.imp().stack.visible_child_name().unwrap().as_str() != "drop-stack-page" {
@@ -254,5 +253,31 @@ impl Window {
 
     pub fn copy_color(&self, hex_name: String) {
         self.imp().clipboard.as_ref().unwrap().set_text(hex_name.as_str());
+    }
+
+    /*
+    GIO SETTINGS
+    */
+
+    fn setup_settings(&self) {
+        let imp = self.imp();
+
+        let width = imp.settings.int("window-width");
+        let height = imp.settings.int("window-height");
+        let maximized = imp.settings.boolean("window-maximized");
+
+        self.set_default_size(width, height);
+        self.set_maximized(maximized);
+    }
+
+    fn save_window_props(&self) {
+        let imp = self.imp();
+
+        let (width, height) = self.default_size();
+        let maximized = self.is_maximized();
+
+        _ = imp.settings.set_int("window-width", width);
+        _ = imp.settings.set_int("window-height", height);
+        _ = imp.settings.set_boolean("window-maximized", maximized);
     }
 }

@@ -1,9 +1,13 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* dropped_image.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, gdk_pixbuf};
-use std::cell::RefCell;
-use std::path::Path;
-use std::error::Error;
+
+use std::{cell::RefCell, path::Path, error::Error};
 
 mod imp {
     use super::*;
@@ -52,6 +56,7 @@ impl DroppedImage {
     }
 
     pub fn load_image(&self, image_path: &str) -> Result<(), Box<dyn Error>> {
+        let imp = self.imp();
         let path = Path::new(image_path);
         let basename = path.file_name().unwrap();
         let _image_name = format!("{}", html_escape::encode_text_minimal(basename.to_str().unwrap()));
@@ -59,11 +64,9 @@ impl DroppedImage {
         let picture = gtk::Picture::for_pixbuf(&pixbuf);
         picture.set_css_classes(&[&"card"]);
         self.set_child(Some(&picture));
-        self.imp().picture.replace(picture);
-        self.imp().pixbuf.replace(Some(pixbuf));
+        imp.picture.replace(picture);
+        imp.pixbuf.replace(Some(pixbuf));
         Ok(())
     }
-
-
 }
     

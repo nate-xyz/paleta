@@ -33,7 +33,6 @@ cargo_opt  = [ '--manifest-path', meson.project_source_root() / 'Cargo.toml' ]
 cargo_opt += [ '--target-dir', meson.project_build_root()  / 'src' ]
 cargo_env  = [ 'CARGO_HOME=' + meson.project_build_root()  / 'cargo-home' ]
 
-
 if get_option('buildtype') == 'release'
   cargo_options += [ '--release' ]
   rust_target = 'release'
@@ -48,6 +47,7 @@ rust_sources = files(
   'main.rs',
   'util.rs',
   'window.rs',
+  'i18n.rs',
 )
 
 subdir('model')

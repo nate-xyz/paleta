@@ -1,16 +1,24 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* palette_row.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gio, glib, glib::clone, CompositeTemplate};
 
 use std::cell::{RefCell, Cell};
-use log::debug;
 
-use crate::model::palette::Palette;
-use crate::model::color::Color;
-use crate::dialog::rename_palette_dialog::RenamePaletteDialog;
-use crate::dialog::duplicate_palette_dialog::DuplicatePaletteDialog;
-use crate::dialog::delete_palette_dialog::DeletePaletteDialog;
-use crate::dialog::add_color_dialog::AddColorDialog;
+use crate::model::{
+    palette::Palette,
+    color::Color,
+};
+use crate::dialog::{
+    rename_palette_dialog::RenamePaletteDialog,
+    duplicate_palette_dialog::DuplicatePaletteDialog,
+    delete_palette_dialog::DeletePaletteDialog,
+    add_color_dialog::AddColorDialog,
+};
 
 use super::palette_color_card::PaletteColorCard;
 
@@ -109,31 +117,36 @@ impl PaletteRow {
             })
         );
         
-        imp.edit_name_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            let dialog = RenamePaletteDialog::new(this.imp().palette.borrow().as_ref().unwrap());
-            dialog.show();
-        }));
+        imp.edit_name_button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                let dialog = RenamePaletteDialog::new(this.imp().palette.borrow().as_ref().unwrap());
+                dialog.show();
+            })
+        );
 
-        imp.duplicate_palette_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            let dialog = DuplicatePaletteDialog::new(this.imp().palette.borrow().as_ref().unwrap());
-            dialog.show();
-        }));
+        imp.duplicate_palette_button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                let dialog = DuplicatePaletteDialog::new(this.imp().palette.borrow().as_ref().unwrap());
+                dialog.show();
+            })
+        );
 
-        imp.delete_palette_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            let dialog = DeletePaletteDialog::new(this.imp().palette.borrow().as_ref().unwrap());
-            dialog.show();
-        }));
+        imp.delete_palette_button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                let dialog = DeletePaletteDialog::new(this.imp().palette.borrow().as_ref().unwrap());
+                dialog.show();
+            })
+        );
 
-        imp.add_color_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            let dialog = AddColorDialog::new(this.imp().palette.borrow().as_ref().unwrap());
-            dialog.show();
-        }));
-        
-        
+        imp.add_color_button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                let dialog = AddColorDialog::new(this.imp().palette.borrow().as_ref().unwrap());
+                dialog.show();
+            })
+        );
     }
 
     fn load(&self, palette: Palette) {
-        debug!("load palette");
         let imp = self.imp();
         imp.title_label.set_label(palette.name().as_str());
         imp.flow_box.set_min_children_per_line(palette.len());
@@ -158,17 +171,11 @@ impl PaletteRow {
             let palette_card = row.downcast::<PaletteColorCard>().expect("PaletteRow is of wrong type");      
             palette_card.set_edit_mode(imp.edit_mode.get());
         }
-
         self.update_edit_view();
-
     }
 
     fn update_edit_view(&self) {
         let imp = self.imp();
         imp.edit_mode_revealer.set_reveal_child(imp.edit_mode.get())
     }
-
-
-
-
 }

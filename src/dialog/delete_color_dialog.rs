@@ -1,28 +1,37 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* delete_color_dialog.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-use gtk::{glib, glib::clone, CompositeTemplate};
+use adw::{prelude::*, subclass::prelude::*};
+use gtk::{glib, glib::{clone, Sender}, CompositeTemplate};
+use gtk_macros::send;
 
 use std::cell::RefCell;
+use log::error;
 
-use crate::util::{database, active_window};
-use crate::toasts::{add_error_toast, remove_color_toast};
+use crate::model::{
+    palette::Palette,
+    color::Color,
+};
+use crate::database::DatabaseAction;
+use crate::toasts::add_error_toast;
 use crate::i18n::{i18n, i18n_k};
-
-use crate::model::palette::Palette;
-use crate::model::color::Color;
+use crate::util::{database, active_window};
 
 use super::simpler_delete_color_card::SimplerDeleteColorCard;
 
 mod imp {
     use super::*;
 
-    #[derive(Debug, Default, CompositeTemplate)]
+    #[derive(Debug, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/delete_color_dialog.ui")]
     pub struct DeleteColorDialogPriv {
         #[template_child(id = "color_bin")]
         pub color_bin: TemplateChild<adw::Bin>,
 
+        pub db_sender: Sender<DatabaseAction>,
         pub palette: RefCell<Option<Palette>>,
         pub color: RefCell<Option<Color>>,
     }
@@ -33,20 +42,21 @@ mod imp {
         type Type = super::DeleteColorDialog;
         type ParentType = adw::MessageDialog;
 
+        fn new() -> Self {
+            Self {
+                color_bin: TemplateChild::default(),
+                db_sender: database().sender(),
+                palette: RefCell::new(None),
+                color: RefCell::new(None),
+            }
+        }
+
         fn class_init(klass: &mut Self::Class) {
             Self::bind_template(klass);
         }
 
         fn instance_init(obj: &glib::subclass::InitializingObject<Self>) {
             obj.init_template();
-        }
-
-        fn new() -> Self {
-            Self {
-                color_bin: TemplateChild::default(),
-                palette: RefCell::new(None),
-                color: RefCell::new(None),
-            }
         }
     }
 
@@ -97,25 +107,15 @@ impl DeleteColorDialog {
         imp.palette.replace(Some(palette.clone()));
     }
 
-
     fn remove_color_from_palette(&self) {
         let imp = self.imp();
-        match imp.palette.borrow().as_ref() {
-            Some(palette) => {
-                match imp.color.borrow().as_ref() {
-                    Some(color) => {
-                        if database().remove_color_from_palette(color.id(), palette.id()) {
-                            remove_color_toast(color.hex_name(), palette.name());
-                            return;
-                        } else {
-                            add_error_toast(i18n_k("Unable to remove color {color_hex}.", &[("color_hex", &color.hex_name())]));
-                        }
-                    },
-                    None => add_error_toast(i18n("Unable to remove color.")),
-                }
-            },
-            None => add_error_toast(i18n("Unable to remove color.")),
+    
+        if let Some(palette) = imp.palette.borrow().as_ref() {
+            if let Some(color) = imp.color.borrow().as_ref() {
+                send!(imp.db_sender, DatabaseAction::RemoveColorFromPalette((color.id(), color.hex_name(), palette.id(), palette.name())));
+                return;
+            }
+            add_error_toast(i18n("Unable to remove color."));
         }
     }
-
 }

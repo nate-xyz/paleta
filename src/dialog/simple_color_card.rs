@@ -1,6 +1,10 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* simple_color_card.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
@@ -84,17 +88,23 @@ impl SimpleColorCard {
         let imp = self.imp();
         
         let ctrl = gtk::EventControllerMotion::new();
-        ctrl.connect_enter(clone!(@strong self as this => move |_controller, _x, _y| {
-            this.imp().button.show();
-        }));
-        ctrl.connect_leave(clone!(@strong self as this => move |_controller| {
-            this.imp().button.hide();
-        }));
+        ctrl.connect_enter(
+            clone!(@strong self as this => move |_controller, _x, _y| {
+                this.imp().button.show();
+            })
+        );
+        ctrl.connect_leave(
+            clone!(@strong self as this => move |_controller| {
+                this.imp().button.hide();
+            })
+        );
         self.add_controller(ctrl);
 
-        imp.button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            this.emit_by_name::<()>("color-selected", &[this.imp().color.borrow().as_ref().unwrap()]);
-        }));
+        imp.button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                this.emit_by_name::<()>("color-selected", &[this.imp().color.borrow().as_ref().unwrap()]);
+            })
+        );
     }
 
     fn load(&self, color: Color) {

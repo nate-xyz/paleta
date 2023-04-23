@@ -1,5 +1,10 @@
-use gtk::glib;
-use gtk::subclass::prelude::*;
+/* palette.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+use gtk::{subclass::prelude::*, glib};
 
 use std::{cell::Cell, cell::RefCell, rc::Rc};
 

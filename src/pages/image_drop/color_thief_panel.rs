@@ -1,21 +1,24 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* color_thief_panel.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, glib::clone, glib::Receiver, glib::Sender, CompositeTemplate, gio::ListStore};
 
-use std::cell::{RefCell, Cell};
-use std::thread;
-use log::debug;
+use std::{cell::{RefCell, Cell}, thread};
 use color_thief::{get_palette, ColorFormat};
-
-use crate::toasts::add_error_toast;
-use crate::i18n::i18n;
+use log::debug;
 
 use crate::dialog::save_palette_dialog::SavePaletteDialog;
+use crate::toasts::add_error_toast;
+use crate::i18n::i18n;
+use crate::util::copy_color;
 
 use super::dropped_image::DroppedImage;
 use super::extracted_color::ExtractedColor;
-use super::extracted_color_card::ExtractedColorCard;
-
+use super::extracted_color_row::ExtractedColorRow;
 
 #[derive(Clone, Debug)]
 pub enum ExtractionAction {
@@ -30,6 +33,9 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/color_thief_panel.ui")]
     pub struct ColorThiefPanelPriv {
+        #[template_child(id = "image_bin")]
+        pub image_bin: TemplateChild<adw::Bin>,
+
         #[template_child(id = "count_amount_spin")]
         pub count_amount_spin: TemplateChild<gtk::SpinButton>,
 
@@ -58,8 +64,6 @@ mod imp {
 
         pub sender: RefCell<Option<Sender<ExtractionAction>>>,
         pub receiver: RefCell<Option<Receiver<ExtractionAction>>>,
-
-
     }
 
     #[glib::object_subclass]
@@ -143,28 +147,33 @@ impl ColorThiefPanel {
         //     }
         // }));
 
-        imp.save_button.connect_clicked(clone!(@strong self as this => @default-panic, move |_button| {
-            this.save_palette();
-        }));
+        imp.save_button.connect_clicked(
+            clone!(@strong self as this => @default-panic, move |_button| {
+                this.save_palette();
+            })
+        );
 
         imp.accuracy_row.set_selected(1);
 
+        imp.quality_dropdown.set_selected(1);
         imp.count_amount.set(imp.count_amount_spin.value());
         imp.quality.set(self.quality());
 
-        imp.count_amount_spin.connect_value_changed(clone!(@strong self as this => @default-panic, move |spin_button| {
-            this.imp().count_amount.set(spin_button.value());
-            this.start_extraction()
-        }));
+        imp.count_amount_spin.connect_value_changed(
+            clone!(@strong self as this => @default-panic, move |spin_button| {
+                this.imp().count_amount.set(spin_button.value());
+                this.start_extraction()
+            })
+        );
         
-        imp.accuracy_row.connect_selected_notify(clone!(@strong self as this => @default-panic, move |_drop_down| {
-            this.imp().quality.set(this.quality());
-            this.start_extraction()
-        }));
-
+        imp.quality_dropdown.connect_selected_notify(
+            clone!(@strong self as this => @default-panic, move |_drop_down| {
+                this.imp().quality.set(this.quality());
+                this.start_extraction()
+            })
+        );
 
         self.setup_channel();
-    
     }
 
     fn setup_channel(&self) {
@@ -183,6 +192,15 @@ impl ColorThiefPanel {
             2 => return 10,
             _ => return 10,
         }
+    }
+
+    pub fn set_image(&self, image: DroppedImage) {
+        let imp = self.imp();
+        imp.image_bin.set_child(Some(&image));
+        imp.image.replace(Some(image));
+        self.set_visible(true);
+        self.list_store().remove_all();
+        self.start_extraction();
     }
 
     fn process_action(&self, action: ExtractionAction) -> glib::Continue {
@@ -216,22 +234,19 @@ impl ColorThiefPanel {
     }
 
     fn extraction_done(&self, colors: Option<Vec<(u8, u8, u8)>>) {
-        match colors {
-            Some(colors) => {
-                let imp = self.imp();
-                imp.spinner.stop();
-                imp.spinner.set_visible(false);
-                imp.palette_box.set_visible(true);
-                imp.list_store.remove_all();
+        if let Some(colors) = colors {
+            let imp = self.imp();
+            imp.spinner.stop();
+            imp.spinner.set_visible(false);
+            imp.palette_box.set_visible(true);
+            imp.list_store.remove_all();
 
-                for rgba in colors {
-                    imp.list_store.append(&ExtractedColor::new(rgba))
-                }
-                    
-            },
-            None => {
-                add_error_toast(i18n("Unable to extract colors from image."));
-            },
+            for rgba in colors {
+                imp.list_store.append(&ExtractedColor::new(rgba))
+            }
+        } else  {
+            add_error_toast(i18n("Unable to extract colors from image."));
+
         }
         debug!("extraction_done");
     }
@@ -271,9 +286,6 @@ impl ColorThiefPanel {
     pub fn list_store(&self) -> &ListStore {
         &self.imp().list_store
     }
-
-
-
 }
 
 fn color_format(has_alpha: bool) -> ColorFormat {
@@ -306,5 +318,3 @@ pub fn load_palette_from_bytes(pixbuf_bytes: &[u8], alpha: ColorFormat, count: u
     }
     None
 }
-
-    

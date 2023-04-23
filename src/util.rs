@@ -1,5 +1,10 @@
-use gtk::prelude::*;
-use gtk::gio;
+/* util.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+use gtk::{prelude::*, gio};
 
 use std::rc::Rc;
 
@@ -8,8 +13,12 @@ use crate::model::model::Model;
 
 use super::application::App;
 use super::window::Window;
-
 use super::i18n::i18n_k;
+
+pub fn settings_manager() -> gio::Settings {
+    let app_id = "io.github.nate_xyz.Paleta";
+    gio::Settings::new(app_id)
+}
 
 pub fn rgb_to_hex(r: u8, g: u8, b: u8) -> String {
     format!("#{:02X}{:02X}{:02X}", r, g, b)

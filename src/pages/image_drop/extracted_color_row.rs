@@ -1,5 +1,10 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* extracted_color_row.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gdk, glib, glib::clone, CompositeTemplate};
 
 use std::cell::RefCell;
@@ -13,7 +18,6 @@ mod imp {
     #[derive(Debug, Default, CompositeTemplate)]
     #[template(resource = "/io/github/nate_xyz/Paleta/extracted_color_row.ui")]
     pub struct ExtractedColorRowPriv {
-        
         #[template_child(id = "row_box")]
         pub row_box: TemplateChild<gtk::Box>,
 
@@ -70,15 +74,18 @@ impl ExtractedColorRow {
 
     fn initialize(&self) {
         let ctrl = gtk::EventControllerMotion::new();
-        ctrl.connect_enter(clone!(@strong self as this => move |_controller, _x, _y| {
-            this.imp().copy_icon.show();
-        }));
-        ctrl.connect_leave(clone!(@strong self as this => move |_controller| {
-            this.imp().copy_icon.hide();
-        }));
+        ctrl.connect_enter(
+            clone!(@strong self as this => move |_controller, _x, _y| {
+                this.imp().copy_icon.show();
+            })
+        );
+        ctrl.connect_leave(
+            clone!(@strong self as this => move |_controller| {
+                this.imp().copy_icon.hide();
+            })
+        );
         self.add_controller(ctrl);
     }
-
 
     fn load_color(&self, color: &ExtractedColor) {
         let imp = self.imp();
@@ -98,5 +105,4 @@ impl ExtractedColorRow {
     pub fn hex_name(&self) -> String {
         self.imp().hex_name.borrow().clone()
     }
-
 }

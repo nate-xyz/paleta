@@ -1,4 +1,5 @@
-<img src="/data/icons/hicolor/scalable/apps/io.github.nate_xyz.Paleta.svg" align="left" height="157px" vspace="20px">
+<img src="/data/icons/icon.svg" align="left" height="200px" vspace="10px">
+
 
 Paleta
 ======

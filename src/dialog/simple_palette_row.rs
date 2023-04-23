@@ -1,10 +1,14 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* simple_palette_row.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{gio, glib, glib::clone, CompositeTemplate};
 
-use crate::util::model;
 use crate::model::color::Color;
+use crate::util::model;
 
 use super::simple_color_card::SimpleColorCard;
 
@@ -84,13 +88,10 @@ impl SimplePaletteRow {
                 "color-selected",
                 false,
                 clone!(@weak this => @default-return None, move |value| {
-                    let color_val = value.get(1); 
-                    match color_val {
-                        Some(color_val) => {
-                            let color = color_val.get::<Color>().ok().unwrap();
+                    if let Some(color_val) = value.get(1) {
+                        if let Some(color) = color_val.get::<Color>().ok() {
                             this.emit_by_name::<()>("color-selected", &[&color]);
-                        },
-                        None => (),
+                        }                        
                     }
                     None
                 }),
@@ -113,5 +114,4 @@ impl SimplePaletteRow {
             imp.list_store.append(color.as_ref());
         }
     }
-
 }

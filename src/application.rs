@@ -1,20 +1,6 @@
 /* application.rs
  *
- * Copyright 2023 nate-xyz
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -26,7 +12,6 @@ use std::rc::Rc;
 
 use crate::config::VERSION;
 use crate::Window;
-
 use crate::database::Database;
 use crate::model::model::Model;
 use crate::i18n::i18n;
@@ -47,7 +32,7 @@ mod imp {
         type ParentType = adw::Application;
 
         fn new() -> Self {
-            let database = Rc::new(Database::new());
+            let database = Database::new();
             let model = Model::new();
             database.connect_local(
                 "populate-model",
@@ -68,9 +53,12 @@ mod imp {
     impl ObjectImpl for App {
         fn constructed(&self) {
             self.parent_constructed();
+
             let obj = self.obj();
             obj.setup_gactions();
-            obj.set_accels_for_action("app.quit", &["<primary>q"]);
+
+            obj.set_accels_for_action("app.quit", &["<primary>q", "<primary>w"]);
+            // TODO: Add more accelerators
         }
     }
 
@@ -139,21 +127,20 @@ impl App {
             .developer_name("nate-xyz")
             .version(VERSION)
             .developers(vec!["nate-xyz"])
-            .copyright("© 2023 nate-xyz")
+            .copyright("Copyright © 2023 nate-xyz")
             .license_type(gtk::License::Gpl30Only)
+            // Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
+            // One name per line, please do not remove previous names.
+            .translator_credits(&i18n("translator-credits"))
             .website("https://github.com/nate-xyz/paleta")
             .issue_url("https://github.com/nate-xyz/paleta/issues")
             .build();
-        
-        // Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL. 
-        // One name per line, please do not remove previous names.
-        about.set_translator_credits(&i18n("translator-credits"));
 
         // Translators: only replace "Powered by "
         let ack: String = i18n("Powered by color-thief");
 
-        about.add_acknowledgement_section(Some(&ack), 
-            &["color-thief-rs https://github.com/RazrFalcon/color-thief-rs", "color-thief-py https://github.com/fengsp/color-thief-py", "color-thief https://github.com/lokesh/color-thief"]);
+        about.add_acknowledgement_section(Some(&ack),
+            &["color-thief-rs https://github.com/RazrFalcon/color-thief-rs", "color-thief https://github.com/lokesh/color-thief"]);
 
         about.present();
     }

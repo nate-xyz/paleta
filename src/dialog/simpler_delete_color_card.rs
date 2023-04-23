@@ -1,6 +1,10 @@
-use adw::prelude::*;
-use adw::subclass::prelude::*;
+/* simpler_delete_color_card.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
+use adw::{prelude::*, subclass::prelude::*};
 use gtk::{glib, CompositeTemplate};
 
 use crate::model::color::Color;

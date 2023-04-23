@@ -1,7 +1,11 @@
-use gtk::prelude::*;
-use gtk::subclass::prelude::*;
+/* color_square.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
 
-use gtk::{gdk, glib, graphene};
+use gtk::{prelude::*, subclass::prelude::*, gdk, glib, graphene};
+
 use std::cell::{RefCell, Cell};
 
 mod imp {

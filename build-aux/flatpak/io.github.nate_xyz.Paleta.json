@@ -39,9 +39,17 @@
             "name" : "paleta",
             "buildsystem" : "meson",
             "sources" : [
+                "cargo-sources.json",
+                {
+                    "type" : "shell",
+                    "commands" : [
+                        "mkdir .cargo",
+                        "cp cargo/config .cargo/"
+                    ]
+                },
                 {
                     "type": "dir",
-                    "path": "."
+                    "path": "../../."
                 }
             ]
         }

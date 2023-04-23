@@ -5,7 +5,7 @@
   <template class="Window" parent="AdwApplicationWindow">
     <property name="handle-menubar-accel">true</property>
     <property name="default-width">1200</property>
-    <property name="default-height">1100</property>
+    <property name="default-height">900</property>
     <property name="content">
       <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">

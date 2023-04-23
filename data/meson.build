@@ -29,6 +29,9 @@ install_data('io.github.nate_xyz.Paleta.gschema.xml',
   install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 
+# Compile schemas locally, so we can run uninstalled under a devenv
+gnome.compile_schemas()
+
 compile_schemas = find_program('glib-compile-schemas', required: false)
 if compile_schemas.found()
   test('Validate schema file',

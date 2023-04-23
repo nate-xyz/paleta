@@ -1,21 +1,45 @@
+/* database.rs
+ *
+ * SPDX-FileCopyrightText: 2023 nate-xyz
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 use adw::subclass::prelude::*;
-use gtk::{glib, prelude::*};
+use gtk::{glib, glib::{clone, Sender, Receiver}, prelude::*};
 
 use std::{env, fs, cell::RefCell, path::PathBuf, error::Error};
+use std::rc::Rc;
 use log::{debug, error};
 use rusqlite::{params, Connection, Result, Transaction};
 use directories_next::BaseDirs;
 
 use crate::pages::image_drop::extracted_color::ExtractedColor;
+use crate::toasts::{add_success_toast, add_error_toast, add_color_toast, remove_color_toast};
+use crate::i18n::{i18n, i18n_k};
+use crate::util::go_to_palette_page;
+
+#[derive(Clone, Debug)]
+pub enum DatabaseAction {
+    TryLoadingDataBase,
+    AddColorToPalette((i64, String, String, (i64, i64, i64, f64))),
+    AddPaletteNew((String, String, (i64, i64, i64, f64))),
+    RemoveColorFromPalette((i64, String, i64, String)),
+    DeletePalette((i64, String)),
+    DuplicatePalette((i64, String, String)),
+    RenamePalette((i64, String, String)),
+    AddPaletteFromExtracted((String, Vec<ExtractedColor>)),
+}
 
 mod imp {
     use super::*;
     use glib::subclass::Signal;
     use once_cell::sync::Lazy;
 
-    #[derive(Debug, Default)]
+    #[derive(Debug)]
     pub struct DatabasePriv {
         pub conn: RefCell<Option<Connection>>,
+        pub db_sender: Sender<DatabaseAction>,
+        pub db_receiver: RefCell<Option<Receiver<DatabaseAction>>>,
     }
 
     #[glib::object_subclass]
@@ -23,6 +47,17 @@ mod imp {
         const NAME: &'static str = "Database";
         type Type = super::Database;
         type ParentType = glib::Object;
+
+        fn new() -> Self {
+            let (db_sender, r) = glib::MainContext::channel(glib::PRIORITY_LOW);
+            let db_receiver = RefCell::new(Some(r));
+
+            Self {
+                conn: RefCell::new(None),
+                db_sender,
+                db_receiver,
+            }
+        }
     }
 
     impl ObjectImpl for DatabasePriv {
@@ -32,7 +67,10 @@ mod imp {
 
         fn signals() -> &'static [Signal] {
             static SIGNALS: Lazy<Vec<Signal>> =
-                Lazy::new(|| vec![Signal::builder("populate-model").build()]);
+                Lazy::new(|| vec![
+                    Signal::builder("populate-model").build(),
+                ]
+            );
 
             SIGNALS.as_ref()
         }
@@ -50,43 +88,101 @@ impl Default for Database {
 }
 
 impl Database {
-    pub fn new() -> Database {
+    pub fn new() -> Rc<Database> {
         let database: Database = Self::default();
 
         let path = env::current_dir().ok().unwrap();
         debug!("The current directory is {}", path.display());
 
+        let database = Rc::new(database);
+        database.clone().setup_channel();
         database
     }
 
-    fn database_location(&self) -> PathBuf {
-        if let Some(base_dirs) = BaseDirs::new() {
-            let folder = base_dirs.data_dir().join("io.github.nate_xyz.Paleta");
-            fs::create_dir_all(folder.clone()).unwrap();
-            folder.join("paleta_database.db")
-        } else {
-            let xdg_dirs = xdg::BaseDirectories::with_prefix("paleta_database").unwrap();
-            match xdg_dirs.place_data_file("paleta_database.db") {
-                Ok(path) => {
-                    let folder = xdg_dirs.get_data_home();
-                    fs::create_dir_all(folder).unwrap();
-                    path
+    pub fn setup_channel(self: Rc<Self>) {
+        let receiver = self.imp().db_receiver.borrow_mut().take().unwrap();
+        receiver.attach(
+            None,
+            clone!(@strong self as this => move |action| this.process_action(action)),
+        );
+    }
+
+    pub fn sender(&self) -> Sender<DatabaseAction> {
+        self.imp().db_sender.clone()
+    }
+
+    fn process_action(&self, action: DatabaseAction) -> glib::Continue {
+        match action {
+            DatabaseAction::TryLoadingDataBase => {
+                if !self.try_loading_database() {
+                    debug!("Unable to load database.");
                 }
-                Err(_) => PathBuf::from("paleta_database.db"),
-            }
+            },
+            DatabaseAction::AddColorToPalette((palette_id, color_hex, palette_name, color_rgba)) => {
+                if self.add_color_to_palette(palette_id, color_hex.clone(), color_rgba) {
+                    add_color_toast(color_hex, palette_name);
+                } else {
+                    add_error_toast(i18n_k("Unable to add color {color_hex}.", &[("color_hex", &color_hex)]));
+                }
+            },
+            DatabaseAction::AddPaletteNew((palette_name, color_hex, color_rgba)) => {
+                if self.add_palette_new(palette_name.clone(), color_hex, color_rgba) {
+                    add_success_toast(&i18n("Created!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &palette_name)]));
+                } else {
+                    add_error_toast(i18n_k("Unable to add new palette «{palette_name}»", &[("palette_name", &palette_name)]));
+                }
+            },
+            DatabaseAction::RemoveColorFromPalette((color_id, color_hex,  palette_id, palette_name)) => {
+                if self.remove_color_from_palette(color_id, palette_id) {
+                    remove_color_toast(color_hex, palette_name);
+                } else {
+                    add_error_toast(i18n_k("Unable to remove color {color_hex}.", &[("color_hex", &color_hex)]));
+                }
+            },
+            DatabaseAction::DeletePalette((palette_id, palette_name)) => {
+                if self.delete_palette(palette_id) {
+                    add_success_toast(&i18n("Removed"), &i18n_k("palette: «{palette_name}».", &[("palette_name", &palette_name)]));
+                } else {
+                    add_error_toast(i18n_k("Unable to delete palette «{palette_name}».", &[("palette_name", &palette_name)]));
+                }
+            },
+            DatabaseAction::DuplicatePalette((palette_id, original_palette_name, duplicated_palette_name)) => {
+                if self.duplicate_palette(palette_id, duplicated_palette_name.clone()) {
+                    add_success_toast(&i18n("Duplicated!"), &i18n_k("Copied «{original_palette}» to «{duplicate_palette}».", &[("original_palette", &original_palette_name), ("duplicate_palette", &duplicated_palette_name)]));
+                } else {
+                    add_error_toast(i18n_k("Unable to duplicate palette «{palette_name}».", &[("palette_name", &original_palette_name)]));
+                }
+            },
+            DatabaseAction::RenamePalette((palette_id, original_palette_name, new_palette_name)) => {
+                if self.rename_palette(palette_id, new_palette_name.clone()) {
+                    add_success_toast(&i18n("Renamed!"), &i18n_k("Changed name from «{old_palette_name}» to «{new_palette_name}».", &[("old_palette_name", &original_palette_name), ("new_palette_name", &new_palette_name)]));
+                } else {
+                    add_error_toast(i18n_k("Unable to rename palette «{palette_name}».", &[("palette_name", &original_palette_name)]));
+                }
+            },
+            DatabaseAction::AddPaletteFromExtracted((palette_name, extracted_colors)) => {
+                if self.add_palette_from_extracted(palette_name.clone(), extracted_colors) {
+                    add_success_toast(&i18n("Saved!"), &i18n_k("New palette: «{palette_name}»", &[("palette_name", &palette_name)]));
+                    go_to_palette_page();
+                } else {
+                    add_error_toast(i18n_k("Unable to add new palette «{palette_name}»", &[("palette_name", &palette_name)]));
+                }
+            },
         }
+
+        glib::Continue(true)
     }
 
     pub fn try_loading_database(&self) -> bool {
         if self.open_connection_to_db() {
             self.emit_by_name::<()>("populate-model", &[]);
-            return true
+            return true;
         } else {
             debug!("unable to open database");
             return false
         }
     }
-
+    
     fn open_connection_to_db(&self) -> bool {
         let path = self.database_location();
         let conn = match Connection::open_with_flags(
@@ -120,6 +216,24 @@ impl Database {
             Err(err) => {
                 error!("An error occurred: {}", err);
                 return false;
+            }
+        }
+    }
+
+    fn database_location(&self) -> PathBuf {
+        if let Some(base_dirs) = BaseDirs::new() {
+            let folder = base_dirs.data_dir().join("io.github.nate_xyz.Paleta");
+            fs::create_dir_all(folder.clone()).unwrap();
+            folder.join("paleta_database.db")
+        } else {
+            let xdg_dirs = xdg::BaseDirectories::with_prefix("io.github.nate_xyz.Paleta").unwrap();
+            match xdg_dirs.place_data_file("paleta_database.db") {
+                Ok(path) => {
+                    let folder = xdg_dirs.get_data_home();
+                    fs::create_dir_all(folder).unwrap();
+                    path
+                }
+                Err(_) => PathBuf::from("paleta_database.db"),
             }
         }
     }
@@ -213,7 +327,7 @@ impl Database {
         Ok(tx.last_insert_rowid())
     }
 
-    pub fn add_palette_from_extracted(&self, palette_name: String, colors: &Vec<ExtractedColor>) -> bool {
+    pub fn add_palette_from_extracted(&self, palette_name: String, colors: Vec<ExtractedColor>) -> bool {
         match self.add_palette_from_extracted_(palette_name, colors) {
             Ok(_) => {
                 self.emit_by_name::<()>("populate-model", &[]);
@@ -227,7 +341,7 @@ impl Database {
 
     }
 
-    fn add_palette_from_extracted_(&self, palette_name: String, colors: &Vec<ExtractedColor>) -> Result<(), Box<dyn Error>> {
+    fn add_palette_from_extracted_(&self, palette_name: String, colors: Vec<ExtractedColor>) -> Result<(), Box<dyn Error>> {
         let mut conn = self.imp().conn.borrow_mut();
         let conn = conn.as_mut().ok_or("Connection not established: add_palette_from_extracted")?;
         let tx = conn.transaction()?;
@@ -259,7 +373,6 @@ impl Database {
             },
         }
     }
-
 
     pub fn add_palette_new(&self, palette_name: String, hex: String, rgba: (i64, i64, i64, f64)) -> bool {
         match self.add_palette_new_(palette_name, hex, rgba) {
@@ -455,8 +568,6 @@ impl Database {
         }
     }
 
-
-
     // ######
     // # REMOVE VALUES 
     // ######
@@ -478,7 +589,6 @@ impl Database {
         let mut conn = self.imp().conn.borrow_mut();
         let conn = conn.as_mut().ok_or("Connection not established: delete_palette")?;
         let tx = conn.transaction()?;
-
 
         tx.execute(format!("DELETE FROM Palette_Color_Junction WHERE palette_id = {};", palette_id).as_str(), ())?;
         tx.execute(format!("DELETE FROM Palettes WHERE id = {};", palette_id).as_str(), ())?;
@@ -557,7 +667,6 @@ impl Database {
     // # QUERY VALUES
     // ######
 
-
     pub fn query_colors(&self) -> Result<Vec<(i64, i64, i64, i64, f64, String)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
         let conn = conn.as_ref().ok_or("Connection not established")?;
@@ -581,7 +690,6 @@ impl Database {
         Ok(result)
     }
 
-
     pub fn query_palettes(&self) -> Result<Vec<(i64, String)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
         let conn = conn.as_ref().ok_or("Connection not established")?;
@@ -600,7 +708,6 @@ impl Database {
 
         Ok(result)
     }
-
 
     pub fn query_palette_color_junction(&self) -> Result<Vec<(i64, i64, i64)>, Box<dyn Error>> {
         let conn = self.imp().conn.borrow();
@@ -647,6 +754,4 @@ impl Database {
         let colors = rows.filter_map(|r| r.ok()).collect();
         Ok(colors)
     }
-
-
 }
