@@ -3,7 +3,7 @@
 read -p "Do you want to do a clean compilation? [n/y] " answer
 
 if [[ "$answer" == "y" ]]; then
-    rm -r _builddir
+    sudo rm -R _builddir
 fi
 
 meson setup _builddir
