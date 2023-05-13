@@ -1,0 +1,609 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the paleta package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: paleta\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-01 22:47+0100\n"
+"PO-Revision-Date: 2023-05-14 02:43+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: data/io.github.nate_xyz.Paleta.desktop.in:3
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:6
+msgid "Paleta"
+msgstr "Paleta"
+
+#: data/io.github.nate_xyz.Paleta.desktop.in:4
+msgid "Color Palettes"
+msgstr "Палітри кольорів"
+
+#: data/io.github.nate_xyz.Paleta.desktop.in:5
+msgid "Extract the dominant colors from any image"
+msgstr "Отримайте домінуючі кольори із будь-якого зображення"
+
+#. Translators: Search terms to find this application. Do not translate or localize the semicolons! The list must also end with a semicolon.
+#: data/io.github.nate_xyz.Paleta.desktop.in:13
+msgid "color;palette;"
+msgstr "колір;палітра;"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:7
+msgid "Generate color palettes with ease"
+msgstr "Генеруйте кольорову палітру із легкістю"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:8
+msgid "nate-xyz"
+msgstr "nate-xyz"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:10
+msgid ""
+"Find the dominant color palette from any image and manage palettes with "
+"Paleta. An intuitive tool for designers, artists, or anyone looking to "
+"streamline their color work."
+msgstr ""
+"Знаходьте домінуючу кольорову палітру із будь-якого зображення і керуйте "
+"палітрами за допомогою Paleta. Інтуїтивний інструмент для дизайнерів, "
+"художників, або будь-кого хто хоче полегшити роботу з кольорами."
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:11
+msgid "Features:"
+msgstr "Функції:"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:13
+msgid "Drag and drop images to load"
+msgstr "Перетягування зображення для завантаження"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:14
+msgid "Color extraction with color-thief"
+msgstr "Отримування кольорів за допомогою color-thief"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:15
+msgid "Save extracted palettes for later use"
+msgstr "Зберігання палітри для наступного використання"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:16
+msgid "Modify saved palette name and colors"
+msgstr "Модифікування назви та кольорів збереженої палітри"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:17
+msgid "Add new palettes from scratch"
+msgstr "Додавання нової палітру з нуля"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:19
+msgid ""
+"❗ Note: Paleta is under active development! If you would like to suggest any "
+"features or if you find any bugs, your feedback is very welcome!"
+msgstr ""
+"❗Увага: Paleta знаходиться у стані активної розробки! Якщо ви бажаєте "
+"запропонувати ідею або якщо ви наштовхнулися на збій, ваш зворотній зв'язок "
+"буде дуже вітатися!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
+msgid "Added German, Hindi, Occitan, Polish, and Russian translations!"
+msgstr ""
+"Додано німецький, хінді, окситанський, польський та російський переклади!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+msgid "Fixed translations for Rust version"
+msgstr "Виправлено переклади для Rust версії додатку"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
+msgid "Rewritten in Rust, now uses colorthief-rs!"
+msgstr "Додаток переписаний у Rust, тепер використовує colorthief-rs!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:48
+msgid "Added Translation Support"
+msgstr "Додана підтримка локалізацій"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:49
+msgid "Added French and Dutch translations!"
+msgstr "Додано французький та голландський переклади!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:56
+msgid "Automatic palette extraction on image load"
+msgstr "Автоматичне отримування палітри при завантаженні зображення"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:57
+msgid "Cleaner extraction panel UI"
+msgstr "Покращення інтерфейсу отримування кольорів"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:58
+msgid "Clearer options for palette quality / accuracy"
+msgstr "Покращення для опцій якості палітри"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:59
+msgid "Better AppData summary"
+msgstr "Покращено підсумок додатку"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:67
+msgid "Toast improvements"
+msgstr "Покращення вспливаючих вікон"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:68
+msgid "Drop Page open button"
+msgstr "Кнопка відкриття файла на сторінці перетягування файлів"
+
+#. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
+#. One name per line, please do not remove previous names.
+#: src/application.rs:162
+msgid "translator-credits"
+msgstr "volkov"
+
+#. Translators: only replace "Powered by "
+#: src/application.rs:168
+msgid "Powered by color-thief"
+msgstr "Працює за допомогою color-thief"
+
+#: src/window.rs:180
+msgid "_Open Image"
+msgstr "_Відкрити зображення"
+
+#: src/window.rs:181 src/dialog/ui/add_color_dialog.ui:13
+#: src/dialog/ui/add_new_palette_dialog.ui:13
+#: src/dialog/ui/delete_color_dialog.ui:13
+#: src/dialog/ui/delete_palette_dialog.ui:13
+#: src/dialog/ui/duplicate_palette_dialog.ui:12
+#: src/dialog/ui/rename_palette_dialog.ui:12
+#: src/dialog/ui/save_palette_dialog.ui:12
+msgid "_Cancel"
+msgstr "_Скасувати"
+
+#: src/window.rs:183
+msgid "Select an Image File"
+msgstr "Оберіть файл зображення"
+
+#: src/window.rs:201 src/window.rs:205
+msgid "Unable to load file."
+msgstr "Неможливо завантажити файл."
+
+#. Translators: Do not replace {color_hex}, only translate "Copied color" and "to clipboard!"
+#: src/util.rs:108
+msgid "Copied color {color_hex} to clipboard!"
+msgstr "Скопійовано колір {color_hex} до буферу обміну!"
+
+#. Translators: Only replace "Error!". Reorder if necessary
+#: src/toasts.rs:61
+msgid "<span foreground={ERROR_RED}>Error!</span> {error_msg}"
+msgstr "<span foreground={ERROR_RED}>Помилка!</span> {error_msg}"
+
+#. Translators: Only replace "Opened image:". Reorder if necessary
+#: src/toasts.rs:71
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
+msgstr ""
+"<span foreground={SUCCESS_GREEN}>Відкрито зображення:</span> {image_name}"
+
+#. Translators: Do not replace {image_name}
+#: src/toasts.rs:78
+msgid "Could not open image: {image_name}"
+msgstr "Не вдалося відкрити: {image_name}"
+
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Added color" and "to palette" Reorder if necessary
+#: src/toasts.rs:85
+msgid "Added color {color_hex} to palette «{palette_name}»."
+msgstr "Додано колір {color_hex} до палітри \"{palette_name}\"."
+
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Removed color" and "from palette" Reorder if necessary
+#: src/toasts.rs:92
+msgid "Removed color {color_hex} from palette «{palette_name}»."
+msgstr "Видалено колір {color_hex} із палітри \"{palette_name}\"."
+
+#: src/ui/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Загальні"
+
+#: src/ui/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показати клавіатурні скорочення"
+
+#: src/ui/help-overlay.ui:22
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Вийти"
+
+#: src/ui/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Image"
+msgstr "Зображення"
+
+#: src/ui/help-overlay.ui:35
+msgctxt "shortcut window"
+msgid "Open Image"
+msgstr "Відкрити зображення"
+
+#: src/ui/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Extract Palette"
+msgstr "Отримати палітру"
+
+#: src/ui/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Save Extracted Palette"
+msgstr "Зберегти отриману палітру"
+
+#: src/ui/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Go To Image Drop Page"
+msgstr "Перейти до сторінки перетягування файлів"
+
+#: src/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Palettes"
+msgstr "Палітри"
+
+#: src/ui/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Toggle Edit Mode"
+msgstr "Перемикнути режим редагування"
+
+#: src/ui/help-overlay.ui:72
+msgctxt "shortcut window"
+msgid "Add Palette"
+msgstr "Додати палітру"
+
+#: src/ui/help-overlay.ui:78
+msgctxt "shortcut window"
+msgid "Go To Palette Page"
+msgstr "Перейти на сторінку палітри"
+
+#: src/ui/window.ui:26 src/pages/image_drop/ui/image_drop_page.ui:29
+msgid "Open Image"
+msgstr "Відкрити зображення"
+
+#: src/ui/window.ui:37
+msgid "Edit Palettes"
+msgstr "Редагувати палітри"
+
+#: src/ui/window.ui:58
+msgid "Drop"
+msgstr "Перетягнути"
+
+#: src/ui/window.ui:69
+msgid "Palettes"
+msgstr "Палітри"
+
+#: src/ui/window.ui:92
+msgid "_Keyboard Shortcuts"
+msgstr "_Клавіатурні скорочення"
+
+#: src/ui/window.ui:96
+msgid "_About Paleta"
+msgstr "_Про Paleta"
+
+#: src/dialog/add_color_dialog.rs:128
+msgid "Add Color to {palette_name}"
+msgstr "Додати колір до {palette_name}"
+
+#: src/dialog/add_color_dialog.rs:155
+msgid "Pick a new color to add to {palette_name}."
+msgstr "Обрати новий колір для {palette_name}."
+
+#: src/dialog/add_color_dialog.rs:166 src/dialog/add_new_palette_dialog.rs:165
+msgid "Currently selected color: {color_hex}"
+msgstr "Поточний обраний колір: {color_hex}"
+
+#: src/dialog/add_color_dialog.rs:188
+msgid "Choose new color to add to {palette_name}"
+msgstr "Оберіть новий колір для {palette_name}"
+
+#: src/dialog/add_color_dialog.rs:221
+msgid "Unable to add color {color_hex}."
+msgstr "Неможливо додати колір {color_hex}."
+
+#: src/dialog/add_color_dialog.rs:224 src/dialog/add_color_dialog.rs:227
+msgid "Unable to add color."
+msgstr "Неможливо додати колір."
+
+#: src/dialog/add_new_palette_dialog.rs:110
+#: src/dialog/save_palette_dialog.rs:81
+msgid "Palette #{palette_index}"
+msgstr "Палітра #{palette_index}"
+
+#: src/dialog/add_new_palette_dialog.rs:151
+msgid "Pick a new color to add to new palette."
+msgstr "Оберіть новий колір для додавання у нову палітру."
+
+#: src/dialog/add_new_palette_dialog.rs:187
+msgid "Choose color to add to new palette"
+msgstr "Оберіть колір для додавання у нову політру"
+
+#: src/dialog/add_new_palette_dialog.rs:216
+msgid "Created!"
+msgstr "Створено!"
+
+#: src/dialog/add_new_palette_dialog.rs:216
+#: src/dialog/save_palette_dialog.rs:113
+msgid "New palette: «{palette_name}»"
+msgstr "Нова палітра: \"{palette_name}\""
+
+#: src/dialog/add_new_palette_dialog.rs:219
+#: src/dialog/save_palette_dialog.rs:119
+msgid "Unable to add new palette «{palette_name}»"
+msgstr "Неможливо додати нову палітру \"{palette_name}\""
+
+#: src/dialog/add_new_palette_dialog.rs:222
+msgid "Unable to add palette, must select a color."
+msgstr "Неможливо додати палітру, треба обрати колір."
+
+#: src/dialog/delete_color_dialog.rs:93
+msgid "Remove color {color_hex} from {palette_name}?"
+msgstr "Видалити колір {color_hex} із {palette_name}?"
+
+#: src/dialog/delete_color_dialog.rs:114
+msgid "Unable to remove color {color_hex}."
+msgstr "Неможливо видалити колір {color_hex}."
+
+#: src/dialog/delete_color_dialog.rs:117 src/dialog/delete_color_dialog.rs:120
+msgid "Unable to remove color."
+msgstr "Неможливо видалити колір."
+
+#: src/dialog/delete_palette_dialog.rs:85
+msgid "Delete {palette_name}?"
+msgstr "Видалити {palette_name}?"
+
+#: src/dialog/delete_palette_dialog.rs:95
+msgid "Removed"
+msgstr "Видалено"
+
+#: src/dialog/delete_palette_dialog.rs:95
+msgid "palette: «{palette_name}»."
+msgstr "палітра \"{palette_name}\"."
+
+#: src/dialog/delete_palette_dialog.rs:98
+msgid "Unable to delete palette «{palette_name}»."
+msgstr "Не вдалося видалити палітру \"{palette_name}\"."
+
+#: src/dialog/delete_palette_dialog.rs:101
+msgid "Unable to delete palette."
+msgstr "Не вдалося видалити палітру."
+
+#: src/dialog/duplicate_palette_dialog.rs:90
+msgid "Duplicate {palette_name}?"
+msgstr "Дублювати палітру {palette_name}?"
+
+#: src/dialog/duplicate_palette_dialog.rs:91
+msgid "{palette_name} duplicate"
+msgstr "Дублікат {palette_name}"
+
+#: src/dialog/duplicate_palette_dialog.rs:112
+msgid "Duplicated!"
+msgstr "Продубльовано!"
+
+#: src/dialog/duplicate_palette_dialog.rs:112
+msgid "Copied «{original_palette}» to «{duplicate_palette}»."
+msgstr "Скопійовано \"{original_palette}\" у \"{duplicate_palette}\"."
+
+#: src/dialog/duplicate_palette_dialog.rs:115
+msgid "Unable to duplicate palette «{palette_name}»."
+msgstr "Не вдалося дублювати палітру \"{palette_name}\"."
+
+#: src/dialog/duplicate_palette_dialog.rs:118
+msgid "Unable to duplicate palette."
+msgstr "Не вдалося дублювати палітру."
+
+#: src/dialog/rename_palette_dialog.rs:90
+msgid "Rename {palette_name}?"
+msgstr "Змінити назву {palette_name}?"
+
+#: src/dialog/rename_palette_dialog.rs:112
+msgid "Renamed!"
+msgstr "Назва змінена!"
+
+#: src/dialog/rename_palette_dialog.rs:112
+msgid "Changed name from «{old_palette_name}» to «{new_palette_name}»."
+msgstr "Назва змінена з \"{old_palette_name}\" на \"{new_palette_name}\"."
+
+#: src/dialog/rename_palette_dialog.rs:115
+msgid "Unable to rename palette «{palette_name}»."
+msgstr "Не вдалося змінити назву палітри \"{palette_name}\"."
+
+#: src/dialog/rename_palette_dialog.rs:118
+msgid "Unable to rename palette."
+msgstr "Не вдалося змінити назву палітри."
+
+#: src/dialog/save_palette_dialog.rs:113
+msgid "Saved!"
+msgstr "Збережено!"
+
+#: src/dialog/save_palette_dialog.rs:122
+msgid "Unable to add palette, no colors extracted."
+msgstr "Не вдалося додати палітру, не отримано жодного кольору."
+
+#: src/dialog/ui/add_color_dialog.ui:6 src/pages/palette/ui/palette_row.ui:71
+msgid "Add Color to Palette"
+msgstr "Додати колір до палітри"
+
+#: src/dialog/ui/add_color_dialog.ui:14
+msgid "_Add Color"
+msgstr "_Додати колір"
+
+#: src/dialog/ui/add_color_dialog.ui:40
+msgid "Select from previously added colors or pick a new one."
+msgstr "Оберіть із попередньо обраних кольорів або оберіть нову."
+
+#: src/dialog/ui/add_color_dialog.ui:62
+#: src/dialog/ui/add_new_palette_dialog.ui:75
+msgid "_Choose with Picker"
+msgstr "_Обрати за допомогою піпетки"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:6
+#: src/pages/palette/ui/palette_page.ui:21
+msgid "Add New Palette"
+msgstr "Додати нову палітру"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:14
+msgid "_Add Palette"
+msgstr "_Додати палітру"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:42
+#: src/dialog/ui/rename_palette_dialog.ui:22
+msgid "New Palette _Name"
+msgstr "Нова _назва палітри"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:52
+msgid "Select from previously added colors or pick one to add to new palette."
+msgstr "Оберіть із раніше обраних кольорів або оберіть новий із палітри."
+
+#: src/dialog/ui/delete_color_dialog.ui:6
+msgid "Remove Color from Palette?"
+msgstr "Видалити колір із палітри?"
+
+#: src/dialog/ui/delete_color_dialog.ui:14
+msgid "_Remove"
+msgstr "_Видалити"
+
+#: src/dialog/ui/delete_palette_dialog.ui:6
+msgid "Delete Palette?"
+msgstr "Видалити палітру?"
+
+#: src/dialog/ui/delete_palette_dialog.ui:14
+msgid "_Delete"
+msgstr "_Видалити"
+
+#: src/dialog/ui/delete_palette_dialog.ui:20
+msgid "This action will permanently remove this palette from Paleta."
+msgstr "Ця дія безповоротно видалить палітру із Paleta."
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:6
+msgid "Duplicate Palette?"
+msgstr "Дублювати палітру?"
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:13
+msgid "_Duplicate"
+msgstr "_Дублювати"
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:22
+msgid "Duplicated Palette _Name"
+msgstr "Нова _назва продубльованої палітри"
+
+#: src/dialog/ui/rename_palette_dialog.ui:6
+msgid "Rename Palette?"
+msgstr "Змінити назву палітри?"
+
+#: src/dialog/ui/rename_palette_dialog.ui:13
+msgid "_Rename"
+msgstr "_Змінити назву"
+
+#: src/dialog/ui/save_palette_dialog.ui:6
+msgid "Save Palette?"
+msgstr "Зберегти палітру?"
+
+#: src/dialog/ui/save_palette_dialog.ui:13
+msgid "_Save"
+msgstr "_Зберегти"
+
+#: src/dialog/ui/save_palette_dialog.ui:22
+msgid "Palette _Name"
+msgstr "_Назва палітри"
+
+#: src/pages/image_drop/color_thief_panel.rs:237
+msgid "Unable to start palette extraction, no image loaded."
+msgstr "Неможливо почати отримання палітри, зображення не завантажено."
+
+#: src/pages/image_drop/color_thief_panel.rs:257
+msgid "Unable to extract colors from image."
+msgstr "Неможливо отримати кольори із зображення."
+
+#: src/pages/image_drop/color_thief_panel.rs:285
+msgid "Unable to save palette, no colors extracted."
+msgstr "Неможливо зберегти палітру, жодного кольору було отримано."
+
+#: src/pages/image_drop/color_thief_panel.rs:288
+msgid "Unable to save palette, no image loaded."
+msgstr "Неможливо зберегти палітру, немає зображення."
+
+#: src/pages/image_drop/image_drop_page.rs:114
+msgid ""
+"Unable to verify file on drop, try with the file chooser in the upper left "
+"corner."
+msgstr ""
+"Неможливо перевірити перетягнутий файл, спробуйте обрати файл через кнопку у "
+"ліво-верхньому куті."
+
+#: src/pages/image_drop/image_drop_page.rs:152
+msgid "Unable to read drop."
+msgstr "Неможливо прочитати зображення."
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:70
+msgid "Palette Count"
+msgstr "Кількість кольорів у палітрі"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:71
+msgid "Max amount of colors to retrieve."
+msgstr "Максимальна кількість кольорів для отримування."
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:87
+msgid "Palette Accuracy"
+msgstr "Точність палітри"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:106
+msgid "Precise"
+msgstr "Дуже точно"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:107
+msgid "Normal"
+msgstr "Нормально"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:108
+msgid "Low"
+msgstr "Неточно"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:169
+msgid "_Save Palette"
+msgstr "_Зберегти палітру"
+
+#: src/pages/image_drop/ui/image_drop_page.ui:14
+msgid "Drop Image"
+msgstr "Перетягніть зображення"
+
+#: src/pages/image_drop/ui/image_drop_page.ui:15
+msgid ""
+"Drag an image here, click the button below, or click the button in the upper "
+"left corner of this window."
+msgstr ""
+"Перетягніть зображення сюди, натисніть на кнопку знизу або у лівому-"
+"верхньому куті цього вікна."
+
+#: src/pages/palette/palette_page.rs:140
+msgid "Cannot toggle edit mode, no palettes added."
+msgstr "Неможливо перемкнути режим редагування, не додано жодної палітри."
+
+#: src/pages/palette/ui/palette_row.ui:50
+msgid "Edit Palette Name"
+msgstr "Редагувати назву палітри"
+
+#: src/pages/palette/ui/palette_row.ui:62
+msgid "Duplicate Palette"
+msgstr "Продублювати палітру"
+
+#: src/pages/palette/ui/palette_row.ui:80
+msgid "Delete Palette"
+msgstr "Видалити палітру"
+
+#: src/pages/palette/ui/palette_page.ui:43
+msgid "Add Some Palettes!"
+msgstr "Додайте палітри!"
+
+#: src/pages/palette/ui/palette_page.ui:44
+msgid ""
+"Drop an image onto the drop page and extract some colors, or add a palette "
+"manually by clicking the button in the lower right corner to get started!"
+msgstr ""
+"Перетягніть зображення на сторінку перетягування та отримайте кольори, або "
+"додайте палітру вручну, натисну кнопку у правому-нижньому куті для того щоб "
+"розпочати!"
+
+#: src/pages/palette/ui/palette_color_card.ui:42
+msgid "Remove Color from Palette"
+msgstr "Видалити колір із палітри"
