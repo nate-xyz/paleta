@@ -1,0 +1,612 @@
+# Turkish translation of io.github.nate_xyz.Paleta.
+# Copyright (C) 2023 io.github.nate_xyz.Paleta's COPYRIGHT HOLDER
+# This file is distributed under the same license as the io.github.nate_xyz.Paleta package.
+#
+# Sabri Ünal <libreajans@gmail.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: io.github.nate_xyz.Paleta\n"
+"Report-Msgid-Bugs-To: https://github.com/nate-xyz/paleta/issues\n"
+"POT-Creation-Date: 2023-03-01 22:47+0100\n"
+"PO-Revision-Date: 2023-05-22 05:04+0300\n"
+"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"Language-Team: Turkish <takim@gnome.org.tr>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-POOTLE-MTIME: 1433334275.000000\n"
+
+#: data/io.github.nate_xyz.Paleta.desktop.in:3
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:6
+msgid "Paleta"
+msgstr "Paleta"
+
+#: data/io.github.nate_xyz.Paleta.desktop.in:4
+msgid "Color Palettes"
+msgstr "Renk Paletleri"
+
+#: data/io.github.nate_xyz.Paleta.desktop.in:5
+msgid "Extract the dominant colors from any image"
+msgstr "Herhangi bir görüntüden baskın renkleri çıkar"
+
+#. Translators: Search terms to find this application. Do not translate or localize the semicolons! The list must also end with a semicolon.
+#: data/io.github.nate_xyz.Paleta.desktop.in:13
+msgid "color;palette;"
+msgstr "renk;palet;"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:7
+msgid "Generate color palettes with ease"
+msgstr "Kolayca renk paletleri oluştur"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:8
+msgid "nate-xyz"
+msgstr "nate-xyz"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:10
+msgid ""
+"Find the dominant color palette from any image and manage palettes with "
+"Paleta. An intuitive tool for designers, artists, or anyone looking to "
+"streamline their color work."
+msgstr ""
+"Paleta ile herhangi bir görüntüden baskın renk paletini bulun ve paletleri "
+"yönetin. Tasarımcılar, sanatçılar veya renk çalışmalarını düzene sokmak "
+"isteyen herkes için sezgisel bir araç."
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:11
+msgid "Features:"
+msgstr "Özellikler:"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:13
+msgid "Drag and drop images to load"
+msgstr "Yüklemek için görüntüleri sürükleyip bırakma"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:14
+msgid "Color extraction with color-thief"
+msgstr "Renk hırsızı ile renk çıkarma"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:15
+msgid "Save extracted palettes for later use"
+msgstr "Çıkarılan paletleri daha sonra kullanmak üzere kaydetme"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:16
+msgid "Modify saved palette name and colors"
+msgstr "Kaydedilen palet adını ve renkleri değiştirme"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:17
+msgid "Add new palettes from scratch"
+msgstr "Sıfırdan yeni paletler ekleme"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:19
+msgid ""
+"❗ Note: Paleta is under active development! If you would like to suggest "
+"any features or if you find any bugs, your feedback is very welcome!"
+msgstr ""
+"❗ Not: Paleta aktif geliştirme aşamasındadır! Herhangi bir özellik önermek "
+"isterseniz veya herhangi bir hata bulursanız, geri bildiriminiz memnuniyetle "
+"karşılanır!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:33
+msgid "Added German, Hindi, Occitan, Polish, and Russian translations!"
+msgstr "Almanca, Hintçe, Oksitanca, Lehçe ve Rusça çeviriler eklendi!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:34
+msgid "Fixed translations for Rust version"
+msgstr "Rust sürümü için çeviriler düzeltildi"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:41
+msgid "Rewritten in Rust, now uses colorthief-rs!"
+msgstr "Rust ile yeniden yazıldı, artık colorthief-rs kullanıyor!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:48
+msgid "Added Translation Support"
+msgstr "Çeviri desteği eklendi"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:49
+msgid "Added French and Dutch translations!"
+msgstr "Fransızca ve Felemenkçe çeviriler eklendi!"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:56
+msgid "Automatic palette extraction on image load"
+msgstr "Görüntü yüklemede kendiliğinden palet çıkarma"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:57
+msgid "Cleaner extraction panel UI"
+msgstr "Daha temiz çıkarma paneli kullanıcı arayüzü"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:58
+msgid "Clearer options for palette quality / accuracy"
+msgstr "Palet kalitesi / doğruluğu için daha net seçenekler"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:59
+msgid "Better AppData summary"
+msgstr "Daha iyi AppData özeti"
+
+# Toast bildirim arayüzü fakat yerleşik bir çevirimiz yok.
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:67
+msgid "Toast improvements"
+msgstr "Bildirim iyileştirmeleri"
+
+#: data/io.github.nate_xyz.Paleta.appdata.xml.in:68
+msgid "Drop Page open button"
+msgstr "Bırak Sayfası aç düğmesi"
+
+#. Translator credits. Replace "translator-credits" with your name/username, and optionally an email or URL.
+#. One name per line, please do not remove previous names.
+#: src/application.rs:162
+msgid "translator-credits"
+msgstr "Sabri Ünal <libreajans@gmail.com>"
+
+#. Translators: only replace "Powered by "
+#: src/application.rs:168
+msgid "Powered by color-thief"
+msgstr "color-thief ile güçlendirilmiştir"
+
+#: src/window.rs:180
+msgid "_Open Image"
+msgstr "Görüntü _Aç"
+
+#: src/window.rs:181 src/dialog/ui/add_color_dialog.ui:13
+#: src/dialog/ui/add_new_palette_dialog.ui:13
+#: src/dialog/ui/delete_color_dialog.ui:13
+#: src/dialog/ui/delete_palette_dialog.ui:13
+#: src/dialog/ui/duplicate_palette_dialog.ui:12
+#: src/dialog/ui/rename_palette_dialog.ui:12
+#: src/dialog/ui/save_palette_dialog.ui:12
+msgid "_Cancel"
+msgstr "_İptal"
+
+#: src/window.rs:183
+msgid "Select an Image File"
+msgstr "Görüntü Dosyası Seç"
+
+#: src/window.rs:201 src/window.rs:205
+msgid "Unable to load file."
+msgstr "Dosya yüklenemiyor."
+
+#. Translators: Do not replace {color_hex}, only translate "Copied color" and "to clipboard!"
+#: src/util.rs:108
+msgid "Copied color {color_hex} to clipboard!"
+msgstr "{color_hex} rengi panoya kopyalandı!"
+
+#. Translators: Only replace "Error!". Reorder if necessary
+#: src/toasts.rs:61
+msgid "<span foreground={ERROR_RED}>Error!</span> {error_msg}"
+msgstr "<span foreground={ERROR_RED}>Hata!</span> {error_msg}"
+
+#. Translators: Only replace "Opened image:". Reorder if necessary
+#: src/toasts.rs:71
+msgid "<span foreground={SUCCESS_GREEN}>Opened image:</span> {image_name}"
+msgstr "<span foreground={SUCCESS_GREEN}>Açılan görüntü:</span> {image_name}"
+
+#. Translators: Do not replace {image_name}
+#: src/toasts.rs:78
+msgid "Could not open image: {image_name}"
+msgstr "Görüntü açılamadı: {image_name}"
+
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Added color" and "to palette" Reorder if necessary
+#: src/toasts.rs:85
+msgid "Added color {color_hex} to palette «{palette_name}»."
+msgstr "{color_hex} rengi “{palette_name}” paletine eklendi."
+
+#. Translators: Do not replace {color_hex} or {palette_name}, only translate "Removed color" and "from palette" Reorder if necessary
+#: src/toasts.rs:92
+msgid "Removed color {color_hex} from palette «{palette_name}»."
+msgstr "{color_hex} rengi “{palette_name}” paletinden kaldırıldı."
+
+#: src/ui/help-overlay.ui:13
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Genel"
+
+#: src/ui/help-overlay.ui:16
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Kısayolları Göster"
+
+#: src/ui/help-overlay.ui:22
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Çık"
+
+#: src/ui/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Image"
+msgstr "Görüntü"
+
+#: src/ui/help-overlay.ui:35
+msgctxt "shortcut window"
+msgid "Open Image"
+msgstr "Görüntü Aç"
+
+#: src/ui/help-overlay.ui:41
+msgctxt "shortcut window"
+msgid "Extract Palette"
+msgstr "Palet Çıkar"
+
+#: src/ui/help-overlay.ui:47
+msgctxt "shortcut window"
+msgid "Save Extracted Palette"
+msgstr "Çıkarılan Paleti Kaydet"
+
+#: src/ui/help-overlay.ui:53
+msgctxt "shortcut window"
+msgid "Go To Image Drop Page"
+msgstr "Görüntü Bırakma Sayfasına Git"
+
+#: src/ui/help-overlay.ui:63
+msgctxt "shortcut window"
+msgid "Palettes"
+msgstr "Paletler"
+
+#: src/ui/help-overlay.ui:66
+msgctxt "shortcut window"
+msgid "Toggle Edit Mode"
+msgstr "Düzenleme Kipini Aç/Kapat"
+
+#: src/ui/help-overlay.ui:72
+msgctxt "shortcut window"
+msgid "Add Palette"
+msgstr "Palet Ekle"
+
+#: src/ui/help-overlay.ui:78
+msgctxt "shortcut window"
+msgid "Go To Palette Page"
+msgstr "Palet sayfasına Git"
+
+#: src/ui/window.ui:26 src/pages/image_drop/ui/image_drop_page.ui:29
+msgid "Open Image"
+msgstr "Görüntü Aç"
+
+#: src/ui/window.ui:37
+msgid "Edit Palettes"
+msgstr "Paletleri Düzenle"
+
+#: src/ui/window.ui:58
+msgid "Drop"
+msgstr "Bırak"
+
+#: src/ui/window.ui:69
+msgid "Palettes"
+msgstr "Paletler"
+
+#: src/ui/window.ui:92
+msgid "_Keyboard Shortcuts"
+msgstr "_Klavye Kısayolları"
+
+#: src/ui/window.ui:96
+msgid "_About Paleta"
+msgstr "Paleta _Hakkında"
+
+#: src/dialog/add_color_dialog.rs:128
+msgid "Add Color to {palette_name}"
+msgstr "{palette_name} paletine renk ekle"
+
+#: src/dialog/add_color_dialog.rs:155
+msgid "Pick a new color to add to {palette_name}."
+msgstr "{palette_name} paletine eklemek için yeni renk seç."
+
+#: src/dialog/add_color_dialog.rs:166 src/dialog/add_new_palette_dialog.rs:165
+msgid "Currently selected color: {color_hex}"
+msgstr "Geçerli seçili renk: {color_hex}"
+
+#: src/dialog/add_color_dialog.rs:188
+msgid "Choose new color to add to {palette_name}"
+msgstr "{palette_name} paletine eklemek için yeni renk seç."
+
+#: src/dialog/add_color_dialog.rs:221
+msgid "Unable to add color {color_hex}."
+msgstr "{color_hex} rengi eklenemiyor."
+
+#: src/dialog/add_color_dialog.rs:224 src/dialog/add_color_dialog.rs:227
+msgid "Unable to add color."
+msgstr "Renk eklenemiyor."
+
+#: src/dialog/add_new_palette_dialog.rs:110
+#: src/dialog/save_palette_dialog.rs:81
+msgid "Palette #{palette_index}"
+msgstr "Palet #{palette_index}"
+
+#: src/dialog/add_new_palette_dialog.rs:151
+msgid "Pick a new color to add to new palette."
+msgstr "Yeni palete eklemek için yeni renk seç."
+
+#: src/dialog/add_new_palette_dialog.rs:187
+msgid "Choose color to add to new palette"
+msgstr "Yeni palete eklemek için renk seç"
+
+#: src/dialog/add_new_palette_dialog.rs:216
+msgid "Created!"
+msgstr "Oluşturuldu!"
+
+#: src/dialog/add_new_palette_dialog.rs:216
+#: src/dialog/save_palette_dialog.rs:113
+msgid "New palette: «{palette_name}»"
+msgstr "Yeni palet: “{palette_name}”"
+
+#: src/dialog/add_new_palette_dialog.rs:219
+#: src/dialog/save_palette_dialog.rs:119
+msgid "Unable to add new palette «{palette_name}»"
+msgstr "Yeni “{palette_name}” paleti eklenemiyor"
+
+#: src/dialog/add_new_palette_dialog.rs:222
+msgid "Unable to add palette, must select a color."
+msgstr "Yeni palet eklenemiyor, renk seçmelisiniz."
+
+#: src/dialog/delete_color_dialog.rs:93
+msgid "Remove color {color_hex} from {palette_name}?"
+msgstr "{palette_name} paletinden {color_hex} rengi kaldırılsın mı?"
+
+#: src/dialog/delete_color_dialog.rs:114
+msgid "Unable to remove color {color_hex}."
+msgstr "{color_hex} rengi kaldırılamıyor."
+
+#: src/dialog/delete_color_dialog.rs:117 src/dialog/delete_color_dialog.rs:120
+msgid "Unable to remove color."
+msgstr "Renk kaldırılamıyor."
+
+#: src/dialog/delete_palette_dialog.rs:85
+msgid "Delete {palette_name}?"
+msgstr "{palette_name} paleti silinsin mi?"
+
+#: src/dialog/delete_palette_dialog.rs:95
+msgid "Removed"
+msgstr "Kaldırıldı"
+
+#: src/dialog/delete_palette_dialog.rs:95
+msgid "palette: «{palette_name}»."
+msgstr "palet: “{palette_name}”."
+
+#: src/dialog/delete_palette_dialog.rs:98
+msgid "Unable to delete palette «{palette_name}»."
+msgstr "“{palette_name}” paleti silinemiyor."
+
+#: src/dialog/delete_palette_dialog.rs:101
+msgid "Unable to delete palette."
+msgstr "Palet silinemiyor."
+
+#: src/dialog/duplicate_palette_dialog.rs:90
+msgid "Duplicate {palette_name}?"
+msgstr "{palette_name} paleti çoğaltılsın mı?"
+
+#: src/dialog/duplicate_palette_dialog.rs:91
+msgid "{palette_name} duplicate"
+msgstr "{palette_name} çoğaltılmış"
+
+#: src/dialog/duplicate_palette_dialog.rs:112
+msgid "Duplicated!"
+msgstr "Çoğaltıldı!"
+
+#: src/dialog/duplicate_palette_dialog.rs:112
+msgid "Copied «{original_palette}» to «{duplicate_palette}»."
+msgstr "“{original_palette}” paleti “{duplicate_palette}” paletine kopyalandı."
+
+#: src/dialog/duplicate_palette_dialog.rs:115
+msgid "Unable to duplicate palette «{palette_name}»."
+msgstr "“{palette_name}” paleti çoğaltılamıyor."
+
+#: src/dialog/duplicate_palette_dialog.rs:118
+msgid "Unable to duplicate palette."
+msgstr "Palet çıkarılamıyor."
+
+#: src/dialog/rename_palette_dialog.rs:90
+msgid "Rename {palette_name}?"
+msgstr "{palette_name} paleti yeniden adlandırılsın mı?"
+
+#: src/dialog/rename_palette_dialog.rs:112
+msgid "Renamed!"
+msgstr "Yeniden adlandırıldı!"
+
+#: src/dialog/rename_palette_dialog.rs:112
+msgid "Changed name from «{old_palette_name}» to «{new_palette_name}»."
+msgstr ""
+"“{old_palette_name}” paleti, “{new_palette_name}” olarak yeniden "
+"adlandırıldı."
+
+#: src/dialog/rename_palette_dialog.rs:115
+msgid "Unable to rename palette «{palette_name}»."
+msgstr "“{palette_name}” paleti yeniden adlandırılamıyor."
+
+#: src/dialog/rename_palette_dialog.rs:118
+msgid "Unable to rename palette."
+msgstr "Palet yeniden adlandırılamıyor."
+
+#: src/dialog/save_palette_dialog.rs:113
+msgid "Saved!"
+msgstr "Kaydedildi!"
+
+#: src/dialog/save_palette_dialog.rs:122
+msgid "Unable to add palette, no colors extracted."
+msgstr "Palet eklenemiyor, renk çıkarılmadı."
+
+#: src/dialog/ui/add_color_dialog.ui:6 src/pages/palette/ui/palette_row.ui:71
+msgid "Add Color to Palette"
+msgstr "Palete Renk Ekle"
+
+#: src/dialog/ui/add_color_dialog.ui:14
+msgid "_Add Color"
+msgstr "Renk _Ekle"
+
+#: src/dialog/ui/add_color_dialog.ui:40
+msgid "Select from previously added colors or pick a new one."
+msgstr ""
+"Daha önce eklenen renkler arasından seçim yapın ya da yeni bir tane seçin."
+
+#: src/dialog/ui/add_color_dialog.ui:62
+#: src/dialog/ui/add_new_palette_dialog.ui:75
+msgid "_Choose with Picker"
+msgstr "_Seçici ile Seç"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:6
+#: src/pages/palette/ui/palette_page.ui:21
+msgid "Add New Palette"
+msgstr "Yeni Palet Ekle"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:14
+msgid "_Add Palette"
+msgstr "Palet _Ekle"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:42
+#: src/dialog/ui/rename_palette_dialog.ui:22
+msgid "New Palette _Name"
+msgstr "Yeni Palet _Adı"
+
+#: src/dialog/ui/add_new_palette_dialog.ui:52
+msgid "Select from previously added colors or pick one to add to new palette."
+msgstr ""
+"Önceden eklenen renklerden birini seçin ya da yeni palete eklemek için "
+"birini seçin."
+
+#: src/dialog/ui/delete_color_dialog.ui:6
+msgid "Remove Color from Palette?"
+msgstr "Renk Paletten Kaldırılsın Mı?"
+
+#: src/dialog/ui/delete_color_dialog.ui:14
+msgid "_Remove"
+msgstr "_Kaldır"
+
+#: src/dialog/ui/delete_palette_dialog.ui:6
+msgid "Delete Palette?"
+msgstr "Paleti Silinsin Mi?"
+
+#: src/dialog/ui/delete_palette_dialog.ui:14
+msgid "_Delete"
+msgstr "_Sil"
+
+#: src/dialog/ui/delete_palette_dialog.ui:20
+msgid "This action will permanently remove this palette from Paleta."
+msgstr "Bu işlem, bu paleti Paletaʼdan kalıcı olarak kaldıracak."
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:6
+msgid "Duplicate Palette?"
+msgstr "Palet Çoğaltılsın Mı?"
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:13
+msgid "_Duplicate"
+msgstr "_Çoğalt"
+
+#: src/dialog/ui/duplicate_palette_dialog.ui:22
+msgid "Duplicated Palette _Name"
+msgstr "Çoğaltılmış Palet _Adı"
+
+#: src/dialog/ui/rename_palette_dialog.ui:6
+msgid "Rename Palette?"
+msgstr "Palet Yeniden Adlandırılsın Mı?"
+
+#: src/dialog/ui/rename_palette_dialog.ui:13
+msgid "_Rename"
+msgstr "_Yeniden Adlandır"
+
+#: src/dialog/ui/save_palette_dialog.ui:6
+msgid "Save Palette?"
+msgstr "Palet Kaydedilsin Mi?"
+
+#: src/dialog/ui/save_palette_dialog.ui:13
+msgid "_Save"
+msgstr "_Kaydet"
+
+#: src/dialog/ui/save_palette_dialog.ui:22
+msgid "Palette _Name"
+msgstr "Palet _Adı"
+
+#: src/pages/image_drop/color_thief_panel.rs:237
+msgid "Unable to start palette extraction, no image loaded."
+msgstr "Palet çıkartma başlatılamıyor, görüntü yüklenmemiş."
+
+#: src/pages/image_drop/color_thief_panel.rs:257
+msgid "Unable to extract colors from image."
+msgstr "Görüntüden renkler çıkarılamıyor."
+
+#: src/pages/image_drop/color_thief_panel.rs:285
+msgid "Unable to save palette, no colors extracted."
+msgstr "Palet kaydedilemiyor, renk çıkarılmadı."
+
+#: src/pages/image_drop/color_thief_panel.rs:288
+msgid "Unable to save palette, no image loaded."
+msgstr "Palet kaydedilemiyor, görüntü yüklenmemiş."
+
+#: src/pages/image_drop/image_drop_page.rs:114
+msgid ""
+"Unable to verify file on drop, try with the file chooser in the upper left "
+"corner."
+msgstr ""
+"Bırakılan dosya doğrulanamıyor, sol üst köşedeki dosya seçiciyle deneyin."
+
+#: src/pages/image_drop/image_drop_page.rs:152
+msgid "Unable to read drop."
+msgstr "Bırakma okunamıyor."
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:70
+msgid "Palette Count"
+msgstr "Palet Sayısı"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:71
+msgid "Max amount of colors to retrieve."
+msgstr "Alınacak azami renk sayısı."
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:87
+msgid "Palette Accuracy"
+msgstr "Palet Doğruluğu"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:106
+msgid "Precise"
+msgstr "Hassasiyet"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:107
+msgid "Normal"
+msgstr "Normal"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:108
+msgid "Low"
+msgstr "Düşük"
+
+#: src/pages/image_drop/ui/color_thief_panel.ui:169
+msgid "_Save Palette"
+msgstr "Paleti _Kaydet"
+
+#: src/pages/image_drop/ui/image_drop_page.ui:14
+msgid "Drop Image"
+msgstr "Görüntü Bırak"
+
+#: src/pages/image_drop/ui/image_drop_page.ui:15
+msgid ""
+"Drag an image here, click the button below, or click the button in the upper "
+"left corner of this window."
+msgstr ""
+"Buraya bir görüntü sürükleyin, aşağıdaki düğmeyi tıklayın ya da bu "
+"pencerenin sol üst köşesindeki düğmeye tıklayın."
+
+#: src/pages/palette/palette_page.rs:140
+msgid "Cannot toggle edit mode, no palettes added."
+msgstr "Düzenleme modu değiştirilemiyor, palet eklenmemiş."
+
+#: src/pages/palette/ui/palette_row.ui:50
+msgid "Edit Palette Name"
+msgstr "Palet Adını Düzenle"
+
+#: src/pages/palette/ui/palette_row.ui:62
+msgid "Duplicate Palette"
+msgstr "Paleti Çoğalt"
+
+#: src/pages/palette/ui/palette_row.ui:80
+msgid "Delete Palette"
+msgstr "Paleti Sil"
+
+#: src/pages/palette/ui/palette_page.ui:43
+msgid "Add Some Palettes!"
+msgstr "Kimi Paletler Ekle!"
+
+#: src/pages/palette/ui/palette_page.ui:44
+msgid ""
+"Drop an image onto the drop page and extract some colors, or add a palette "
+"manually by clicking the button in the lower right corner to get started!"
+msgstr ""
+"Açılan sayfaya bir görüntü bırakın ve kimi renkleri ayıklayın ya da başlamak "
+"için sağ alt köşedeki düğmeye tıklayarak elle bir palet ekleyin!"
+
+#: src/pages/palette/ui/palette_color_card.ui:42
+msgid "Remove Color from Palette"
+msgstr "Rengi Paletten kaldır"
