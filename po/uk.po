@@ -1,15 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Ukrainian translation for Paleta.
+# Copyright (C) 2023 THE Paleta's COPYRIGHT HOLDER
 # This file is distributed under the same license as the paleta package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# volkov <volkovissocool@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: paleta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-03-01 22:47+0100\n"
-"PO-Revision-Date: 2023-05-14 02:43+0300\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2023-05-26 01:25+0300\n"
+"Last-Translator: volkov <volkovissocool@gmail.com>\n"
 "Language-Team: \n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgstr "Кнопка відкриття файла на сторінці пер�
 #. One name per line, please do not remove previous names.
 #: src/application.rs:162
 msgid "translator-credits"
-msgstr "volkov"
+msgstr "volkov <volkovissocool@gmail.com>"
 
 #. Translators: only replace "Powered by "
 #: src/application.rs:168
