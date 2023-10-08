@@ -3,9 +3,9 @@
   <id>io.github.nate_xyz.Paleta.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
-  <name>Paleta</name>
+  <name translatable="no">Paleta</name>
   <summary>Generate color palettes with ease</summary>
-  <developer_name>nate-xyz</developer_name>
+  <developer_name translatable="no">nate-xyz</developer_name>
   <description>
     <p>Find the dominant color palette from any image and manage palettes with Paleta. An intuitive tool for designers, artists, or anyone looking to streamline their color work.</p>
     <p>Features:</p>
@@ -28,7 +28,7 @@
 
   <releases>
     <release version="0.3.1" date="2023-02-27">
-      <description>
+      <description translatable="no">
         <ul>
           <li>Added German, Hindi, Occitan, Polish, and Russian translations!</li>
           <li>Fixed translations for Rust version</li>
@@ -36,14 +36,14 @@
       </description>
     </release>
     <release version="0.3.0" date="2023-02-24">
-      <description>
+      <description translatable="no">
         <ul>
           <li>Rewritten in Rust, now uses colorthief-rs!</li>
         </ul>
       </description>
     </release>
     <release version="0.2.3" date="2023-02-13">
-      <description>
+      <description translatable="no">
         <ul>
           <li>Added Translation Support</li>
           <li>Added French and Dutch translations!</li>
@@ -51,7 +51,7 @@
       </description>
     </release>
     <release version="0.2.2" date="2023-02-10">
-      <description>
+      <description translatable="no">
         <ul>
           <li>Automatic palette extraction on image load</li>s
           <li>Cleaner extraction panel UI</li>
@@ -62,7 +62,7 @@
     </release>
     <release version="0.2.1" date="2023-02-09"/>
     <release version="0.2.0" date="2023-02-08">
-      <description>
+      <description translatable="no">
         <ul>
           <li>Toast improvements</li>
           <li>Drop Page open button</li>
